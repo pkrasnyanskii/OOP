@@ -16,15 +16,20 @@ mkdir -p $BIN_DIR
 mkdir -p $DOC_DIR
 
 # компиляция всех Java-файлов
+echo "Compiling sources"
 javac -d $BIN_DIR $(find $SRC_DIR -name "*.java")
 
 # генерация Javadoc
+echo "Creating Javadoc"
 javadoc -d $DOC_DIR $(find $SRC_DIR -name "*.java")
 
 # упаковка в jar
+echo "Packing JAR"
 cd $BIN_DIR
 jar cfe $JAR_FILE ru.nsu.krasnyanski.HeapSort ru/nsu/krasnyanski/*.class
 cd ..
 
 # запуск приложения
-java -cp $BIN_DIR/$JAR_FILE ru.nsu.krasnyanski.Demo
+echo "Launching HeapSort"
+java -cp $BIN_DIR/$JAR_FILE ru.nsu.krasnyanski.HeapSort
+echo "Done!"
