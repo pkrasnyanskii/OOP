@@ -1,7 +1,7 @@
 package ru.nsu.krasnyanski;
 
 public class HeapSort {
-    /** Heapify is a method to create max heap from a given array
+    /** Heapify is a method to create max heap from a given array.
      *
      * @param arr Array to heapify
      * @param n Array length
@@ -13,10 +13,12 @@ public class HeapSort {
         int l = 2 * i + 1;
         int r = 2 * i + 2;
 
-        if (l < n && arr[l] > arr[large])
+        if (l < n && arr[l] > arr[large]) {
             large = l;
-        if (r < n && arr[r] > arr[large])
+        }
+        if (r < n && arr[r] > arr[large]){
             large = r;
+        }
 
         if (large != i) {
             int swap = arr[i];
@@ -27,7 +29,7 @@ public class HeapSort {
         }
     }
 
-    /** Sort is a method which sorts given array by using heapify method
+    /** Sort is a method which sorts given array by using heapify method.
      *
      * @param arr Array
      */
@@ -35,10 +37,11 @@ public class HeapSort {
 
         int n = arr.length;
 
-        for(int i = n/2 - 1; i >= 0; i--)
+        for(int i = n / 2 - 1; i >= 0; i--) {
             heapify(arr, n, i);
+        }
 
-        for(int i = n-1; i >= 0; i--){
+        for(int i = n - 1; i >= 0; i--){
             int temp = arr[0];
             arr[0] = arr[i];
             arr[i] = temp;
