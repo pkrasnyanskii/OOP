@@ -1,56 +1,15 @@
 package ru.nsu.krasnyanski;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
-
 
 /**
  * Unit tests for HeapSort algorithm.
  */
 public class HeapSortTests {
-    @Test
-    public void reversedArray() {
-        int[] actual = {9, 7, 5, 3, 1};
-        int[] expected = {1, 3, 5, 7, 9};
-        HeapSort.sort(actual);
-        assertArrayEquals(expected, actual);
-    }
 
     @Test
-    public void alreadySorted() {
-        int[] actual = {1, 2, 3, 4, 5};
-        int[] expected = {1, 2, 3, 4, 5};
-        HeapSort.sort(actual);
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void withDuplicates() {
-        int[] actual = {4, 1, 3, 4, 2, 1};
-        int[] expected = {1, 1, 2, 3, 4, 4};
-        HeapSort.sort(actual);
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void negativeNumbers() {
-        int[] actual = {0, -1, -3, 2, 1};
-        int[] expected = {-3, -1, 0, 1, 2};
-        HeapSort.sort(actual);
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void singleElement() {
-        int[] actual = {42};
-        int[] expected = {42};
-        HeapSort.sort(actual);
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void emptyArray() {
+    void emptyArray() {
         int[] actual = {};
         int[] expected = {};
         HeapSort.sort(actual);
@@ -58,13 +17,15 @@ public class HeapSortTests {
     }
 
     @Test
-    public void nullArray() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> HeapSort.sort(null));
-        assertEquals("Array must not be null", exception.getMessage());
+    void singleElement() {
+        int[] actual = {42};
+        int[] expected = {42};
+        HeapSort.sort(actual);
+        assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void twoElementsReversed() {
+    void twoElementsReversed() {
         int[] actual = {2, 1};
         int[] expected = {1, 2};
         HeapSort.sort(actual);
@@ -72,9 +33,54 @@ public class HeapSortTests {
     }
 
     @Test
+    void reversedArray() {
+        int[] actual = {9, 7, 5, 3, 1};
+        int[] expected = {1, 3, 5, 7, 9};
+        HeapSort.sort(actual);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void alreadySorted() {
+        int[] actual = {1, 2, 3, 4, 5};
+        int[] expected = {1, 2, 3, 4, 5};
+        HeapSort.sort(actual);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void withDuplicates() {
+        int[] actual = {4, 1, 3, 4, 2, 1};
+        int[] expected = {1, 1, 2, 3, 4, 4};
+        HeapSort.sort(actual);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void negativeNumbers() {
+        int[] actual = {0, -1, -3, 2, 1};
+        int[] expected = {-3, -1, 0, 1, 2};
+        HeapSort.sort(actual);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void nullArray() {
+        assertThrows(IllegalArgumentException.class, () -> HeapSort.sort(null));
+    }
+
+    @Test
     void complexHeapify() {
         int[] actual = {1, 3, 2};
         int[] expected = {1, 2, 3};
+        HeapSort.sort(actual);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void largerComplexArray() {
+        int[] actual = {5, 3, 8, 1, 6, 7, 2, 4};
+        int[] expected = {1, 2, 3, 4, 5, 6, 7, 8};
         HeapSort.sort(actual);
         assertArrayEquals(expected, actual);
     }
