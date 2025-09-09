@@ -1,5 +1,9 @@
 package ru.nsu.krasnyanski;
 
+/**
+ * Implements the HeapSort algorithm.
+ * Provides a method to sort arrays using a heap-based approach.
+ */
 public class HeapSort {
 
     /** Sort is a method which sorts given array by using heapify method.
@@ -13,11 +17,11 @@ public class HeapSort {
 
         int n = arr.length;
 
-        for(int i = n / 2 - 1; i >= 0; i--) {
+        for (int i = n / 2 - 1; i >= 0; i--) {
             heapify(arr, n, i);
         }
 
-        for(int i = n - 1; i >= 0; i--){
+        for (int i = n - 1; i >= 0; i--){
             int temp = arr[0];
             arr[0] = arr[i];
             arr[i] = temp;
