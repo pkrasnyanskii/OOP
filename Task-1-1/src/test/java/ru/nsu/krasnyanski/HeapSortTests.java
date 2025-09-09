@@ -70,4 +70,12 @@ public class HeapSortTests {
         HeapSort.sort(actual);
         assertArrayEquals(expected, actual);
     }
+
+    @Test
+    void complexHeapify() {
+        int[] actual = {1, 3, 2};
+        int[] expected = {1, 2, 3};
+        HeapSort.sort(actual);
+        assertArrayEquals(expected, actual);
+    }
 }
