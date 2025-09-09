@@ -1,8 +1,8 @@
 package ru.nsu.krasnyanski;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -53,6 +53,20 @@ public class HeapSortTests {
     public void emptyArray() {
         int[] actual = {};
         int[] expected = {};
+        HeapSort.sort(actual);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void nullArray() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> HeapSort.sort(null));
+        assertEquals("Array must not be null", exception.getMessage());
+    }
+
+    @Test
+    public void twoElementsReversed() {
+        int[] actual = {2, 1};
+        int[] expected = {1, 2};
         HeapSort.sort(actual);
         assertArrayEquals(expected, actual);
     }
