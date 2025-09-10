@@ -1,7 +1,7 @@
 package ru.nsu.krasnyanski;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import org.junit.jupiter.api.Test;
 
 public class HeapSortTests {
     @Test
