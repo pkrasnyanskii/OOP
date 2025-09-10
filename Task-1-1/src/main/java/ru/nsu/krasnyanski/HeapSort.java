@@ -53,4 +53,16 @@ public class HeapSort {
             heapify(arr, n, large);
         }
     }
+
+    /**
+     * Main method to demonstrate HeapSort.
+     *
+     * @param args command-line arguments (not used)
+     */
+    public static void main(String[] args) {
+        int[] arr = {5, 3, 8, 1, 2, 7};
+        System.out.println("Before: " + java.util.Arrays.toString(arr));
+        sort(arr);
+        System.out.println("After: " + java.util.Arrays.toString(arr));
+    }
 }
