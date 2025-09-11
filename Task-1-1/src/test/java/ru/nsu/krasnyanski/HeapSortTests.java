@@ -1,8 +1,13 @@
 package ru.nsu.krasnyanski;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
 import org.junit.jupiter.api.Test;
 
+
+/**
+ * Unit tests for HeapSort algorithm.
+ */
 public class HeapSortTests {
     @Test
     public void reversedArray() {
