@@ -71,16 +71,16 @@ public class HeapSortTests {
 
     @Test
     void complexHeapify() {
-        int[] actual = {1, 3, 2};
-        int[] expected = {1, 2, 3};
+        int[] actual = {3, 9, 5, 1, 2, 8, 7};
+        int[] expected = {1, 2, 3, 5, 7, 8, 9};
         HeapSort.sort(actual);
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    void largerComplexArray() {
-        int[] actual = {5, 3, 8, 1, 6, 7, 2, 4};
-        int[] expected = {1, 2, 3, 4, 5, 6, 7, 8};
+    void largerArray() {
+        int[] actual = {10, 20, 5, 6, 1, 8, 9, 7, 3};
+        int[] expected = {1, 3, 5, 6, 7, 8, 9, 10, 20};
         HeapSort.sort(actual);
         assertArrayEquals(expected, actual);
     }
