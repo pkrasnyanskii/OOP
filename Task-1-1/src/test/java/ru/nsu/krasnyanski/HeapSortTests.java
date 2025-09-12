@@ -102,4 +102,9 @@ public class HeapSortTests {
         HeapSort.sort(actual);
         assertArrayEquals(expected, actual);
     }
+
+    @Test
+    void runMain() {
+        HeapSort.main(new String[]{});
+    }
 }
