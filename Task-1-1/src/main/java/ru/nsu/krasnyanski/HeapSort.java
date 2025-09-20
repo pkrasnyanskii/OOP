@@ -4,7 +4,11 @@ package ru.nsu.krasnyanski;
  * Implements the HeapSort algorithm.
  * Provides a method to sort arrays using a heap-based approach.
  */
-public class HeapSort {
+public final class HeapSort {
+
+    private HeapSort(){
+        throw new UnsupportedOperationException("Utility class");
+    }
 
     /** Sort is a method which sorts given array by using heapify method.
      *
