@@ -1,19 +1,19 @@
 package ru.nsu.krasnyanski;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Represents a player or dealer in Blackjack.
- * Stores the player's hand and calculates scores according to Blackjack rules.
+ * Represents a Blackjack player (user or dealer).
  */
 public class Player {
     private final String name;
     private final List<Card> hand = new ArrayList<>();
 
     /**
-     * Constructs a Player.
+     * Constructs a Player with a given name.
      *
-     * @param name player's name
+     * @param name the name of the player
      */
     public Player(String name) {
         this.name = name;
@@ -22,35 +22,40 @@ public class Player {
     /**
      * Adds a card to the player's hand.
      *
-     * @param card the Card to add
+     * @param card the card to add
      */
     public void addCard(Card card) {
         hand.add(card);
     }
 
     /**
-     * Returns the current score of the player's hand.
-     * Handles Ace as 11 or 1 depending on hand total.
+     * Returns the current score of the player, considering Ace as 11 or 1.
      *
-     * @return hand score
+     * @return player's score
      */
     public int getScore() {
-        int sum = hand.stream().mapToInt(Card::getValue).sum();
-        long aces = hand.stream().filter(c -> c.getValue() == 11).count();
-        while (sum > 21 && aces > 0) {
-            sum -= 10;
-            aces--;
+        int total = 0;
+        int aceCount = 0;
+        for (Card card : hand) {
+            total += card.getValue();
+            if (card.getValue() == 11) {
+                aceCount++;
+            }
         }
-        return sum;
+        while (total > 21 && aceCount > 0) {
+            total -= 10;
+            aceCount--;
+        }
+        return total;
     }
 
     /**
-     * Returns the list of cards in hand.
+     * Returns the player's hand.
      *
-     * @return list of Card objects
+     * @return list of cards in hand
      */
     public List<Card> getHand() {
-        return hand;
+        return new ArrayList<>(hand);
     }
 
     @Override

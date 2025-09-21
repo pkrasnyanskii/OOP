@@ -9,9 +9,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
+/**
+ * Unit tests for Blackjack classes.
+ */
 public class BlackjackTest {
 
+    /**
+     * Tests Card class getters and toString.
+     */
     @Test
     public void testCard() {
         Card card = new Card("♠", "A", 11);
@@ -19,6 +24,9 @@ public class BlackjackTest {
         assertEquals("A ♠ (11)", card.toString());
     }
 
+    /**
+     * Tests Deck drawing and remaining card count.
+     */
     @Test
     public void testDeckDrawAndRemaining() {
         Deck deck = new Deck();
@@ -28,23 +36,35 @@ public class BlackjackTest {
         assertEquals(size - 1, deck.remainingCards());
     }
 
+    /**
+     * Tests that drawing from an empty deck throws exception.
+     */
     @Test
     public void testDeckEmpty() {
         Deck deck = new Deck();
-        while (deck.remainingCards() > 0) deck.draw();
+        while (deck.remainingCards() > 0) {
+            deck.draw();
+        }
         assertThrows(NoSuchElementException.class, deck::draw);
     }
 
+    /**
+     * Tests Player score calculation with Aces.
+     */
     @Test
     public void testPlayerScoreWithAces() {
         Player player = new Player("Test");
         player.addCard(new Card("♠", "A", 11));
         player.addCard(new Card("♥", "K", 10));
         assertEquals(21, player.getScore());
+
         player.addCard(new Card("♦", "2", 2));
         assertEquals(13, player.getScore()); // Ace becomes 1
     }
 
+    /**
+     * Tests that a card is added to Player hand correctly.
+     */
     @Test
     public void testPlayerHand() {
         Player player = new Player("Test");

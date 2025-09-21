@@ -12,8 +12,8 @@ public class Card {
     /**
      * Constructs a Card.
      *
-     * @param suit the suit of the card (♠, ♥, ♦, ♣)
-     * @param rank the rank of the card (2-10, J, Q, K, A)
+     * @param suit  the suit of the card (♠, ♥, ♦, ♣)
+     * @param rank  the rank of the card (2-10, J, Q, K, A)
      * @param value the point value of the card
      */
     public Card(String suit, String rank, int value) {
