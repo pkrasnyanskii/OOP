@@ -2,20 +2,12 @@ package ru.nsu.krasnyanski;
 
 import java.util.Scanner;
 
-/**
- * Represents a single round of a Blackjack game.
- * Manages player and dealer actions, determines the winner.
- */
 public class BlackjackGame {
     private final Deck deck = new Deck();
     private final Player player = new Player("Вы");
     private final Player dealer = new Player("Дилер");
     private final Scanner scanner = new Scanner(System.in);
 
-    /**
-     * Plays a single round of Blackjack.
-     * Handles initial deal, player turn, dealer turn, and determines winner.
-     */
     public void playRound() {
         player.addCard(deck.draw());
         player.addCard(deck.draw());
@@ -57,8 +49,14 @@ public class BlackjackGame {
         int ps = player.getScore();
         int ds = dealer.getScore();
         System.out.println("Итог: Ваш счёт = " + ps + ", Дилер = " + ds);
-        if (ds > 21 || ps > ds) System.out.println("Вы выиграли!");
-        else if (ps < ds) System.out.println("Вы проиграли!");
-        else System.out.println("Ничья!");
+        if (ds > 21 || ps > ds) {
+            System.out.println("Вы выиграли!");
+        }
+        else if (ps < ds) {
+            System.out.println("Вы проиграли!");
+        }
+        else {
+            System.out.println("Ничья!");
+        }
     }
 }
