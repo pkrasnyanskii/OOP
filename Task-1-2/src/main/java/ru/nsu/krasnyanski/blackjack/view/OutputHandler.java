@@ -35,7 +35,8 @@ public class OutputHandler {
      * @param score      the player's current score
      */
     public void showPlayerCards(String playerName, String cards, int score) {
-        println(messages.get("player.cards") + " " + playerName + ": " + cards + " > " + score);
+        println(messages.get("game.welcome") + System.lineSeparator()
+                + messages.get("player.cards") + " " + playerName + ": " + cards + " > " + score);
     }
 
     /**

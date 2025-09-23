@@ -16,11 +16,11 @@ import ru.nsu.krasnyanski.blackjack.view.OutputHandler;
  */
 public class BlackjackGame {
     private final Deck deck = new Deck();
-    private final Player player = new Player("Вы");
-    private final Player dealer = new Player("Дилер");
     private final OutputHandler output;
     private final InputHandler input;
     private final Messages messages;
+    private final Player player;
+    private final Player dealer;
 
     /**
      * Creates a new Blackjack game controller.
@@ -33,6 +33,8 @@ public class BlackjackGame {
         this.output = output;
         this.input = input;
         this.messages = messages;
+        this.player = new Player(messages.get("you"));
+        this.dealer = new Player(messages.get("dealer"));
     }
 
     /**
