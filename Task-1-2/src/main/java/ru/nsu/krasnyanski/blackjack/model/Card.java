@@ -2,10 +2,10 @@ package ru.nsu.krasnyanski.blackjack.model;
 
 /**
  * Represents a playing card in Blackjack.
- * <p>
+ *
  * Each card has a suit and a rank.
  * The value of the card is determined by its rank.
- * </p>
+ *
  */
 public class Card {
     private final String suit;
