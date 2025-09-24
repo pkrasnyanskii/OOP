@@ -1,7 +1,9 @@
 package ru.nsu.krasnyanski.blackjack.view;
 
-import ru.nsu.krasnyanski.blackjack.localization.Messages;
 import java.util.Scanner;
+
+import ru.nsu.krasnyanski.blackjack.localization.Messages;
+
 
 /**
  * Handles user input for the Blackjack game.

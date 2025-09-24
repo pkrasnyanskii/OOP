@@ -45,6 +45,7 @@ public class OutputHandler {
      * @param dealerCard the dealer's visible card
      */
     public void showDealerHidden(String dealerCard) {
-        println(messages.get("dealer.cards.hidden") + " [" + dealerCard + ", <" + messages.get("hidden.card") + ">]");
+        println(messages.get("dealer.cards.hidden")
+                + " [" + dealerCard + ", <" + messages.get("hidden.card") + ">]");
     }
 }
