@@ -1,13 +1,13 @@
 package ru.nsu.krasnyanski.blackjack;
 
-import org.junit.jupiter.api.Test;
+import java.util.NoSuchElementException;
 
 import ru.nsu.krasnyanski.blackjack.model.Card;
 import ru.nsu.krasnyanski.blackjack.model.Deck;
 import ru.nsu.krasnyanski.blackjack.model.Player;
 import ru.nsu.krasnyanski.blackjack.model.Rank;
 
-import java.util.NoSuchElementException;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

@@ -5,7 +5,6 @@ package ru.nsu.krasnyanski.blackjack.model;
  * <p>
  * Each card has a suit and a rank.
  * The value of the card is determined by its rank.
- *
  */
 public class Card {
     private final String suit;
