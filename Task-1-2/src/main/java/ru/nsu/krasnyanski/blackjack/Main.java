@@ -21,8 +21,18 @@ public class Main {
         OutputHandler output = new OutputHandler(messages);
 
         try (InputHandler input = new InputHandler(messages, output)) {
-            BlackjackGame game = new BlackjackGame(output, input, messages);
-            game.playRound();
+            while (true){
+                BlackjackGame game = new BlackjackGame(output, input, messages);
+                game.playRound();
+
+                output.println(messages.get("play.again"));
+
+                int choice = input.getChoice();
+                if (choice == 2) {
+                    output.println(messages.get("goodbye"));
+                    break;
+                }
+            }
         }
     }
 }

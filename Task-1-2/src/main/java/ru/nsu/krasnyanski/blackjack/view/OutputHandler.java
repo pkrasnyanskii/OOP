@@ -19,15 +19,6 @@ public class OutputHandler {
     }
 
     /**
-     * Prints a line to the console.
-     *
-     * @param text the text to print
-     */
-    public void println(String text) {
-        System.out.println(text);
-    }
-
-    /**
      * Shows the player's cards and current score.
      *
      * @param playerName the name of the player
@@ -48,4 +39,14 @@ public class OutputHandler {
         println(messages.get("dealer.cards.hidden")
                 + " [" + dealerCard + ", <" + messages.get("hidden.card") + ">]");
     }
+
+    /**
+     * Prints a line to the console.
+     *
+     * @param text the text to print
+     */
+    public void println(String text) {
+        System.out.println(text);
+    }
+
 }
