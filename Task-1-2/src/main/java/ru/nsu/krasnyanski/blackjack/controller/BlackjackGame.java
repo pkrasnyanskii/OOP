@@ -63,7 +63,7 @@ public class BlackjackGame {
      */
     private void playerTurn() {
         while (player.getScore() < 21) {
-            int choice = input.getChoice();
+            int choice = input.getChoice("prompt.choice");
             if (choice == 1) {
                 Card card = deck.draw();
                 player.addCard(card);
