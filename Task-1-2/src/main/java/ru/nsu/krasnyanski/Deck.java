@@ -9,7 +9,7 @@ import java.util.*;
 public class Deck {
     private final List<Card> cards = new ArrayList<>();
     private static final String[] SUITS = {"♠", "♥", "♦", "♣"};
-    private static final String[] RANKS = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
+    private static final String[] RANKS = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 
     /**
      * Constructs a Deck with 2 shuffled standard 52-card decks.
@@ -19,9 +19,15 @@ public class Deck {
             for (String suit : SUITS) {
                 for (String rank : RANKS) {
                     int value;
-                    if (rank.equals("A")) value = 11;
-                    else if ("JQK".contains(rank)) value = 10;
-                    else value = Integer.parseInt(rank);
+                    if (rank.equals("A")){
+                        value = 11;
+                    }
+                    else if ("JQK".contains(rank)) {
+                        value = 10;
+                    }
+                    else {
+                        value = Integer.parseInt(rank);
+                    }
                     cards.add(new Card(suit, rank, value));
                 }
             }
@@ -36,7 +42,9 @@ public class Deck {
      * @throws NoSuchElementException if the deck is empty
      */
     public Card draw() {
-        if (cards.isEmpty()) throw new NoSuchElementException("Deck is empty");
+        if (cards.isEmpty()) {
+            throw new NoSuchElementException("Deck is empty");
+        }
         return cards.remove(0);
     }
 
