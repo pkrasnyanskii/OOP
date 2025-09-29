@@ -2,12 +2,18 @@ package ru.nsu.krasnyanski;
 
 import java.util.Scanner;
 
+/**
+ * Represents a Blackjack game round with a player and a dealer.
+ */
 public class BlackjackGame {
     private final Deck deck = new Deck();
     private final Player player = new Player("Вы");
     private final Player dealer = new Player("Дилер");
     private final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Plays a single round of Blackjack.
+     */
     public void playRound() {
         player.addCard(deck.draw());
         player.addCard(deck.draw());
@@ -30,7 +36,9 @@ public class BlackjackGame {
                 player.addCard(c);
                 System.out.println("Вы взяли: " + c);
                 System.out.println("Ваши карты: " + player);
-            } else break;
+            } else {
+                break;
+            }
         }
 
         if (player.getScore() > 21) {
@@ -40,6 +48,7 @@ public class BlackjackGame {
 
         System.out.println("Ход дилера:");
         System.out.println("Карты дилера: " + dealer);
+
         while (dealer.getScore() < 17) {
             Card c = deck.draw();
             dealer.addCard(c);
@@ -48,14 +57,13 @@ public class BlackjackGame {
 
         int ps = player.getScore();
         int ds = dealer.getScore();
+
         System.out.println("Итог: Ваш счёт = " + ps + ", Дилер = " + ds);
         if (ds > 21 || ps > ds) {
             System.out.println("Вы выиграли!");
-        }
-        else if (ps < ds) {
+        } else if (ps < ds) {
             System.out.println("Вы проиграли!");
-        }
-        else {
+        } else {
             System.out.println("Ничья!");
         }
     }

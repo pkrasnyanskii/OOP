@@ -1,6 +1,9 @@
 package ru.nsu.krasnyanski;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Represents a deck of playing cards.
@@ -9,7 +12,8 @@ import java.util.*;
 public class Deck {
     private final List<Card> cards = new ArrayList<>();
     private static final String[] SUITS = {"♠", "♥", "♦", "♣"};
-    private static final String[] RANKS = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
+    private static final String[] RANKS = {"2", "3", "4", "5", "6", "7", "8", "9", "10",
+            "J", "Q", "K", "A"};
 
     /**
      * Constructs a Deck with 2 shuffled standard 52-card decks.
@@ -19,13 +23,11 @@ public class Deck {
             for (String suit : SUITS) {
                 for (String rank : RANKS) {
                     int value;
-                    if (rank.equals("A")){
+                    if ("A".equals(rank)) {
                         value = 11;
-                    }
-                    else if ("JQK".contains(rank)) {
+                    } else if ("JQK".contains(rank)) {
                         value = 10;
-                    }
-                    else {
+                    } else {
                         value = Integer.parseInt(rank);
                     }
                     cards.add(new Card(suit, rank, value));
