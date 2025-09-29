@@ -76,8 +76,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Player</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Represents a player or dealer in Blackjack.
- Stores the player's hand and calculates scores according to Blackjack rules.</div>
+<div class="block">Represents a Blackjack player (user or dealer).</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -91,7 +90,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">Player</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Constructs a Player.</div>
+<div class="block">Constructs a Player with a given name.</div>
 </div>
 </div>
 </section>
@@ -115,12 +114,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Card.html" title="class in ru.nsu.krasnyanski">Card</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getHand()" class="member-name-link">getHand</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the list of cards in hand.</div>
+<div class="block">Returns the player's hand.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getScore()" class="member-name-link">getScore</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the current score of the player's hand.</div>
+<div class="block">Returns the current score of the player, considering Ace as 11 or 1.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -146,10 +145,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>Player</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Player</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
-<div class="block">Constructs a Player.</div>
+<div class="block">Constructs a Player with a given name.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>name</code> - player's name</dd>
+<dd><code>name</code> - the name of the player</dd>
 </dl>
 </section>
 </li>
@@ -168,7 +167,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Adds a card to the player's hand.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>card</code> - the Card to add</dd>
+<dd><code>card</code> - the card to add</dd>
 </dl>
 </section>
 </li>
@@ -176,11 +175,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getScore()">
 <h3>getScore</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getScore</span>()</div>
-<div class="block">Returns the current score of the player's hand.
- Handles Ace as 11 or 1 depending on hand total.</div>
+<div class="block">Returns the current score of the player, considering Ace as 11 or 1.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>hand score</dd>
+<dd>player's score</dd>
 </dl>
 </section>
 </li>
@@ -188,10 +186,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getHand()">
 <h3>getHand</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Card.html" title="class in ru.nsu.krasnyanski">Card</a>&gt;</span>&nbsp;<span class="element-name">getHand</span>()</div>
-<div class="block">Returns the list of cards in hand.</div>
+<div class="block">Returns the player's hand.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>list of Card objects</dd>
+<dd>list of cards in hand</dd>
 </dl>
 </section>
 </li>
