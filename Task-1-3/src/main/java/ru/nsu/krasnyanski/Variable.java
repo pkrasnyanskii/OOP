@@ -26,9 +26,9 @@ public class Variable extends Expression {
     }
 
     @Override
-    public int eval(Map<String, Integer> variables) {
+    public int eval(Map<String, Integer> variables) throws ExpressionException{
         if (!variables.containsKey(name)) {
-            throw new IllegalArgumentException("Variable " + name + " not assigned");
+            throw new VariableNotAssignedException(name);
         }
         return variables.get(name);
     }

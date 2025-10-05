@@ -31,7 +31,11 @@ public class Div extends Expression {
     }
 
     @Override
-    public int eval(Map<String, Integer> variables) {
-        return left.eval(variables) / right.eval(variables);
+    public int eval(Map<String, Integer> variables) throws ExpressionException{
+        int divisor = right.eval(variables);
+        if (divisor == 0) {
+            throw new DivisionByZeroException();
+        }
+        return left.eval(variables) / divisor;
     }
 }

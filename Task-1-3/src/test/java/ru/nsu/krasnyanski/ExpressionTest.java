@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ExpressionTest {
 
     @Test
-    void testNumberPrintAndEval() {
+    void testNumberPrintAndEval() throws ExpressionException {
         Expression n = new Number(7);
         assertEquals("7", n.print());
         assertEquals(7, n.eval(Map.of()));
@@ -20,7 +20,7 @@ class ExpressionTest {
     }
 
     @Test
-    void testVariablePrintEvalDerivative() {
+    void testVariablePrintEvalDerivative() throws ExpressionException {
         Expression v = new Variable("x");
         assertEquals("x", v.print());
         assertEquals(5, v.eval(Map.of("x", 5)));
@@ -29,7 +29,7 @@ class ExpressionTest {
     }
 
     @Test
-    void testAdd() {
+    void testAdd() throws ExpressionException {
         Expression e = new Add(new Number(2), new Variable("x"));
         assertEquals("(2+x)", e.print());
         assertEquals(12, e.eval(Map.of("x", 10)));
@@ -38,7 +38,7 @@ class ExpressionTest {
     }
 
     @Test
-    void testSub() {
+    void testSub() throws ExpressionException {
         Expression e = new Sub(new Number(5), new Variable("y"));
         assertEquals("(5-y)", e.print());
         assertEquals(2, e.eval(Map.of("y", 3)));
@@ -47,7 +47,7 @@ class ExpressionTest {
     }
 
     @Test
-    void testMul() {
+    void testMul() throws ExpressionException {
         Expression e = new Mul(new Variable("x"), new Number(4));
         assertEquals("(x*4)", e.print());
         assertEquals(20, e.eval(Map.of("x", 5)));
@@ -56,7 +56,7 @@ class ExpressionTest {
     }
 
     @Test
-    void testDiv() {
+    void testDiv() throws ExpressionException {
         Expression e = new Div(new Variable("x"), new Number(2));
         assertEquals("(x/2)", e.print());
         assertEquals(3, e.eval(Map.of("x", 6)));
@@ -65,28 +65,28 @@ class ExpressionTest {
     }
 
     @Test
-    void testParserSimple() {
+    void testParserSimple() throws ExpressionException, InvalidExpressionException {
         Expression e = Parser.parse("(3+5)");
         assertEquals("(3+5)", e.print());
         assertEquals(8, e.eval(Map.of()));
     }
 
     @Test
-    void testParserNested() {
+    void testParserNested() throws ExpressionException, InvalidExpressionException {
         Expression e = Parser.parse("(3+(2*x))");
         assertEquals("(3+(2*x))", e.print());
         assertEquals(23, e.eval(Map.of("x", 10)));
     }
 
     @Test
-    void testParserWhitespace() {
+    void testParserWhitespace() throws InvalidExpressionException {
         Expression e = Parser.parse(" ( 4 * ( x - 2 ) ) ");
         assertEquals("(4+(x-2))".replace('+', '*'), e.print());
     }
 
     @Test
     void testParserThrowsOnMalformed() {
-        assertThrows(IllegalArgumentException.class, () -> Parser.parse("(3+)"));
-        assertThrows(IllegalArgumentException.class, () -> Parser.parse(""));
+        assertThrows(InvalidExpressionException.class, () -> Parser.parse("(3+)"));
+        assertThrows(InvalidExpressionException.class, () -> Parser.parse(""));
     }
 }
