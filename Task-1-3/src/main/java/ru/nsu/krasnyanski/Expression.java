@@ -1,13 +1,13 @@
 package ru.nsu.krasnyanski;
 
 import java.util.Map;
-
 import static ru.nsu.krasnyanski.Parser.parseVariables;
 
 /**
  * Abstract class for mathematical expressions.
  */
 public abstract class Expression {
+
     /**
      * Prints the expression in canonical form.
      *
@@ -28,9 +28,18 @@ public abstract class Expression {
      *
      * @param variables map variable → integer value
      * @return integer result
+     * @throws ExpressionException if evaluation fails
      */
     public abstract int eval(Map<String, Integer> variables) throws ExpressionException;
 
+    /**
+     * Evaluates expression using string of variable assignments.
+     *
+     * @param variables string like "x=5;y=3"
+     * @return integer result
+     * @throws ExpressionException if evaluation fails
+     * @throws InvalidExpressionException if variable string invalid
+     */
     public int eval(String variables) throws ExpressionException, InvalidExpressionException {
         Map<String, Integer> map = parseVariables(variables);
         return eval(map);
