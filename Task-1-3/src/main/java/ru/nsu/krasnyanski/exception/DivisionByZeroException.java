@@ -1,4 +1,4 @@
-package ru.nsu.krasnyanski;
+package ru.nsu.krasnyanski.exception;
 
 /**
  * Exception thrown when division by zero occurs.
