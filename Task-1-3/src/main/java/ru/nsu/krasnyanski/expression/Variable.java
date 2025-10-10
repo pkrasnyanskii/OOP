@@ -1,9 +1,9 @@
 package ru.nsu.krasnyanski.expression;
 
+import java.util.Map;
+
 import ru.nsu.krasnyanski.exception.ExpressionException;
 import ru.nsu.krasnyanski.exception.VariableNotAssignedException;
-
-import java.util.Map;
 
 /**
  * Represents variable in expression.

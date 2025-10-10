@@ -1,8 +1,8 @@
 package ru.nsu.krasnyanski.expression;
 
-import ru.nsu.krasnyanski.exception.ExpressionException;
-
 import java.util.Map;
+
+import ru.nsu.krasnyanski.exception.ExpressionException;
 
 /**
  * Subtraction expression.
