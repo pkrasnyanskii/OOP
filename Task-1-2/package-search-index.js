@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.krasnyanski"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.krasnyanski.blackjack"},{"l":"ru.nsu.krasnyanski.blackjack.controller"},{"l":"ru.nsu.krasnyanski.blackjack.localization"},{"l":"ru.nsu.krasnyanski.blackjack.model"},{"l":"ru.nsu.krasnyanski.blackjack.view"}];updateSearchResults();

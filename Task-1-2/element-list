@@ -1,1 +1,5 @@
-ru.nsu.krasnyanski
+ru.nsu.krasnyanski.blackjack
+ru.nsu.krasnyanski.blackjack.controller
+ru.nsu.krasnyanski.blackjack.localization
+ru.nsu.krasnyanski.blackjack.model
+ru.nsu.krasnyanski.blackjack.view
