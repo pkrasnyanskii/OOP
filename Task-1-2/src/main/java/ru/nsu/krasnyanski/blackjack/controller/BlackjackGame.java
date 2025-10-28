@@ -9,7 +9,7 @@ import ru.nsu.krasnyanski.blackjack.view.OutputHandler;
 
 /**
  * The main controller class that manages the Blackjack game flow.
- *
+ * <p>
  * It coordinates interactions between the model (cards, players, deck)
  * and the view components (input and output handlers).
  *
