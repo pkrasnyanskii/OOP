@@ -9,8 +9,8 @@ import ru.nsu.krasnyanski.blackjack.view.OutputHandler;
 
 /**
  * The main controller class that manages the Blackjack game flow.
- * <p>
- * It coordinates interactions between the model (cards, players, deck)
+ *
+ * <p>It coordinates interactions between the model (cards, players, deck)
  * and the view components (input and output handlers).
  */
 public class BlackjackGame {
@@ -68,7 +68,8 @@ public class BlackjackGame {
                 Card card = deck.draw();
                 player.addCard(card);
                 output.println(messages.get("player.took") + " " + card);
-                output.showPlayerCards(player.getName(), player.getHand().toString(), player.getScore());
+                output.showPlayerCards(player.getName(),
+                        player.getHand().toString(), player.getScore());
             } else {
                 break;
             }

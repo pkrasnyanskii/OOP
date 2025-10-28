@@ -1,7 +1,6 @@
 package ru.nsu.krasnyanski.blackjack.view;
 
 import java.util.Scanner;
-
 import ru.nsu.krasnyanski.blackjack.localization.Messages;
 
 
