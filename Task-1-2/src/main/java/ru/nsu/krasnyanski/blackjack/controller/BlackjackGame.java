@@ -12,7 +12,6 @@ import ru.nsu.krasnyanski.blackjack.view.OutputHandler;
  * <p>
  * It coordinates interactions between the model (cards, players, deck)
  * and the view components (input and output handlers).
- *
  */
 public class BlackjackGame {
     private final Deck deck = new Deck();
