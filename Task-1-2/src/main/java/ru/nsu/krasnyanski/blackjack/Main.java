@@ -7,7 +7,7 @@ import ru.nsu.krasnyanski.blackjack.view.OutputHandler;
 
 /**
  * Entry point for the Blackjack game.
- * Initializes messages, input, and output handlers, and runs a game round.
+ * Allows playing multiple rounds in a loop.
  */
 public class Main {
 
@@ -21,16 +21,21 @@ public class Main {
         OutputHandler output = new OutputHandler(messages);
 
         try (InputHandler input = new InputHandler(messages, output)) {
-            while (true){
-                BlackjackGame game = new BlackjackGame(output, input, messages);
-                game.playRound();
+            output.println(messages.get("game.welcome"));
 
-                output.println(messages.get("play.again"));
+            boolean play = true;
 
-                int choice = input.getChoice();
-                if (choice == 2) {
+            BlackjackGame game = new BlackjackGame(output, input, messages);
+            game.playRound();
+
+            while (play) {
+                int start = input.getChoice("play.again");
+                if (start == 0) {
+                    play = false;
                     output.println(messages.get("goodbye"));
-                    break;
+                } else {
+                    game = new BlackjackGame(output, input, messages);
+                    game.playRound();
                 }
             }
         }

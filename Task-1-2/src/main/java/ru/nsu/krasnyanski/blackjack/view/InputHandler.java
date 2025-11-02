@@ -28,11 +28,12 @@ public class InputHandler implements AutoCloseable {
     /**
      * Prompts the user to enter a choice (0 or 1) and validates input.
      *
+     * @param promptKey the Messages prompt handler
      * @return the user's choice, either 0 or 1
      */
-    public int getChoice() {
+    public int getChoice(String promptKey) {
         while (true) {
-            output.println(messages.get("prompt.choice"));
+            output.println(messages.get(promptKey));
             if (!scanner.hasNextInt()) {
                 output.println(messages.get("invalid.input"));
                 scanner.next();
@@ -45,6 +46,7 @@ public class InputHandler implements AutoCloseable {
             output.println(messages.get("invalid.input"));
         }
     }
+
 
     /**
      * Closes the underlying Scanner to release resources.
