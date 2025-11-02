@@ -74,4 +74,27 @@ public class BlackjackTest {
         assertEquals(52, deck.getRemainingCardsCount());
         assertTrue(deck.draw() instanceof Card);
     }
+
+    @Test
+    public void testDrawIfBothHave21() {
+        Player player = new Player("Player");
+        Player dealer = new Player("Dealer");
+        player.addCard(new Card("♠", Rank.ACE));
+        player.addCard(new Card("♥", Rank.KING));
+        dealer.addCard(new Card("♦", Rank.ACE));
+        dealer.addCard(new Card("♣", Rank.KING));
+        int ps = player.getScore();
+        int ds = dealer.getScore();
+        assertEquals(21, ps);
+        assertEquals(21, ds);
+
+        String result =
+                ps > 21 ? "lose" :
+                        ds > 21 || ps > ds ? "win" :
+                                ps < ds ? "lose" :
+                                        "draw";
+
+        assertEquals("draw", result);
+    }
+
 }
