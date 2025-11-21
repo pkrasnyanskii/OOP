@@ -121,7 +121,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="block">Closes the underlying Scanner to release resources.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getChoice()" class="member-name-link">getChoice</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getChoice(java.lang.String)" class="member-name-link">getChoice</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;promptKey)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Prompts the user to enter a choice (0 or 1) and validates input.</div>
 </div>
@@ -164,11 +164,13 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getChoice()">
+<section class="detail" id="getChoice(java.lang.String)">
 <h3>getChoice</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getChoice</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getChoice</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;promptKey)</span></div>
 <div class="block">Prompts the user to enter a choice (0 or 1) and validates input.</div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>promptKey</code> - the Messages prompt handler</dd>
 <dt>Returns:</dt>
 <dd>the user's choice, either 0 or 1</dd>
 </dl>
