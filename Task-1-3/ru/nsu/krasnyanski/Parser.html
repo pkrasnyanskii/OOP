@@ -107,10 +107,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Expression.html" title="class in ru.nsu.krasnyanski">Expression</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parse(java.lang.String)" class="member-name-link">parse</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;input)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Parses a string into an Expression.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseVariables(java.lang.String)" class="member-name-link">parseVariables</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Parses variable assignments from string.</div>
+</div>
 </div>
 </div>
 </div>
@@ -147,9 +151,14 @@ loadScripts(document, 'script');</script>
 <h3>parse</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Expression.html" title="class in ru.nsu.krasnyanski">Expression</a></span>&nbsp;<span class="element-name">parse</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;input)</span>
                         throws <span class="exceptions"><a href="InvalidExpressionException.html" title="class in ru.nsu.krasnyanski">InvalidExpressionException</a></span></div>
+<div class="block">Parses a string into an Expression.</div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>input</code> - expression string like "(3+(2*x))"</dd>
+<dt>Returns:</dt>
+<dd>Expression tree</dd>
 <dt>Throws:</dt>
-<dd><code><a href="InvalidExpressionException.html" title="class in ru.nsu.krasnyanski">InvalidExpressionException</a></code></dd>
+<dd><code><a href="InvalidExpressionException.html" title="class in ru.nsu.krasnyanski">InvalidExpressionException</a></code> - if string invalid</dd>
 </dl>
 </section>
 </li>
@@ -158,9 +167,14 @@ loadScripts(document, 'script');</script>
 <h3>parseVariables</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</span>&nbsp;<span class="element-name">parseVariables</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span>
                                           throws <span class="exceptions"><a href="InvalidExpressionException.html" title="class in ru.nsu.krasnyanski">InvalidExpressionException</a></span></div>
+<div class="block">Parses variable assignments from string.</div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>s</code> - string like "x=5;y=3"</dd>
+<dt>Returns:</dt>
+<dd>map of variable → value</dd>
 <dt>Throws:</dt>
-<dd><code><a href="InvalidExpressionException.html" title="class in ru.nsu.krasnyanski">InvalidExpressionException</a></code></dd>
+<dd><code><a href="InvalidExpressionException.html" title="class in ru.nsu.krasnyanski">InvalidExpressionException</a></code> - if string malformed</dd>
 </dl>
 </section>
 </li>
