@@ -89,4 +89,30 @@ class ExpressionTest {
         assertThrows(InvalidExpressionException.class, () -> Parser.parse("(3+)"));
         assertThrows(InvalidExpressionException.class, () -> Parser.parse(""));
     }
+
+    @Test
+    void testEvalStringInput() throws ExpressionException, InvalidExpressionException {
+        Expression e = Parser.parse("(x+3)");
+        assertEquals(8, e.eval("x=5"));
+        assertEquals(7, e.eval("x=4"));
+    }
+
+    @Test
+    void testVariableNotAssignedException() throws InvalidExpressionException {
+        Expression v = new Variable("y");
+        assertThrows(VariableNotAssignedException.class, () -> v.eval(Map.of()));
+    }
+
+    @Test
+    void testDivisionByZeroException() throws InvalidExpressionException, ExpressionException {
+        Expression e = new Div(new Number(10), new Number(0));
+        assertThrows(DivisionByZeroException.class, () -> e.eval(Map.of()));
+    }
+
+    @Test
+    void testInvalidExpressionExceptionParse() {
+        assertThrows(InvalidExpressionException.class, () -> Parser.parse("(3+)"));
+        assertThrows(InvalidExpressionException.class, () -> Parser.parse(")5("));
+        assertThrows(InvalidExpressionException.class, () -> Parser.parse(""));
+    }
 }
