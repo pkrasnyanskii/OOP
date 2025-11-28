@@ -1,20 +1,17 @@
 package ru.nsu.krasnyanski;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Parser for expressions.
  * Supports numbers, variables, and operators (+, -, *, /) with parentheses.
  */
 public class Parser {
 
-    /**
-     * Parses a string into an Expression.
-     *
-     * @param input expression string like (3+(2*x))
-     * @return Expression tree
-     */
-    public static Expression parse(String input) {
+    public static Expression parse(String input) throws InvalidExpressionException {
         if (input == null || input.trim().isEmpty()) {
-            throw new IllegalArgumentException("Empty expression");
+            throw new InvalidExpressionException("Empty expression");
         }
         return new ParserImpl(input.replaceAll("\\s+", "")).parse();
     }
@@ -27,17 +24,17 @@ public class Parser {
             this.s = s;
         }
 
-        Expression parse() {
+        Expression parse() throws InvalidExpressionException {
             Expression e = parseExpression();
             if (pos != s.length()) {
-                throw new IllegalArgumentException("Unexpected input: " + s.substring(pos));
+                throw new InvalidExpressionException("Unexpected input: " + s.substring(pos));
             }
             return e;
         }
 
-        private Expression parseExpression() {
+        private Expression parseExpression() throws InvalidExpressionException {
             if (pos >= s.length()) {
-                throw new IllegalArgumentException("Unexpected end of input");
+                throw new InvalidExpressionException("Unexpected end of input");
             }
 
             char ch = s.charAt(pos);
@@ -50,27 +47,23 @@ public class Parser {
                 pos++;
                 Expression left = parseExpression();
                 if (pos >= s.length()) {
-                    throw new IllegalArgumentException("Missing operator at position " + pos);
+                    throw new InvalidExpressionException("Missing operator at position " + pos);
                 }
                 char op = s.charAt(pos++);
                 Expression right = parseExpression();
                 if (pos >= s.length() || s.charAt(pos) != ')') {
-                    throw new IllegalArgumentException("Missing closing parenthesis at position " + pos);
+                    throw new InvalidExpressionException("Missing closing parenthesis at position " + pos);
                 }
                 pos++;
-                if (op == '+') {
-                    return new Add(left, right);
-                } else if (op == '-') {
-                    return new Sub(left, right);
-                } else if (op == '*') {
-                    return new Mul(left, right);
-                } else if (op == '/') {
-                    return new Div(left, right);
-                } else {
-                    throw new IllegalArgumentException("Unknown operator: " + op);
-                }
+                return switch (op) {
+                    case '+' -> new Add(left, right);
+                    case '-' -> new Sub(left, right);
+                    case '*' -> new Mul(left, right);
+                    case '/' -> new Div(left, right);
+                    default -> throw new InvalidExpressionException("Unknown operator: " + op);
+                };
             } else {
-                throw new IllegalArgumentException("Unexpected char: " + ch + " at " + pos);
+                throw new InvalidExpressionException("Unexpected char: " + ch + " at " + pos);
             }
         }
 
@@ -89,5 +82,27 @@ public class Parser {
             }
             return new Variable(s.substring(start, pos));
         }
+    }
+
+    public static Map<String, Integer> parseVariables(String s) throws InvalidExpressionException {
+        Map<String, Integer> map = new HashMap<>();
+        if (s == null || s.trim().isEmpty()) return map;
+
+        String[] parts = s.split(";");
+        for (String p : parts) {
+            String[] kv = p.split("=");
+            if (kv.length != 2) {
+                throw new InvalidExpressionException("Invalid assignment: " + p);
+            }
+            String key = kv[0].trim();
+            int value;
+            try {
+                value = Integer.parseInt(kv[1].trim());
+            } catch (NumberFormatException e) {
+                throw new InvalidExpressionException("Invalid number: " + kv[1].trim());
+            }
+            map.put(key, value);
+        }
+        return map;
     }
 }

@@ -2,6 +2,8 @@ package ru.nsu.krasnyanski;
 
 import java.util.Map;
 
+import static ru.nsu.krasnyanski.Parser.parseVariables;
+
 /**
  * Abstract class for mathematical expressions.
  */
@@ -27,5 +29,10 @@ public abstract class Expression {
      * @param variables map variable → integer value
      * @return integer result
      */
-    public abstract int eval(Map<String, Integer> variables);
+    public abstract int eval(Map<String, Integer> variables) throws ExpressionException;
+
+    public int eval(String variables) throws ExpressionException, InvalidExpressionException {
+        Map<String, Integer> map = parseVariables(variables);
+        return eval(map);
+    }
 }
