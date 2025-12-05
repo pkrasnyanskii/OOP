@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.krasnyanski"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.krasnyanski.exception"},{"l":"ru.nsu.krasnyanski.expression"},{"l":"ru.nsu.krasnyanski.parser"}];updateSearchResults();
