@@ -1,17 +1,14 @@
 package ru.nsu.krasnyanski;
 
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import ru.nsu.krasnyanski.exception.DivisionByZeroException;
 import ru.nsu.krasnyanski.exception.ExpressionException;
 import ru.nsu.krasnyanski.exception.InvalidExpressionException;
 import ru.nsu.krasnyanski.exception.VariableNotAssignedException;
-
 import ru.nsu.krasnyanski.expression.Add;
 import ru.nsu.krasnyanski.expression.Div;
 import ru.nsu.krasnyanski.expression.Expression;
@@ -19,8 +16,6 @@ import ru.nsu.krasnyanski.expression.Mul;
 import ru.nsu.krasnyanski.expression.Number;
 import ru.nsu.krasnyanski.expression.Sub;
 import ru.nsu.krasnyanski.expression.Variable;
-
-
 import ru.nsu.krasnyanski.parser.Parser;
 
 /**

@@ -1,16 +1,16 @@
 package ru.nsu.krasnyanski.parser;
 
-import ru.nsu.krasnyanski.exception.InvalidExpressionException;
-import ru.nsu.krasnyanski.expression.Expression;
-import ru.nsu.krasnyanski.expression.Number;
-import ru.nsu.krasnyanski.expression.Variable;
-import ru.nsu.krasnyanski.expression.Add;
-import ru.nsu.krasnyanski.expression.Sub;
-import ru.nsu.krasnyanski.expression.Mul;
-import ru.nsu.krasnyanski.expression.Div;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import ru.nsu.krasnyanski.exception.InvalidExpressionException;
+import ru.nsu.krasnyanski.expression.Add;
+import ru.nsu.krasnyanski.expression.Div;
+import ru.nsu.krasnyanski.expression.Expression;
+import ru.nsu.krasnyanski.expression.Mul;
+import ru.nsu.krasnyanski.expression.Number;
+import ru.nsu.krasnyanski.expression.Sub;
+import ru.nsu.krasnyanski.expression.Variable;
 
 /**
  * Parser for expressions.

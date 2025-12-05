@@ -1,7 +1,6 @@
 package ru.nsu.krasnyanski.expression;
 
 import java.util.Map;
-
 import ru.nsu.krasnyanski.exception.DivisionByZeroException;
 import ru.nsu.krasnyanski.exception.ExpressionException;
 
