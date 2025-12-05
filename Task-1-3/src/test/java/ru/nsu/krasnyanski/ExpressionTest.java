@@ -1,6 +1,13 @@
 package ru.nsu.krasnyanski;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.krasnyanski.exception.DivisionByZeroException;
+import ru.nsu.krasnyanski.exception.ExpressionException;
+import ru.nsu.krasnyanski.exception.InvalidExpressionException;
+import ru.nsu.krasnyanski.exception.VariableNotAssignedException;
+import ru.nsu.krasnyanski.expression.*;
+import ru.nsu.krasnyanski.expression.Number;
+import ru.nsu.krasnyanski.parser.Parser;
 
 import java.util.Map;
 
@@ -13,7 +20,7 @@ class ExpressionTest {
 
     @Test
     void testNumberPrintAndEval() throws ExpressionException {
-        Expression n = new Number(7);
+        Expression n = new ru.nsu.krasnyanski.expression.Number(7);
         assertEquals("7", n.print());
         assertEquals(7, n.eval(Map.of()));
         assertEquals("0", n.derivative("x").print());
@@ -30,7 +37,7 @@ class ExpressionTest {
 
     @Test
     void testAdd() throws ExpressionException {
-        Expression e = new Add(new Number(2), new Variable("x"));
+        Expression e = new Add(new ru.nsu.krasnyanski.expression.Number(2), new Variable("x"));
         assertEquals("(2+x)", e.print());
         assertEquals(12, e.eval(Map.of("x", 10)));
         Expression d = e.derivative("x");
@@ -39,7 +46,7 @@ class ExpressionTest {
 
     @Test
     void testSub() throws ExpressionException {
-        Expression e = new Sub(new Number(5), new Variable("y"));
+        Expression e = new Sub(new ru.nsu.krasnyanski.expression.Number(5), new Variable("y"));
         assertEquals("(5-y)", e.print());
         assertEquals(2, e.eval(Map.of("y", 3)));
         Expression d = e.derivative("y");
@@ -48,7 +55,7 @@ class ExpressionTest {
 
     @Test
     void testMul() throws ExpressionException {
-        Expression e = new Mul(new Variable("x"), new Number(4));
+        Expression e = new Mul(new Variable("x"), new ru.nsu.krasnyanski.expression.Number(4));
         assertEquals("(x*4)", e.print());
         assertEquals(20, e.eval(Map.of("x", 5)));
         Expression d = e.derivative("x");
@@ -57,7 +64,7 @@ class ExpressionTest {
 
     @Test
     void testDiv() throws ExpressionException {
-        Expression e = new Div(new Variable("x"), new Number(2));
+        Expression e = new Div(new Variable("x"), new ru.nsu.krasnyanski.expression.Number(2));
         assertEquals("(x/2)", e.print());
         assertEquals(3, e.eval(Map.of("x", 6)));
         Expression d = e.derivative("x");
@@ -105,7 +112,7 @@ class ExpressionTest {
 
     @Test
     void testDivisionByZeroException() throws InvalidExpressionException, ExpressionException {
-        Expression e = new Div(new Number(10), new Number(0));
+        Expression e = new Div(new ru.nsu.krasnyanski.expression.Number(10), new Number(0));
         assertThrows(DivisionByZeroException.class, () -> e.eval(Map.of()));
     }
 

@@ -1,4 +1,7 @@
-package ru.nsu.krasnyanski;
+package ru.nsu.krasnyanski.expression;
+
+import ru.nsu.krasnyanski.exception.DivisionByZeroException;
+import ru.nsu.krasnyanski.exception.ExpressionException;
 
 import java.util.Map;
 
@@ -31,7 +34,7 @@ public class Div extends Expression {
     }
 
     @Override
-    public int eval(Map<String, Integer> variables) throws ExpressionException{
+    public int eval(Map<String, Integer> variables) throws ExpressionException {
         int divisor = right.eval(variables);
         if (divisor == 0) {
             throw new DivisionByZeroException();

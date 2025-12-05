@@ -1,4 +1,7 @@
-package ru.nsu.krasnyanski;
+package ru.nsu.krasnyanski.expression;
+
+import ru.nsu.krasnyanski.exception.ExpressionException;
+import ru.nsu.krasnyanski.exception.VariableNotAssignedException;
 
 import java.util.Map;
 
@@ -26,7 +29,7 @@ public class Variable extends Expression {
     }
 
     @Override
-    public int eval(Map<String, Integer> variables) throws ExpressionException{
+    public int eval(Map<String, Integer> variables) throws ExpressionException {
         if (!variables.containsKey(name)) {
             throw new VariableNotAssignedException(name);
         }

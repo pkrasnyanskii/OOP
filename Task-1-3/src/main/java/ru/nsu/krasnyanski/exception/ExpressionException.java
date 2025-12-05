@@ -1,4 +1,4 @@
-package ru.nsu.krasnyanski;
+package ru.nsu.krasnyanski.exception;
 
 /**
  * Base exception for evaluation errors in expressions.

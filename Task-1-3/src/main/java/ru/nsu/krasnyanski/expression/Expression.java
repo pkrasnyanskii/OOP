@@ -1,7 +1,10 @@
-package ru.nsu.krasnyanski;
+package ru.nsu.krasnyanski.expression;
+
+import ru.nsu.krasnyanski.exception.ExpressionException;
+import ru.nsu.krasnyanski.exception.InvalidExpressionException;
 
 import java.util.Map;
-import static ru.nsu.krasnyanski.Parser.parseVariables;
+import static ru.nsu.krasnyanski.parser.Parser.parseVariables;
 
 /**
  * Abstract class for mathematical expressions.
