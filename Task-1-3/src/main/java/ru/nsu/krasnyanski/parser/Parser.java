@@ -1,8 +1,13 @@
 package ru.nsu.krasnyanski.parser;
 
 import ru.nsu.krasnyanski.exception.InvalidExpressionException;
-import ru.nsu.krasnyanski.expression.*;
+import ru.nsu.krasnyanski.expression.Expression;
 import ru.nsu.krasnyanski.expression.Number;
+import ru.nsu.krasnyanski.expression.Variable;
+import ru.nsu.krasnyanski.expression.Add;
+import ru.nsu.krasnyanski.expression.Sub;
+import ru.nsu.krasnyanski.expression.Mul;
+import ru.nsu.krasnyanski.expression.Div;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -79,7 +84,8 @@ public class Parser {
                     case '-' -> new Sub(left, right);
                     case '*' -> new Mul(left, right);
                     case '/' -> new Div(left, right);
-                    default -> throw new InvalidExpressionException("Unknown operator: " + operator);
+                    default -> throw new
+                            InvalidExpressionException("Unknown operator: " + operator);
                 };
             } else {
                 throw new InvalidExpressionException("Unexpected char: " + ch + " at " + pos);

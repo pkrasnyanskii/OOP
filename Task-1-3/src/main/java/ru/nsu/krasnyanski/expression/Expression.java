@@ -1,9 +1,10 @@
 package ru.nsu.krasnyanski.expression;
 
+import java.util.Map;
+
 import ru.nsu.krasnyanski.exception.ExpressionException;
 import ru.nsu.krasnyanski.exception.InvalidExpressionException;
 
-import java.util.Map;
 import static ru.nsu.krasnyanski.parser.Parser.parseVariables;
 
 /**
