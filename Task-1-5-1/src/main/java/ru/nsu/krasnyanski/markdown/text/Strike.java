@@ -2,6 +2,7 @@ package ru.nsu.krasnyanski.markdown.text;
 
 /**
  * Represents a strike-through text element in Markdown.
+ *
  * <p>Markdown syntax: <code>~~text~~</code>
  */
 public class Strike extends Text {

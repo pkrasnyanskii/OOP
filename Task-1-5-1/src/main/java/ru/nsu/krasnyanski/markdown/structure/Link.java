@@ -5,6 +5,7 @@ import ru.nsu.krasnyanski.markdown.Element;
 
 /**
  * Represents a Markdown hyperlink.
+ *
  * <p>Markdown syntax: <code>[text](url)</code>
  */
 public class Link implements Element {
