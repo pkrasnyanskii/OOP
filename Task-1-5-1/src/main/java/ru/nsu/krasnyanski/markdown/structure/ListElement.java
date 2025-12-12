@@ -1,9 +1,9 @@
 package ru.nsu.krasnyanski.markdown.structure;
 
-import ru.nsu.krasnyanski.markdown.Element;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
+import ru.nsu.krasnyanski.markdown.Element;
 
 /**
  * Represents an ordered or unordered Markdown list.
@@ -54,10 +54,10 @@ public class ListElement implements Element {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o){
+        if (this == o) {
             return true;
         }
-        if (!(o instanceof ListElement)){
+        if (!(o instanceof ListElement)) {
             return false;
         }
         ListElement l = (ListElement) o;

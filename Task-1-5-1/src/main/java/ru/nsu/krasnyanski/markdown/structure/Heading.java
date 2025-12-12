@@ -1,7 +1,7 @@
 package ru.nsu.krasnyanski.markdown.structure;
 
-import ru.nsu.krasnyanski.markdown.Element;
 import java.util.Objects;
+import ru.nsu.krasnyanski.markdown.Element;
 
 /**
  * Represents a Markdown heading (levels 1–6).
@@ -35,10 +35,10 @@ public class Heading implements Element {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o){
+        if (this == o) {
             return true;
         }
-        if (!(o instanceof Heading)){
+        if (!(o instanceof Heading)) {
             return false;
         }
         Heading h = (Heading) o;

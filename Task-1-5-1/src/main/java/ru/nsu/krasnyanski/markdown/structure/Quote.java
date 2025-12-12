@@ -1,8 +1,8 @@
 package ru.nsu.krasnyanski.markdown.structure;
 
-import ru.nsu.krasnyanski.markdown.Element;
 import java.util.List;
 import java.util.Objects;
+import ru.nsu.krasnyanski.markdown.Element;
 
 /**
  * Represents a Markdown blockquote.
@@ -36,10 +36,10 @@ public class Quote implements Element {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o){
+        if (this == o) {
             return true;
         }
-        if (!(o instanceof Quote)){
+        if (!(o instanceof Quote)) {
             return false;
         }
         Quote q = (Quote) o;

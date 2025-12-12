@@ -1,7 +1,7 @@
 package ru.nsu.krasnyanski.markdown.text;
 
-import ru.nsu.krasnyanski.markdown.Element;
 import java.util.Objects;
+import ru.nsu.krasnyanski.markdown.Element;
 
 /**
  * Represents a plain text element in a Markdown document.
@@ -42,8 +42,12 @@ public class Text implements Element {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Text)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Text)) {
+            return false;
+        }
         Text t = (Text) o;
         return Objects.equals(content, t.content);
     }
