@@ -42,7 +42,7 @@ public class Table implements Element {
     }
 
     /**
-     * Converts this table into Markdown format:
+     * Converts this table into Markdown format.
      * <pre>
      * | H1 | H2 |
      * | :--- | ---: |
@@ -51,7 +51,9 @@ public class Table implements Element {
      */
     @Override
     public String toMarkdown() {
-        if (rows.isEmpty()) return "";
+        if (rows.isEmpty()) {
+            return "";
+        }
 
         StringBuilder sb = new StringBuilder();
         List<Element> header = rows.get(0);
@@ -92,9 +94,9 @@ public class Table implements Element {
             return false;
         }
         Table t = (Table) o;
-        return rowLimit == t.rowLimit &&
-                Objects.equals(rows, t.rows) &&
-                Objects.equals(alignments, t.alignments);
+        return rowLimit == t.rowLimit
+                && Objects.equals(rows, t.rows)
+                && Objects.equals(alignments, t.alignments);
     }
 
     @Override
@@ -140,7 +142,7 @@ public class Table implements Element {
         public Builder addRow(Object... cells) {
             List<Element> row = new ArrayList<>();
             for (Object c : cells) {
-                if (c instanceof Element e){
+                if (c instanceof Element e) {
                     row.add(e);
                 }
                 else {
