@@ -5,9 +5,7 @@ import ru.nsu.krasnyanski.markdown.Element;
 
 /**
  * Represents a Markdown image.
- * <p>
- * Markdown syntax: <code>![alt](url)</code>
- * </p>
+ * <p>Markdown syntax: <code>![alt](url)</code>
  */
 public class Image implements Element {
     private final String alt;

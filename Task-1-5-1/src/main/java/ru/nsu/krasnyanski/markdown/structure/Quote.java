@@ -6,9 +6,7 @@ import ru.nsu.krasnyanski.markdown.Element;
 
 /**
  * Represents a Markdown blockquote.
- * <p>
- * Each element forms a new line prefixed with <code>> </code>.
- * </p>
+ * <p>Each element forms a new line prefixed with <code>> </code>.
  */
 public class Quote implements Element {
     private final List<Element> elements;

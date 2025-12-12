@@ -2,9 +2,7 @@ package ru.nsu.krasnyanski.markdown.text;
 
 /**
  * Represents bold text in Markdown.
- * <p>
- * Markdown syntax: <code>**text**</code>
- * </p>
+ * <p>Markdown syntax: <code>**text**</code>
  */
 public class Bold extends Text {
 
