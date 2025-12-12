@@ -31,8 +31,12 @@ public class Image implements Element {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Image)) return false;
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof Image)){
+            return false;
+        }
         Image img = (Image) o;
         return Objects.equals(alt, img.alt) && Objects.equals(url, img.url);
     }

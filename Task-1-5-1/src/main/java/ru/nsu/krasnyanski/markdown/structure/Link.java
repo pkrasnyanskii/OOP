@@ -31,8 +31,12 @@ public class Link implements Element {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Link)) return false;
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof Link)){
+            return false;
+        }
         Link l = (Link) o;
         return Objects.equals(text, l.text) && Objects.equals(url, l.url);
     }
