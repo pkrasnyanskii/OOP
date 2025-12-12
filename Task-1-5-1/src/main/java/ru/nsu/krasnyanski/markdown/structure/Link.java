@@ -3,10 +3,22 @@ package ru.nsu.krasnyanski.markdown.structure;
 import ru.nsu.krasnyanski.markdown.Element;
 import java.util.Objects;
 
+/**
+ * Represents a Markdown hyperlink.
+ * <p>
+ * Markdown syntax: <code>[text](url)</code>
+ * </p>
+ */
 public class Link implements Element {
     private final String text;
     private final String url;
 
+    /**
+     * Creates a new Markdown link.
+     *
+     * @param text visible label
+     * @param url destination URL
+     */
     public Link(String text, String url) {
         this.text = text;
         this.url = url;
@@ -19,8 +31,8 @@ public class Link implements Element {
 
     @Override
     public boolean equals(Object o) {
-        if(this == o) return true;
-        if(!(o instanceof Link)) return false;
+        if (this == o) return true;
+        if (!(o instanceof Link)) return false;
         Link l = (Link) o;
         return Objects.equals(text, l.text) && Objects.equals(url, l.url);
     }
