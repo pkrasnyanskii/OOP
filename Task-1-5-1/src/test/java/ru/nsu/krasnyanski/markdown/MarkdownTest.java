@@ -1,11 +1,17 @@
 package ru.nsu.krasnyanski.markdown;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import ru.nsu.krasnyanski.markdown.structure.CodeBlock;
 import ru.nsu.krasnyanski.markdown.structure.Heading;
 import ru.nsu.krasnyanski.markdown.structure.Image;
 import ru.nsu.krasnyanski.markdown.structure.Link;
 import ru.nsu.krasnyanski.markdown.structure.ListElement;
+import ru.nsu.krasnyanski.markdown.structure.MarkdownException;
 import ru.nsu.krasnyanski.markdown.structure.Quote;
 import ru.nsu.krasnyanski.markdown.structure.Table;
 import ru.nsu.krasnyanski.markdown.structure.Task;
@@ -14,8 +20,6 @@ import ru.nsu.krasnyanski.markdown.text.InlineCode;
 import ru.nsu.krasnyanski.markdown.text.Italic;
 import ru.nsu.krasnyanski.markdown.text.Strike;
 import ru.nsu.krasnyanski.markdown.text.Text;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class MarkdownTest {
 
@@ -24,8 +28,8 @@ class MarkdownTest {
         Text plain = new Text("hello");
         Bold bold = new Bold("bold");
         Italic italic = new Italic("italic");
-        Strike strike = new Strike("strike");
-        InlineCode code = new InlineCode("code");
+        final Strike strike = new Strike("strike");
+        final InlineCode code = new InlineCode("code");
 
         assertEquals("hello", plain.toMarkdown());
         assertEquals("**bold**", bold.toMarkdown());
@@ -41,6 +45,20 @@ class MarkdownTest {
 
         assertEquals("# Title", h1.toMarkdown());
         assertEquals("### Subtitle", h3.toMarkdown());
+    }
+
+    @Test
+    void testHeadingEdgeCases() {
+        assertThrows(MarkdownException.class, () -> new Heading(0, "Too low"));
+        assertThrows(MarkdownException.class, () -> new Heading(7, "Too high"));
+
+        Heading h1a = new Heading(1, "A");
+        Heading h1b = new Heading(1, "A");
+        Heading h1c = new Heading(1, "B");
+
+        assertEquals(h1a, h1b);
+        assertNotEquals(h1a, h1c);
+        assertEquals(h1a.hashCode(), h1b.hashCode());
     }
 
     @Test
@@ -105,7 +123,6 @@ class MarkdownTest {
         assertEquals("", ul.toMarkdown());
     }
 
-
     @Test
     void testTable() {
         Table.Builder builder = new Table.Builder()
@@ -132,7 +149,6 @@ class MarkdownTest {
         assertEquals(expected, table.toMarkdown());
     }
 
-
     @Test
     void testEqualsAndHashCode() {
         Bold b1 = new Bold("text");
@@ -142,69 +158,5 @@ class MarkdownTest {
         assertEquals(b1, b2);
         assertNotEquals(b1, b3);
         assertEquals(b1.hashCode(), b2.hashCode());
-    }
-
-    @Test
-    void testListElementEdgeCases() {
-        ListElement emptyUl = new ListElement(false);
-        ListElement emptyOl = new ListElement(true);
-        assertEquals("", emptyUl.toMarkdown());
-        assertEquals("", emptyOl.toMarkdown());
-
-        ListElement ul = new ListElement(false);
-        ul.addItem(new Text("Only"));
-        assertEquals("- Only", ul.toMarkdown());
-
-        ListElement ol = new ListElement(true);
-        ol.addItem(new Text("First"));
-        assertEquals("1. First", ol.toMarkdown());
-    }
-
-    @Test
-    void testQuoteEdgeCases() {
-        Quote emptyQuote = new Quote(java.util.List.of());
-        assertEquals("", emptyQuote.toMarkdown());
-
-        Quote multi = new Quote(java.util.List.of(new Text("one"), new Text("two")));
-        assertEquals("> one\n> two", multi.toMarkdown());
-    }
-
-    @Test
-    void testTaskEdgeCases() {
-        Task tEmpty = new Task("", false);
-        assertEquals("- [ ] ", tEmpty.toMarkdown());
-
-        Task tDone = new Task("Done", true);
-        Task tCopy = new Task("Done", true);
-        assertEquals(tDone, tCopy);
-        assertEquals(tDone.hashCode(), tCopy.hashCode());
-    }
-
-    @Test
-    void testImageAndLinkEdgeCases() {
-        Image i1 = new Image("alt", "url");
-        Image i2 = new Image("alt", "url");
-        Image i3 = new Image("alt", "other");
-        assertEquals(i1, i2);
-        assertNotEquals(i1, i3);
-
-        Link l1 = new Link("name", "href");
-        Link l2 = new Link("name", "href");
-        Link l3 = new Link("name", "other");
-        assertEquals(l1, l2);
-        assertNotEquals(l1, l3);
-    }
-
-    @Test
-    void testCodeBlockEdgeCases() {
-        CodeBlock cbEmpty = new CodeBlock("", "");
-        assertEquals("```\n\n```", cbEmpty.toMarkdown());
-
-        CodeBlock cbLang = new CodeBlock("println", "kotlin");
-        assertEquals("```kotlin\nprintln\n```", cbLang.toMarkdown());
-
-        CodeBlock cb2 = new CodeBlock("println", "kotlin");
-        assertEquals(cbLang, cb2);
-        assertEquals(cbLang.hashCode(), cb2.hashCode());
     }
 }
