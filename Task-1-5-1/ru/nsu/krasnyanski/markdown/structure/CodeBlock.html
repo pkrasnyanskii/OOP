@@ -82,6 +82,14 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">CodeBlock</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.markdown">Element</a></span></div>
+<div class="block">Represents a fenced code block in Markdown.
+ <p>
+ Syntax:
+ <pre>
+ ```language
+ code...
+ ```
+ </pre></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -95,7 +103,9 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,java.lang.String)" class="member-name-link">CodeBlock</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;code,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;language)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a code block.</div>
+</div>
 </div>
 </section>
 </li>
@@ -118,7 +128,9 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toMarkdown()" class="member-name-link">toMarkdown</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Serializes element into Markdown string.</div>
+</div>
 </div>
 </div>
 </div>
@@ -141,6 +153,12 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <h3>CodeBlock</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CodeBlock</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;code,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;language)</span></div>
+<div class="block">Creates a code block.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>code</code> - the content inside the block</dd>
+<dd><code>language</code> - optional language label (e.g. "java")</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -155,9 +173,13 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <section class="detail" id="toMarkdown()">
 <h3>toMarkdown</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toMarkdown</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../Element.html#toMarkdown()">Element</a></code></span></div>
+<div class="block">Serializes element into Markdown string.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../Element.html#toMarkdown()">toMarkdown</a></code>&nbsp;in interface&nbsp;<code><a href="../Element.html" title="interface in ru.nsu.krasnyanski.markdown">Element</a></code></dd>
+<dt>Returns:</dt>
+<dd>Markdown representation of the element</dd>
 </dl>
 </section>
 </li>

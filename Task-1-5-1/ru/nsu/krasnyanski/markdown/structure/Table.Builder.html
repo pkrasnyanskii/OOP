@@ -81,6 +81,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public static class </span><span class="element-name type-name-label">Table.Builder</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Builder for constructing tables row by row.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -110,16 +111,24 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Table.Builder.html" title="class in ru.nsu.krasnyanski.markdown.structure">Table.Builder</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addRow(java.lang.Object...)" class="member-name-link">addRow</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;cells)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Adds one table row.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Table.html" title="class in ru.nsu.krasnyanski.markdown.structure">Table</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#build()" class="member-name-link">build</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Builds the <a href="Table.html" title="class in ru.nsu.krasnyanski.markdown.structure"><code>Table</code></a> instance.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Table.Builder.html" title="class in ru.nsu.krasnyanski.markdown.structure">Table.Builder</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#withAlignments(int...)" class="member-name-link">withAlignments</a><wbr>(int...&nbsp;aligns)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets alignments for columns.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Table.Builder.html" title="class in ru.nsu.krasnyanski.markdown.structure">Table.Builder</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#withRowLimit(int)" class="member-name-link">withRowLimit</a><wbr>(int&nbsp;limit)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets maximum number of data rows written to Markdown.</div>
+</div>
 </div>
 </div>
 </div>
@@ -155,24 +164,43 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="withAlignments(int...)">
 <h3>withAlignments</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Table.Builder.html" title="class in ru.nsu.krasnyanski.markdown.structure">Table.Builder</a></span>&nbsp;<span class="element-name">withAlignments</span><wbr><span class="parameters">(int...&nbsp;aligns)</span></div>
+<div class="block">Sets alignments for columns.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>aligns</code> - alignment constants</dd>
+<dt>Returns:</dt>
+<dd>this builder</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="withRowLimit(int)">
 <h3>withRowLimit</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Table.Builder.html" title="class in ru.nsu.krasnyanski.markdown.structure">Table.Builder</a></span>&nbsp;<span class="element-name">withRowLimit</span><wbr><span class="parameters">(int&nbsp;limit)</span></div>
+<div class="block">Sets maximum number of data rows written to Markdown.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>limit</code> - row limit</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="addRow(java.lang.Object...)">
 <h3>addRow</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Table.Builder.html" title="class in ru.nsu.krasnyanski.markdown.structure">Table.Builder</a></span>&nbsp;<span class="element-name">addRow</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;cells)</span></div>
+<div class="block">Adds one table row.
+ Non-Element objects are wrapped in <a href="../text/Text.html" title="class in ru.nsu.krasnyanski.markdown.text"><code>Text</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>cells</code> - any objects representing table cells</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="build()">
 <h3>build</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Table.html" title="class in ru.nsu.krasnyanski.markdown.structure">Table</a></span>&nbsp;<span class="element-name">build</span>()</div>
+<div class="block">Builds the <a href="Table.html" title="class in ru.nsu.krasnyanski.markdown.structure"><code>Table</code></a> instance.</div>
 </section>
 </li>
 </ul>

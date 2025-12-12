@@ -82,6 +82,13 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Task</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.markdown">Element</a></span></div>
+<div class="block">Represents a Markdown task list item.
+ <p>
+ Markdown syntax:
+ <ul>
+     <li><code>- [ ] description</code> — unchecked task</li>
+     <li><code>- [x] description</code> — completed task</li>
+ </ul></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -95,7 +102,9 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,boolean)" class="member-name-link">Task</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;description,
  boolean&nbsp;done)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a new task list item.</div>
+</div>
 </div>
 </section>
 </li>
@@ -112,13 +121,17 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Equality checks both description and completion flag.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toMarkdown()" class="member-name-link">toMarkdown</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Converts this task into Markdown string.</div>
+</div>
 </div>
 </div>
 </div>
@@ -141,6 +154,12 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <h3>Task</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Task</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;description,
  boolean&nbsp;done)</span></div>
+<div class="block">Creates a new task list item.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>description</code> - text of the task</dd>
+<dd><code>done</code> - whether the task is completed</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -155,9 +174,12 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <section class="detail" id="toMarkdown()">
 <h3>toMarkdown</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toMarkdown</span>()</div>
+<div class="block">Converts this task into Markdown string.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../Element.html#toMarkdown()">toMarkdown</a></code>&nbsp;in interface&nbsp;<code><a href="../Element.html" title="interface in ru.nsu.krasnyanski.markdown">Element</a></code></dd>
+<dt>Returns:</dt>
+<dd>formatted task list item</dd>
 </dl>
 </section>
 </li>
@@ -165,6 +187,7 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <section class="detail" id="equals(java.lang.Object)">
 <h3>equals</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</span></div>
+<div class="block">Equality checks both description and completion flag.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>

@@ -86,6 +86,12 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Text</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.markdown">Element</a></span></div>
+<div class="block">Represents a plain text element in a Markdown document.
+ <p>
+ This is the base class for all inline Markdown text elements such as bold, italic,
+ strike-through, and inline code. It stores raw textual content and returns it unchanged
+ in <a href="#toMarkdown()"><code>toMarkdown()</code></a>, unless overridden by subclasses.
+ </p></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -113,7 +119,9 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">Text</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;content)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a new plain text element.</div>
+</div>
 </div>
 </section>
 </li>
@@ -130,13 +138,20 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks equality by comparing classes and content.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Computes hash code based on content.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toMarkdown()" class="member-name-link">toMarkdown</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the content unchanged, because plain text
+ does not require any Markdown formatting.</div>
+</div>
 </div>
 </div>
 </div>
@@ -172,6 +187,11 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>Text</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Text</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;content)</span></div>
+<div class="block">Creates a new plain text element.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>content</code> - the text content (not null)</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -186,9 +206,13 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <section class="detail" id="toMarkdown()">
 <h3>toMarkdown</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toMarkdown</span>()</div>
+<div class="block">Returns the content unchanged, because plain text
+ does not require any Markdown formatting.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../Element.html#toMarkdown()">toMarkdown</a></code>&nbsp;in interface&nbsp;<code><a href="../Element.html" title="interface in ru.nsu.krasnyanski.markdown">Element</a></code></dd>
+<dt>Returns:</dt>
+<dd>raw text content</dd>
 </dl>
 </section>
 </li>
@@ -196,9 +220,14 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <section class="detail" id="equals(java.lang.Object)">
 <h3>equals</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</span></div>
+<div class="block">Checks equality by comparing classes and content.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>o</code> - the object to compare</dd>
+<dt>Returns:</dt>
+<dd>true if both are Text instances with the same content</dd>
 </dl>
 </section>
 </li>
@@ -206,9 +235,12 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <section class="detail" id="hashCode()">
 <h3>hashCode</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">hashCode</span>()</div>
+<div class="block">Computes hash code based on content.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
+<dt>Returns:</dt>
+<dd>hash code for this Text</dd>
 </dl>
 </section>
 </li>

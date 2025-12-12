@@ -83,6 +83,10 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Strike</span>
 <span class="extends-implements">extends <a href="Text.html" title="class in ru.nsu.krasnyanski.markdown.text">Text</a></span></div>
+<div class="block">Represents a strike-through text element in Markdown.
+ <p>
+ Markdown syntax: <code>~~text~~</code>
+ </p></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -104,7 +108,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">Strike</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;content)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a new strike-through text element.</div>
+</div>
 </div>
 </section>
 </li>
@@ -121,7 +127,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toMarkdown()" class="member-name-link">toMarkdown</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Converts the content to Markdown by wrapping it in <code>~~</code>.</div>
+</div>
 </div>
 </div>
 </div>
@@ -146,6 +154,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>Strike</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Strike</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;content)</span></div>
+<div class="block">Creates a new strike-through text element.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>content</code> - inner text</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -160,11 +173,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="toMarkdown()">
 <h3>toMarkdown</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toMarkdown</span>()</div>
+<div class="block">Converts the content to Markdown by wrapping it in <code>~~</code>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../Element.html#toMarkdown()">toMarkdown</a></code>&nbsp;in interface&nbsp;<code><a href="../Element.html" title="interface in ru.nsu.krasnyanski.markdown">Element</a></code></dd>
 <dt>Overrides:</dt>
 <dd><code><a href="Text.html#toMarkdown()">toMarkdown</a></code>&nbsp;in class&nbsp;<code><a href="Text.html" title="class in ru.nsu.krasnyanski.markdown.text">Text</a></code></dd>
+<dt>Returns:</dt>
+<dd>Markdown-formatted strike-through text</dd>
 </dl>
 </section>
 </li>

@@ -82,6 +82,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ListElement</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.markdown">Element</a></span></div>
+<div class="block">Represents an ordered or unordered Markdown list.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -94,7 +95,9 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(boolean)" class="member-name-link">ListElement</a><wbr>(boolean&nbsp;ordered)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a new list.</div>
+</div>
 </div>
 </section>
 </li>
@@ -111,7 +114,9 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addItem(ru.nsu.krasnyanski.markdown.Element)" class="member-name-link">addItem</a><wbr>(<a href="../Element.html" title="interface in ru.nsu.krasnyanski.markdown">Element</a>&nbsp;item)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Adds a list item.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -120,7 +125,12 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toMarkdown()" class="member-name-link">toMarkdown</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Converts list items to Markdown:
+ 
+     <code>- item</code> for unordered
+     <code>1.</code></div>
+</div>
 </div>
 </div>
 </div>
@@ -142,6 +152,11 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <section class="detail" id="&lt;init&gt;(boolean)">
 <h3>ListElement</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ListElement</span><wbr><span class="parameters">(boolean&nbsp;ordered)</span></div>
+<div class="block">Creates a new list.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>ordered</code> - true for numbered list, false for bullet list</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -156,15 +171,27 @@ implements <a href="../Element.html" title="interface in ru.nsu.krasnyanski.mark
 <section class="detail" id="addItem(ru.nsu.krasnyanski.markdown.Element)">
 <h3>addItem</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addItem</span><wbr><span class="parameters">(<a href="../Element.html" title="interface in ru.nsu.krasnyanski.markdown">Element</a>&nbsp;item)</span></div>
+<div class="block">Adds a list item.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>item</code> - element to add</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="toMarkdown()">
 <h3>toMarkdown</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toMarkdown</span>()</div>
+<div class="block">Converts list items to Markdown:
+ <ul>
+     <li><code>- item</code> for unordered</li>
+     <li><code>1. item</code> for ordered</li>
+ </ul></div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../Element.html#toMarkdown()">toMarkdown</a></code>&nbsp;in interface&nbsp;<code><a href="../Element.html" title="interface in ru.nsu.krasnyanski.markdown">Element</a></code></dd>
+<dt>Returns:</dt>
+<dd>Markdown representation of the element</dd>
 </dl>
 </section>
 </li>
