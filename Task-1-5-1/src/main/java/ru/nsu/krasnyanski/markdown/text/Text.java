@@ -28,3 +28,4 @@ public class Text implements Element {
         return Objects.hash(content);
     }
 }
+
