@@ -39,6 +39,12 @@ class MarkdownTest {
     }
 
     @Test
+    void testQuoteMultiLine() {
+        Quote quote = new Quote(java.util.List.of(new Text("line1"), new Text("line2")));
+        assertEquals("> line1\n> line2", quote.toMarkdown());
+    }
+
+    @Test
     void testLinkAndImage() {
         Link link = new Link("Google", "https://google.com");
         Image img = new Image("Alt", "image.png");
@@ -64,6 +70,12 @@ class MarkdownTest {
     }
 
     @Test
+    void testCodeBlockEmpty() {
+        CodeBlock cb = new CodeBlock("", "");
+        assertEquals("```\n\n```", cb.toMarkdown());
+    }
+
+    @Test
     void testListElement() {
         ListElement ul = new ListElement(false);
         ul.addItem(new Text("One"));
@@ -75,6 +87,13 @@ class MarkdownTest {
         ol.addItem(new Text("Second"));
         assertEquals("1. First\n2. Second", ol.toMarkdown());
     }
+
+    @Test
+    void testEmptyList() {
+        ListElement ul = new ListElement(false);
+        assertEquals("", ul.toMarkdown());
+    }
+
 
     @Test
     void testTable() {

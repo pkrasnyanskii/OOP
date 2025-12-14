@@ -3,10 +3,27 @@ package ru.nsu.krasnyanski.markdown.structure;
 import ru.nsu.krasnyanski.markdown.Element;
 import java.util.Objects;
 
+/**
+ * Represents a fenced code block in Markdown.
+ * <p>
+ * Syntax:
+ * <pre>
+ * ```language
+ * code...
+ * ```
+ * </pre>
+ * </p>
+ */
 public class CodeBlock implements Element {
     private final String code;
     private final String language;
 
+    /**
+     * Creates a code block.
+     *
+     * @param code the content inside the block
+     * @param language optional language label (e.g. "java")
+     */
     public CodeBlock(String code, String language) {
         this.code = code;
         this.language = language;
@@ -19,8 +36,8 @@ public class CodeBlock implements Element {
 
     @Override
     public boolean equals(Object o) {
-        if(this == o) return true;
-        if(!(o instanceof CodeBlock)) return false;
+        if (this == o) return true;
+        if (!(o instanceof CodeBlock)) return false;
         CodeBlock c = (CodeBlock) o;
         return Objects.equals(code, c.code) && Objects.equals(language, c.language);
     }
