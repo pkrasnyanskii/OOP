@@ -54,8 +54,12 @@ public class ListElement implements Element {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ListElement)) return false;
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof ListElement)){
+            return false;
+        }
         ListElement l = (ListElement) o;
         return ordered == l.ordered && Objects.equals(items, l.items);
     }

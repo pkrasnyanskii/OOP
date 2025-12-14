@@ -86,8 +86,12 @@ public class Table implements Element {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Table)) return false;
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof Table)){
+            return false;
+        }
         Table t = (Table) o;
         return rowLimit == t.rowLimit &&
                 Objects.equals(rows, t.rows) &&
@@ -111,6 +115,7 @@ public class Table implements Element {
          * Sets alignments for columns.
          *
          * @param aligns alignment constants
+         * @return this builder
          */
         public Builder withAlignments(int... aligns) {
             this.alignments = aligns;
@@ -136,8 +141,12 @@ public class Table implements Element {
         public Builder addRow(Object... cells) {
             List<Element> row = new ArrayList<>();
             for (Object c : cells) {
-                if (c instanceof Element e) row.add(e);
-                else row.add(new Text(c.toString()));
+                if (c instanceof Element e){
+                    row.add(e);
+                }
+                else{
+                    row.add(new Text(c.toString()));
+                }
             }
             rows.add(row);
             return this;

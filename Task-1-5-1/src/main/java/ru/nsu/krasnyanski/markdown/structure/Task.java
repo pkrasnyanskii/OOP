@@ -41,8 +41,12 @@ public class Task implements Element {
     /** Equality checks both description and completion flag. */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Task)) return false;
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof Task)){
+            return false;
+        }
         Task t = (Task) o;
         return done == t.done && Objects.equals(description, t.description);
     }

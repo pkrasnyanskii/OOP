@@ -36,8 +36,12 @@ public class Quote implements Element {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Quote)) return false;
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof Quote)){
+            return false;
+        }
         Quote q = (Quote) o;
         return Objects.equals(elements, q.elements);
     }
