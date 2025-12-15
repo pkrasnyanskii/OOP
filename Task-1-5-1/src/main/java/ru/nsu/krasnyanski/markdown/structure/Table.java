@@ -1,11 +1,11 @@
 package ru.nsu.krasnyanski.markdown.structure;
 
-import ru.nsu.krasnyanski.markdown.text.Text;
-import ru.nsu.krasnyanski.markdown.Element;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import ru.nsu.krasnyanski.markdown.text.Text;
+import ru.nsu.krasnyanski.markdown.Element;
 
 /**
  * Represents a Markdown table.
@@ -16,7 +16,6 @@ import java.util.Objects;
  *     <li>row limit</li>
  *     <li>mixed content using {@link Element}</li>
  * </ul>
- * </p>
  */
 public class Table implements Element {
 
@@ -86,10 +85,10 @@ public class Table implements Element {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o){
+        if (this == o) {
             return true;
         }
-        if (!(o instanceof Table)){
+        if (!(o instanceof Table)) {
             return false;
         }
         Table t = (Table) o;
@@ -144,7 +143,7 @@ public class Table implements Element {
                 if (c instanceof Element e){
                     row.add(e);
                 }
-                else{
+                else {
                     row.add(new Text(c.toString()));
                 }
             }

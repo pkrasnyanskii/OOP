@@ -1,7 +1,7 @@
 package ru.nsu.krasnyanski.markdown.structure;
 
-import ru.nsu.krasnyanski.markdown.Element;
 import java.util.Objects;
+import ru.nsu.krasnyanski.markdown.Element;
 
 /**
  * Represents a Markdown image.
@@ -31,10 +31,10 @@ public class Image implements Element {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o){
+        if (this == o) {
             return true;
         }
-        if (!(o instanceof Image)){
+        if (!(o instanceof Image)) {
             return false;
         }
         Image img = (Image) o;

@@ -1,7 +1,7 @@
 package ru.nsu.krasnyanski.markdown.structure;
 
-import ru.nsu.krasnyanski.markdown.Element;
 import java.util.Objects;
+import ru.nsu.krasnyanski.markdown.Element;
 
 /**
  * Represents a Markdown task list item.
@@ -11,7 +11,6 @@ import java.util.Objects;
  *     <li><code>- [ ] description</code> — unchecked task</li>
  *     <li><code>- [x] description</code> — completed task</li>
  * </ul>
- * </p>
  */
 public class Task implements Element {
     private final String description;
@@ -41,10 +40,10 @@ public class Task implements Element {
     /** Equality checks both description and completion flag. */
     @Override
     public boolean equals(Object o) {
-        if (this == o){
+        if (this == o) {
             return true;
         }
-        if (!(o instanceof Task)){
+        if (!(o instanceof Task)) {
             return false;
         }
         Task t = (Task) o;

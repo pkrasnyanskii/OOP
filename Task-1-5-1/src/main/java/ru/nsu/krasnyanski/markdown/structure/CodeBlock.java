@@ -1,7 +1,7 @@
 package ru.nsu.krasnyanski.markdown.structure;
 
-import ru.nsu.krasnyanski.markdown.Element;
 import java.util.Objects;
+import ru.nsu.krasnyanski.markdown.Element;
 
 /**
  * Represents a fenced code block in Markdown.
@@ -12,7 +12,6 @@ import java.util.Objects;
  * code...
  * ```
  * </pre>
- * </p>
  */
 public class CodeBlock implements Element {
     private final String code;
@@ -36,10 +35,10 @@ public class CodeBlock implements Element {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o){
+        if (this == o) {
             return true;
         }
-        if (!(o instanceof CodeBlock)){
+        if (!(o instanceof CodeBlock)) {
             return false;
         }
         CodeBlock c = (CodeBlock) o;
