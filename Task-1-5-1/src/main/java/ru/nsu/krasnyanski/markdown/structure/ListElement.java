@@ -32,7 +32,7 @@ public class ListElement implements Element {
     }
 
     /**
-     * Converts list items to Markdown:
+     * Converts list items to Markdown.
      * <ul>
      *     <li><code>- item</code> for unordered</li>
      *     <li><code>1. item</code> for ordered</li>
