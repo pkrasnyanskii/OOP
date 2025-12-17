@@ -9,6 +9,7 @@ import ru.nsu.krasnyanski.markdown.Element;
 
 /**
  * Represents a Markdown table.
+ *
  * <p>Supports:
  * <ul>
  *     <li>column alignments (left, center, right)</li>

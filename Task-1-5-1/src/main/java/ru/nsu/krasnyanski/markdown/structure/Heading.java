@@ -5,6 +5,7 @@ import ru.nsu.krasnyanski.markdown.Element;
 
 /**
  * Represents a Markdown heading (levels 1–6).
+ *
  * <p>Markdown syntax: <code>## Heading</code>
  */
 public class Heading implements Element {

@@ -2,6 +2,7 @@ package ru.nsu.krasnyanski.markdown.text;
 
 /**
  * Represents italic text in Markdown.
+ *
  * <p>Markdown syntax: <code>*text*</code>
  */
 public class Italic extends Text {

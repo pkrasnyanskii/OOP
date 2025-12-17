@@ -5,6 +5,7 @@ import ru.nsu.krasnyanski.markdown.Element;
 
 /**
  * Represents a Markdown task list item.
+ *
  * <p>Markdown syntax:
  * <ul>
  *     <li><code>- [ ] description</code> — unchecked task</li>
