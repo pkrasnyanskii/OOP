@@ -5,11 +5,9 @@ import ru.nsu.krasnyanski.markdown.Element;
 
 /**
  * Represents a plain text element in a Markdown document.
- * <p>
- * This is the base class for all inline Markdown text elements such as bold, italic,
+ * <p>This is the base class for all inline Markdown text elements such as bold, italic,
  * strike-through, and inline code. It stores raw textual content and returns it unchanged
  * in {@link #toMarkdown()}, unless overridden by subclasses.
- * </p>
  */
 public class Text implements Element {
     protected final String content;

@@ -5,8 +5,7 @@ import ru.nsu.krasnyanski.markdown.Element;
 
 /**
  * Represents a fenced code block in Markdown.
- * <p>
- * Syntax:
+ * <p>Syntax:
  * <pre>
  * ```language
  * code...
