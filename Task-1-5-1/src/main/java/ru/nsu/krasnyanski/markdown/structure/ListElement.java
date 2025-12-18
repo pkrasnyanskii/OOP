@@ -1,7 +1,7 @@
 package ru.nsu.krasnyanski.markdown.structure;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import ru.nsu.krasnyanski.markdown.Element;
 

@@ -1,11 +1,6 @@
 package ru.nsu.krasnyanski.markdown;
 
 import org.junit.jupiter.api.Test;
-import ru.nsu.krasnyanski.markdown.text.Bold;
-import ru.nsu.krasnyanski.markdown.text.InlineCode;
-import ru.nsu.krasnyanski.markdown.text.Italic;
-import ru.nsu.krasnyanski.markdown.text.Strike;
-import ru.nsu.krasnyanski.markdown.text.Text;
 import ru.nsu.krasnyanski.markdown.structure.CodeBlock;
 import ru.nsu.krasnyanski.markdown.structure.Heading;
 import ru.nsu.krasnyanski.markdown.structure.Image;
@@ -14,6 +9,11 @@ import ru.nsu.krasnyanski.markdown.structure.ListElement;
 import ru.nsu.krasnyanski.markdown.structure.Quote;
 import ru.nsu.krasnyanski.markdown.structure.Table;
 import ru.nsu.krasnyanski.markdown.structure.Task;
+import ru.nsu.krasnyanski.markdown.text.Bold;
+import ru.nsu.krasnyanski.markdown.text.InlineCode;
+import ru.nsu.krasnyanski.markdown.text.Italic;
+import ru.nsu.krasnyanski.markdown.text.Strike;
+import ru.nsu.krasnyanski.markdown.text.Text;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 

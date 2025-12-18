@@ -3,10 +3,8 @@ package ru.nsu.krasnyanski.markdown.structure;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import ru.nsu.krasnyanski.markdown.text.Text;
 import ru.nsu.krasnyanski.markdown.Element;
-
+import ru.nsu.krasnyanski.markdown.text.Text;
 /**
  * Represents a Markdown table.
  *
@@ -19,13 +17,13 @@ import ru.nsu.krasnyanski.markdown.Element;
  */
 public class Table implements Element {
 
-    /** Align left: <code>:---</code> */
+    /** Align left: <code>:---</code>. */
     public static final int ALIGN_LEFT = 0;
 
-    /** Align center: <code>:---:</code> */
+    /** Align center: <code>:---:</code>. */
     public static final int ALIGN_CENTER = 1;
 
-    /** Align right: <code>---:</code> */
+    /** Align right: <code>---:</code>. */
     public static final int ALIGN_RIGHT = 2;
 
     private final List<List<Element>> rows;
@@ -59,7 +57,9 @@ public class Table implements Element {
         List<Element> header = rows.get(0);
 
         sb.append("|");
-        for (Element e : header) sb.append(" ").append(e.toMarkdown()).append(" |");
+        for (Element e : header){
+            sb.append(" ").append(e.toMarkdown()).append(" |");
+        }
         sb.append("\n");
 
         sb.append("|");
