@@ -143,4 +143,68 @@ class MarkdownTest {
         assertNotEquals(b1, b3);
         assertEquals(b1.hashCode(), b2.hashCode());
     }
+
+    @Test
+    void testListElementEdgeCases() {
+        ListElement emptyUl = new ListElement(false);
+        ListElement emptyOl = new ListElement(true);
+        assertEquals("", emptyUl.toMarkdown());
+        assertEquals("", emptyOl.toMarkdown());
+
+        ListElement ul = new ListElement(false);
+        ul.addItem(new Text("Only"));
+        assertEquals("- Only", ul.toMarkdown());
+
+        ListElement ol = new ListElement(true);
+        ol.addItem(new Text("First"));
+        assertEquals("1. First", ol.toMarkdown());
+    }
+
+    @Test
+    void testQuoteEdgeCases() {
+        Quote emptyQuote = new Quote(java.util.List.of());
+        assertEquals("", emptyQuote.toMarkdown());
+
+        Quote multi = new Quote(java.util.List.of(new Text("one"), new Text("two")));
+        assertEquals("> one\n> two", multi.toMarkdown());
+    }
+
+    @Test
+    void testTaskEdgeCases() {
+        Task tEmpty = new Task("", false);
+        assertEquals("- [ ] ", tEmpty.toMarkdown());
+
+        Task tDone = new Task("Done", true);
+        Task tCopy = new Task("Done", true);
+        assertEquals(tDone, tCopy);
+        assertEquals(tDone.hashCode(), tCopy.hashCode());
+    }
+
+    @Test
+    void testImageAndLinkEdgeCases() {
+        Image i1 = new Image("alt", "url");
+        Image i2 = new Image("alt", "url");
+        Image i3 = new Image("alt", "other");
+        assertEquals(i1, i2);
+        assertNotEquals(i1, i3);
+
+        Link l1 = new Link("name", "href");
+        Link l2 = new Link("name", "href");
+        Link l3 = new Link("name", "other");
+        assertEquals(l1, l2);
+        assertNotEquals(l1, l3);
+    }
+
+    @Test
+    void testCodeBlockEdgeCases() {
+        CodeBlock cbEmpty = new CodeBlock("", "");
+        assertEquals("```\n\n```", cbEmpty.toMarkdown());
+
+        CodeBlock cbLang = new CodeBlock("println", "kotlin");
+        assertEquals("```kotlin\nprintln\n```", cbLang.toMarkdown());
+
+        CodeBlock cb2 = new CodeBlock("println", "kotlin");
+        assertEquals(cbLang, cb2);
+        assertEquals(cbLang.hashCode(), cb2.hashCode());
+    }
 }
