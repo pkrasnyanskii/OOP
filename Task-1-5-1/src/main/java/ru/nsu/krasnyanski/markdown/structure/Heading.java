@@ -21,7 +21,7 @@ public class Heading implements Element {
      */
     public Heading(int level, String text) {
         if (level < 1 || level > 6) {
-            throw new IllegalArgumentException("Heading level 1-6");
+            throw new MarkdownException("Heading level 1-6");
         }
         this.level = level;
         this.text = text;
