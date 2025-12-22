@@ -26,4 +26,9 @@ public class Number extends Expression {
     public int eval(Map<String, Integer> variables) {
         return value;
     }
+
+    @Override
+    public Expression simplify() { return this; }
+
+    public int getValue() { return value; }
 }
