@@ -1,9 +1,9 @@
 package ru.nsu.krasnyanski.markdown.structure;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 import ru.nsu.krasnyanski.markdown.text.Text;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ListElementTest {
 

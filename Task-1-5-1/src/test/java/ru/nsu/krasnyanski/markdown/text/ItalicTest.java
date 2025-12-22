@@ -1,9 +1,9 @@
 package ru.nsu.krasnyanski.markdown.text;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import org.junit.jupiter.api.Test;
 
 class ItalicTest {
 
