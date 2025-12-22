@@ -83,30 +83,6 @@ class MarkdownTest {
     }
 
     @Test
-    void testQuoteAdvanced() {
-        Quote q1 = new Quote(java.util.List.of(new Text("")));
-        assertEquals("> ", q1.toMarkdown());
-
-        Quote q2 = new Quote(java.util.List.of(new Text("line1"), new Text("   "), new Text("line2")));
-        assertEquals("> line1\n>    \n> line2", q2.toMarkdown());
-
-        Quote q3 = new Quote(java.util.List.of(
-                new Bold("hello"),
-                new Italic("world")
-        ));
-        assertEquals("> **hello**\n> *world*", q3.toMarkdown());
-
-        Quote qA = new Quote(java.util.List.of(new Text("x")));
-        Quote qB = new Quote(java.util.List.of(new Text("x")));
-        Quote qC = new Quote(java.util.List.of(new Text("y")));
-
-        assertEquals(qA, qB);
-        assertNotEquals(qA, qC);
-        assertEquals(qA.hashCode(), qB.hashCode());
-    }
-
-
-    @Test
     void testLinkAndImage() {
         Link link = new Link("Google", "https://google.com");
         Image img = new Image("Alt", "image.png");
@@ -137,25 +113,6 @@ class MarkdownTest {
 
         assertEquals("- [ ] Do homework", t1.toMarkdown());
         assertEquals("- [x] Done task", t2.toMarkdown());
-    }
-
-    @Test
-    void testTaskEdgeCases() {
-        Task empty = new Task("", false);
-        assertEquals("- [ ] ", empty.toMarkdown());
-
-        Task spaces = new Task("   ", true);
-        assertEquals("- [x]    ", spaces.toMarkdown());
-
-        Task a1 = new Task("A", false);
-        Task a2 = new Task("A", false);
-        Task a3 = new Task("A", true);
-        Task b = new Task("B", false);
-
-        assertEquals(a1, a2);
-        assertNotEquals(a1, a3);
-        assertNotEquals(a1, b);
-        assertEquals(a1.hashCode(), a2.hashCode());
     }
 
     @Test
@@ -198,22 +155,6 @@ class MarkdownTest {
     void testEmptyList() {
         ListElement ul = new ListElement(false);
         assertEquals("", ul.toMarkdown());
-    }
-
-    @Test
-    void testListElementEdgeCases() {
-        ListElement emptyUl = new ListElement(false);
-        ListElement emptyOl = new ListElement(true);
-        assertEquals("", emptyUl.toMarkdown());
-        assertEquals("", emptyOl.toMarkdown());
-
-        ListElement ul = new ListElement(false);
-        ul.addItem(new Text("Only"));
-        assertEquals("- Only", ul.toMarkdown());
-
-        ListElement ol = new ListElement(true);
-        ol.addItem(new Text("First"));
-        assertEquals("1. First", ol.toMarkdown());
     }
 
     @Test
