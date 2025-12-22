@@ -172,7 +172,9 @@ public class Parser {
                     pos++;
                     Expression right = parseTerm();
                     left = (c == '+') ? new Add(left, right) : new Sub(left, right);
-                } else break;
+                } else {
+                    break;
+                }
             }
             return left;
         }
@@ -185,7 +187,9 @@ public class Parser {
                     pos++;
                     Expression right = parseFactor();
                     left = (c == '*') ? new Mul(left, right) : new Div(left, right);
-                } else break;
+                } else {
+                    break;
+                }
             }
             return left;
         }
@@ -199,13 +203,17 @@ public class Parser {
 
             if (Character.isDigit(c)) {
                 int start = pos;
-                while (pos < s.length() && Character.isDigit(s.charAt(pos))) pos++;
+                while (pos < s.length() && Character.isDigit(s.charAt(pos))) {
+                    pos++;
+                }
                 return new Number(Integer.parseInt(s.substring(start, pos)));
             }
 
             if (Character.isLetter(c)) {
                 int start = pos;
-                while (pos < s.length() && Character.isLetter(s.charAt(pos))) pos++;
+                while (pos < s.length() && Character.isLetter(s.charAt(pos))) {
+                    pos++;
+                }
                 return new Variable(s.substring(start, pos));
             }
 

@@ -36,5 +36,7 @@ public class Variable extends Expression {
     }
 
     @Override
-    public Expression simplify() { return this; }
+    public Expression simplify() {
+        return this;
+    }
 }

@@ -35,13 +35,17 @@ public class Sub extends Expression {
         Expression l = left.simplify();
         Expression r = right.simplify();
 
-        if (l.print().equals(r.print())) return new Number(0);
+        if (l.print().equals(r.print())) {
+            return new Number(0);
+        }
 
         if (l instanceof Number a && r instanceof Number b) {
             return new Number(a.getValue() - b.getValue());
         }
 
-        if (l instanceof Number a && a.getValue() == 0) return new Mul(new Number(-1), r);
+        if (l instanceof Number a && a.getValue() == 0) {
+            return new Mul(new Number(-1), r);
+        }
 
         return new Sub(l, r);
     }
