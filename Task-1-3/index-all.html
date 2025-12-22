@@ -49,7 +49,7 @@ loadScripts(document, 'script');</script>
 <div class="header">
 <h1>Index</h1>
 </div>
-<a href="#I:A">A</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a><span class="vertical-separator">|</span><a href="serialized-form.html">Serialized&nbsp;Form</a>
+<a href="#I:A">A</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a><span class="vertical-separator">|</span><a href="serialized-form.html">Serialized&nbsp;Form</a>
 <h2 class="title" id="I:A">A</h2>
 <dl class="index">
 <dt><a href="ru/nsu/krasnyanski/expression/Add.html" class="type-name-link" title="class in ru.nsu.krasnyanski.expression">Add</a> - Class in <a href="ru/nsu/krasnyanski/expression/package-summary.html">ru.nsu.krasnyanski.expression</a></dt>
@@ -125,6 +125,11 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/krasnyanski/exception/ExpressionException.html#%3Cinit%3E(java.lang.String)" class="member-name-link">ExpressionException(String)</a> - Constructor for exception ru.nsu.krasnyanski.exception.<a href="ru/nsu/krasnyanski/exception/ExpressionException.html" title="class in ru.nsu.krasnyanski.exception">ExpressionException</a></dt>
 <dd>&nbsp;</dd>
 </dl>
+<h2 class="title" id="I:G">G</h2>
+<dl class="index">
+<dt><a href="ru/nsu/krasnyanski/expression/Number.html#getValue()" class="member-name-link">getValue()</a> - Method in class ru.nsu.krasnyanski.expression.<a href="ru/nsu/krasnyanski/expression/Number.html" title="class in ru.nsu.krasnyanski.expression">Number</a></dt>
+<dd>&nbsp;</dd>
+</dl>
 <h2 class="title" id="I:I">I</h2>
 <dl class="index">
 <dt><a href="ru/nsu/krasnyanski/exception/InvalidExpressionException.html" class="type-name-link" title="class in ru.nsu.krasnyanski.exception">InvalidExpressionException</a> - Exception in <a href="ru/nsu/krasnyanski/exception/package-summary.html">ru.nsu.krasnyanski.exception</a></dt>
@@ -168,6 +173,11 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Parses variable assignments from string.</div>
 </dd>
+<dt><a href="ru/nsu/krasnyanski/parser/Parser.html#parseWithoutParentheses(java.lang.String)" class="member-name-link">parseWithoutParentheses(String)</a> - Static method in class ru.nsu.krasnyanski.parser.<a href="ru/nsu/krasnyanski/parser/Parser.html" title="class in ru.nsu.krasnyanski.parser">Parser</a></dt>
+<dd>
+<div class="block">Parses an expression without mandatory parentheses,
+ respecting operator precedence.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanski/expression/Add.html#print()" class="member-name-link">print()</a> - Method in class ru.nsu.krasnyanski.expression.<a href="ru/nsu/krasnyanski/expression/Add.html" title="class in ru.nsu.krasnyanski.expression">Add</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/krasnyanski/expression/Div.html#print()" class="member-name-link">print()</a> - Method in class ru.nsu.krasnyanski.expression.<a href="ru/nsu/krasnyanski/expression/Div.html" title="class in ru.nsu.krasnyanski.expression">Div</a></dt>
@@ -196,6 +206,22 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:S">S</h2>
 <dl class="index">
+<dt><a href="ru/nsu/krasnyanski/expression/Add.html#simplify()" class="member-name-link">simplify()</a> - Method in class ru.nsu.krasnyanski.expression.<a href="ru/nsu/krasnyanski/expression/Add.html" title="class in ru.nsu.krasnyanski.expression">Add</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/krasnyanski/expression/Div.html#simplify()" class="member-name-link">simplify()</a> - Method in class ru.nsu.krasnyanski.expression.<a href="ru/nsu/krasnyanski/expression/Div.html" title="class in ru.nsu.krasnyanski.expression">Div</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/krasnyanski/expression/Expression.html#simplify()" class="member-name-link">simplify()</a> - Method in class ru.nsu.krasnyanski.expression.<a href="ru/nsu/krasnyanski/expression/Expression.html" title="class in ru.nsu.krasnyanski.expression">Expression</a></dt>
+<dd>
+<div class="block">Returns a simplified version of the expression.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanski/expression/Mul.html#simplify()" class="member-name-link">simplify()</a> - Method in class ru.nsu.krasnyanski.expression.<a href="ru/nsu/krasnyanski/expression/Mul.html" title="class in ru.nsu.krasnyanski.expression">Mul</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/krasnyanski/expression/Number.html#simplify()" class="member-name-link">simplify()</a> - Method in class ru.nsu.krasnyanski.expression.<a href="ru/nsu/krasnyanski/expression/Number.html" title="class in ru.nsu.krasnyanski.expression">Number</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/krasnyanski/expression/Sub.html#simplify()" class="member-name-link">simplify()</a> - Method in class ru.nsu.krasnyanski.expression.<a href="ru/nsu/krasnyanski/expression/Sub.html" title="class in ru.nsu.krasnyanski.expression">Sub</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/krasnyanski/expression/Variable.html#simplify()" class="member-name-link">simplify()</a> - Method in class ru.nsu.krasnyanski.expression.<a href="ru/nsu/krasnyanski/expression/Variable.html" title="class in ru.nsu.krasnyanski.expression">Variable</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/krasnyanski/expression/Sub.html" class="type-name-link" title="class in ru.nsu.krasnyanski.expression">Sub</a> - Class in <a href="ru/nsu/krasnyanski/expression/package-summary.html">ru.nsu.krasnyanski.expression</a></dt>
 <dd>
 <div class="block">Subtraction expression.</div>
@@ -218,7 +244,7 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/krasnyanski/exception/VariableNotAssignedException.html#%3Cinit%3E(java.lang.String)" class="member-name-link">VariableNotAssignedException(String)</a> - Constructor for exception ru.nsu.krasnyanski.exception.<a href="ru/nsu/krasnyanski/exception/VariableNotAssignedException.html" title="class in ru.nsu.krasnyanski.exception">VariableNotAssignedException</a></dt>
 <dd>&nbsp;</dd>
 </dl>
-<a href="#I:A">A</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a><span class="vertical-separator">|</span><a href="serialized-form.html">Serialized&nbsp;Form</a></main>
+<a href="#I:A">A</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a><span class="vertical-separator">|</span><a href="serialized-form.html">Serialized&nbsp;Form</a></main>
 </div>
 </div>
 </body>

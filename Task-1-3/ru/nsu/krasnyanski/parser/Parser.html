@@ -116,6 +116,12 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Parses variable assignments from string.</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../expression/Expression.html" title="class in ru.nsu.krasnyanski.expression">Expression</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseWithoutParentheses(java.lang.String)" class="member-name-link">parseWithoutParentheses</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;input)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Parses an expression without mandatory parentheses,
+ respecting operator precedence.</div>
+</div>
 </div>
 </div>
 </div>
@@ -176,6 +182,23 @@ loadScripts(document, 'script');</script>
 <dd>map of variable → value</dd>
 <dt>Throws:</dt>
 <dd><code><a href="../exception/InvalidExpressionException.html" title="class in ru.nsu.krasnyanski.exception">InvalidExpressionException</a></code> - if string malformed</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="parseWithoutParentheses(java.lang.String)">
+<h3>parseWithoutParentheses</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../expression/Expression.html" title="class in ru.nsu.krasnyanski.expression">Expression</a></span>&nbsp;<span class="element-name">parseWithoutParentheses</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;input)</span>
+                                          throws <span class="exceptions"><a href="../exception/InvalidExpressionException.html" title="class in ru.nsu.krasnyanski.exception">InvalidExpressionException</a></span></div>
+<div class="block">Parses an expression without mandatory parentheses,
+ respecting operator precedence.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>input</code> - expression string</dd>
+<dt>Returns:</dt>
+<dd>parsed expression</dd>
+<dt>Throws:</dt>
+<dd><code><a href="../exception/InvalidExpressionException.html" title="class in ru.nsu.krasnyanski.exception">InvalidExpressionException</a></code> - if input is invalid</dd>
 </dl>
 </section>
 </li>
