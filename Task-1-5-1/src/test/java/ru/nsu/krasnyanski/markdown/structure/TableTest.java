@@ -19,10 +19,10 @@ class TableTest {
         Table table = builder.build();
 
         String expected =
-                "| Index | Random |\n" +
-                        "| ---: | :--- |\n" +
-                        "| 1 | **8** |\n" +
-                        "| 2 | 2 |\n";
+                "| Index | Random |\n"
+                        + "| ---: | :--- |\n"
+                        + "| 1 | **8** |\n"
+                        + "| 2 | 2 |\n";
 
         assertEquals(expected, table.toMarkdown());
     }

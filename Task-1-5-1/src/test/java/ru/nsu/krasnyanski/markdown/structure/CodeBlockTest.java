@@ -2,7 +2,6 @@ package ru.nsu.krasnyanski.markdown.structure;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
 import org.junit.jupiter.api.Test;
 
 class CodeBlockTest {
