@@ -143,4 +143,108 @@ public class Parser {
 
         return map;
     }
+
+    /**
+     * Recursive descent parser with operator precedence.
+     */
+    private static class ParserNoBrackets {
+
+        private final String s;
+        private int pos = 0;
+
+        ParserNoBrackets(String s) {
+            this.s = s;
+        }
+
+        Expression parse() throws InvalidExpressionException {
+            Expression e = parseExpression();
+            if (pos != s.length()) {
+                throw new InvalidExpressionException("Unexpected input");
+            }
+            return e;
+        }
+
+        Expression parseExpression() throws InvalidExpressionException {
+            Expression left = parseTerm();
+            while (pos < s.length()) {
+                char c = s.charAt(pos);
+                if (c == '+' || c == '-') {
+                    pos++;
+                    Expression right = parseTerm();
+                    left = (c == '+') ? new Add(left, right) : new Sub(left, right);
+                } else {
+                    break;
+                }
+            }
+            return left;
+        }
+
+        Expression parseTerm() throws InvalidExpressionException {
+            Expression left = parseFactor();
+            while (pos < s.length()) {
+                char c = s.charAt(pos);
+                if (c == '*' || c == '/') {
+                    pos++;
+                    Expression right = parseFactor();
+                    left = (c == '*') ? new Mul(left, right) : new Div(left, right);
+                } else {
+                    break;
+                }
+            }
+            return left;
+        }
+
+        Expression parseFactor() throws InvalidExpressionException {
+            if (pos >= s.length()) {
+                throw new InvalidExpressionException("Unexpected end");
+            }
+
+            char c = s.charAt(pos);
+
+            if (Character.isDigit(c)) {
+                int start = pos;
+                while (pos < s.length() && Character.isDigit(s.charAt(pos))) {
+                    pos++;
+                }
+                return new Number(Integer.parseInt(s.substring(start, pos)));
+            }
+
+            if (Character.isLetter(c)) {
+                int start = pos;
+                while (pos < s.length() && Character.isLetter(s.charAt(pos))) {
+                    pos++;
+                }
+                return new Variable(s.substring(start, pos));
+            }
+
+            if (c == '(') {
+                pos++;
+                Expression e = parseExpression();
+                if (pos >= s.length() || s.charAt(pos) != ')') {
+                    throw new InvalidExpressionException("Missing ')'");
+                }
+                pos++;
+                return e;
+            }
+
+            throw new InvalidExpressionException("Unexpected character: " + c);
+        }
+    }
+
+    /**
+     * Parses an expression without mandatory parentheses,
+     * respecting operator precedence.
+     *
+     * @param input expression string
+     * @return parsed expression
+     * @throws InvalidExpressionException if input is invalid
+     */
+    public static Expression parseWithoutParentheses(String input)
+            throws InvalidExpressionException {
+        if (input == null || input.trim().isEmpty()) {
+            throw new InvalidExpressionException("Empty expression");
+        }
+        return new ParserNoBrackets(input.replaceAll("\\s+", "")).parse();
+    }
+
 }

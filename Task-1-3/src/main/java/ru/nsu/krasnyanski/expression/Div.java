@@ -40,4 +40,19 @@ public class Div extends Expression {
         }
         return left.eval(variables) / divisor;
     }
+
+    @Override
+    public Expression simplify() {
+        Expression l = left.simplify();
+        Expression r = right.simplify();
+
+        if (l instanceof Number a && r instanceof Number b) {
+            if (b.getValue() == 0) {
+                throw new ArithmeticException("Division by zero");
+            }
+            return new Number(a.getValue() / b.getValue());
+        }
+
+        return new Div(l, r);
+    }
 }
