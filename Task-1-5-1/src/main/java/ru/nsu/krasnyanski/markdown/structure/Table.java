@@ -57,7 +57,7 @@ public class Table implements Element {
         List<Element> header = rows.get(0);
 
         sb.append("|");
-        for (Element e : header){
+        for (Element e : header) {
             sb.append(" ").append(e.toMarkdown()).append(" |");
         }
         sb.append("\n");
