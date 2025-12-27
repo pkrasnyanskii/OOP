@@ -47,4 +47,12 @@ public abstract class Expression {
         Map<String, Integer> map = parseVariables(variables);
         return eval(map);
     }
+
+    /**
+     * Returns a simplified version of the expression.
+     * The original expression is not modified.
+     *
+     * @return simplified expression
+     */
+    public abstract Expression simplify();
 }

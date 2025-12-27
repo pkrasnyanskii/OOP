@@ -19,7 +19,7 @@ import ru.nsu.krasnyanski.expression.Variable;
 import ru.nsu.krasnyanski.parser.Parser;
 
 /**
- * Tests for the Expression hierarchy and Parser.
+ * Tests for the Expression hierarchy and parser.
  */
 class ExpressionTest {
 
