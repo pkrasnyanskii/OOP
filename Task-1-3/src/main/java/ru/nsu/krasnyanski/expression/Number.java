@@ -28,7 +28,11 @@ public class Number extends Expression {
     }
 
     @Override
-    public Expression simplify() { return this; }
+    public Expression simplify() {
+        return this;
+    }
 
-    public int getValue() { return value; }
+    public int getValue() {
+        return value;
+    }
 }

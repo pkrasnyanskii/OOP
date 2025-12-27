@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * Tests for additional tasks:
+ * Tests for additional tasks.
  * - parsing without mandatory parentheses
  * - expression simplification
  */
