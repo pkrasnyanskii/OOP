@@ -34,4 +34,7 @@ public class Variable extends Expression {
         }
         return variables.get(name);
     }
+
+    @Override
+    public Expression simplify() { return this; }
 }
