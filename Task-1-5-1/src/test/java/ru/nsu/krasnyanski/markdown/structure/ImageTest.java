@@ -23,7 +23,7 @@ class ImageTest {
 
         String expected = """
             ![Test image](%s)
-            """.formatted(path).stripIndent().stripTrailing();
+            """.formatted(path).stripTrailing();
 
         assertEquals(expected, img.toMarkdown());
     }
