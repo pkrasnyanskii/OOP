@@ -1,7 +1,7 @@
 method,threads,time_ms
-sequential,1,1
+sequential,1,2
 threads,1,5
 threads,2,0
-threads,4,1
-threads,8,1
-parallelStream,-1,11
+threads,4,0
+threads,8,3
+parallelStream,-1,14
