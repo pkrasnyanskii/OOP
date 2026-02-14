@@ -1,9 +1,18 @@
 package ru.nsu.krasnyanski.primes;
 
+/**
+ * Утилитарный класс для проверки чисел на простоту.
+ */
 public final class PrimeChecker {
 
     private PrimeChecker() {}
 
+    /**
+     * Проверяет, является ли число простым.
+     *
+     * @param n число для проверки
+     * @return true, если число простое, иначе false
+     */
     public static boolean isPrime(int n) {
         if (n <= 1) return false;
         if (n == 2) return true;

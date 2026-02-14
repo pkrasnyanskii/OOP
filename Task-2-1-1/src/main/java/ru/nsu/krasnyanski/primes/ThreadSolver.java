@@ -2,21 +2,28 @@ package ru.nsu.krasnyanski.primes;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * Многопоточный алгоритм поиска непростого числа в массиве.
+ */
 public class ThreadSolver {
 
-    public static boolean hasNonPrime(int[] array, int threadCount)
-            throws InterruptedException {
+    /**
+     * Проверяет массив на наличие непростого числа с использованием нескольких потоков.
+     *
+     * @param array массив целых чисел
+     * @param threadCount количество потоков
+     * @return true, если найдено хотя бы одно непростое число
+     * @throws InterruptedException если выполнение потоков было прервано
+     */
+    public static boolean hasNonPrime(int[] array, int threadCount) throws InterruptedException {
 
         AtomicBoolean found = new AtomicBoolean(false);
         Thread[] threads = new Thread[threadCount];
-
         int chunk = array.length / threadCount;
 
         for (int t = 0; t < threadCount; t++) {
             int start = t * chunk;
-            int end = (t == threadCount - 1)
-                    ? array.length
-                    : start + chunk;
+            int end = (t == threadCount - 1) ? array.length : start + chunk;
 
             threads[t] = new Thread(() -> {
                 for (int i = start; i < end && !found.get(); i++) {
