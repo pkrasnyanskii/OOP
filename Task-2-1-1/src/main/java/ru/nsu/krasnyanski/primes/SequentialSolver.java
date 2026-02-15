@@ -1,22 +1,31 @@
 package ru.nsu.krasnyanski.primes;
 
 /**
- * Последовательный алгоритм поиска непростого числа в массиве.
+ * Sequential implementation of {@link PrimeSolver}.
  */
-public class SequentialSolver {
+public class SequentialSolver implements PrimeSolver {
 
-    /**
-     * Проверяет, есть ли в массиве хотя бы одно число, которое не является простым.
-     *
-     * @param array массив целых чисел
-     * @return true, если найдено хотя бы одно непростое число
-     */
-    public static boolean hasNonPrime(int[] array) {
-        for (int x : array) {
-            if (!PrimeChecker.isPrime(x)) {
+    @Override
+    public boolean hasNonPrime(int[] array) {
+        if (array == null) {
+            throw new IllegalArgumentException("Array must not be null");
+        }
+
+        if (array.length == 0) {
+            return false;
+        }
+
+        for (int value : array) {
+            if (!PrimeChecker.isPrime(value)) {
                 return true;
             }
         }
+
         return false;
+    }
+
+    @Override
+    public String getName() {
+        return "Sequential";
     }
 }
