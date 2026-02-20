@@ -3,19 +3,27 @@ package ru.nsu.krasnyanski.primes;
 import java.util.Arrays;
 
 /**
- * Алгоритм поиска непростого числа в массиве с использованием parallelStream().
+ * Parallel stream implementation of {@link PrimeSolver}.
  */
-public class ParallelStreamSolver {
+public class ParallelStreamSolver implements PrimeSolver {
 
-    /**
-     * Проверяет массив на наличие хотя бы одного непростого числа.
-     *
-     * @param array массив целых чисел
-     * @return true, если найдено хотя бы одно непростое число
-     */
-    public static boolean hasNonPrime(int[] array) {
+    @Override
+    public boolean hasNonPrime(int[] array) {
+        if (array == null) {
+            throw new IllegalArgumentException("Array must not be null");
+        }
+
+        if (array.length == 0) {
+            return false;
+        }
+
         return Arrays.stream(array)
                 .parallel()
-                .anyMatch(x -> !PrimeChecker.isPrime(x));
+                .anyMatch(value -> !PrimeChecker.isPrime(value));
+    }
+
+    @Override
+    public String getName() {
+        return "ParallelStream";
     }
 }

@@ -1,7 +1,6 @@
-method,threads,time_ms
-sequential,1,2
-threads,1,5
-threads,2,0
-threads,4,0
-threads,8,3
-parallelStream,-1,14
+solver,time_ms
+Sequential,1
+ThreadSolver(1),2
+ThreadSolver(2),0
+ThreadSolver(4),1
+ParallelStream,4
