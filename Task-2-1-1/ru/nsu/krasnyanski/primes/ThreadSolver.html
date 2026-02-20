@@ -73,10 +73,18 @@ loadScripts(document, 'script');</script>
 <div class="inheritance">ru.nsu.krasnyanski.primes.ThreadSolver</div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>All Implemented Interfaces:</dt>
+<dd><code><a href="PrimeSolver.html" title="interface in ru.nsu.krasnyanski.primes">PrimeSolver</a></code></dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ThreadSolver</span>
-<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Многопоточный алгоритм поиска непростого числа в массиве.</div>
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
+implements <a href="PrimeSolver.html" title="interface in ru.nsu.krasnyanski.primes">PrimeSolver</a></span></div>
+<div class="block">Multi-threaded implementation of <a href="PrimeSolver.html" title="interface in ru.nsu.krasnyanski.primes"><code>PrimeSolver</code></a>.
+
+ <p>Splits the input array into chunks and processes them
+ using a specified number of threads.</p></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -88,8 +96,10 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">ThreadSolver</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int)" class="member-name-link">ThreadSolver</a><wbr>(int&nbsp;threadCount)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Constructs a solver with a specified number of threads.</div>
+</div>
 </div>
 </section>
 </li>
@@ -98,17 +108,21 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#hasNonPrime(int%5B%5D,int)" class="member-name-link">hasNonPrime</a><wbr>(int[]&nbsp;array,
- int&nbsp;threadCount)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Проверяет массив на наличие непростого числа с использованием нескольких потоков.</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getName()" class="member-name-link">getName</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the human-readable name of the solver implementation.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasNonPrime(int%5B%5D)" class="member-name-link">hasNonPrime</a><wbr>(int[]&nbsp;array)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks whether the given array contains at least one non-prime number.</div>
 </div>
 </div>
 </div>
@@ -128,9 +142,16 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;()">
+<section class="detail" id="&lt;init&gt;(int)">
 <h3>ThreadSolver</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ThreadSolver</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ThreadSolver</span><wbr><span class="parameters">(int&nbsp;threadCount)</span></div>
+<div class="block">Constructs a solver with a specified number of threads.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>threadCount</code> - number of worker threads</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if threadCount is less than 1</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -142,20 +163,36 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="hasNonPrime(int[],int)">
+<section class="detail" id="hasNonPrime(int[])">
 <h3>hasNonPrime</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasNonPrime</span><wbr><span class="parameters">(int[]&nbsp;array,
- int&nbsp;threadCount)</span>
-                           throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
-<div class="block">Проверяет массив на наличие непростого числа с использованием нескольких потоков.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasNonPrime</span><wbr><span class="parameters">(int[]&nbsp;array)</span>
+                    throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="PrimeSolver.html#hasNonPrime(int%5B%5D)">PrimeSolver</a></code></span></div>
+<div class="block">Checks whether the given array contains at least one non-prime number.</div>
 <dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="PrimeSolver.html#hasNonPrime(int%5B%5D)">hasNonPrime</a></code>&nbsp;in interface&nbsp;<code><a href="PrimeSolver.html" title="interface in ru.nsu.krasnyanski.primes">PrimeSolver</a></code></dd>
 <dt>Parameters:</dt>
-<dd><code>array</code> - массив целых чисел</dd>
-<dd><code>threadCount</code> - количество потоков</dd>
+<dd><code>array</code> - the array of integers to check</dd>
 <dt>Returns:</dt>
-<dd>true, если найдено хотя бы одно непростое число</dd>
+<dd><code>true</code> if at least one element is not prime,
+         <code>false</code> otherwise</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code> - если выполнение потоков было прервано</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code> - if the computation is interrupted</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getName()">
+<h3>getName</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getName</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="PrimeSolver.html#getName()">PrimeSolver</a></code></span></div>
+<div class="block">Returns the human-readable name of the solver implementation.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="PrimeSolver.html#getName()">getName</a></code>&nbsp;in interface&nbsp;<code><a href="PrimeSolver.html" title="interface in ru.nsu.krasnyanski.primes">PrimeSolver</a></code></dd>
+<dt>Returns:</dt>
+<dd>solver name</dd>
 </dl>
 </section>
 </li>

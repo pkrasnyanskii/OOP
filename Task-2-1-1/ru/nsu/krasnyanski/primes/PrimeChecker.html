@@ -76,7 +76,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">PrimeChecker</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Утилитарный класс для проверки чисел на простоту.</div>
+<div class="block">Utility class for checking whether a number is prime.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -92,9 +92,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#isPrime(int)" class="member-name-link">isPrime</a><wbr>(int&nbsp;n)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#isPrime(int)" class="member-name-link">isPrime</a><wbr>(int&nbsp;number)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Проверяет, является ли число простым.</div>
+<div class="block">Determines whether the given number is prime.</div>
 </div>
 </div>
 </div>
@@ -116,13 +116,14 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="isPrime(int)">
 <h3>isPrime</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isPrime</span><wbr><span class="parameters">(int&nbsp;n)</span></div>
-<div class="block">Проверяет, является ли число простым.</div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isPrime</span><wbr><span class="parameters">(int&nbsp;number)</span></div>
+<div class="block">Determines whether the given number is prime.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>n</code> - число для проверки</dd>
+<dd><code>number</code> - integer to check</dd>
 <dt>Returns:</dt>
-<dd>true, если число простое, иначе false</dd>
+<dd><code>true</code> if the number is prime,
+         <code>false</code> otherwise</dd>
 </dl>
 </section>
 </li>
