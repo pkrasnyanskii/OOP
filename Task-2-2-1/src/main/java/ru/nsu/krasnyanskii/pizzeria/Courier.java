@@ -1,0 +1,64 @@
+package ru.nsu.krasnyanskii.pizzeria;
+
+/**
+ * Courier fetches up to {@code trunkCapacity} pizzas from storage and delivers them.
+ */
+public class Courier implements Runnable {
+    private final int id;
+    private final int trunkCapacity;
+    private final PizzaStorage storage;
+    /** Delivery time per batch in ms. */
+    private final int deliveryTimeMs;
+    private volatile boolean running = true;
+
+    public Courier(int id, int trunkCapacity, int deliveryTimeMs, PizzaStorage storage) {
+        this.id = id;
+        this.trunkCapacity = trunkCapacity;
+        this.deliveryTimeMs = deliveryTimeMs;
+        this.storage = storage;
+    }
+
+    @Override
+    public void run() {
+        System.out.printf("[Courier-%d] начал работу (багажник: %d пицц)%n", id, trunkCapacity);
+        try {
+            while (running) {
+                List<Order> batch = storage.take(trunkCapacity);
+                if (batch.isEmpty()) break;  // storage closed and empty
+
+                for (Order order : batch) {
+                    order.setState(Order.State.DELIVERING);
+                }
+                System.out.printf("[Courier-%d] везёт %d пицц: %s%n",
+                        id, batch.size(), formatIds(batch));
+
+                Thread.sleep(deliveryTimeMs);
+
+                for (Order order : batch) {
+                    order.setState(Order.State.DELIVERED);
+                }
+                System.out.printf("[Courier-%d] доставил заказы: %s%n", id, formatIds(batch));
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        System.out.printf("[Courier-%d] завершил работу%n", id);
+    }
+
+    private String formatIds(List<Order> orders) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < orders.size(); i++) {
+            if (i > 0) sb.append(", ");
+            sb.append("#").append(orders.get(i).getId());
+        }
+        return sb.toString();
+    }
+
+    public void stop() {
+        running = false;
+    }
+
+    public int getId() { return id; }
+    public int getTrunkCapacity() { return trunkCapacity; }
+    public int getDeliveryTimeMs() { return deliveryTimeMs; }
+}
