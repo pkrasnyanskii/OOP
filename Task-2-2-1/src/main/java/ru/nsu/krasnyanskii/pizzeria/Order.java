@@ -8,7 +8,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Order {
 
-    // Глобальный счётчик — AtomicInteger потокобезопасен без synchronized
     private static final AtomicInteger COUNTER = new AtomicInteger(1);
 
     public enum State {
@@ -34,7 +33,6 @@ public class Order {
     private final int id;
     private volatile State state;
 
-    /** Создаёт новый заказ с уникальным id. */
     public Order() {
         this.id = COUNTER.getAndIncrement();
         this.state = State.QUEUED;

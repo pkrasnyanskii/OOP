@@ -16,6 +16,14 @@ public class Courier implements Runnable {
     private final int deliveryTimeMs;
     private volatile boolean running = true;
 
+    /**
+     * Creates a courier.
+     *
+     * @param id            courier identifier
+     * @param trunkCapacity max pizzas per trip; must be positive
+     * @param deliveryTimeMs delivery duration in ms; must be positive
+     * @param storage       shared pizza storage
+     */
     public Courier(int id, int trunkCapacity, int deliveryTimeMs, PizzaStorage storage) {
         if (trunkCapacity <= 0) {
             throw new IllegalArgumentException("trunkCapacity must be positive");

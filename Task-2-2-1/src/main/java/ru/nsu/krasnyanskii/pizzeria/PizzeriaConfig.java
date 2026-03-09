@@ -3,31 +3,36 @@ package ru.nsu.krasnyanskii.pizzeria;
 import java.util.List;
 
 /**
- * Конфигурация пиццерии, считываемая из JSON файла.
+ * Pizzeria configuration loaded from a JSON file.
  */
 public class PizzeriaConfig {
 
-    /** Вместимость склада (в пиццах). */
+    /** Storage capacity in pizzas. */
     public int storageCapacity;
 
-    /** Интервал между новыми заказами (мс). */
+    /** Interval between new orders (ms). */
     public int orderIntervalMs;
 
-    /** Сколько времени работает пиццерия (мс). */
+    /** Total working time of the pizzeria (ms). */
     public long workDurationMs;
 
+    /** List of baker configurations. */
     public List<BakerConfig> bakers;
+
+    /** List of courier configurations. */
     public List<CourierConfig> couriers;
 
+    /** Configuration for a single baker. */
     public static class BakerConfig {
-        /** Время приготовления одной пиццы (мс). */
+        /** Cooking time in ms per pizza. */
         public int cookingTimeMs;
     }
 
+    /** Configuration for a single courier. */
     public static class CourierConfig {
-        /** Максимальное количество пицц за одну поездку. */
+        /** Max number of pizzas per delivery. */
         public int trunkCapacity;
-        /** Время одной доставки (мс). */
+        /** Delivery duration in ms. */
         public int deliveryTimeMs;
     }
 }

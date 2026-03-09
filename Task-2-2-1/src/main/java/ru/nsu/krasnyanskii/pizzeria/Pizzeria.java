@@ -16,6 +16,13 @@ import java.util.List;
  */
 public class Pizzeria {
 
+    /**
+     * Entry point. Loads config, starts all workers, runs for the configured duration,
+     * then performs a full shutdown with serialization of unfinished orders.
+     *
+     * @param args optional: args[0] = config path, args[1] = serialized orders path
+     * @throws Exception if config cannot be loaded or threads are interrupted
+     */
     public static void main(String[] args) throws Exception {
         String configPath      = args.length > 0 ? args[0] : "config.json";
         String serializedPath  = args.length > 1 ? args[1] : "unfinished_orders.json";
