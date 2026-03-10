@@ -6,8 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.nsu.krasnyanskii.pizzeria.workers.Baker;
 
 class BakerTest {
+
+    private final PizzeriaView view = new PizzeriaView();
 
     @BeforeEach
     void resetCounter() {
@@ -21,15 +24,15 @@ class BakerTest {
 
         Order order = new Order();
         queue.put(order);
-        queue.close(); // после этого заказа пекарь завершится
+        queue.close();
 
-        Baker baker = new Baker(1, 50, queue, storage);
+        Baker baker = new Baker(1, 50, queue, storage, view);
         Thread t = new Thread(baker);
         t.start();
         t.join(2000);
 
-        assertFalse(t.isAlive(), "Пекарь должен завершиться");
-        assertEquals(1, storage.size(), "Пицца должна быть на складе");
+        assertFalse(t.isAlive(), "Baker should finish");
+        assertEquals(1, storage.size(), "Pizza should be in storage");
         assertEquals(Order.State.IN_STORAGE, order.getState());
     }
 
@@ -38,7 +41,7 @@ class BakerTest {
         BlockingOrderQueue<Order> queue = new BlockingOrderQueue<>(10);
         PizzaStorage storage = new PizzaStorage(10);
         assertThrows(IllegalArgumentException.class,
-                () -> new Baker(1, 0, queue, storage));
+                () -> new Baker(1, 0, queue, storage, view));
     }
 
     @Test
@@ -47,7 +50,7 @@ class BakerTest {
         PizzaStorage storage = new PizzaStorage(10);
         queue.close();
 
-        Baker baker = new Baker(1, 50, queue, storage);
+        Baker baker = new Baker(1, 50, queue, storage, view);
         Thread t = new Thread(baker);
         t.start();
         t.join(1000);

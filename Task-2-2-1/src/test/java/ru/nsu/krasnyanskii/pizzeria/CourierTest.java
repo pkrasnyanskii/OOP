@@ -7,8 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.nsu.krasnyanskii.pizzeria.workers.Courier;
 
 class CourierTest {
+
+    private final PizzeriaView view = new PizzeriaView();
 
     @BeforeEach
     void resetCounter() {
@@ -23,9 +26,9 @@ class CourierTest {
         Order o2 = new Order();
         storage.put(o1);
         storage.put(o2);
-        storage.closeAccepting(); // курьер заберёт и завершится
+        storage.closeAccepting();
 
-        Courier courier = new Courier(1, 5, 50, storage);
+        Courier courier = new Courier(1, 5, 50, storage, view);
         Thread t = new Thread(courier);
         t.start();
         t.join(2000);
@@ -43,8 +46,7 @@ class CourierTest {
         }
         storage.closeAccepting();
 
-        // Багажник на 2 пиццы — понадобится несколько поездок
-        Courier courier = new Courier(1, 2, 10, storage);
+        Courier courier = new Courier(1, 2, 10, storage, view);
         Thread t = new Thread(courier);
         t.start();
         t.join(3000);
@@ -57,6 +59,6 @@ class CourierTest {
     void courierThrowsOnInvalidCapacity() {
         PizzaStorage storage = new PizzaStorage(10);
         assertThrows(IllegalArgumentException.class,
-                () -> new Courier(1, 0, 100, storage));
+                () -> new Courier(1, 0, 100, storage, view));
     }
 }

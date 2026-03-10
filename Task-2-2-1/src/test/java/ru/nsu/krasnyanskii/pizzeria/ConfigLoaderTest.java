@@ -40,20 +40,19 @@ class ConfigLoaderTest {
 
         PizzeriaConfig config = ConfigLoader.load(cfg.toString());
 
-        assertEquals(10, config.storageCapacity);
-        assertEquals(200, config.orderIntervalMs);
-        assertEquals(5000L, config.workDurationMs);
-        assertEquals(2, config.bakers.size());
-        assertEquals(300, config.bakers.get(0).cookingTimeMs);
-        assertEquals(500, config.bakers.get(1).cookingTimeMs);
-        assertEquals(1, config.couriers.size());
-        assertEquals(3, config.couriers.get(0).trunkCapacity);
-        assertEquals(400, config.couriers.get(0).deliveryTimeMs);
+        assertEquals(10, config.getStorageCapacity());
+        assertEquals(200, config.getOrderIntervalMs());
+        assertEquals(5000L, config.getWorkDurationMs());
+        assertEquals(2, config.getBakers().size());
+        assertEquals(300, config.getBakers().get(0).getCookingTimeMs());
+        assertEquals(500, config.getBakers().get(1).getCookingTimeMs());
+        assertEquals(1, config.getCouriers().size());
+        assertEquals(3, config.getCouriers().get(0).getTrunkCapacity());
+        assertEquals(400, config.getCouriers().get(0).getDeliveryTimeMs());
     }
 
     @Test
     void throwsOnMissingKey() throws IOException {
-        // Нет storageCapacity — должен бросить исключение
         Path cfg = writeConfig("""
             {
               "orderIntervalMs": 200,
@@ -80,7 +79,7 @@ class ConfigLoaderTest {
             """);
 
         PizzeriaConfig config = ConfigLoader.load(cfg.toString());
-        assertTrue(config.bakers.isEmpty());
-        assertTrue(config.couriers.isEmpty());
+        assertTrue(config.getBakers().isEmpty());
+        assertTrue(config.getCouriers().isEmpty());
     }
 }

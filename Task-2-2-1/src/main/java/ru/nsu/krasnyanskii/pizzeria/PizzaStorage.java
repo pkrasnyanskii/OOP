@@ -5,19 +5,23 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Thread-safe bounded storage for finished pizzas.
+ * Thread-safe bounded storage for cooked pizzas.
  *
- * <p>Пекари кладут пиццы, курьеры забирают партиями.
- * Реализация через intrinsic lock (synchronized + wait/notifyAll),
- * без java.util.concurrent коллекций.</p>
+ * <p>Uses intrinsic lock ({@code synchronized} + {@code wait}/{@code notifyAll})
+ * without {@code java.util.concurrent} collections.</p>
  */
 public class PizzaStorage {
 
     private final int capacity;
     private final LinkedList<Order> orders = new LinkedList<>();
-    // false = больше пицц не будет (пиццерия закрывается)
     private volatile boolean accepting = true;
 
+    /**
+     * Creates a PizzaStorage.
+     *
+     * @param capacity max number of pizzas; must be positive
+     * @throws IllegalArgumentException if capacity is not positive
+     */
     public PizzaStorage(int capacity) {
         if (capacity <= 0) {
             throw new IllegalArgumentException("Storage capacity must be positive");
@@ -26,8 +30,10 @@ public class PizzaStorage {
     }
 
     /**
-     * Пекарь кладёт пиццу на склад.
-     * Блокирует если склад полон — ждёт пока курьер не заберёт партию.
+     * Puts a pizza into storage, blocking if full.
+     *
+     * @param order cooked order to store
+     * @throws InterruptedException if the thread is interrupted while waiting
      */
     public synchronized void put(Order order) throws InterruptedException {
         while (orders.size() >= capacity) {
@@ -35,39 +41,39 @@ public class PizzaStorage {
         }
         orders.addLast(order);
         order.setState(Order.State.IN_STORAGE);
-        notifyAll(); // будим курьеров которые ждут в take()
+        notifyAll();
     }
 
     /**
-     * Курьер забирает до maxCount пицц.
-     * Блокирует если склад пуст и ещё принимает новые заказы.
+     * Takes up to {@code maxCount} pizzas, blocking while storage is empty and open.
      *
-     * @return список пицц или пустой список если склад закрыт и пуст
+     * @param maxCount max pizzas to take
+     * @return list of taken pizzas; empty if storage is closed and empty
+     * @throws InterruptedException if the thread is interrupted while waiting
      */
     public synchronized List<Order> take(int maxCount) throws InterruptedException {
         while (orders.isEmpty() && accepting) {
-            wait(); // ждём пока пекарь что-нибудь положит
+            wait();
         }
         List<Order> taken = new ArrayList<>();
         int count = Math.min(maxCount, orders.size());
         for (int i = 0; i < count; i++) {
             taken.add(orders.removeFirst());
         }
-        notifyAll(); // будим пекарей которые ждут места
+        notifyAll();
         return taken;
     }
 
-    /**
-     * Останавливает приём новых пицц.
-     * Курьеры заберут оставшееся и завершат работу.
-     */
+    /** Signals that no more pizzas will be added; couriers will drain and exit. */
     public synchronized void closeAccepting() {
         accepting = false;
         notifyAll();
     }
 
     /**
-     * Забирает все пиццы (для сериализации).
+     * Drains all remaining pizzas (used during shutdown serialization).
+     *
+     * @return snapshot of remaining orders
      */
     public synchronized List<Order> drainAll() {
         List<Order> result = new ArrayList<>(orders);
@@ -76,14 +82,17 @@ public class PizzaStorage {
         return result;
     }
 
+    /** Returns {@code true} if no pizzas are in storage. */
     public synchronized boolean isEmpty() {
         return orders.isEmpty();
     }
 
+    /** Returns the number of pizzas currently in storage. */
     public synchronized int size() {
         return orders.size();
     }
 
+    /** Returns {@code true} if the storage is still accepting new pizzas. */
     public boolean isAccepting() {
         return accepting;
     }

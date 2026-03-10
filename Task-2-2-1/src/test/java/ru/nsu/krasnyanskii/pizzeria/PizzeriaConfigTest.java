@@ -11,32 +11,32 @@ class PizzeriaConfigTest {
     @Test
     void fieldsAreAccessible() {
         PizzeriaConfig config = new PizzeriaConfig();
-        config.storageCapacity = 5;
-        config.orderIntervalMs = 100;
-        config.workDurationMs  = 3000L;
-        config.bakers          = new ArrayList<>();
-        config.couriers        = new ArrayList<>();
+        config.setStorageCapacity(5);
+        config.setOrderIntervalMs(100);
+        config.setWorkDurationMs(3000L);
+        config.setBakers(new ArrayList<>());
+        config.setCouriers(new ArrayList<>());
 
-        assertEquals(5,     config.storageCapacity);
-        assertEquals(100,   config.orderIntervalMs);
-        assertEquals(3000L, config.workDurationMs);
-        assertTrue(config.bakers.isEmpty());
-        assertTrue(config.couriers.isEmpty());
+        assertEquals(5, config.getStorageCapacity());
+        assertEquals(100, config.getOrderIntervalMs());
+        assertEquals(3000L, config.getWorkDurationMs());
+        assertTrue(config.getBakers().isEmpty());
+        assertTrue(config.getCouriers().isEmpty());
     }
 
     @Test
     void bakerConfigFields() {
         PizzeriaConfig.BakerConfig bc = new PizzeriaConfig.BakerConfig();
-        bc.cookingTimeMs = 400;
-        assertEquals(400, bc.cookingTimeMs);
+        bc.setCookingTimeMs(400);
+        assertEquals(400, bc.getCookingTimeMs());
     }
 
     @Test
     void courierConfigFields() {
         PizzeriaConfig.CourierConfig cc = new PizzeriaConfig.CourierConfig();
-        cc.trunkCapacity  = 3;
-        cc.deliveryTimeMs = 500;
-        assertEquals(3,   cc.trunkCapacity);
-        assertEquals(500, cc.deliveryTimeMs);
+        cc.setTrunkCapacity(3);
+        cc.setDeliveryTimeMs(500);
+        assertEquals(3, cc.getTrunkCapacity());
+        assertEquals(500, cc.getDeliveryTimeMs());
     }
 }

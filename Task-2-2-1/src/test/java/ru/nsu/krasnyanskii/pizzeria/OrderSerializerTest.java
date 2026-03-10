@@ -15,6 +15,8 @@ class OrderSerializerTest {
     @TempDir
     Path tempDir;
 
+    private final PizzeriaView view = new PizzeriaView();
+
     @BeforeEach
     void resetCounter() {
         Order.resetCounter();
@@ -26,7 +28,7 @@ class OrderSerializerTest {
         Order o2 = new Order(99, Order.State.COOKING);
 
         String path = tempDir.resolve("orders.json").toString();
-        OrderSerializer.save(List.of(o1, o2), path);
+        OrderSerializer.save(List.of(o1, o2), path, view);
 
         List<Order> loaded = OrderSerializer.load(path);
         assertEquals(2, loaded.size());
@@ -39,7 +41,7 @@ class OrderSerializerTest {
     @Test
     void saveEmptyList() throws IOException {
         String path = tempDir.resolve("empty.json").toString();
-        OrderSerializer.save(List.of(), path);
+        OrderSerializer.save(List.of(), path, view);
         List<Order> loaded = OrderSerializer.load(path);
         assertTrue(loaded.isEmpty());
     }
