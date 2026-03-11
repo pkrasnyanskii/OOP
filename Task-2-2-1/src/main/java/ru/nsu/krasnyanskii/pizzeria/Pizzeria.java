@@ -20,6 +20,10 @@ import ru.nsu.krasnyanskii.pizzeria.workers.OrderGenerator;
  */
 public class Pizzeria {
 
+    private Pizzeria() {
+        // utility class
+    }
+
     /**
      * Starts the pizzeria.
      *

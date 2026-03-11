@@ -11,10 +11,10 @@ repositories {
 }
 
 dependencies {
-    // Jackson — парсинг JSON конфига (доп. задание)
+    // Jackson for JSON config parsing
     implementation("com.fasterxml.jackson.core:jackson-databind:2.17.2")
 
-    // Lombok — генерация геттеров/сеттеров/конструкторов (доп. задание)
+    // Lombok for boilerplate generation (getters, setters, constructors)
     compileOnly("org.projectlombok:lombok:1.18.34")
     annotationProcessor("org.projectlombok:lombok:1.18.34")
     testCompileOnly("org.projectlombok:lombok:1.18.34")
@@ -27,6 +27,11 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.javadoc {
+    // Suppress "missing" doclint warnings produced by Lombok-generated constructors.
+    (options as StandardJavadocDocletOptions).addStringOption("Xdoclint:all,-missing", "-quiet")
 }
 
 tasks.jacocoTestReport {

@@ -85,14 +85,29 @@ public class Courier implements Runnable, Stoppable {
         running = false;
     }
 
+    /**
+     * Returns the courier identifier.
+     *
+     * @return courier id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Returns the maximum number of pizzas this courier can carry per trip.
+     *
+     * @return trunk capacity
+     */
     public int getTrunkCapacity() {
         return trunkCapacity;
     }
 
+    /**
+     * Returns the delivery duration in milliseconds.
+     *
+     * @return delivery time in ms
+     */
     public int getDeliveryTimeMs() {
         return deliveryTimeMs;
     }

@@ -77,10 +77,20 @@ public class Baker implements Runnable, Stoppable {
         running = false;
     }
 
+    /**
+     * Returns the baker identifier.
+     *
+     * @return baker id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Returns the cooking duration per pizza in milliseconds.
+     *
+     * @return cooking time in ms
+     */
     public int getCookingTimeMs() {
         return cookingTimeMs;
     }

@@ -82,17 +82,29 @@ public class PizzaStorage {
         return result;
     }
 
-    /** Returns {@code true} if no pizzas are in storage. */
+    /**
+     * Returns {@code true} if no pizzas are in storage.
+     *
+     * @return {@code true} if empty
+     */
     public synchronized boolean isEmpty() {
         return orders.isEmpty();
     }
 
-    /** Returns the number of pizzas currently in storage. */
+    /**
+     * Returns the number of pizzas currently in storage.
+     *
+     * @return current size
+     */
     public synchronized int size() {
         return orders.size();
     }
 
-    /** Returns {@code true} if the storage is still accepting new pizzas. */
+    /**
+     * Returns {@code true} if the storage is still accepting new pizzas.
+     *
+     * @return {@code true} if accepting
+     */
     public boolean isAccepting() {
         return accepting;
     }
