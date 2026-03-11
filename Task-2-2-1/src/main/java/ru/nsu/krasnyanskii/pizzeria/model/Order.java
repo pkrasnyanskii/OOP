@@ -1,6 +1,9 @@
-package ru.nsu.krasnyanskii.pizzeria;
+package ru.nsu.krasnyanskii.pizzeria.model;
 
 import java.util.concurrent.atomic.AtomicInteger;
+
+import lombok.Getter;
+import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
 
 /** Represents a single pizza order moving through the pipeline. */
 public class Order {
@@ -40,14 +43,22 @@ public class Order {
         }
     }
 
-    private final int id;
-
     /**
-     * {@code volatile} ensures state changes written by one thread (baker/courier)
-     * are immediately visible to all other threads without CPU-register caching.
+     * -- GETTER --
+     *  Returns the unique order identifier.
+     *
+     * @return order id
      */
+    @Getter
+    private final int id;
+    /**
+     * -- GETTER --
+     *  Returns the current lifecycle state.
+     *
+     * @return current state
+     */
+    @Getter
     private volatile State state;
-
     private final PizzeriaView view;
 
     /**
@@ -82,24 +93,6 @@ public class Order {
     }
 
     /**
-     * Returns the unique order identifier.
-     *
-     * @return order id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Returns the current lifecycle state.
-     *
-     * @return current state
-     */
-    public State getState() {
-        return state;
-    }
-
-    /**
      * Updates the state and notifies the view if one is present.
      *
      * @param state new state
@@ -112,7 +105,7 @@ public class Order {
     }
 
     /** Resets the id counter; for tests only. */
-    static void resetCounter() {
+    public static void resetCounter() {
         COUNTER.set(1);
     }
 }

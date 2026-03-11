@@ -1,23 +1,16 @@
-package ru.nsu.krasnyanskii.pizzeria;
-
-import java.io.File;
-import java.io.IOException;
+package ru.nsu.krasnyanskii.pizzeria.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
+import ru.nsu.krasnyanskii.pizzeria.model.PizzeriaConfig;
 
-/**
- * Loads {@link PizzeriaConfig} from a JSON file using Jackson.
- *
- * <p>Jackson maps JSON field names to class fields automatically.
- * Lombok {@code @Data} provides the setters Jackson needs; {@code @NoArgsConstructor}
- * provides the no-arg constructor required for deserialization.</p>
- */
+/** Loads {@link PizzeriaConfig} from a JSON file using Jackson. */
 public class ConfigLoader {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     private ConfigLoader() {
-        // utility class
     }
 
     /**

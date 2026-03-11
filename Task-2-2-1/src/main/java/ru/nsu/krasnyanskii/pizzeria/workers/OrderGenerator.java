@@ -1,31 +1,16 @@
 package ru.nsu.krasnyanskii.pizzeria.workers;
 
 import ru.nsu.krasnyanskii.pizzeria.BlockingOrderQueue;
-import ru.nsu.krasnyanskii.pizzeria.Order;
-import ru.nsu.krasnyanskii.pizzeria.PizzeriaView;
 import ru.nsu.krasnyanskii.pizzeria.Stoppable;
+import ru.nsu.krasnyanskii.pizzeria.model.Order;
+import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
 
-/**
- * Produces new orders at a fixed interval until stopped.
- *
- * <p><b>ISP</b> (Interface Segregation): implements only {@link Stoppable}, a focused
- * single-method interface. A "fat" interface would force unrelated methods on every
- * worker class.</p>
- *
- * <p><b>DIP</b> (Dependency Inversion): {@code Pizzeria} (high-level module) depends on
- * the {@link Stoppable} abstraction, not on concrete classes. Both the high-level and
- * low-level modules depend on the abstraction, not on each other.</p>
- */
+/** Produces new orders at a fixed interval until stopped. */
 public class OrderGenerator implements Runnable, Stoppable {
 
     private final BlockingOrderQueue<Order> orderQueue;
     private final int intervalMs;
     private final PizzeriaView view;
-
-    /**
-     * {@code volatile} ensures the {@code false} written by {@code stop()} is
-     * visible to the generator thread without additional synchronization.
-     */
     private volatile boolean running = true;
 
     /**
