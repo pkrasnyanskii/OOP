@@ -3,6 +3,7 @@ package ru.nsu.krasnyanskii.pizzeria.workers;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lombok.Getter;
 import ru.nsu.krasnyanskii.pizzeria.PizzaStorage;
 import ru.nsu.krasnyanskii.pizzeria.Stoppable;
 import ru.nsu.krasnyanskii.pizzeria.model.Order;
@@ -11,9 +12,12 @@ import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
 /** Worker that picks up batches of pizzas from storage and delivers them. */
 public class Courier implements Runnable, Stoppable {
 
+    @Getter
     private final int id;
+    @Getter
     private final int trunkCapacity;
     private final PizzaStorage storage;
+    @Getter
     private final int deliveryTimeMs;
     private final PizzeriaView view;
     private volatile boolean running = true;
@@ -75,30 +79,4 @@ public class Courier implements Runnable, Stoppable {
         running = false;
     }
 
-    /**
-     * Returns the courier identifier.
-     *
-     * @return courier id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Returns the maximum number of pizzas this courier can carry per trip.
-     *
-     * @return trunk capacity
-     */
-    public int getTrunkCapacity() {
-        return trunkCapacity;
-    }
-
-    /**
-     * Returns the delivery duration in milliseconds.
-     *
-     * @return delivery time in ms
-     */
-    public int getDeliveryTimeMs() {
-        return deliveryTimeMs;
-    }
 }

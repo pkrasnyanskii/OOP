@@ -1,5 +1,6 @@
 package ru.nsu.krasnyanskii.pizzeria.workers;
 
+import lombok.Getter;
 import ru.nsu.krasnyanskii.pizzeria.BlockingOrderQueue;
 import ru.nsu.krasnyanskii.pizzeria.PizzaStorage;
 import ru.nsu.krasnyanskii.pizzeria.Stoppable;
@@ -9,7 +10,9 @@ import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
 /** Worker that takes orders from the queue, simulates cooking, and puts pizzas to storage. */
 public class Baker implements Runnable, Stoppable {
 
+    @Getter
     private final int id;
+    @Getter
     private final int cookingTimeMs;
     private final BlockingOrderQueue<Order> orderQueue;
     private final PizzaStorage storage;
@@ -66,21 +69,4 @@ public class Baker implements Runnable, Stoppable {
         running = false;
     }
 
-    /**
-     * Returns the baker identifier.
-     *
-     * @return baker id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Returns the cooking duration per pizza in milliseconds.
-     *
-     * @return cooking time in ms
-     */
-    public int getCookingTimeMs() {
-        return cookingTimeMs;
-    }
 }
