@@ -7,12 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.krasnyanskii.pizzeria.model.Order;
+import ru.nsu.krasnyanskii.pizzeria.view.ConsolePizzeriaView;
 import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
 import ru.nsu.krasnyanskii.pizzeria.workers.Baker;
 
 class BakerTest {
 
-    private final PizzeriaView view = new PizzeriaView();
+    private final PizzeriaView view = new ConsolePizzeriaView();
 
     @BeforeEach
     void resetCounter() {
