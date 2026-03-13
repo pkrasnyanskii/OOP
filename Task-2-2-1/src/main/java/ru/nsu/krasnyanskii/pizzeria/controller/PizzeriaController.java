@@ -4,18 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import ru.nsu.krasnyanskii.pizzeria.BlockingOrderQueue;
-import ru.nsu.krasnyanskii.pizzeria.PizzaStorage;
-import ru.nsu.krasnyanskii.pizzeria.Stoppable;
 import ru.nsu.krasnyanskii.pizzeria.config.ConfigLoader;
 import ru.nsu.krasnyanskii.pizzeria.config.OrderSerializer;
 import ru.nsu.krasnyanskii.pizzeria.model.Order;
 import ru.nsu.krasnyanskii.pizzeria.model.PizzeriaConfig;
+import ru.nsu.krasnyanskii.pizzeria.queue.BlockingOrderQueue;
+import ru.nsu.krasnyanskii.pizzeria.queue.OrderQueue;
+import ru.nsu.krasnyanskii.pizzeria.storage.BoundedPizzaStorage;
+import ru.nsu.krasnyanskii.pizzeria.storage.PizzaStorage;
 import ru.nsu.krasnyanskii.pizzeria.view.ConsolePizzeriaView;
 import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
 import ru.nsu.krasnyanskii.pizzeria.workers.Baker;
 import ru.nsu.krasnyanskii.pizzeria.workers.Courier;
 import ru.nsu.krasnyanskii.pizzeria.workers.OrderGenerator;
+import ru.nsu.krasnyanskii.pizzeria.workers.Worker;
 
 /**
  * Orchestrates the full pizzeria lifecycle.
@@ -48,16 +50,15 @@ public class PizzeriaController {
         view.pizzeriaOpened();
         PizzeriaConfig config = ConfigLoader.load(configPath);
 
-        BlockingOrderQueue<Order> orderQueue = new BlockingOrderQueue<>(1000);
-        PizzaStorage storage = new PizzaStorage(config.getStorageCapacity());
+        OrderQueue<Order> orderQueue = new BlockingOrderQueue<>(1000);
+        PizzaStorage storage = new BoundedPizzaStorage(config.getStorageCapacity());
 
-        List<Baker>   bakers         = createBakers(config, orderQueue, storage, view);
-        List<Courier> couriers       = createCouriers(config, storage, view);
-        List<Thread>  bakerThreads   = startThreads(bakers, "Baker");
-        List<Thread>  courierThreads = startThreads(couriers, "Courier");
+        List<Worker> bakers         = createBakers(config, orderQueue, storage, view);
+        List<Worker> couriers       = createCouriers(config, storage, view);
+        List<Thread> bakerThreads   = startThreads(bakers, "Baker");
+        List<Thread> courierThreads = startThreads(couriers, "Courier");
 
-        OrderGenerator generator = new OrderGenerator(
-                orderQueue, config.getOrderIntervalMs(), view);
+        Worker generator = new OrderGenerator(orderQueue, config.getOrderIntervalMs(), view);
         Thread generatorThread = new Thread(generator, "OrderGenerator");
         generatorThread.start();
 
@@ -72,7 +73,8 @@ public class PizzeriaController {
                 orderQueue, storage);
 
         if (!unfinished.isEmpty()) {
-            OrderSerializer.save(unfinished, serializedPath, view);
+            OrderSerializer.save(unfinished, serializedPath);
+            view.serializerSaved(unfinished.size(), serializedPath);
         } else {
             view.allOrdersDone();
         }
@@ -80,20 +82,20 @@ public class PizzeriaController {
     }
 
     /**
-     * Creates baker instances from configuration.
+     * Creates baker workers from configuration.
      *
-     * @param config     pizzeria configuration
-     * @param queue      shared order queue
-     * @param storage    shared pizza storage
-     * @param view       view for console output
-     * @return list of configured bakers
+     * @param config  pizzeria configuration
+     * @param queue   shared order queue
+     * @param storage shared pizza storage
+     * @param view    view for console output
+     * @return list of configured baker workers
      */
-    private static List<Baker> createBakers(PizzeriaConfig config,
-                                             BlockingOrderQueue<Order> queue,
-                                             PizzaStorage storage,
-                                             PizzeriaView view) {
+    private static List<Worker> createBakers(PizzeriaConfig config,
+                                              OrderQueue<Order> queue,
+                                              PizzaStorage storage,
+                                              PizzeriaView view) {
         return IntStream.range(0, config.getBakers().size())
-                .mapToObj(i -> new Baker(
+                .mapToObj(i -> (Worker) new Baker(
                         i + 1,
                         config.getBakers().get(i).getCookingTimeMs(),
                         queue, storage, view))
@@ -101,18 +103,18 @@ public class PizzeriaController {
     }
 
     /**
-     * Creates courier instances from configuration.
+     * Creates courier workers from configuration.
      *
      * @param config  pizzeria configuration
      * @param storage shared pizza storage
      * @param view    view for console output
-     * @return list of configured couriers
+     * @return list of configured courier workers
      */
-    private static List<Courier> createCouriers(PizzeriaConfig config,
-                                                 PizzaStorage storage,
-                                                 PizzeriaView view) {
+    private static List<Worker> createCouriers(PizzeriaConfig config,
+                                                PizzaStorage storage,
+                                                PizzeriaView view) {
         return IntStream.range(0, config.getCouriers().size())
-                .mapToObj(i -> new Courier(
+                .mapToObj(i -> (Worker) new Courier(
                         i + 1,
                         config.getCouriers().get(i).getTrunkCapacity(),
                         config.getCouriers().get(i).getDeliveryTimeMs(),
@@ -123,13 +125,11 @@ public class PizzeriaController {
     /**
      * Wraps each worker in a named thread and starts it.
      *
-     * @param workers list of runnable workers
+     * @param workers list of workers to start
      * @param prefix  thread name prefix (e.g. {@code "Baker"})
-     * @param <T>     worker type
      * @return list of started threads
      */
-    private static <T extends Runnable> List<Thread> startThreads(List<T> workers,
-                                                                    String prefix) {
+    private static List<Thread> startThreads(List<Worker> workers, String prefix) {
         return IntStream.range(0, workers.size())
                 .mapToObj(i -> {
                     Thread t = new Thread(workers.get(i), prefix + "-" + (i + 1));
@@ -142,7 +142,7 @@ public class PizzeriaController {
     /**
      * Performs a graceful shutdown and collects unfinished orders.
      *
-     * @param generator       order generator to stop first
+     * @param generator       generator worker to stop first
      * @param generatorThread generator thread to join
      * @param bakers          baker workers
      * @param bakerThreads    baker threads
@@ -153,13 +153,13 @@ public class PizzeriaController {
      * @return list of orders that could not be completed
      * @throws InterruptedException if the current thread is interrupted while joining
      */
-    private static List<Order> shutdown(OrderGenerator generator,
+    private static List<Order> shutdown(Worker generator,
                                          Thread generatorThread,
-                                         List<Baker> bakers,
+                                         List<Worker> bakers,
                                          List<Thread> bakerThreads,
-                                         List<Courier> couriers,
+                                         List<Worker> couriers,
                                          List<Thread> courierThreads,
-                                         BlockingOrderQueue<Order> orderQueue,
+                                         OrderQueue<Order> orderQueue,
                                          PizzaStorage storage) throws InterruptedException {
         generator.stop();
         generatorThread.interrupt();
@@ -170,11 +170,11 @@ public class PizzeriaController {
         List<Order> unfinished = new ArrayList<>(orderQueue.drainAll());
         unfinished.forEach(o -> o.setState(Order.State.CANCELLED));
 
-        stopAll(bakers);
+        bakers.forEach(Worker::stop);
         interruptAndJoin(bakerThreads);
 
         storage.closeAccepting();
-        stopAll(couriers);
+        couriers.forEach(Worker::stop);
         interruptAndJoin(courierThreads);
 
         List<Order> inStorage = storage.drainAll();
@@ -182,15 +182,6 @@ public class PizzeriaController {
         unfinished.addAll(inStorage);
 
         return unfinished;
-    }
-
-    /**
-     * Calls {@link Stoppable#stop()} on every worker.
-     *
-     * @param workers list of stoppable workers
-     */
-    private static void stopAll(List<? extends Stoppable> workers) {
-        workers.forEach(Stoppable::stop);
     }
 
     /**

@@ -1,9 +1,8 @@
 package ru.nsu.krasnyanskii.pizzeria.model;
 
 import java.util.concurrent.atomic.AtomicInteger;
-
 import lombok.Getter;
-import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
+import lombok.Setter;
 
 /** Represents a single pizza order moving through the pipeline. */
 public class Order {
@@ -11,6 +10,7 @@ public class Order {
     private static final AtomicInteger COUNTER = new AtomicInteger(1);
 
     /** Lifecycle states of an order. */
+    @Getter
     public enum State {
         /** Order placed and waiting in queue. */
         QUEUED("queued"),
@@ -27,61 +27,32 @@ public class Order {
         /** Order cancelled and serialized on shutdown. */
         CANCELLED("cancelled (serialized)");
 
+        /** Human-readable description of this state. */
         private final String description;
 
         State(String description) {
             this.description = description;
         }
 
-        /**
-         * Returns the human-readable description of this state.
-         *
-         * @return state description
-         */
-        public String getDescription() {
-            return description;
-        }
     }
 
-    /**
-     * -- GETTER --
-     *  Returns the unique order identifier.
-     *
-     * @return order id
-     */
+    /** Unique order identifier. */
     @Getter
     private final int id;
-    /**
-     * -- GETTER --
-     *  Returns the current lifecycle state.
-     *
-     * @return current state
-     */
+
+    /** Current lifecycle state. */
     @Getter
+    @Setter
     private volatile State state;
-    private final PizzeriaView view;
 
-    /**
-     * Creates a new order and logs the QUEUED state via view.
-     *
-     * @param view view for state-change output
-     */
-    public Order(PizzeriaView view) {
-        this.id = COUNTER.getAndIncrement();
-        this.state = State.QUEUED;
-        this.view = view;
-        view.orderStateChanged(id, State.QUEUED.getDescription());
-    }
-
-    /** Creates a new order without view; no logging (used in tests). */
+    /** Creates a new order in the QUEUED state. */
     public Order() {
         this.id = COUNTER.getAndIncrement();
         this.state = State.QUEUED;
-        this.view = null;
     }
 
     /**
-     * Deserialization constructor — restores a saved order without logging.
+     * Deserialization constructor — restores a saved order without auto-incrementing the counter.
      *
      * @param id    saved order id
      * @param state saved state
@@ -89,19 +60,6 @@ public class Order {
     public Order(int id, State state) {
         this.id = id;
         this.state = state;
-        this.view = null;
-    }
-
-    /**
-     * Updates the state and notifies the view if one is present.
-     *
-     * @param state new state
-     */
-    public void setState(State state) {
-        this.state = state;
-        if (view != null) {
-            view.orderStateChanged(id, state.getDescription());
-        }
     }
 
     /** Resets the id counter; for tests only. */

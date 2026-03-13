@@ -1,4 +1,4 @@
-package ru.nsu.krasnyanskii.pizzeria;
+package ru.nsu.krasnyanskii.pizzeria.queue;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @param <T> element type
  */
-public class BlockingOrderQueue<T> {
+public class BlockingOrderQueue<T> implements OrderQueue<T> {
 
     private final Deque<T> queue = new ArrayDeque<>();
     private final int capacity;
@@ -32,12 +32,7 @@ public class BlockingOrderQueue<T> {
         this.capacity = capacity;
     }
 
-    /**
-     * Inserts an element, blocking until space is available.
-     *
-     * @param item element to insert
-     * @throws InterruptedException if the thread is interrupted while waiting
-     */
+    @Override
     public synchronized void put(T item) throws InterruptedException {
         while (queue.size() >= capacity && !closed) {
             wait();
@@ -49,12 +44,7 @@ public class BlockingOrderQueue<T> {
         notifyAll();
     }
 
-    /**
-     * Retrieves and removes the head element, blocking until one is available.
-     *
-     * @return the head element, or {@code null} if the queue is closed and empty
-     * @throws InterruptedException if the thread is interrupted while waiting
-     */
+    @Override
     public synchronized T take() throws InterruptedException {
         while (queue.isEmpty() && !closed) {
             wait();
@@ -67,17 +57,13 @@ public class BlockingOrderQueue<T> {
         return item;
     }
 
-    /** Closes the queue; threads blocked in {@code take()} will receive {@code null}. */
+    @Override
     public synchronized void close() {
         closed = true;
         notifyAll();
     }
 
-    /**
-     * Drains all remaining elements (used for serialization on shutdown).
-     *
-     * @return snapshot of remaining elements
-     */
+    @Override
     public synchronized List<T> drainAll() {
         List<T> result = new ArrayList<>(queue);
         queue.clear();
@@ -85,29 +71,17 @@ public class BlockingOrderQueue<T> {
         return result;
     }
 
-    /**
-     * Returns {@code true} if the queue contains no elements.
-     *
-     * @return {@code true} if empty
-     */
+    @Override
     public synchronized boolean isEmpty() {
         return queue.isEmpty();
     }
 
-    /**
-     * Returns the number of elements currently in the queue.
-     *
-     * @return current size
-     */
+    @Override
     public synchronized int size() {
         return queue.size();
     }
 
-    /**
-     * Returns {@code true} if the queue has been closed.
-     *
-     * @return {@code true} if closed
-     */
+    @Override
     public boolean isClosed() {
         return closed;
     }

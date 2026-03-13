@@ -2,15 +2,13 @@ package ru.nsu.krasnyanskii.pizzeria.workers;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import lombok.Getter;
-import ru.nsu.krasnyanskii.pizzeria.PizzaStorage;
-import ru.nsu.krasnyanskii.pizzeria.Stoppable;
 import ru.nsu.krasnyanskii.pizzeria.model.Order;
+import ru.nsu.krasnyanskii.pizzeria.storage.PizzaStorage;
 import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
 
 /** Worker that picks up batches of pizzas from storage and delivers them. */
-public class Courier implements Runnable, Stoppable {
+public class Courier implements Worker {
 
     @Getter
     private final int id;
@@ -78,5 +76,4 @@ public class Courier implements Runnable, Stoppable {
     public void stop() {
         running = false;
     }
-
 }

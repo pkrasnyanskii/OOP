@@ -9,7 +9,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import ru.nsu.krasnyanskii.pizzeria.model.Order;
-import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
 
 /** Saves and loads unfinished orders in a minimal JSON format. */
 public class OrderSerializer {
@@ -22,18 +21,15 @@ public class OrderSerializer {
      *
      * @param orders   list of orders to save
      * @param filePath destination file path
-     * @param view     view for the confirmation message
      * @throws IOException if the file cannot be written
      */
-    public static void save(List<Order> orders, String filePath,
-                            PizzeriaView view) throws IOException {
+    public static void save(List<Order> orders, String filePath) throws IOException {
         String body = orders.stream()
                 .map(o -> "  {\"id\": " + o.getId()
                         + ", \"state\": \"" + o.getState().name() + "\"}")
                 .collect(Collectors.joining(",\n"));
         String json = "[\n" + body + "\n]\n";
         Files.write(Paths.get(filePath), json.getBytes());
-        view.serializerSaved(orders.size(), filePath);
     }
 
     /**

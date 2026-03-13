@@ -11,15 +11,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import ru.nsu.krasnyanskii.pizzeria.config.OrderSerializer;
 import ru.nsu.krasnyanskii.pizzeria.model.Order;
-import ru.nsu.krasnyanskii.pizzeria.view.ConsolePizzeriaView;
-import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
 
 class OrderSerializerTest {
 
     @TempDir
     Path tempDir;
-
-    private final PizzeriaView view = new ConsolePizzeriaView();
 
     @BeforeEach
     void resetCounter() {
@@ -32,7 +28,7 @@ class OrderSerializerTest {
         Order o2 = new Order(99, Order.State.COOKING);
 
         String path = tempDir.resolve("orders.json").toString();
-        OrderSerializer.save(List.of(o1, o2), path, view);
+        OrderSerializer.save(List.of(o1, o2), path);
 
         List<Order> loaded = OrderSerializer.load(path);
         assertEquals(2, loaded.size());
@@ -45,7 +41,7 @@ class OrderSerializerTest {
     @Test
     void saveEmptyList() throws IOException {
         String path = tempDir.resolve("empty.json").toString();
-        OrderSerializer.save(List.of(), path, view);
+        OrderSerializer.save(List.of(), path);
         List<Order> loaded = OrderSerializer.load(path);
         assertTrue(loaded.isEmpty());
     }

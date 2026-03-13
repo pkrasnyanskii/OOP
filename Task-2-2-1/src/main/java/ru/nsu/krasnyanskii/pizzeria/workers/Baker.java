@@ -1,20 +1,19 @@
 package ru.nsu.krasnyanskii.pizzeria.workers;
 
 import lombok.Getter;
-import ru.nsu.krasnyanskii.pizzeria.BlockingOrderQueue;
-import ru.nsu.krasnyanskii.pizzeria.PizzaStorage;
-import ru.nsu.krasnyanskii.pizzeria.Stoppable;
 import ru.nsu.krasnyanskii.pizzeria.model.Order;
+import ru.nsu.krasnyanskii.pizzeria.queue.OrderQueue;
+import ru.nsu.krasnyanskii.pizzeria.storage.PizzaStorage;
 import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
 
 /** Worker that takes orders from the queue, simulates cooking, and puts pizzas to storage. */
-public class Baker implements Runnable, Stoppable {
+public class Baker implements Worker {
 
     @Getter
     private final int id;
     @Getter
     private final int cookingTimeMs;
-    private final BlockingOrderQueue<Order> orderQueue;
+    private final OrderQueue<Order> orderQueue;
     private final PizzaStorage storage;
     private final PizzeriaView view;
     private volatile boolean running = true;
@@ -29,7 +28,7 @@ public class Baker implements Runnable, Stoppable {
      * @param view          view for all console output
      */
     public Baker(int id, int cookingTimeMs,
-                 BlockingOrderQueue<Order> orderQueue,
+                 OrderQueue<Order> orderQueue,
                  PizzaStorage storage,
                  PizzeriaView view) {
         if (cookingTimeMs <= 0) {
@@ -57,6 +56,7 @@ public class Baker implements Runnable, Stoppable {
                 order.setState(Order.State.COOKED);
                 view.bakerCooked(id, order.getId());
                 storage.put(order);
+                view.orderStateChanged(order.getId(), Order.State.IN_STORAGE.getDescription());
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -68,5 +68,4 @@ public class Baker implements Runnable, Stoppable {
     public void stop() {
         running = false;
     }
-
 }

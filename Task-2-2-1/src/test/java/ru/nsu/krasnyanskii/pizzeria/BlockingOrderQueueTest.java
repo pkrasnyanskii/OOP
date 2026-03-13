@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import ru.nsu.krasnyanskii.pizzeria.queue.BlockingOrderQueue;
 
 class BlockingOrderQueueTest {
 
@@ -49,11 +50,9 @@ class BlockingOrderQueueTest {
 
     @Test
     void putBlocksWhenFull() throws InterruptedException {
-        // Очередь на 1 элемент
         BlockingOrderQueue<String> queue = new BlockingOrderQueue<>(1);
         queue.put("first");
 
-        // Второй put должен заблокироваться
         Thread putter = new Thread(() -> {
             try {
                 queue.put("second");
@@ -63,11 +62,9 @@ class BlockingOrderQueueTest {
         });
         putter.start();
 
-        // Даём потоку время заблокироваться
         Thread.sleep(100);
         assertTrue(putter.isAlive(), "Поток должен быть заблокирован");
 
-        // Освобождаем место
         queue.take();
         putter.join(500);
         assertFalse(putter.isAlive(), "Поток должен завершиться после освобождения места");

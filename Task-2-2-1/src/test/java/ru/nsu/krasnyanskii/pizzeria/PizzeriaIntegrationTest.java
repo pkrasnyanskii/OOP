@@ -7,6 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.krasnyanskii.pizzeria.model.Order;
+import ru.nsu.krasnyanskii.pizzeria.queue.BlockingOrderQueue;
+import ru.nsu.krasnyanskii.pizzeria.queue.OrderQueue;
+import ru.nsu.krasnyanskii.pizzeria.storage.BoundedPizzaStorage;
+import ru.nsu.krasnyanskii.pizzeria.storage.PizzaStorage;
 import ru.nsu.krasnyanskii.pizzeria.view.ConsolePizzeriaView;
 import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
 import ru.nsu.krasnyanskii.pizzeria.workers.Baker;
@@ -24,8 +28,8 @@ class PizzeriaIntegrationTest {
 
     @Test
     void fullPipelineDeliversAllOrders() throws InterruptedException {
-        BlockingOrderQueue<Order> queue = new BlockingOrderQueue<>(10);
-        PizzaStorage storage = new PizzaStorage(5);
+        OrderQueue<Order> queue = new BlockingOrderQueue<>(10);
+        PizzaStorage storage = new BoundedPizzaStorage(5);
 
         Order o1 = new Order();
         Order o2 = new Order();
@@ -61,8 +65,8 @@ class PizzeriaIntegrationTest {
 
     @Test
     void storageCapacityLimitBlocksBakers() throws InterruptedException {
-        BlockingOrderQueue<Order> queue = new BlockingOrderQueue<>(10);
-        PizzaStorage storage = new PizzaStorage(1);
+        OrderQueue<Order> queue = new BlockingOrderQueue<>(10);
+        PizzaStorage storage = new BoundedPizzaStorage(1);
 
         Order o1 = new Order();
         Order o2 = new Order();

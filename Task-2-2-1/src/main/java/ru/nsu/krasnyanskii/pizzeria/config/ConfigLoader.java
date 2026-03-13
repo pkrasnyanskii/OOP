@@ -23,19 +23,7 @@ public class ConfigLoader {
      */
     public static PizzeriaConfig load(String filePath) throws IOException {
         PizzeriaConfig config = MAPPER.readValue(new File(filePath), PizzeriaConfig.class);
-        validate(config);
+        ConfigValidator.validate(config);
         return config;
-    }
-
-    private static void validate(PizzeriaConfig config) {
-        if (config.getStorageCapacity() <= 0) {
-            throw new IllegalArgumentException("Missing key in config: storageCapacity");
-        }
-        if (config.getOrderIntervalMs() <= 0) {
-            throw new IllegalArgumentException("Missing key in config: orderIntervalMs");
-        }
-        if (config.getWorkDurationMs() <= 0) {
-            throw new IllegalArgumentException("Missing key in config: workDurationMs");
-        }
     }
 }
