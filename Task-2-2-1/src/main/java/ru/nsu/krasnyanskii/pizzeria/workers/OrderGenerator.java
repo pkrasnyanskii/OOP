@@ -2,15 +2,14 @@ package ru.nsu.krasnyanskii.pizzeria.workers;
 
 import ru.nsu.krasnyanskii.pizzeria.model.Order;
 import ru.nsu.krasnyanskii.pizzeria.queue.OrderQueue;
-import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
+import ru.nsu.krasnyanskii.pizzeria.view.GeneratorView;
 
-/** Produces new orders at a fixed interval until stopped. */
+/** Produces new orders at a fixed interval until interrupted or the queue is closed. */
 public class OrderGenerator implements Worker {
 
     private final OrderQueue<Order> orderQueue;
     private final int intervalMs;
-    private final PizzeriaView view;
-    private volatile boolean running = true;
+    private final GeneratorView view;
 
     /**
      * Creates an OrderGenerator.
@@ -21,7 +20,7 @@ public class OrderGenerator implements Worker {
      */
     public OrderGenerator(OrderQueue<Order> orderQueue,
                           int intervalMs,
-                          PizzeriaView view) {
+                          GeneratorView view) {
         if (intervalMs <= 0) {
             throw new IllegalArgumentException("intervalMs must be positive");
         }
@@ -34,9 +33,9 @@ public class OrderGenerator implements Worker {
     public void run() {
         view.generatorStarted();
         try {
-            while (running && !orderQueue.isClosed()) {
+            while (!Thread.currentThread().isInterrupted() && !orderQueue.isClosed()) {
                 Thread.sleep(intervalMs);
-                if (!running || orderQueue.isClosed()) {
+                if (orderQueue.isClosed()) {
                     break;
                 }
                 Order order = new Order();
@@ -48,10 +47,5 @@ public class OrderGenerator implements Worker {
             Thread.currentThread().interrupt();
         }
         view.generatorStopped();
-    }
-
-    @Override
-    public void stop() {
-        running = false;
     }
 }

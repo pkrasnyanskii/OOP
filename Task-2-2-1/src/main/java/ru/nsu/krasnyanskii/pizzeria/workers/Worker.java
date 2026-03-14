@@ -1,5 +1,10 @@
 package ru.nsu.krasnyanskii.pizzeria.workers;
 
-/** Contract for a pizzeria worker: can be run in a thread and stopped gracefully. */
-public interface Worker extends Runnable, Stoppable {
+/**
+ * Marker interface for a pizzeria worker.
+ *
+ * <p>Workers are cooperative {@link Runnable}s; they finish when their input
+ * dries up (queue/storage closed) or when their thread is interrupted.</p>
+ */
+public interface Worker extends Runnable {
 }

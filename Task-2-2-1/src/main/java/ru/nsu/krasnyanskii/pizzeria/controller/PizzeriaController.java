@@ -12,7 +12,9 @@ import ru.nsu.krasnyanskii.pizzeria.queue.BlockingOrderQueue;
 import ru.nsu.krasnyanskii.pizzeria.queue.OrderQueue;
 import ru.nsu.krasnyanskii.pizzeria.storage.BoundedPizzaStorage;
 import ru.nsu.krasnyanskii.pizzeria.storage.PizzaStorage;
+import ru.nsu.krasnyanskii.pizzeria.view.BakerView;
 import ru.nsu.krasnyanskii.pizzeria.view.ConsolePizzeriaView;
+import ru.nsu.krasnyanskii.pizzeria.view.CourierView;
 import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
 import ru.nsu.krasnyanskii.pizzeria.workers.Baker;
 import ru.nsu.krasnyanskii.pizzeria.workers.Courier;
@@ -67,9 +69,9 @@ public class PizzeriaController {
         view.shutdownStarted();
 
         List<Order> unfinished = shutdown(
-                generator, generatorThread,
-                bakers, bakerThreads,
-                couriers, courierThreads,
+                generatorThread,
+                bakerThreads,
+                courierThreads,
                 orderQueue, storage);
 
         if (!unfinished.isEmpty()) {
@@ -93,7 +95,7 @@ public class PizzeriaController {
     private static List<Worker> createBakers(PizzeriaConfig config,
                                               OrderQueue<Order> queue,
                                               PizzaStorage storage,
-                                              PizzeriaView view) {
+                                              BakerView view) {
         return IntStream.range(0, config.getBakers().size())
                 .mapToObj(i -> (Worker) new Baker(
                         i + 1,
@@ -112,7 +114,7 @@ public class PizzeriaController {
      */
     private static List<Worker> createCouriers(PizzeriaConfig config,
                                                 PizzaStorage storage,
-                                                PizzeriaView view) {
+                                                CourierView view) {
         return IntStream.range(0, config.getCouriers().size())
                 .mapToObj(i -> (Worker) new Courier(
                         i + 1,
@@ -142,26 +144,23 @@ public class PizzeriaController {
     /**
      * Performs a graceful shutdown and collects unfinished orders.
      *
-     * @param generator       generator worker to stop first
-     * @param generatorThread generator thread to join
-     * @param bakers          baker workers
-     * @param bakerThreads    baker threads
-     * @param couriers        courier workers
-     * @param courierThreads  courier threads
+     * <p>Stops the generator first (so no new orders appear), closes the queue
+     * so bakers exit when it drains, then closes storage so couriers exit when it drains.
+     * Each phase finishes by interrupting and joining the corresponding threads.</p>
+     *
+     * @param generatorThread generator thread to interrupt and join
+     * @param bakerThreads    baker threads to interrupt and join
+     * @param courierThreads  courier threads to interrupt and join
      * @param orderQueue      shared order queue
      * @param storage         shared pizza storage
      * @return list of orders that could not be completed
      * @throws InterruptedException if the current thread is interrupted while joining
      */
-    private static List<Order> shutdown(Worker generator,
-                                         Thread generatorThread,
-                                         List<Worker> bakers,
+    private static List<Order> shutdown(Thread generatorThread,
                                          List<Thread> bakerThreads,
-                                         List<Worker> couriers,
                                          List<Thread> courierThreads,
                                          OrderQueue<Order> orderQueue,
                                          PizzaStorage storage) throws InterruptedException {
-        generator.stop();
         generatorThread.interrupt();
         generatorThread.join();
 
@@ -170,11 +169,9 @@ public class PizzeriaController {
         List<Order> unfinished = new ArrayList<>(orderQueue.drainAll());
         unfinished.forEach(o -> o.setState(Order.State.CANCELLED));
 
-        bakers.forEach(Worker::stop);
         interruptAndJoin(bakerThreads);
 
         storage.closeAccepting();
-        couriers.forEach(Worker::stop);
         interruptAndJoin(courierThreads);
 
         List<Order> inStorage = storage.drainAll();

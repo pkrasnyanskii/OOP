@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import lombok.Getter;
 import ru.nsu.krasnyanskii.pizzeria.model.Order;
 import ru.nsu.krasnyanskii.pizzeria.storage.PizzaStorage;
-import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
+import ru.nsu.krasnyanskii.pizzeria.view.CourierView;
 
 /** Worker that picks up batches of pizzas from storage and delivers them. */
 public class Courier implements Worker {
@@ -17,8 +17,7 @@ public class Courier implements Worker {
     private final PizzaStorage storage;
     @Getter
     private final int deliveryTimeMs;
-    private final PizzeriaView view;
-    private volatile boolean running = true;
+    private final CourierView view;
 
     /**
      * Creates a Courier.
@@ -30,7 +29,7 @@ public class Courier implements Worker {
      * @param view           view for all console output
      */
     public Courier(int id, int trunkCapacity, int deliveryTimeMs,
-                   PizzaStorage storage, PizzeriaView view) {
+                   PizzaStorage storage, CourierView view) {
         if (trunkCapacity <= 0) {
             throw new IllegalArgumentException("trunkCapacity must be positive");
         }
@@ -48,7 +47,7 @@ public class Courier implements Worker {
     public void run() {
         view.courierStarted(id, trunkCapacity);
         try {
-            while (running) {
+            while (!Thread.currentThread().isInterrupted()) {
                 List<Order> batch = storage.take(trunkCapacity);
                 if (batch.isEmpty()) {
                     break;
@@ -70,10 +69,5 @@ public class Courier implements Worker {
         return orders.stream()
                 .map(o -> "#" + o.getId())
                 .collect(Collectors.joining(", "));
-    }
-
-    @Override
-    public void stop() {
-        running = false;
     }
 }
