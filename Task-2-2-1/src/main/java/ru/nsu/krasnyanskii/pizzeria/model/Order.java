@@ -2,15 +2,18 @@ package ru.nsu.krasnyanskii.pizzeria.model;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 /** Represents a single pizza order moving through the pipeline. */
+@Getter
 public class Order {
 
     private static final AtomicInteger COUNTER = new AtomicInteger(1);
 
     /** Lifecycle states of an order. */
     @Getter
+    @RequiredArgsConstructor
     public enum State {
         /** Order placed and waiting in queue. */
         QUEUED("queued"),
@@ -29,19 +32,12 @@ public class Order {
 
         /** Human-readable description of this state. */
         private final String description;
-
-        State(String description) {
-            this.description = description;
-        }
-
     }
 
     /** Unique order identifier. */
-    @Getter
     private final int id;
 
     /** Current lifecycle state. */
-    @Getter
     @Setter
     private volatile State state;
 

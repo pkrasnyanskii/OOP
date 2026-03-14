@@ -17,7 +17,7 @@ public class BlockingOrderQueue<T> implements OrderQueue<T> {
 
     private final Deque<T> queue = new ArrayDeque<>();
     private final int capacity;
-    private volatile boolean closed = false;
+    private volatile boolean closed;
 
     /**
      * Creates a bounded blocking queue.
