@@ -1,6 +1,6 @@
 solver,time_ms
-Sequential,1
-ThreadSolver(1),2
-ThreadSolver(2),0
-ThreadSolver(4),1
-ParallelStream,4
+Sequential,3661
+ThreadSolver(1 threads),3685
+ThreadSolver(2 threads),2691
+ThreadSolver(4 threads),1432
+ParallelStream,1166
