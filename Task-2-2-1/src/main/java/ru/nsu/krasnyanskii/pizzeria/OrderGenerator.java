@@ -1,15 +1,18 @@
 package ru.nsu.krasnyanskii.pizzeria;
 
-
 /**
- * Generates orders at a fixed interval until told to stop.
+ * Генерирует заказы с фиксированным интервалом пока не будет остановлен.
  */
 public class OrderGenerator implements Runnable {
+
     private final BlockingOrderQueue<Order> orderQueue;
     private final int intervalMs;
     private volatile boolean running = true;
 
     public OrderGenerator(BlockingOrderQueue<Order> orderQueue, int intervalMs) {
+        if (intervalMs <= 0) {
+            throw new IllegalArgumentException("intervalMs must be positive");
+        }
         this.orderQueue = orderQueue;
         this.intervalMs = intervalMs;
     }
@@ -20,9 +23,11 @@ public class OrderGenerator implements Runnable {
         try {
             while (running && !orderQueue.isClosed()) {
                 Thread.sleep(intervalMs);
-                if (!running || orderQueue.isClosed()) break;
+                if (!running || orderQueue.isClosed()) {
+                    break;
+                }
                 Order order = new Order();
-                order.setState(Order.State.QUEUED);
+                System.out.printf("[OrderGenerator] новый заказ #%d%n", order.getId());
                 orderQueue.put(order);
             }
         } catch (InterruptedException e) {

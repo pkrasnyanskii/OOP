@@ -1,12 +1,16 @@
 package ru.nsu.krasnyanskii.pizzeria;
 
 /**
- * Baker picks orders from the queue, "cooks" them (sleep proportional to speed),
- * then places them into storage.
+ * Пекарь — берёт заказы из очереди, "готовит" (спит cookingTimeMs),
+ * затем кладёт на склад.
+ *
+ * <p>Реализует Runnable — это предпочтительный способ по сравнению
+ * с наследованием от Thread, т.к. не тратит наследование.</p>
  */
 public class Baker implements Runnable {
+
     private final int id;
-    /** Cooking speed in ms per pizza (lower = faster). */
+    /** Время приготовления одной пиццы в мс. */
     private final int cookingTimeMs;
     private final BlockingOrderQueue<Order> orderQueue;
     private final PizzaStorage storage;
@@ -15,6 +19,9 @@ public class Baker implements Runnable {
     public Baker(int id, int cookingTimeMs,
                  BlockingOrderQueue<Order> orderQueue,
                  PizzaStorage storage) {
+        if (cookingTimeMs <= 0) {
+            throw new IllegalArgumentException("cookingTimeMs must be positive");
+        }
         this.id = id;
         this.cookingTimeMs = cookingTimeMs;
         this.orderQueue = orderQueue;
@@ -23,11 +30,13 @@ public class Baker implements Runnable {
 
     @Override
     public void run() {
-        System.out.printf("[Baker-%d] начал работу (скорость готовки: %d мс)%n", id, cookingTimeMs);
+        System.out.printf("[Baker-%d] начал работу (время готовки: %d мс)%n", id, cookingTimeMs);
         try {
             while (running) {
                 Order order = orderQueue.take();
-                if (order == null) break;   // queue closed and empty
+                if (order == null) {
+                    break; // очередь закрыта и пуста
+                }
 
                 order.setState(Order.State.COOKING);
                 System.out.printf("[Baker-%d] готовит заказ #%d%n", id, order.getId());
@@ -35,7 +44,8 @@ public class Baker implements Runnable {
                 Thread.sleep(cookingTimeMs);
 
                 order.setState(Order.State.COOKED);
-                System.out.printf("[Baker-%d] заказ #%d готов, кладёт на склад%n", id, order.getId());
+                System.out.printf("[Baker-%d] заказ #%d готов, кладёт на склад%n",
+                        id, order.getId());
 
                 storage.put(order);
             }
@@ -45,10 +55,16 @@ public class Baker implements Runnable {
         System.out.printf("[Baker-%d] завершил работу%n", id);
     }
 
+    /** Мягкая остановка — пекарь завершит текущий заказ. */
     public void stop() {
         running = false;
     }
 
-    public int getId() { return id; }
-    public int getCookingTimeMs() { return cookingTimeMs; }
+    public int getId() {
+        return id;
+    }
+
+    public int getCookingTimeMs() {
+        return cookingTimeMs;
+    }
 }

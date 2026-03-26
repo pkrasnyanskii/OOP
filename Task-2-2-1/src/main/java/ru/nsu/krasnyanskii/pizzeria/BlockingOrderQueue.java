@@ -1,41 +1,83 @@
 package ru.nsu.krasnyanskii.pizzeria;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
- * Custom blocking queue implemented with intrinsic locks (wait/notifyAll).
- * Does NOT use java.util.concurrent collections.
+ * Custom bounded blocking queue using intrinsic locks (wait / notifyAll).
+ *
+ * <p>Запрещено использовать java.util.concurrent.BlockingQueue — поэтому
+ * реализуем блокировку вручную через synchronized + wait/notifyAll.</p>
+ *
+ * <p>Принцип работы:
+ * <ul>
+ *   <li>put() — если очередь полна, поток ждёт (wait) пока не освободится место</li>
+ *   <li>take() — если очередь пуста, поток ждёт (wait) пока не появится элемент</li>
+ *   <li>close() — сигнализирует всем ждущим потокам что очередь закрыта</li>
+ * </ul>
+ * </p>
  */
 public class BlockingOrderQueue<T> {
+
     private final LinkedList<T> queue = new LinkedList<>();
     private final int capacity;
     private volatile boolean closed = false;
 
     public BlockingOrderQueue(int capacity) {
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("Capacity must be positive");
+        }
         this.capacity = capacity;
     }
 
+    /**
+     * Добавляет элемент. Блокирует если очередь полна.
+     */
     public synchronized void put(T item) throws InterruptedException {
         while (queue.size() >= capacity && !closed) {
-            wait();
+            wait(); // освобождаем монитор и ждём notifyAll
         }
-        if (closed) return;
+        if (closed) {
+            return;
+        }
         queue.addLast(item);
-        notifyAll();
+        notifyAll(); // будим потоки которые ждут в take()
     }
 
     /**
-     * Blocks until an item is available or the queue is closed.
-     * @return item, or null if queue is closed and empty
+     * Забирает элемент. Блокирует если очередь пуста и не закрыта.
+     *
+     * @return элемент или null если очередь закрыта и пуста
      */
     public synchronized T take() throws InterruptedException {
         while (queue.isEmpty() && !closed) {
             wait();
         }
-        if (queue.isEmpty()) return null;
+        if (queue.isEmpty()) {
+            return null; // закрыта и пуста — сигнал для пекаря завершить работу
+        }
         T item = queue.removeFirst();
-        notifyAll();
+        notifyAll(); // будим потоки которые ждут в put()
         return item;
+    }
+
+    /**
+     * Закрывает очередь — все ждущие потоки получат null из take().
+     */
+    public synchronized void close() {
+        closed = true;
+        notifyAll();
+    }
+
+    /**
+     * Забирает все оставшиеся элементы (для сериализации при остановке).
+     */
+    public synchronized List<T> drainAll() {
+        List<T> result = new ArrayList<>(queue);
+        queue.clear();
+        notifyAll();
+        return result;
     }
 
     public synchronized boolean isEmpty() {
@@ -46,20 +88,7 @@ public class BlockingOrderQueue<T> {
         return queue.size();
     }
 
-    public synchronized void close() {
-        closed = true;
-        notifyAll();
-    }
-
     public boolean isClosed() {
         return closed;
-    }
-
-    /** Drain all remaining elements into a list (for serialization). */
-    public synchronized java.util.List<T> drainAll() {
-        java.util.List<T> result = new java.util.ArrayList<>(queue);
-        queue.clear();
-        notifyAll();
-        return result;
     }
 }
