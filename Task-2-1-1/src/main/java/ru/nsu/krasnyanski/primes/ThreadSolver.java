@@ -7,14 +7,6 @@ package ru.nsu.krasnyanski.primes;
  * in a separate thread. Uses {@link MyAtomicBoolean} — a hand-written
  * thread-safe flag — to signal early termination across threads.</p>
  *
- * <p>Three ways to create a thread in Java:
- * <ol>
- *   <li>Extend {@link Thread} and override {@code run()}</li>
- *   <li>Pass a {@link Runnable} to {@code new Thread(runnable)} — used here</li>
- *   <li>Submit a task to {@link java.util.concurrent.ExecutorService}</li>
- * </ol>
- * </p>
- *
  * <p>{@code thread.start()} creates a new OS thread and returns immediately.
  * {@code thread.run()} just calls the method in the current thread — no parallelism.</p>
  */
