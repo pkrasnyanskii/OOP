@@ -72,7 +72,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">PizzeriaConfig</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Конфигурация пиццерии, считываемая из JSON файла.</div>
+<div class="block">Pizzeria configuration loaded from a JSON file.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -87,10 +87,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static class&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="PizzeriaConfig.BakerConfig.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.BakerConfig</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Configuration for a single baker.</div>
+</div>
 <div class="col-first odd-row-color"><code>static class&nbsp;</code></div>
 <div class="col-second odd-row-color"><code><a href="PizzeriaConfig.CourierConfig.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.CourierConfig</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Configuration for a single courier.</div>
+</div>
 </div>
 </section>
 </li>
@@ -105,24 +109,28 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="PizzeriaConfig.BakerConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.BakerConfig</a>&gt;</code></div>
 <div class="col-second even-row-color"><code><a href="#bakers" class="member-name-link">bakers</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">List of baker configurations.</div>
+</div>
 <div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="PizzeriaConfig.CourierConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.CourierConfig</a>&gt;</code></div>
 <div class="col-second odd-row-color"><code><a href="#couriers" class="member-name-link">couriers</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">List of courier configurations.</div>
+</div>
 <div class="col-first even-row-color"><code>int</code></div>
 <div class="col-second even-row-color"><code><a href="#orderIntervalMs" class="member-name-link">orderIntervalMs</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Интервал между новыми заказами (мс).</div>
+<div class="block">Interval between new orders (ms).</div>
 </div>
 <div class="col-first odd-row-color"><code>int</code></div>
 <div class="col-second odd-row-color"><code><a href="#storageCapacity" class="member-name-link">storageCapacity</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">Вместимость склада (в пиццах).</div>
+<div class="block">Storage capacity in pizzas.</div>
 </div>
 <div class="col-first even-row-color"><code>long</code></div>
 <div class="col-second even-row-color"><code><a href="#workDurationMs" class="member-name-link">workDurationMs</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Сколько времени работает пиццерия (мс).</div>
+<div class="block">Total working time of the pizzeria (ms).</div>
 </div>
 </div>
 </section>
@@ -162,33 +170,35 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="storageCapacity">
 <h3>storageCapacity</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">storageCapacity</span></div>
-<div class="block">Вместимость склада (в пиццах).</div>
+<div class="block">Storage capacity in pizzas.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="orderIntervalMs">
 <h3>orderIntervalMs</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">orderIntervalMs</span></div>
-<div class="block">Интервал между новыми заказами (мс).</div>
+<div class="block">Interval between new orders (ms).</div>
 </section>
 </li>
 <li>
 <section class="detail" id="workDurationMs">
 <h3>workDurationMs</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">workDurationMs</span></div>
-<div class="block">Сколько времени работает пиццерия (мс).</div>
+<div class="block">Total working time of the pizzeria (ms).</div>
 </section>
 </li>
 <li>
 <section class="detail" id="bakers">
 <h3>bakers</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="PizzeriaConfig.BakerConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.BakerConfig</a>&gt;</span>&nbsp;<span class="element-name">bakers</span></div>
+<div class="block">List of baker configurations.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="couriers">
 <h3>couriers</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="PizzeriaConfig.CourierConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.CourierConfig</a>&gt;</span>&nbsp;<span class="element-name">couriers</span></div>
+<div class="block">List of courier configurations.</div>
 </section>
 </li>
 </ul>
