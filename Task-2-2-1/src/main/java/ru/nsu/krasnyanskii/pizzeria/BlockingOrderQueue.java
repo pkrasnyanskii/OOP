@@ -22,6 +22,12 @@ public class BlockingOrderQueue<T> {
     private final int capacity;
     private volatile boolean closed = false;
 
+    /**
+     * Creates a new bounded blocking queue.
+     *
+     * @param capacity maximum number of elements; must be positive
+     * @throws IllegalArgumentException if capacity is not positive
+     */
     public BlockingOrderQueue(int capacity) {
         if (capacity <= 0) {
             throw new IllegalArgumentException("Capacity must be positive");

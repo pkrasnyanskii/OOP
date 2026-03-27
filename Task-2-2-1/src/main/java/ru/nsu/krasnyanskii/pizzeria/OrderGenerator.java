@@ -9,6 +9,13 @@ public class OrderGenerator implements Runnable {
     private final int intervalMs;
     private volatile boolean running = true;
 
+    /**
+     * Creates an order generator.
+     *
+     * @param orderQueue queue to put new orders into
+     * @param intervalMs interval between orders in ms; must be positive
+     * @throws IllegalArgumentException if intervalMs is not positive
+     */
     public OrderGenerator(BlockingOrderQueue<Order> orderQueue, int intervalMs) {
         if (intervalMs <= 0) {
             throw new IllegalArgumentException("intervalMs must be positive");

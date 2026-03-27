@@ -18,6 +18,14 @@ public class ConfigLoader {
         // utility class
     }
 
+    /**
+     * Loads pizzeria configuration from a JSON file.
+     *
+     * @param filePath path to the JSON configuration file
+     * @return parsed {@link PizzeriaConfig}
+     * @throws IOException              if the file cannot be read
+     * @throws IllegalArgumentException if a required key is missing
+     */
     public static PizzeriaConfig load(String filePath) throws IOException {
         String json = new String(Files.readAllBytes(Paths.get(filePath)));
         PizzeriaConfig config = new PizzeriaConfig();
