@@ -1,9 +1,10 @@
 package ru.nsu.krasnyanskii.snake;
 
 import org.junit.jupiter.api.Test;
-import ru.nsu.krasnyanskii.snake.model.FoodType;
+import ru.nsu.krasnyanskii.snake.model.entity.FoodType;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FoodTypeTest {
 
@@ -16,12 +17,12 @@ class FoodTypeTest {
     @Test
     void bonusFoodHigherScore() {
         assertTrue(FoodType.BONUS.getScoreValue() > FoodType.NORMAL.getScoreValue());
-        assertEquals(1, FoodType.BONUS.getGrowthDelta()); // still grows
+        assertEquals(1, FoodType.BONUS.getGrowthDelta());
     }
 
     @Test
-    void shrinkFoodNegativeGrowth() {
+    void shrinkFoodNegativeGrowthPositiveScore() {
         assertTrue(FoodType.SHRINK.getGrowthDelta() < 0);
-        assertTrue(FoodType.SHRINK.getScoreValue() > 0); // risk reward
+        assertTrue(FoodType.SHRINK.getScoreValue() > 0);
     }
 }

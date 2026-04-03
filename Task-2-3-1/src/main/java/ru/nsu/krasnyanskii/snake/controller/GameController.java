@@ -3,49 +3,46 @@ package ru.nsu.krasnyanskii.snake.controller;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import ru.nsu.krasnyanskii.snake.model.Direction;
+
 import ru.nsu.krasnyanskii.snake.model.GameConfig;
 import ru.nsu.krasnyanskii.snake.model.GameModel;
 import ru.nsu.krasnyanskii.snake.model.GameState;
+import ru.nsu.krasnyanskii.snake.model.entity.Direction;
 import ru.nsu.krasnyanskii.snake.view.GameBoard;
 
 /**
- * MVC Controller — bridges the model and view.
- * <p>
- * Responsibilities:
- *   <li>Owns the {@link AnimationTimer} game loop.</li>
- *   <li>Translates keyboard events into model direction requests.</li>
- *   <li>Advances the model via {@link GameModel#step()} according to level speed.</li>
- *   <li>Requests the view ({@link GameBoard}) to redraw after each step.</li>
- *   <li>Updates the HUD labels (score, level, length).</li>
- * </p>
+ * MVC Controller — wires the model and the view together.
  *
- * <h3>Why AnimationTimer instead of a Thread?</h3>
- * {@code AnimationTimer} callbacks run on the JavaFX Application Thread,
- * so we never need Platform.runLater() for UI updates. We control the
- * effective tick rate manually using nanosecond timestamps.
+ * <p>Responsibilities:</p>
+ *   Owns the {@link AnimationTimer} that drives the game loop.</li>
+ *   Translates {@link javafx.scene.input.KeyEvent}s into model direction requests and game commands.
+ *   Advances the model via {@link GameModel#step()} at a rate controlled by the current level.
+ *   Triggers a full canvas redraw via {@link GameBoard#render(GameModel)} every animation frame.
+ *   Keeps the HUD labels (score, level, length) up to date after each tick.
+ *
+ * <p>{@link AnimationTimer} is used instead of a background {@link Thread} because its
+ * {@code handle()} callback always runs on the JavaFX Application Thread, eliminating
+ * the need for {@code Platform.runLater()} around every UI update. Tick rate is
+ * managed manually via nanosecond timestamps rather than {@code Thread.sleep()}.</p>
  */
 public class GameController {
 
     @FXML private BorderPane rootPane;
-    @FXML private Label labelScore;
-    @FXML private Label labelLevel;
-    @FXML private Label labelLength;
+    @FXML private Label      labelScore;
+    @FXML private Label      labelLevel;
+    @FXML private Label      labelLength;
 
-    private GameBoard  board;
-    private GameModel  model;
-    private GameConfig config;
+    private GameBoard     board;
+    private GameModel     model;
+    private GameConfig    config;
     private AnimationTimer gameLoop;
-
-    /** Timestamp (ns) of the last game-logic tick. */
-    private long lastTickTime = 0;
+    private long          lastTickNano = 0;
 
     /**
-     * Called by the FXML loader after all @FXML fields are injected.
-     * We create the canvas here (not in FXML) so we can size it to the pane.
+     * Called automatically by the FXML loader after all {@code @FXML} fields are injected.
+     * Sets up the canvas and starts the first game session.
      */
     @FXML
     public void initialize() {
@@ -55,8 +52,7 @@ public class GameController {
     }
 
     private void setupBoard() {
-        double boardPx = 500;
-        board = new GameBoard(boardPx, boardPx);
+        board = new GameBoard(500, 500);
         rootPane.setCenter(board);
 
         rootPane.sceneProperty().addListener((obs, oldScene, newScene) -> {
@@ -69,24 +65,24 @@ public class GameController {
     private void startNewGame() {
         if (gameLoop != null) gameLoop.stop();
 
-        model = new GameModel(config);
-        lastTickTime = 0;
+        model        = new GameModel(config);
+        lastTickNano = 0;
 
         gameLoop = new AnimationTimer() {
             @Override
             public void handle(long nowNano) {
-                long tickMs = config.tickForLevel(model.getLevel());
-                long tickNano = tickMs * 1_000_000L;
+                long tickNano = config.tickForLevel(model.getLevel()) * 1_000_000L;
 
-                if (lastTickTime == 0) {
-                    lastTickTime = nowNano;
+                if (lastTickNano == 0) {
+                    lastTickNano = nowNano;
                 }
 
-                if (nowNano - lastTickTime >= tickNano) {
-                    lastTickTime = nowNano;
+                if (nowNano - lastTickNano >= tickNano) {
+                    lastTickNano = nowNano;
                     model.step();
-                    updateHUD();
+                    updateHud();
                 }
+
                 board.render(model);
             }
         };
@@ -94,26 +90,26 @@ public class GameController {
     }
 
     private void handleKey(KeyEvent event) {
-        KeyCode code = event.getCode();
-        switch (code) {
+        switch (event.getCode()) {
             case UP,    W -> model.requestDirection(Direction.UP);
             case DOWN,  S -> model.requestDirection(Direction.DOWN);
             case LEFT,  A -> model.requestDirection(Direction.LEFT);
             case RIGHT, D -> model.requestDirection(Direction.RIGHT);
             case P, ESCAPE -> model.togglePause();
             case R -> {
-                if (model.getState() != GameState.RUNNING &&
-                    model.getState() != GameState.PAUSED) {
+                if (model.getState() != GameState.RUNNING
+                        && model.getState() != GameState.PAUSED) {
                     startNewGame();
                 }
             }
+            default -> { }
         }
         event.consume();
     }
 
-    private void updateHUD() {
-        labelScore.setText("Score: " + model.getScore());
-        labelLevel.setText("Level: " + model.getLevel());
+    private void updateHud() {
+        labelScore.setText("Score: "   + model.getScore());
+        labelLevel.setText("Level: "   + model.getLevel());
         labelLength.setText("Length: " + model.getSnake().getLength()
                 + " / " + config.winLength());
     }
