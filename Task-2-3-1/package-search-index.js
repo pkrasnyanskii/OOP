@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.krasnyanskii.snake"},{"l":"ru.nsu.krasnyanskii.snake.controller"},{"l":"ru.nsu.krasnyanskii.snake.model"},{"l":"ru.nsu.krasnyanskii.snake.model.board"},{"l":"ru.nsu.krasnyanskii.snake.model.entity"},{"l":"ru.nsu.krasnyanskii.snake.view"}];updateSearchResults();
