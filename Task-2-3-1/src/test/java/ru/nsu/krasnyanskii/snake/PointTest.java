@@ -1,36 +1,18 @@
 package ru.nsu.krasnyanskii.snake;
 
 import org.junit.jupiter.api.Test;
-import ru.nsu.krasnyanskii.snake.model.Direction;
-import ru.nsu.krasnyanskii.snake.model.Point;
+import ru.nsu.krasnyanskii.snake.model.entity.Direction;
+import ru.nsu.krasnyanskii.snake.model.entity.Point;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class PointTest {
 
-    @Test
-    void moveUp() {
-        Point p = new Point(5, 5);
-        assertEquals(new Point(5, 4), p.move(Direction.UP));
-    }
-
-    @Test
-    void moveDown() {
-        Point p = new Point(5, 5);
-        assertEquals(new Point(5, 6), p.move(Direction.DOWN));
-    }
-
-    @Test
-    void moveLeft() {
-        Point p = new Point(5, 5);
-        assertEquals(new Point(4, 5), p.move(Direction.LEFT));
-    }
-
-    @Test
-    void moveRight() {
-        Point p = new Point(5, 5);
-        assertEquals(new Point(6, 5), p.move(Direction.RIGHT));
-    }
+    @Test void moveUp()    { assertEquals(new Point(5, 4), new Point(5, 5).move(Direction.UP)); }
+    @Test void moveDown()  { assertEquals(new Point(5, 6), new Point(5, 5).move(Direction.DOWN)); }
+    @Test void moveLeft()  { assertEquals(new Point(4, 5), new Point(5, 5).move(Direction.LEFT)); }
+    @Test void moveRight() { assertEquals(new Point(6, 5), new Point(5, 5).move(Direction.RIGHT)); }
 
     @Test
     void equalityAndHashCode() {

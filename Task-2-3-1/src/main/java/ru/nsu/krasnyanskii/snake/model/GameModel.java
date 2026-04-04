@@ -7,115 +7,108 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import ru.nsu.krasnyanskii.snake.model.board.BoardBounds;
+import ru.nsu.krasnyanskii.snake.model.entity.Direction;
+import ru.nsu.krasnyanskii.snake.model.entity.Food;
+import ru.nsu.krasnyanskii.snake.model.entity.FoodType;
+import ru.nsu.krasnyanskii.snake.model.entity.Point;
+
 /**
  * Central model for the Snake game.
- * <p>
- * Holds all mutable game state:
- * <ul>
- *   <li>The {@link Snake} body</li>
- *   <li>Active {@link Food} items</li>
- *   <li>Static obstacle positions</li>
- *   <li>Score, level, and {@link GameState}</li>
- * </ul>
- * This class is <em>completely free of JavaFX</em>; it communicates with
- * the controller via plain return values and is testable with pure JUnit.
- * </p>
  *
- * <h3>MVC role</h3>
- * GameModel = <strong>M</strong>. It enforces all game rules and exposes
- * query methods. The controller calls {@link #step()} once per tick,
- * reads the resulting state, and notifies the view to redraw.
+ * <p>Owns all mutable game state: the {@link Snake}, active {@link Food} items,
+ * static obstacle positions, score, level, and the current {@link GameState}.</p>
+ *
+ * <p>This class is completely free of JavaFX. It exposes a single
+ * {@link #step()} method that the controller calls once per game tick, plus
+ * query methods the view uses for rendering.</p>
+ *
+ * <p>Wall behaviour is fully delegated to the {@link BoardBounds} strategy
+ * supplied at construction time. Switching between solid walls and wrap-around
+ * requires no change to this class (open/closed principle).</p>
  */
 public class GameModel {
 
-    // ------------------------------------------------------------------ //
-    //  State                                                               //
-    // ------------------------------------------------------------------ //
+    private final GameConfig  config;
+    private final BoardBounds bounds;
+    private final Random      random = new Random();
 
-    private final GameConfig config;
-    private final Random random = new Random();
-
-    private Snake snake;
-    private Direction currentDirection = Direction.RIGHT;
-    private Direction pendingDirection = Direction.RIGHT;
-
+    private final Snake       snake;
     private final List<Food>  foods     = new ArrayList<>();
     private final Set<Point>  obstacles = new HashSet<>();
 
-    private GameState state = GameState.RUNNING;
-    private int score  = 0;
-    private int level  = 1;
-    /** Accumulated score threshold to trigger next level-up. */
-    private int nextLevelScore = 10;
+    private Direction currentDirection = Direction.RIGHT;
+    private Direction pendingDirection = Direction.RIGHT;
 
-    // ------------------------------------------------------------------ //
-    //  Constructor                                                         //
-    // ------------------------------------------------------------------ //
+    private GameState state          = GameState.RUNNING;
+    private int       score          = 0;
+    private int       level          = 1;
+    private int       nextLevelScore = 10;
 
+    /**
+     * Constructs a new game from the given configuration.
+     *
+     * <p>The appropriate {@link BoardBounds} implementation is created via
+     * {@link GameConfig#createBounds()}, so the caller never needs to
+     * instantiate boundary objects directly.</p>
+     *
+     * @param config the game configuration to use
+     */
     public GameModel(GameConfig config) {
         this.config = config;
+        this.bounds = config.createBounds();
+
         Point start = new Point(config.boardWidth() / 2, config.boardHeight() / 2);
-        snake = new Snake(start);
+        this.snake  = new Snake(start);
+
         spawnObstacles();
         replenishFood();
     }
 
-    // ------------------------------------------------------------------ //
-    //  Game loop step — called by the controller timer                     //
-    // ------------------------------------------------------------------ //
-
     /**
      * Advances the game by one tick.
-     * <ol>
-     *   <li>Apply the buffered direction change.</li>
-     *   <li>Move the snake.</li>
-     *   <li>Check wall/obstacle/self collisions → GAME_OVER.</li>
-     *   <li>Check food consumption → grow + score.</li>
-     *   <li>Check win condition.</li>
-     *   <li>Replenish missing food items.</li>
-     * </ol>
+     *   Apply the buffered direction (reverse moves are silently ignored).
+     *   Compute the new head via {@link BoardBounds#apply(Point)}.
+     *   If the result is {@code null}, the snake hit a solid wall → {@link GameState#GAME_OVER}.
+     *   Check obstacle and self-collision.
+     *   Check food consumption → grow snake and update score.
+     *   Check win condition.
+     *   Replenish food to maintain {@link GameConfig#foodCount()} items on the board.
+     *
+     * <p>This method is a no-op when the state is not {@link GameState#RUNNING}.</p>
      */
     public void step() {
         if (state != GameState.RUNNING) return;
 
-        // Apply buffered direction (cannot reverse)
         if (!pendingDirection.isOpposite(currentDirection)) {
             currentDirection = pendingDirection;
         }
 
-        // Move
-        snake.move(currentDirection);
+        Point rawHead  = snake.getHead().move(currentDirection);
+        Point safeHead = bounds.apply(rawHead);
 
-        // --- Collision checks ---
-        Point head = snake.getHead();
-
-        // Wall collision
-        if (head.x() < 0 || head.x() >= config.boardWidth()
-                || head.y() < 0 || head.y() >= config.boardHeight()) {
+        if (safeHead == null) {
             state = GameState.GAME_OVER;
             return;
         }
 
-        // Obstacle collision
-        if (obstacles.contains(head)) {
+        if (!safeHead.equals(rawHead)) {
+            snake.teleportHead(safeHead);
+        } else {
+            snake.move(currentDirection);
+        }
+
+        if (obstacles.contains(safeHead)) {
             state = GameState.GAME_OVER;
             return;
         }
 
-        // Self-collision
         if (snake.selfCollision()) {
             state = GameState.GAME_OVER;
             return;
         }
 
-        // --- Food consumption ---
-        Food eaten = null;
-        for (Food food : foods) {
-            if (food.getPosition().equals(head)) {
-                eaten = food;
-                break;
-            }
-        }
+        Food eaten = findFoodAt(safeHead);
         if (eaten != null) {
             foods.remove(eaten);
             snake.scheduleGrowth(eaten.getType().getGrowthDelta());
@@ -123,24 +116,21 @@ public class GameModel {
             checkLevelUp();
         }
 
-        // --- Win condition ---
         if (snake.getLength() >= config.winLength()) {
             state = GameState.WIN;
             return;
         }
 
-        // Keep food count constant
         replenishFood();
     }
 
-    // ------------------------------------------------------------------ //
-    //  Direction input                                                     //
-    // ------------------------------------------------------------------ //
-
     /**
-     * Buffers a requested direction change.
-     * The actual change is applied at the start of the next {@link #step()},
-     * preventing the snake from reversing mid-tick.
+     * Buffers a direction change to be applied at the start of the next {@link #step()}.
+     *
+     * <p>Reverse moves (e.g. requesting {@link Direction#LEFT} while moving
+     * {@link Direction#RIGHT}) are silently ignored both here and in {@link #step()}.</p>
+     *
+     * @param dir the requested direction
      */
     public void requestDirection(Direction dir) {
         if (!dir.isOpposite(currentDirection)) {
@@ -148,10 +138,10 @@ public class GameModel {
         }
     }
 
-    // ------------------------------------------------------------------ //
-    //  Pause / resume                                                      //
-    // ------------------------------------------------------------------ //
-
+    /**
+     * Toggles between {@link GameState#RUNNING} and {@link GameState#PAUSED}.
+     * Has no effect when the game is over or won.
+     */
     public void togglePause() {
         if (state == GameState.RUNNING) {
             state = GameState.PAUSED;
@@ -160,17 +150,21 @@ public class GameModel {
         }
     }
 
-    // ------------------------------------------------------------------ //
-    //  Internal helpers                                                    //
-    // ------------------------------------------------------------------ //
+    private Food findFoodAt(Point position) {
+        for (Food food : foods) {
+            if (food.getPosition().equals(position)) {
+                return food;
+            }
+        }
+        return null;
+    }
 
     private void spawnObstacles() {
-        int count = config.obstacleCount();
         Point snakeStart = snake.getHead();
-        while (obstacles.size() < count) {
+        while (obstacles.size() < config.obstacleCount()) {
             Point p = randomFreeCell();
-            // Keep a clear zone of 3 around the spawn point
-            if (Math.abs(p.x() - snakeStart.x()) > 3 || Math.abs(p.y() - snakeStart.y()) > 3) {
+            if (Math.abs(p.x() - snakeStart.x()) > 3
+                    || Math.abs(p.y() - snakeStart.y()) > 3) {
                 obstacles.add(p);
             }
         }
@@ -178,15 +172,10 @@ public class GameModel {
 
     private void replenishFood() {
         while (foods.size() < config.foodCount()) {
-            Point p = randomFreeCell();
-            FoodType type = pickFoodType();
-            foods.add(new Food(p, type));
+            foods.add(new Food(randomFreeCell(), pickFoodType()));
         }
     }
 
-    /**
-     * Weighted random food type: 70% NORMAL, 20% BONUS, 10% SHRINK.
-     */
     private FoodType pickFoodType() {
         int roll = random.nextInt(100);
         if (roll < 70) return FoodType.NORMAL;
@@ -194,9 +183,6 @@ public class GameModel {
         return FoodType.SHRINK;
     }
 
-    /**
-     * Finds a random cell that is not occupied by the snake, food, or obstacles.
-     */
     private Point randomFreeCell() {
         Set<Point> occupied = new HashSet<>(obstacles);
         snake.getBody().forEach(occupied::add);
@@ -204,9 +190,8 @@ public class GameModel {
 
         Point p;
         do {
-            int x = random.nextInt(config.boardWidth());
-            int y = random.nextInt(config.boardHeight());
-            p = new Point(x, y);
+            p = new Point(random.nextInt(config.boardWidth()),
+                          random.nextInt(config.boardHeight()));
         } while (occupied.contains(p));
         return p;
     }
@@ -218,16 +203,27 @@ public class GameModel {
         }
     }
 
-    // ------------------------------------------------------------------ //
-    //  Accessors (read-only views for controller/view)                    //
-    // ------------------------------------------------------------------ //
+    /** @return the snake entity */
+    public Snake       getSnake()     { return snake; }
 
-    public Snake          getSnake()      { return snake; }
-    public List<Food>     getFoods()      { return Collections.unmodifiableList(foods); }
-    public Set<Point>     getObstacles()  { return Collections.unmodifiableSet(obstacles); }
-    public GameState      getState()      { return state; }
-    public int            getScore()      { return score; }
-    public int            getLevel()      { return level; }
-    public GameConfig     getConfig()     { return config; }
-    public Direction      getDirection()  { return currentDirection; }
+    /** @return unmodifiable view of active food items */
+    public List<Food>  getFoods()     { return Collections.unmodifiableList(foods); }
+
+    /** @return unmodifiable view of obstacle cell positions */
+    public Set<Point>  getObstacles() { return Collections.unmodifiableSet(obstacles); }
+
+    /** @return current game lifecycle state */
+    public GameState   getState()     { return state; }
+
+    /** @return accumulated score */
+    public int         getScore()     { return score; }
+
+    /** @return current level (1-based) */
+    public int         getLevel()     { return level; }
+
+    /** @return the configuration this game was started with */
+    public GameConfig  getConfig()    { return config; }
+
+    /** @return the direction the snake is currently travelling */
+    public Direction   getDirection() { return currentDirection; }
 }

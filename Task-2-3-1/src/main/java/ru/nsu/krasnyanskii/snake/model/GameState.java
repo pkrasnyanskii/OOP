@@ -1,17 +1,18 @@
 package ru.nsu.krasnyanskii.snake.model;
 
 /**
- * Represents the lifecycle state of a game session.
- * The controller transitions between these states; the view renders
- * different overlays depending on the current state.
+ * Lifecycle states of a game session.
+ *
+ * <p>The controller drives transitions; the view renders different overlays
+ * depending on the current state.</p>
  */
 public enum GameState {
-    /** Game is active and the game loop is running. */
+    /** Game loop is running and accepting input. */
     RUNNING,
-    /** Game is paused; loop is halted until resumed. */
+    /** Game loop is suspended until the player resumes. */
     PAUSED,
-    /** Snake hit a wall, itself, or an obstacle — player lost. */
+    /** Snake collided with a wall, obstacle, or itself. */
     GAME_OVER,
-    /** Snake reached win length — player won. */
+    /** Snake reached the target length. */
     WIN
 }
