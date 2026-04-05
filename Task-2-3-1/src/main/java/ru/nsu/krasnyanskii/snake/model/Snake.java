@@ -20,7 +20,7 @@ import ru.nsu.krasnyanskii.snake.model.entity.Point;
  * <p>Movement algorithm (per task spec §3):</p>
  *   Prepend the new head position ({@code addFirst}).
  *   If {@code pendingGrowth > 0}, decrement it and skip tail removal — the snake grows.
- *   Otherwise remove the tail segment ({@code removeLast}) — the snake slides.
+ *   Otherwise, remove the tail segment ({@code removeLast}) — the snake slides.
  *
  * <p>This class is completely free of JavaFX and has no knowledge of board boundaries.
  * Boundary logic is handled by {@link ru.nsu.krasnyanskii.snake.model.board.BoardBounds} before
