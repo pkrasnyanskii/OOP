@@ -2,14 +2,9 @@ package ru.nsu.krasnyanskii.snake.model.entity;
 
 /**
  * Classifies food items by their effect on the snake and score.
- *
  *   {@link #NORMAL}  — grows snake by 1, awards 1 point.
  *   {@link #BONUS}   — grows snake by 1, awards 3 points (golden, rare).
  *   {@link #SHRINK}  — shrinks snake by 1, awards 5 points (high-risk reward).
- *
- * <p>Adding a new food variant requires only a new constant here and one new
- * {@code case} in {@link ru.nsu.krasnyanskii.snake.view.GameBoard} — no other classes change
- * (open/closed principle).</p>
  */
 public enum FoodType {
     NORMAL(1,  1),

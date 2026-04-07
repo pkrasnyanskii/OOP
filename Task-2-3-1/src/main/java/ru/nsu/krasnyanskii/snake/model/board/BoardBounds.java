@@ -8,10 +8,6 @@ import ru.nsu.krasnyanskii.snake.model.entity.Point;
  * <p>Two built-in implementations are provided:
  * {@link SolidWallBounds} (classic: hitting a wall kills the snake) and
  * {@link WrapAroundBounds} (toroidal: the snake exits one side and enters the opposite).</p>
- *
- * <p>Adding a third boundary rule (e.g. bouncing) requires only a new implementation
- * of this interface — no changes to {@link ru.nsu.krasnyanskii.snake.model.GameModel} are needed
- * (open/closed principle).</p>
  */
 public interface BoardBounds {
 
