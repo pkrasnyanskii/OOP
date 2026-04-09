@@ -7,6 +7,8 @@ public enum Direction {
     UP, DOWN, LEFT, RIGHT;
 
     /**
+     * Checks whether {@code other} is the direct opposite of this direction.
+     *
      * @param other another direction
      * @return {@code true} if {@code other} is the direct opposite of this direction
      */

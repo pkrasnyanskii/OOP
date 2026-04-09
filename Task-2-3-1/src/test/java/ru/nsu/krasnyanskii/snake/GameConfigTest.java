@@ -1,10 +1,10 @@
 package ru.nsu.krasnyanskii.snake;
 
-import org.junit.jupiter.api.Test;
-import ru.nsu.krasnyanskii.snake.model.GameConfig;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+import ru.nsu.krasnyanskii.snake.model.GameConfig;
 
 class GameConfigTest {
 

@@ -14,6 +14,11 @@ import ru.nsu.krasnyanskii.snake.model.entity.Direction;
 import ru.nsu.krasnyanskii.snake.model.entity.Food;
 import ru.nsu.krasnyanskii.snake.model.entity.Point;
 
+/**
+ * Canvas-based view component that renders the snake game board.
+ *
+ * <p>Supports full and partial redraws to minimise unnecessary canvas operations.</p>
+ */
 public class GameBoard extends Canvas {
 
     private static final Color COLOR_BG_EVEN = Color.web("#1a1a2e");
@@ -35,6 +40,11 @@ public class GameBoard extends Canvas {
         super(width, height);
     }
 
+    /**
+     * Renders the current game state onto the canvas.
+     *
+     * @param model the game model to render
+     */
     public void render(GameModel model) {
         int cols = model.getConfig().boardWidth();
         int rows = model.getConfig().boardHeight();
@@ -68,17 +78,14 @@ public class GameBoard extends Canvas {
     }
 
     private void partialRedraw(GraphicsContext gc, GameModel model) {
-        // Очищаем все позиции, где змейка была в прошлом кадре
         for (Point p : lastSnakePositions) {
             drawBackgroundCell(gc, p);
         }
 
-        // Очищаем позиции еды (на случай съедания)
         for (Food food : model.getFoods()) {
             drawBackgroundCell(gc, food.getPosition());
         }
 
-        // Рисуем актуальную еду и змейку
         drawFood(gc, model.getFoods());
         drawSnake(gc, model);
     }
@@ -160,10 +167,31 @@ public class GameBoard extends Canvas {
         double[] ey = new double[2];
 
         switch (dir) {
-            case RIGHT -> { ex[0] = cx + offset; ey[0] = cy - offset; ex[1] = cx + offset; ey[1] = cy + offset; }
-            case LEFT  -> { ex[0] = cx - offset; ey[0] = cy - offset; ex[1] = cx - offset; ey[1] = cy + offset; }
-            case UP    -> { ex[0] = cx - offset; ey[0] = cy - offset; ex[1] = cx + offset; ey[1] = cy - offset; }
-            case DOWN  -> { ex[0] = cx - offset; ey[0] = cy + offset; ex[1] = cx + offset; ey[1] = cy + offset; }
+            case RIGHT -> {
+                ex[0] = cx + offset;
+                ey[0] = cy - offset;
+                ex[1] = cx + offset;
+                ey[1] = cy + offset;
+            }
+            case LEFT -> {
+                ex[0] = cx - offset;
+                ey[0] = cy - offset;
+                ex[1] = cx - offset;
+                ey[1] = cy + offset;
+            }
+            case UP -> {
+                ex[0] = cx - offset;
+                ey[0] = cy - offset;
+                ex[1] = cx + offset;
+                ey[1] = cy - offset;
+            }
+            case DOWN -> {
+                ex[0] = cx - offset;
+                ey[0] = cy + offset;
+                ex[1] = cx + offset;
+                ey[1] = cy + offset;
+            }
+            default -> { }
         }
 
         gc.setFill(Color.WHITE);
@@ -201,7 +229,8 @@ public class GameBoard extends Canvas {
                 gc.fillText("YOU WIN!", cx, cy - 30);
                 gc.setFill(Color.WHITE);
                 gc.setFont(Font.font("Monospace", 18));
-                gc.fillText("Score: " + model.getScore() + " Level: " + model.getLevel(), cx, cy + 10);
+                gc.fillText("Score: " + model.getScore()
+                        + " Level: " + model.getLevel(), cx, cy + 10);
                 gc.fillText("Press R to restart", cx, cy + 40);
             }
             case PAUSED -> {
@@ -212,6 +241,7 @@ public class GameBoard extends Canvas {
                 gc.setFont(Font.font("Monospace", 16));
                 gc.fillText("Press P to continue", cx, cy + 30);
             }
+            default -> { }
         }
     }
 }

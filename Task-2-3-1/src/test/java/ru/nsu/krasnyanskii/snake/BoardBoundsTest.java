@@ -1,13 +1,14 @@
 package ru.nsu.krasnyanskii.snake;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import org.junit.jupiter.api.Test;
 import ru.nsu.krasnyanskii.snake.model.board.BoardBounds;
 import ru.nsu.krasnyanskii.snake.model.board.SolidWallBounds;
 import ru.nsu.krasnyanskii.snake.model.board.WrapAroundBounds;
 import ru.nsu.krasnyanskii.snake.model.entity.Point;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 class BoardBoundsTest {
 
@@ -21,22 +22,22 @@ class BoardBoundsTest {
     }
 
     @Test
-    void solidWallReturnsNullWhenXNegative() {
+    void solidWallReturnsNullForNegativeX() {
         assertNull(new SolidWallBounds(W, H).apply(new Point(-1, 5)));
     }
 
     @Test
-    void solidWallReturnsNullWhenXOverflow() {
+    void solidWallReturnsNullForOverflowX() {
         assertNull(new SolidWallBounds(W, H).apply(new Point(10, 5)));
     }
 
     @Test
-    void solidWallReturnsNullWhenYNegative() {
+    void solidWallReturnsNullForNegativeY() {
         assertNull(new SolidWallBounds(W, H).apply(new Point(5, -1)));
     }
 
     @Test
-    void solidWallReturnsNullWhenYOverflow() {
+    void solidWallReturnsNullForOverflowY() {
         assertNull(new SolidWallBounds(W, H).apply(new Point(5, 10)));
     }
 
@@ -46,7 +47,7 @@ class BoardBoundsTest {
         for (int x = -2; x <= W + 2; x++) {
             for (int y = -2; y <= H + 2; y++) {
                 Point result = b.apply(new Point(x, y));
-                org.junit.jupiter.api.Assertions.assertNotNull(result);
+                assertNotNull(result);
             }
         }
     }

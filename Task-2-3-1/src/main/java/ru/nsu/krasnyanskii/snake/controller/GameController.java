@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-
 import ru.nsu.krasnyanskii.snake.model.GameConfig;
 import ru.nsu.krasnyanskii.snake.model.GameModel;
 import ru.nsu.krasnyanskii.snake.model.GameState;

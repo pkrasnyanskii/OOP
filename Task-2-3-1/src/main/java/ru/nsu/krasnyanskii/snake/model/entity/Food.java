@@ -16,9 +16,21 @@ public final class Food {
         this.type     = type;
     }
 
-    /** @return the grid cell this food occupies */
-    public Point    getPosition() { return position; }
+    /**
+     * Returns the grid cell this food occupies.
+     *
+     * @return the grid cell this food occupies
+     */
+    public Point getPosition() {
+        return position;
+    }
 
-    /** @return the type that determines score and growth effect */
-    public FoodType getType()     { return type; }
+    /**
+     * Returns the type that determines score and growth effect.
+     *
+     * @return the type that determines score and growth effect
+     */
+    public FoodType getType() {
+        return type;
+    }
 }

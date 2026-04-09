@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./gradlew tasks:*)",
+      "Bash(java -jar /tmp/checkstyle.jar -c \"/c/Users/prkra/OneDrive/Рабочий стол/Study Files/OOP/.github/google_checks.xml\" src/main/java/ru/nsu/krasnyanskii/snake/view/GameBoard.java)"
+    ]
+  }
+}

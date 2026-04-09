@@ -6,7 +6,6 @@ import java.util.Deque;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import ru.nsu.krasnyanskii.snake.model.entity.Direction;
 import ru.nsu.krasnyanskii.snake.model.entity.Point;
 
@@ -89,6 +88,8 @@ public class Snake {
     }
 
     /**
+     * Checks whether the given point overlaps any segment of this snake.
+     *
      * @param point any grid cell
      * @return {@code true} if {@code point} overlaps any segment of this snake
      */
@@ -107,14 +108,32 @@ public class Snake {
         return body.stream().filter(p -> p.equals(head)).count() > 1;
     }
 
-    /** @return the head cell (front of the body) */
-    public Point getHead() { return body.peekFirst(); }
+    /**
+     * Returns the head cell (front of the body).
+     *
+     * @return the head cell (front of the body)
+     */
+    public Point getHead() {
+        return body.peekFirst();
+    }
 
-    /** @return the tail cell (back of the body) */
-    public Point getTail() { return body.peekLast(); }
+    /**
+     * Returns the tail cell (back of the body).
+     *
+     * @return the tail cell (back of the body)
+     */
+    public Point getTail() {
+        return body.peekLast();
+    }
 
-    /** @return the current number of segments */
-    public int getLength() { return body.size(); }
+    /**
+     * Returns the current number of segments.
+     *
+     * @return the current number of segments
+     */
+    public int getLength() {
+        return body.size();
+    }
 
     /**
      * Returns an unmodifiable snapshot of the body in head-first order.

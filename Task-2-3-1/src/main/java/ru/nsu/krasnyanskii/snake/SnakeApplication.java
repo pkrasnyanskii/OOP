@@ -8,7 +8,8 @@ import javafx.stage.Stage;
 /**
  * JavaFX application entry point.
  * <p>
- * Loads the FXML layout, which in turn instantiates the {@link ru.nsu.krasnyanskii.snake.controller.GameController}.
+ * Loads the FXML layout, which in turn instantiates the
+ * {@link ru.nsu.krasnyanskii.snake.controller.GameController}.
  * The controller wires the model and the view together — this class has no
  * game logic of its own (single responsibility principle).
  * </p>

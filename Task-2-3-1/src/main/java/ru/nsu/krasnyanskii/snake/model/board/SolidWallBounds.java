@@ -19,6 +19,8 @@ public final class SolidWallBounds implements BoardBounds {
     }
 
     /**
+     * Applies the solid-wall boundary rule to the given point.
+     *
      * @return {@code null} when {@code point} is outside the board; {@code point} otherwise.
      */
     @Override
