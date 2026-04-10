@@ -99,14 +99,6 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">GameBoard</span>
 <span class="extends-implements">extends javafx.scene.canvas.Canvas</span></div>
-<div class="block">Renders the entire game board onto a JavaFX <code>Canvas</code>.
-
- <p>This class is the <strong>View</strong> in the MVC pattern. It is strictly
- read-only with respect to the model: <a href="#render(ru.nsu.krasnyanskii.snake.model.GameModel)"><code>render(GameModel)</code></a> pulls all data
- it needs through getter methods and never mutates any model object.</p>
-
- <p>The canvas is sized once at construction time. <a href="#render(ru.nsu.krasnyanskii.snake.model.GameModel)"><code>render(GameModel)</code></a> can
- be called every animation frame without recreating any JavaFX nodes.</p></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -141,9 +133,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(double,double)" class="member-name-link">GameBoard</a><wbr>(double&nbsp;width,
  double&nbsp;height)</code></div>
-<div class="col-last even-row-color">
-<div class="block">Creates a board canvas with the given pixel dimensions.</div>
-</div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -160,9 +150,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(ru.nsu.krasnyanskii.snake.model.GameModel)" class="member-name-link">render</a><wbr>(<a href="../model/GameModel.html" title="class in ru.nsu.krasnyanskii.snake.model">GameModel</a>&nbsp;model)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Redraws the entire canvas from the current model state.</div>
-</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -194,12 +182,6 @@ loadScripts(document, 'script');</script>
 <h3>GameBoard</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">GameBoard</span><wbr><span class="parameters">(double&nbsp;width,
  double&nbsp;height)</span></div>
-<div class="block">Creates a board canvas with the given pixel dimensions.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>width</code> - canvas width in pixels</dd>
-<dd><code>height</code> - canvas height in pixels</dd>
-</dl>
 </section>
 </li>
 </ul>
@@ -214,15 +196,6 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="render(ru.nsu.krasnyanskii.snake.model.GameModel)">
 <h3>render</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">render</span><wbr><span class="parameters">(<a href="../model/GameModel.html" title="class in ru.nsu.krasnyanskii.snake.model">GameModel</a>&nbsp;model)</span></div>
-<div class="block">Redraws the entire canvas from the current model state.
-
- <p>Must be called on the JavaFX Application Thread. Overlays for
- <a href="../model/GameState.html#GAME_OVER"><code>GameState.GAME_OVER</code></a>, <a href="../model/GameState.html#WIN"><code>GameState.WIN</code></a>, and
- <a href="../model/GameState.html#PAUSED"><code>GameState.PAUSED</code></a> are drawn on top of the board.</p></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>model</code> - the game model to read from</dd>
-</dl>
 </section>
 </li>
 </ul>

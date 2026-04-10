@@ -95,9 +95,9 @@ loadScripts(document, 'script');</script>
 
  <p>The body is stored in an <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ArrayDeque.html" title="class or interface in java.util" class="external-link"><code>ArrayDeque</code></a>: <code>peekFirst()</code> is the head,
  <code>peekLast()</code> is the tail. A parallel <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/HashSet.html" title="class or interface in java.util" class="external-link"><code>HashSet</code></a> mirrors the deque
- so that self-collision lookups run in O(1) instead of O(n).</p>
+ so that self-collision lookups run in O(1).</p>
 
- <p>Movement algorithm (per task spec §3):</p>
+ <p>Movement algorithm:</p>
    Prepend the new head position (<code>addFirst</code>).
    If <code>pendingGrowth &gt; 0</code>, decrement it and skip tail removal — the snake grows.
    Otherwise, remove the tail segment (<code>removeLast</code>) — the snake slides.
@@ -214,9 +214,10 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="entity/Point.html" title="class in ru.nsu.krasnyanskii.snake.model.entity">Point</a></span>&nbsp;<span class="element-name">move</span><wbr><span class="parameters">(<a href="entity/Direction.html" title="enum class in ru.nsu.krasnyanskii.snake.model.entity">Direction</a>&nbsp;direction)</span></div>
 <div class="block">Moves the snake one step in <code>direction</code>.
 
- <p>The caller is responsible for supplying an already-validated (possibly
- wrapped) head position via <a href="entity/Point.html#move(ru.nsu.krasnyanskii.snake.model.entity.Direction)"><code>Point.move(Direction)</code></a> and
- <a href="board/BoardBounds.html#apply(ru.nsu.krasnyanskii.snake.model.entity.Point)"><code>BoardBounds.apply(Point)</code></a> before calling this method.</p></div>
+ <p>The caller is responsible for supplying an already-validated
+ head position via <a href="entity/Point.html#move(ru.nsu.krasnyanskii.snake.model.entity.Direction)"><code>Point.move(Direction)</code></a> and
+ <a href="board/BoardBounds.html#apply(ru.nsu.krasnyanskii.snake.model.entity.Point)"><code>BoardBounds.apply(Point)</code></a>
+ before calling this method.</p></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>direction</code> - the direction to move</dd>
