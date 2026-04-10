@@ -15,9 +15,9 @@ import ru.nsu.krasnyanskii.snake.model.entity.Point;
  *
  * <p>The body is stored in an {@link ArrayDeque}: {@code peekFirst()} is the head,
  * {@code peekLast()} is the tail. A parallel {@link HashSet} mirrors the deque
- * so that self-collision lookups run in O(1) instead of O(n).</p>
+ * so that self-collision lookups run in O(1).</p>
  *
- * <p>Movement algorithm (per task spec §3):</p>
+ * <p>Movement algorithm:</p>
  *   Prepend the new head position ({@code addFirst}).
  *   If {@code pendingGrowth > 0}, decrement it and skip tail removal — the snake grows.
  *   Otherwise, remove the tail segment ({@code removeLast}) — the snake slides.
@@ -45,9 +45,10 @@ public class Snake {
     /**
      * Moves the snake one step in {@code direction}.
      *
-     * <p>The caller is responsible for supplying an already-validated (possibly
-     * wrapped) head position via {@link Point#move(Direction)} and
-     * {@link ru.nsu.krasnyanskii.snake.model.board.BoardBounds#apply(Point)} before calling this method.</p>
+     * <p>The caller is responsible for supplying an already-validated
+     * head position via {@link Point#move(Direction)} and
+     * {@link ru.nsu.krasnyanskii.snake.model.board.BoardBounds#apply(Point)}
+     * before calling this method.</p>
      *
      * @param direction the direction to move
      * @return the tail {@link Point} that was removed, or {@code null} if the snake grew
