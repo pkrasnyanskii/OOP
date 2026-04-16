@@ -1,11 +1,11 @@
 package ru.nsu.krasnyanskii.snake;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 import ru.nsu.krasnyanskii.snake.model.entity.Food;
 import ru.nsu.krasnyanskii.snake.model.entity.FoodType;
 import ru.nsu.krasnyanskii.snake.model.entity.Point;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FoodTest {
 
@@ -17,6 +17,13 @@ class FoodTest {
         assertEquals(FoodType.NORMAL, food.getType());
     }
 
-    @Test void bonusFoodType()  { assertEquals(FoodType.BONUS,  new Food(new Point(0, 0), FoodType.BONUS).getType()); }
-    @Test void shrinkFoodType() { assertEquals(FoodType.SHRINK, new Food(new Point(1, 1), FoodType.SHRINK).getType()); }
+    @Test
+    void bonusFoodType() {
+        assertEquals(FoodType.BONUS, new Food(new Point(0, 0), FoodType.BONUS).getType());
+    }
+
+    @Test
+    void shrinkFoodType() {
+        assertEquals(FoodType.SHRINK, new Food(new Point(1, 1), FoodType.SHRINK).getType());
+    }
 }

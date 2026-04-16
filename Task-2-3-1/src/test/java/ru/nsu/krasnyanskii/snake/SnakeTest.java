@@ -1,14 +1,14 @@
 package ru.nsu.krasnyanskii.snake;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.krasnyanskii.snake.model.Snake;
 import ru.nsu.krasnyanskii.snake.model.entity.Direction;
 import ru.nsu.krasnyanskii.snake.model.entity.Point;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SnakeTest {
 
@@ -19,8 +19,15 @@ class SnakeTest {
         snake = new Snake(new Point(5, 5));
     }
 
-    @Test void initialLengthIsOne() { assertEquals(1, snake.getLength()); }
-    @Test void initialHead()        { assertEquals(new Point(5, 5), snake.getHead()); }
+    @Test
+    void initialLengthIsOne() {
+        assertEquals(1, snake.getLength());
+    }
+
+    @Test
+    void initialHead() {
+        assertEquals(new Point(5, 5), snake.getHead());
+    }
 
     @Test
     void moveRightAdvancesHead() {
@@ -50,8 +57,15 @@ class SnakeTest {
         assertEquals(4, snake.getLength());
     }
 
-    @Test void bodyContainsHead()             { assertTrue(snake.contains(new Point(5, 5))); }
-    @Test void bodyDoesNotContainArbitraryCell() { assertFalse(snake.contains(new Point(0, 0))); }
+    @Test
+    void bodyContainsHead() {
+        assertTrue(snake.contains(new Point(5, 5)));
+    }
+
+    @Test
+    void bodyDoesNotContainArbitraryCell() {
+        assertFalse(snake.contains(new Point(0, 0)));
+    }
 
     @Test
     void selfCollisionDetected() {

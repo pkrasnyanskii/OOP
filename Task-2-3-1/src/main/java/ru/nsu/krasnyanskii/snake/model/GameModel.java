@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-
 import ru.nsu.krasnyanskii.snake.model.board.BoardBounds;
 import ru.nsu.krasnyanskii.snake.model.entity.Direction;
 import ru.nsu.krasnyanskii.snake.model.entity.Food;
@@ -266,6 +265,8 @@ public class GameModel {
     }
 
     /**
+     * Returns the snake entity.
+     *
      * @return the snake entity
      */
     public Snake getSnake() {
@@ -273,6 +274,8 @@ public class GameModel {
     }
 
     /**
+     * Returns an unmodifiable view of active food items.
+     *
      * @return unmodifiable view of active food items
      */
     public List<Food> getFoods() {
@@ -280,6 +283,8 @@ public class GameModel {
     }
 
     /**
+     * Returns an unmodifiable view of obstacle cell positions.
+     *
      * @return unmodifiable view of obstacle cell positions
      */
     public Set<Point> getObstacles() {
@@ -287,6 +292,8 @@ public class GameModel {
     }
 
     /**
+     * Returns the current game lifecycle state.
+     *
      * @return current game lifecycle state
      */
     public GameState getState() {
@@ -294,6 +301,8 @@ public class GameModel {
     }
 
     /**
+     * Returns the accumulated score.
+     *
      * @return accumulated score
      */
     public int getScore() {
@@ -301,6 +310,8 @@ public class GameModel {
     }
 
     /**
+     * Returns the current level (1-based).
+     *
      * @return current level (1-based)
      */
     public int getLevel() {
@@ -308,6 +319,8 @@ public class GameModel {
     }
 
     /**
+     * Returns the configuration this game was started with.
+     *
      * @return the configuration this game was started with
      */
     public GameConfig getConfig() {
@@ -315,6 +328,8 @@ public class GameModel {
     }
 
     /**
+     * Returns the direction the snake is currently travelling.
+     *
      * @return the direction the snake is currently travelling
      */
     public Direction getDirection() {
