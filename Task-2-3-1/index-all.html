@@ -57,7 +57,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Wraps or validates <code>point</code> according to this boundary rule.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/board/SolidWallBounds.html#apply(ru.nsu.krasnyanskii.snake.model.entity.Point)" class="member-name-link">apply(Point)</a> - Method in class ru.nsu.krasnyanskii.snake.model.board.<a href="ru/nsu/krasnyanskii/snake/model/board/SolidWallBounds.html" title="class in ru.nsu.krasnyanskii.snake.model.board">SolidWallBounds</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Applies the solid-wall boundary rule to the given point.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/board/WrapAroundBounds.html#apply(ru.nsu.krasnyanskii.snake.model.entity.Point)" class="member-name-link">apply(Point)</a> - Method in class ru.nsu.krasnyanskii.snake.model.board.<a href="ru/nsu/krasnyanskii/snake/model/board/WrapAroundBounds.html" title="class in ru.nsu.krasnyanskii.snake.model.board">WrapAroundBounds</a></dt>
 <dd>
 <div class="block">Wraps <code>point</code> using modular arithmetic so it always lands inside the board.</div>
@@ -83,7 +85,9 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:C">C</h2>
 <dl class="index">
 <dt><a href="ru/nsu/krasnyanskii/snake/model/Snake.html#contains(ru.nsu.krasnyanskii.snake.model.entity.Point)" class="member-name-link">contains(Point)</a> - Method in class ru.nsu.krasnyanskii.snake.model.<a href="ru/nsu/krasnyanskii/snake/model/Snake.html" title="class in ru.nsu.krasnyanskii.snake.model">Snake</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Checks whether the given point overlaps any segment of this snake.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/GameConfig.html#createBounds()" class="member-name-link">createBounds()</a> - Method in record class ru.nsu.krasnyanskii.snake.model.<a href="ru/nsu/krasnyanskii/snake/model/GameConfig.html" title="class in ru.nsu.krasnyanskii.snake.model">GameConfig</a></dt>
 <dd>
 <div class="block">Constructs the correct <a href="ru/nsu/krasnyanskii/snake/model/board/BoardBounds.html" title="interface in ru.nsu.krasnyanskii.snake.model.board"><code>BoardBounds</code></a> implementation for this config.</div>
@@ -137,7 +141,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Snake collided with a wall, obstacle, or itself.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/view/GameBoard.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.snake.view">GameBoard</a> - Class in <a href="ru/nsu/krasnyanskii/snake/view/package-summary.html">ru.nsu.krasnyanskii.snake.view</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Canvas-based view component that renders the snake game board.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/view/GameBoard.html#%3Cinit%3E(double,double)" class="member-name-link">GameBoard(double, double)</a> - Constructor for class ru.nsu.krasnyanskii.snake.view.<a href="ru/nsu/krasnyanskii/snake/view/GameBoard.html" title="class in ru.nsu.krasnyanskii.snake.view">GameBoard</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/GameConfig.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.snake.model">GameConfig</a> - Record Class in <a href="ru/nsu/krasnyanskii/snake/model/package-summary.html">ru.nsu.krasnyanskii.snake.model</a></dt>
@@ -171,39 +177,65 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns an unmodifiable snapshot of the body in head-first order.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/GameModel.html#getConfig()" class="member-name-link">getConfig()</a> - Method in class ru.nsu.krasnyanskii.snake.model.<a href="ru/nsu/krasnyanskii/snake/model/GameModel.html" title="class in ru.nsu.krasnyanskii.snake.model">GameModel</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the configuration this game was started with.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/GameModel.html#getDirection()" class="member-name-link">getDirection()</a> - Method in class ru.nsu.krasnyanskii.snake.model.<a href="ru/nsu/krasnyanskii/snake/model/GameModel.html" title="class in ru.nsu.krasnyanskii.snake.model">GameModel</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the direction the snake is currently travelling.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/GameModel.html#getFoods()" class="member-name-link">getFoods()</a> - Method in class ru.nsu.krasnyanskii.snake.model.<a href="ru/nsu/krasnyanskii/snake/model/GameModel.html" title="class in ru.nsu.krasnyanskii.snake.model">GameModel</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns an unmodifiable view of active food items.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/entity/FoodType.html#getGrowthDelta()" class="member-name-link">getGrowthDelta()</a> - Method in enum class ru.nsu.krasnyanskii.snake.model.entity.<a href="ru/nsu/krasnyanskii/snake/model/entity/FoodType.html" title="enum class in ru.nsu.krasnyanskii.snake.model.entity">FoodType</a></dt>
 <dd>
-<div class="block">Change in snake length when this food item is consumed (positive = grow, negative = shrink).</div>
+<div class="block">Returns the change in snake length when this food item is consumed.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/Snake.html#getHead()" class="member-name-link">getHead()</a> - Method in class ru.nsu.krasnyanskii.snake.model.<a href="ru/nsu/krasnyanskii/snake/model/Snake.html" title="class in ru.nsu.krasnyanskii.snake.model">Snake</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the head cell (front of the body).</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/Snake.html#getLength()" class="member-name-link">getLength()</a> - Method in class ru.nsu.krasnyanskii.snake.model.<a href="ru/nsu/krasnyanskii/snake/model/Snake.html" title="class in ru.nsu.krasnyanskii.snake.model">Snake</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the current number of segments.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/GameModel.html#getLevel()" class="member-name-link">getLevel()</a> - Method in class ru.nsu.krasnyanskii.snake.model.<a href="ru/nsu/krasnyanskii/snake/model/GameModel.html" title="class in ru.nsu.krasnyanskii.snake.model">GameModel</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the current level (1-based).</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/GameModel.html#getObstacles()" class="member-name-link">getObstacles()</a> - Method in class ru.nsu.krasnyanskii.snake.model.<a href="ru/nsu/krasnyanskii/snake/model/GameModel.html" title="class in ru.nsu.krasnyanskii.snake.model">GameModel</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns an unmodifiable view of obstacle cell positions.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/entity/Food.html#getPosition()" class="member-name-link">getPosition()</a> - Method in class ru.nsu.krasnyanskii.snake.model.entity.<a href="ru/nsu/krasnyanskii/snake/model/entity/Food.html" title="class in ru.nsu.krasnyanskii.snake.model.entity">Food</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the grid cell this food occupies.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/GameModel.html#getScore()" class="member-name-link">getScore()</a> - Method in class ru.nsu.krasnyanskii.snake.model.<a href="ru/nsu/krasnyanskii/snake/model/GameModel.html" title="class in ru.nsu.krasnyanskii.snake.model">GameModel</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the accumulated score.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/entity/FoodType.html#getScoreValue()" class="member-name-link">getScoreValue()</a> - Method in enum class ru.nsu.krasnyanskii.snake.model.entity.<a href="ru/nsu/krasnyanskii/snake/model/entity/FoodType.html" title="enum class in ru.nsu.krasnyanskii.snake.model.entity">FoodType</a></dt>
 <dd>
-<div class="block">Points awarded when this food item is consumed.</div>
+<div class="block">Returns the points awarded when this food item is consumed.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/GameModel.html#getSnake()" class="member-name-link">getSnake()</a> - Method in class ru.nsu.krasnyanskii.snake.model.<a href="ru/nsu/krasnyanskii/snake/model/GameModel.html" title="class in ru.nsu.krasnyanskii.snake.model">GameModel</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the snake entity.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/GameModel.html#getState()" class="member-name-link">getState()</a> - Method in class ru.nsu.krasnyanskii.snake.model.<a href="ru/nsu/krasnyanskii/snake/model/GameModel.html" title="class in ru.nsu.krasnyanskii.snake.model">GameModel</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the current game lifecycle state.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/Snake.html#getTail()" class="member-name-link">getTail()</a> - Method in class ru.nsu.krasnyanskii.snake.model.<a href="ru/nsu/krasnyanskii/snake/model/Snake.html" title="class in ru.nsu.krasnyanskii.snake.model">Snake</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the tail cell (back of the body).</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/entity/Food.html#getType()" class="member-name-link">getType()</a> - Method in class ru.nsu.krasnyanskii.snake.model.entity.<a href="ru/nsu/krasnyanskii/snake/model/entity/Food.html" title="class in ru.nsu.krasnyanskii.snake.model.entity">Food</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the type that determines score and growth effect.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:H">H</h2>
 <dl class="index">
@@ -227,7 +259,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the value of the <a href="./ru/nsu/krasnyanskii/snake/model/GameConfig.html#param-initialSpeed"><code>initialSpeed</code></a> record component.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/entity/Direction.html#isOpposite(ru.nsu.krasnyanskii.snake.model.entity.Direction)" class="member-name-link">isOpposite(Direction)</a> - Method in enum class ru.nsu.krasnyanskii.snake.model.entity.<a href="ru/nsu/krasnyanskii/snake/model/entity/Direction.html" title="enum class in ru.nsu.krasnyanskii.snake.model.entity">Direction</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Checks whether <code>other</code> is the direct opposite of this direction.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:L">L</h2>
 <dl class="index">
@@ -289,7 +323,9 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:R">R</h2>
 <dl class="index">
 <dt><a href="ru/nsu/krasnyanskii/snake/view/GameBoard.html#render(ru.nsu.krasnyanskii.snake.model.GameModel)" class="member-name-link">render(GameModel)</a> - Method in class ru.nsu.krasnyanskii.snake.view.<a href="ru/nsu/krasnyanskii/snake/view/GameBoard.html" title="class in ru.nsu.krasnyanskii.snake.view">GameBoard</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Renders the current game state onto the canvas.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/snake/model/GameModel.html#requestDirection(ru.nsu.krasnyanskii.snake.model.entity.Direction)" class="member-name-link">requestDirection(Direction)</a> - Method in class ru.nsu.krasnyanskii.snake.model.<a href="ru/nsu/krasnyanskii/snake/model/GameModel.html" title="class in ru.nsu.krasnyanskii.snake.model">GameModel</a></dt>
 <dd>
 <div class="block">Buffers a direction change to be applied at the start of the next <a href="ru/nsu/krasnyanskii/snake/model/GameModel.html#step()"><code>GameModel.step()</code></a>.</div>

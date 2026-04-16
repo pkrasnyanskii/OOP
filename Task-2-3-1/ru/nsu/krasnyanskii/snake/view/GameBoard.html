@@ -99,6 +99,9 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">GameBoard</span>
 <span class="extends-implements">extends javafx.scene.canvas.Canvas</span></div>
+<div class="block">Canvas-based view component that renders the snake game board.
+
+ <p>Supports full and partial redraws to minimise unnecessary canvas operations.</p></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -150,7 +153,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(ru.nsu.krasnyanskii.snake.model.GameModel)" class="member-name-link">render</a><wbr>(<a href="../model/GameModel.html" title="class in ru.nsu.krasnyanskii.snake.model">GameModel</a>&nbsp;model)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Renders the current game state onto the canvas.</div>
+</div>
 </div>
 </div>
 </div>
@@ -196,6 +201,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="render(ru.nsu.krasnyanskii.snake.model.GameModel)">
 <h3>render</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">render</span><wbr><span class="parameters">(<a href="../model/GameModel.html" title="class in ru.nsu.krasnyanskii.snake.model">GameModel</a>&nbsp;model)</span></div>
+<div class="block">Renders the current game state onto the canvas.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>model</code> - the game model to render</dd>
+</dl>
 </section>
 </li>
 </ul>

@@ -136,7 +136,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#contains(ru.nsu.krasnyanskii.snake.model.entity.Point)" class="member-name-link">contains</a><wbr>(<a href="entity/Point.html" title="class in ru.nsu.krasnyanskii.snake.model.entity">Point</a>&nbsp;point)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks whether the given point overlaps any segment of this snake.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="entity/Point.html" title="class in ru.nsu.krasnyanskii.snake.model.entity">Point</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBody()" class="member-name-link">getBody</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -144,13 +146,19 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="entity/Point.html" title="class in ru.nsu.krasnyanskii.snake.model.entity">Point</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getHead()" class="member-name-link">getHead</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the head cell (front of the body).</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLength()" class="member-name-link">getLength</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the current number of segments.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="entity/Point.html" title="class in ru.nsu.krasnyanskii.snake.model.entity">Point</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTail()" class="member-name-link">getTail</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the tail cell (back of the body).</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="entity/Point.html" title="class in ru.nsu.krasnyanskii.snake.model.entity">Point</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#move(ru.nsu.krasnyanskii.snake.model.entity.Direction)" class="member-name-link">move</a><wbr>(<a href="entity/Direction.html" title="enum class in ru.nsu.krasnyanskii.snake.model.entity">Direction</a>&nbsp;direction)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -244,6 +252,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="contains(ru.nsu.krasnyanskii.snake.model.entity.Point)">
 <h3>contains</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">contains</span><wbr><span class="parameters">(<a href="entity/Point.html" title="class in ru.nsu.krasnyanskii.snake.model.entity">Point</a>&nbsp;point)</span></div>
+<div class="block">Checks whether the given point overlaps any segment of this snake.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>point</code> - any grid cell</dd>
@@ -268,6 +277,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getHead()">
 <h3>getHead</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="entity/Point.html" title="class in ru.nsu.krasnyanskii.snake.model.entity">Point</a></span>&nbsp;<span class="element-name">getHead</span>()</div>
+<div class="block">Returns the head cell (front of the body).</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the head cell (front of the body)</dd>
@@ -278,6 +288,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getTail()">
 <h3>getTail</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="entity/Point.html" title="class in ru.nsu.krasnyanskii.snake.model.entity">Point</a></span>&nbsp;<span class="element-name">getTail</span>()</div>
+<div class="block">Returns the tail cell (back of the body).</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the tail cell (back of the body)</dd>
@@ -288,6 +299,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getLength()">
 <h3>getLength</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getLength</span>()</div>
+<div class="block">Returns the current number of segments.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the current number of segments</dd>

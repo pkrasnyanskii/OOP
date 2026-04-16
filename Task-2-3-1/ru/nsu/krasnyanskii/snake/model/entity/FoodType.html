@@ -144,12 +144,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getGrowthDelta()" class="member-name-link">getGrowthDelta</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Change in snake length when this food item is consumed (positive = grow, negative = shrink).</div>
+<div class="block">Returns the change in snake length when this food item is consumed.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getScoreValue()" class="member-name-link">getScoreValue</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Points awarded when this food item is consumed.</div>
+<div class="block">Returns the points awarded when this food item is consumed.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="FoodType.html" title="enum class in ru.nsu.krasnyanskii.snake.model.entity">FoodType</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#valueOf(java.lang.String)" class="member-name-link">valueOf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
@@ -243,14 +243,22 @@ not permitted.)</div>
 <section class="detail" id="getScoreValue()">
 <h3>getScoreValue</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getScoreValue</span>()</div>
-<div class="block">Points awarded when this food item is consumed.</div>
+<div class="block">Returns the points awarded when this food item is consumed.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>points awarded when this food item is consumed</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getGrowthDelta()">
 <h3>getGrowthDelta</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getGrowthDelta</span>()</div>
-<div class="block">Change in snake length when this food item is consumed (positive = grow, negative = shrink).</div>
+<div class="block">Returns the change in snake length when this food item is consumed.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>segments to add (positive) or remove (negative)</dd>
+</dl>
 </section>
 </li>
 </ul>
