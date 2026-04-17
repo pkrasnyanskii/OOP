@@ -1,0 +1,34 @@
+/* ===== Snake Game Stylesheet ===== */
+
+.root {
+    -fx-background-color: #0d0d1a;
+}
+
+/* HUD top bar */
+.hud-bar {
+    -fx-background-color: #1a1a2e;
+    -fx-padding: 10 20 10 20;
+    -fx-border-color: #533483;
+    -fx-border-width: 0 0 2 0;
+}
+
+.hud-label {
+    -fx-text-fill: #4ecca3;
+    -fx-font-family: "Monospace";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* Bottom hint bar */
+.hint-bar {
+    -fx-background-color: #1a1a2e;
+    -fx-padding: 8 20 8 20;
+    -fx-border-color: #533483;
+    -fx-border-width: 2 0 0 0;
+}
+
+.hint-label {
+    -fx-text-fill: #888;
+    -fx-font-family: "Monospace";
+    -fx-font-size: 12px;
+}

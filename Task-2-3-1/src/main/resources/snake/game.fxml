@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ru.nsu.krasnyanskii.snake.controller.GameController"
+            fx:id="rootPane"
+            stylesheets="@game.css"
+            focusTraversable="true"
+            prefWidth="600"
+            prefHeight="600">
+
+    <!-- Top HUD bar -->
+    <top>
+        <HBox styleClass="hud-bar" spacing="30" alignment="CENTER">
+            <Label fx:id="labelScore" text="Score: 0"  styleClass="hud-label"/>
+            <Label fx:id="labelLevel" text="Level: 1"  styleClass="hud-label"/>
+            <Label fx:id="labelLength" text="Length: 1 / 20" styleClass="hud-label"/>
+        </HBox>
+    </top>
+
+    <!-- Center: GameBoard canvas is added programmatically in the controller -->
+
+    <!-- Bottom hint bar -->
+    <bottom>
+        <HBox styleClass="hint-bar" alignment="CENTER" spacing="20">
+            <Label text="WASD / Arrows: move" styleClass="hint-label"/>
+            <Label text="P / ESC: pause"      styleClass="hint-label"/>
+            <Label text="R: restart"           styleClass="hint-label"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
