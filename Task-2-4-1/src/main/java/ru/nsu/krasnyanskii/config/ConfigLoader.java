@@ -2,12 +2,11 @@ package ru.nsu.krasnyanskii.config;
 
 import groovy.lang.Binding;
 import groovy.lang.Script;
+import java.io.File;
+import java.io.IOException;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import ru.nsu.krasnyanskii.dsl.OopCheckerScriptInterface;
 import ru.nsu.krasnyanskii.model.OopCheckerConfig;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Loads configuration from a Groovy DSL file (oop_checker.groovy).
@@ -28,8 +27,9 @@ public class ConfigLoader {
         File scriptFile = new File(directory, SCRIPT_NAME);
         if (!scriptFile.exists()) {
             throw new IOException(
-                "Config file '" + SCRIPT_NAME + "' not found in " + directory.getAbsolutePath()
-                + "\nCreate oop_checker.groovy in the working directory."
+                "Config file '" + SCRIPT_NAME + "' not found in "
+                    + directory.getAbsolutePath()
+                    + "\nCreate oop_checker.groovy in the working directory."
             );
         }
         return loadFromFile(scriptFile);
@@ -45,7 +45,7 @@ public class ConfigLoader {
     public static OopCheckerConfig loadFromFile(File scriptFile) throws IOException {
         try {
             CompilerConfiguration cc = new CompilerConfiguration();
-            // Reference the Groovy class by name to avoid a Java→Groovy compile-time dependency
+            // Reference the Groovy class by name to avoid a Java to Groovy compile-time dependency
             cc.setScriptBaseClass("ru.nsu.krasnyanskii.dsl.OopCheckerScript");
 
             groovy.lang.GroovyShell shell = new groovy.lang.GroovyShell(
@@ -69,7 +69,8 @@ public class ConfigLoader {
         } catch (Exception e) {
             throw new IOException(
                 "Error loading config from " + scriptFile.getAbsolutePath()
-                + ": " + e.getMessage(), e
+                    + ": " + e.getMessage(),
+                e
             );
         }
     }

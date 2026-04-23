@@ -1,19 +1,5 @@
 package ru.nsu.krasnyanskii.checker;
 
-import ru.nsu.krasnyanskii.model.ActivityConfig;
-import ru.nsu.krasnyanskii.model.CheckInstruction;
-import ru.nsu.krasnyanskii.model.Group;
-import ru.nsu.krasnyanskii.model.OopCheckerConfig;
-import ru.nsu.krasnyanskii.model.Student;
-import ru.nsu.krasnyanskii.model.results.BuildStatus;
-import ru.nsu.krasnyanskii.model.results.StudentCheckResult;
-import ru.nsu.krasnyanskii.model.results.TaskCheckResult;
-import ru.nsu.krasnyanskii.model.results.TestCounts;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -24,10 +10,23 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import ru.nsu.krasnyanskii.model.ActivityConfig;
+import ru.nsu.krasnyanskii.model.CheckInstruction;
+import ru.nsu.krasnyanskii.model.Group;
+import ru.nsu.krasnyanskii.model.OopCheckerConfig;
+import ru.nsu.krasnyanskii.model.Student;
+import ru.nsu.krasnyanskii.model.results.BuildStatus;
+import ru.nsu.krasnyanskii.model.results.StudentCheckResult;
+import ru.nsu.krasnyanskii.model.results.TaskCheckResult;
+import ru.nsu.krasnyanskii.model.results.TestCounts;
 
 /**
  * Orchestrates the check pipeline for all students and tasks.
- * Pipeline per task: (1) compile → (2) javadoc + checkstyle → (3) tests.
+ * Pipeline per task: (1) compile, (2) javadoc + checkstyle, (3) tests.
  * Each step is skipped if the previous step failed.
  */
 public class ProjectChecker {
@@ -39,6 +38,12 @@ public class ProjectChecker {
     private final ActivityTracker  activityTracker;
     private final ProcessRunner    processRunner;
 
+    /**
+     * Creates a ProjectChecker with the given config and local repos directory.
+     *
+     * @param config   parsed OOP checker configuration
+     * @param reposDir directory where student repos will be cloned
+     */
     public ProjectChecker(OopCheckerConfig config, Path reposDir) {
         this.config    = config;
         int timeout    = config.getScoringConfig().getTestTimeoutSeconds();
@@ -89,7 +94,8 @@ public class ProjectChecker {
             ActivityConfig activityConfig = config.getActivityConfig();
             if (activityConfig != null) {
                 int    activeWeeks   = activityTracker.countActiveWeeks(repoPath, activityConfig);
-                double activityBonus = activityTracker.calculateActivityBonus(activeWeeks, activityConfig);
+                double activityBonus = activityTracker.calculateActivityBonus(
+                        activeWeeks, activityConfig);
                 studentResult.setActiveWeeks(activeWeeks);
                 studentResult.setActivityBonus(activityBonus);
             }
@@ -133,8 +139,8 @@ public class ProjectChecker {
         result.setStyleStatus(resolveStatus(style));
 
         // Step 3: tests (only if step 2 passed; NOT_AVAILABLE is not a failure)
-        boolean step2Passed = isPassedOrNA(result.getDocsStatus())
-                           && isPassedOrNA(result.getStyleStatus());
+        boolean step2Passed = isPassedOrNa(result.getDocsStatus())
+                && isPassedOrNa(result.getStyleStatus());
 
         if (!step2Passed) {
             log.info("[" + github + "/" + taskId + "] Step 3 skipped: docs/style failed");
@@ -159,12 +165,16 @@ public class ProjectChecker {
     // ── Helpers ───────────────────────────────────────────────────────────────
 
     private BuildStatus resolveStatus(ProcessResult pr) {
-        if (pr.isTimedOut())                return BuildStatus.TIMEOUT;
-        if (isTaskNotFound(pr.getOutput())) return BuildStatus.NOT_AVAILABLE;
+        if (pr.isTimedOut()) {
+            return BuildStatus.TIMEOUT;
+        }
+        if (isTaskNotFound(pr.getOutput())) {
+            return BuildStatus.NOT_AVAILABLE;
+        }
         return pr.isSuccess() ? BuildStatus.SUCCESS : BuildStatus.FAILED;
     }
 
-    private boolean isPassedOrNA(BuildStatus status) {
+    private boolean isPassedOrNa(BuildStatus status) {
         return status == BuildStatus.SUCCESS || status == BuildStatus.NOT_AVAILABLE;
     }
 
@@ -181,7 +191,7 @@ public class ProjectChecker {
 
     private boolean isTaskNotFound(String output) {
         return (output.contains("Task '") && output.contains("' not found"))
-            || (output.contains("Could not find") && output.contains("task"));
+                || (output.contains("Could not find") && output.contains("task"));
     }
 
     /** Parses JUnit XML files from build/test-results and aggregates counts. */
@@ -189,16 +199,19 @@ public class ProjectChecker {
         TestCounts total = new TestCounts();
         Path dir = repoPath.resolve(taskId).resolve("build").resolve("test-results");
 
-        if (!Files.exists(dir)) return total;
+        if (!Files.exists(dir)) {
+            return total;
+        }
 
         try (Stream<Path> stream = Files.walk(dir)) {
             stream.filter(p -> p.toString().endsWith(".xml"))
-                  .forEach(xml -> {
-                      try { total.add(parseXmlFile(xml.toFile())); }
-                      catch (Exception e) {
-                          log.warning("Could not parse " + xml + ": " + e.getMessage());
-                      }
-                  });
+                    .forEach(xml -> {
+                        try {
+                            total.add(parseXmlFile(xml.toFile()));
+                        } catch (Exception e) {
+                            log.warning("Could not parse " + xml + ": " + e.getMessage());
+                        }
+                    });
         } catch (IOException e) {
             log.warning("Could not walk " + dir + ": " + e.getMessage());
         }
@@ -209,8 +222,10 @@ public class ProjectChecker {
         Document doc = DocumentBuilderFactory.newInstance()
                 .newDocumentBuilder().parse(xmlFile);
 
-        NodeList suites   = doc.getElementsByTagName("testsuite");
-        int passed = 0, failed = 0, skipped = 0;
+        NodeList suites = doc.getElementsByTagName("testsuite");
+        int passed = 0;
+        int failed = 0;
+        int skipped = 0;
 
         for (int i = 0; i < suites.getLength(); i++) {
             Element suite  = (Element) suites.item(i);
@@ -227,7 +242,10 @@ public class ProjectChecker {
 
     private int intAttr(Element el, String attr) {
         String v = el.getAttribute(attr);
-        try { return v != null && !v.isEmpty() ? Integer.parseInt(v) : 0; }
-        catch (NumberFormatException e) { return 0; }
+        try {
+            return v != null && !v.isEmpty() ? Integer.parseInt(v) : 0;
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 }

@@ -1,14 +1,13 @@
 package ru.nsu.krasnyanskii.checker;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import ru.nsu.krasnyanskii.model.OopCheckerConfig;
 import ru.nsu.krasnyanskii.model.ScoringConfig;
 import ru.nsu.krasnyanskii.model.Task;
 import ru.nsu.krasnyanskii.model.results.BuildStatus;
 import ru.nsu.krasnyanskii.model.results.TaskCheckResult;
 import ru.nsu.krasnyanskii.model.results.TestCounts;
-
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
 /**
  * Calculates the score for a student's task result.
@@ -32,7 +31,9 @@ public class ScoreCalculator {
      */
     public double calculate(String studentGithub, TaskCheckResult result) {
         Task task = config.findTaskById(result.getTaskId()).orElse(null);
-        if (task == null) return 0.0;
+        if (task == null) {
+            return 0.0;
+        }
 
         ScoringConfig sc = config.getScoringConfig();
 

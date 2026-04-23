@@ -1,11 +1,10 @@
 package ru.nsu.krasnyanskii.model.results;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import lombok.Getter;
+import lombok.Setter;
 
 /** Aggregated check result for one student: task results plus activity bonus. */
 @Getter
@@ -20,6 +19,13 @@ public class StudentCheckResult {
     private int    activeWeeks   = 0;
     private double activityBonus = 0.0;
 
+    /**
+     * Creates a new result container for the given student.
+     *
+     * @param studentGithub student's GitHub login
+     * @param studentName   student's full name
+     * @param groupName     name of the student's group
+     */
     public StudentCheckResult(String studentGithub, String studentName, String groupName) {
         this.studentGithub = studentGithub;
         this.studentName   = studentName;

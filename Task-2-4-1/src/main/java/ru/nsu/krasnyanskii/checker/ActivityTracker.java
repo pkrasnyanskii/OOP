@@ -1,9 +1,8 @@
 package ru.nsu.krasnyanskii.checker;
 
-import ru.nsu.krasnyanskii.model.ActivityConfig;
-
 import java.nio.file.Path;
 import java.util.Set;
+import ru.nsu.krasnyanskii.model.ActivityConfig;
 
 /** Counts active commit weeks and calculates the corresponding bonus. */
 public class ActivityTracker {
@@ -21,10 +20,13 @@ public class ActivityTracker {
      * @return number of active weeks
      */
     public int countActiveWeeks(Path repoPath, ActivityConfig config) {
-        if (config == null || config.getCourseStart() == null || config.getCourseEnd() == null) {
+        if (config == null
+                || config.getCourseStart() == null
+                || config.getCourseEnd() == null) {
             return 0;
         }
-        Set<String> weeks = gitManager.getActiveWeeks(repoPath, config.getCourseStart(), config.getCourseEnd());
+        Set<String> weeks = gitManager.getActiveWeeks(
+                repoPath, config.getCourseStart(), config.getCourseEnd());
         return weeks.size();
     }
 
@@ -36,7 +38,9 @@ public class ActivityTracker {
      * @return bonus points to award
      */
     public double calculateActivityBonus(int activeWeeks, ActivityConfig config) {
-        if (config == null) return 0.0;
+        if (config == null) {
+            return 0.0;
+        }
         if (activeWeeks >= config.getMinActiveWeeks()) {
             return config.getBonusPoints();
         }

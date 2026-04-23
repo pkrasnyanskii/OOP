@@ -81,7 +81,9 @@ public class GitManager {
             ProcessResult result = runner.run(repoPath,
                     "git", "log", "-1", "--format=%ad", "--date=format:%Y-%m-%d", "--", taskSubDir);
             String out = result.getOutput().trim();
-            if (out.isEmpty()) return null;
+            if (out.isEmpty()) {
+                return null;
+            }
             return LocalDate.parse(out, ISO_DATE);
         } catch (Exception e) {
             return null;
@@ -107,7 +109,9 @@ public class GitManager {
                     "--date=format:%Y-%V");
             for (String line : result.getOutput().split("\n")) {
                 String w = line.trim();
-                if (!w.isEmpty()) weeks.add(w);
+                if (!w.isEmpty()) {
+                    weeks.add(w);
+                }
             }
         } catch (Exception e) {
             log.warning("Failed to get active weeks: " + e.getMessage());
@@ -120,13 +124,24 @@ public class GitManager {
             ProcessResult result = runner.run(repoPath,
                     "git", "symbolic-ref", "refs/remotes/origin/HEAD");
             String ref = result.getOutput().trim();
-            if (ref.endsWith("/main"))   return "main";
-            if (ref.endsWith("/master")) return "master";
-        } catch (Exception ignored) {}
+            if (ref.endsWith("/main")) {
+                return "main";
+            }
+            if (ref.endsWith("/master")) {
+                return "master";
+            }
+        } catch (Exception e) {
+            log.fine("Could not read symbolic-ref: " + e.getMessage());
+        }
         try {
-            ProcessResult r = runner.run(repoPath, "git", "show-ref", "--verify", "refs/remotes/origin/main");
-            if (r.isSuccess()) return "main";
-        } catch (Exception ignored) {}
+            ProcessResult r = runner.run(
+                    repoPath, "git", "show-ref", "--verify", "refs/remotes/origin/main");
+            if (r.isSuccess()) {
+                return "main";
+            }
+        } catch (Exception e) {
+            log.fine("Could not verify origin/main: " + e.getMessage());
+        }
         return "master";
     }
 }

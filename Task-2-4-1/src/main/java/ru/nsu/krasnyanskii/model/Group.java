@@ -1,10 +1,9 @@
 package ru.nsu.krasnyanskii.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
 /** A course group containing a list of students. */
 @Getter
@@ -13,7 +12,8 @@ public class Group {
     private String        name;
     private List<Student> students = new ArrayList<>();
 
-    public Group() {}
+    public Group() {
+    }
 
     public Group(String name) {
         this.name = name;

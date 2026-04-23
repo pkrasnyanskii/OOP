@@ -1,8 +1,7 @@
 package ru.nsu.krasnyanskii.model;
 
-import lombok.Data;
-
 import java.time.LocalDate;
+import lombok.Data;
 
 /** Configuration for the weekly activity bonus task. */
 @Data
