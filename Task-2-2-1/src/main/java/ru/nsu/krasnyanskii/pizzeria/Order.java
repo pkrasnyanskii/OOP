@@ -9,12 +9,19 @@ public class Order {
 
     /** Lifecycle states of an order. */
     public enum State {
+        /** Order placed and waiting in queue. */
         QUEUED("queued"),
+        /** Order is being cooked. */
         COOKING("cooking"),
+        /** Order cooked, waiting for storage space. */
         COOKED("cooked, waiting for storage"),
+        /** Order sitting in storage, awaiting courier. */
         IN_STORAGE("in storage"),
+        /** Order picked up and on the way. */
         DELIVERING("delivering"),
+        /** Order successfully delivered. */
         DELIVERED("delivered"),
+        /** Order cancelled and serialized on shutdown. */
         CANCELLED("cancelled (serialized)");
 
         private final String description;
@@ -23,6 +30,11 @@ public class Order {
             this.description = description;
         }
 
+        /**
+         * Returns the human-readable description of this state.
+         *
+         * @return state description
+         */
         public String getDescription() {
             return description;
         }
@@ -50,9 +62,7 @@ public class Order {
         view.orderStateChanged(id, State.QUEUED.getDescription());
     }
 
-    /**
-     * Creates a new order without view (no logging; used in tests).
-     */
+    /** Creates a new order without view; no logging (used in tests). */
     public Order() {
         this.id = COUNTER.getAndIncrement();
         this.state = State.QUEUED;
@@ -60,7 +70,7 @@ public class Order {
     }
 
     /**
-     * Deserialization constructor — restores a saved order, no logging.
+     * Deserialization constructor — restores a saved order without logging.
      *
      * @param id    saved order id
      * @param state saved state
@@ -71,15 +81,29 @@ public class Order {
         this.view = null;
     }
 
+    /**
+     * Returns the unique order identifier.
+     *
+     * @return order id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Returns the current lifecycle state.
+     *
+     * @return current state
+     */
     public State getState() {
         return state;
     }
 
-    /** Updates the state and notifies the view if one is present. */
+    /**
+     * Updates the state and notifies the view if one is present.
+     *
+     * @param state new state
+     */
     public void setState(State state) {
         this.state = state;
         if (view != null) {
