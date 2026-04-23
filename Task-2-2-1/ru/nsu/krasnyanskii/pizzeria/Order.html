@@ -31,6 +31,7 @@ loadScripts(document, 'script');</script>
 <div class="top-nav" id="navbar-top">
 <div class="skip-nav"><a href="#skip-navbar-top" title="Skip navigation links">Skip navigation links</a></div>
 <ul id="navbar-top-firstrow" class="nav-list" title="Navigation">
+<li><a href="../../../../index.html">Overview</a></li>
 <li><a href="package-summary.html">Package</a></li>
 <li class="nav-bar-cell1-rev">Class</li>
 <li><a href="package-tree.html">Tree</a></li>
@@ -76,8 +77,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Order</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Represents a single pizza order moving through the pipeline.
- State changes are logged to stdout as required by the task.</div>
+<div class="block">Represents a single pizza order moving through the pipeline.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -92,7 +92,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static enum&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="Order.State.html" class="type-name-link" title="enum class in ru.nsu.krasnyanskii.pizzeria">Order.State</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Lifecycle states of an order.</div>
+</div>
 </div>
 </section>
 </li>
@@ -105,11 +107,17 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">Order</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a new order without view; no logging (used in tests).</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(int,ru.nsu.krasnyanskii.pizzeria.Order.State)" class="member-name-link">Order</a><wbr>(int&nbsp;id,
  <a href="Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria">Order.State</a>&nbsp;state)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Используется при десериализации незавершённых заказов.</div>
+<div class="block">Deserialization constructor — restores a saved order without logging.</div>
+</div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.krasnyanskii.pizzeria.PizzeriaView)" class="member-name-link">Order</a><wbr>(<a href="PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a>&nbsp;view)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Creates a new order and logs the QUEUED state via view.</div>
 </div>
 </div>
 </section>
@@ -127,15 +135,18 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getId()" class="member-name-link">getId</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the unique order identifier.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria">Order.State</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getState()" class="member-name-link">getState</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the current lifecycle state.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setState(ru.nsu.krasnyanskii.pizzeria.Order.State)" class="member-name-link">setState</a><wbr>(<a href="Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria">Order.State</a>&nbsp;state)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Меняет состояние и сразу печатает: [номер заказа] [состояние]
- как требует условие задачи.</div>
+<div class="block">Updates the state and notifies the view if one is present.</div>
 </div>
 </div>
 </div>
@@ -155,9 +166,21 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="&lt;init&gt;(ru.nsu.krasnyanskii.pizzeria.PizzeriaView)">
+<h3>Order</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Order</span><wbr><span class="parameters">(<a href="PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a>&nbsp;view)</span></div>
+<div class="block">Creates a new order and logs the QUEUED state via view.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>view</code> - view for state-change output</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="&lt;init&gt;()">
 <h3>Order</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Order</span>()</div>
+<div class="block">Creates a new order without view; no logging (used in tests).</div>
 </section>
 </li>
 <li>
@@ -165,7 +188,12 @@ loadScripts(document, 'script');</script>
 <h3>Order</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Order</span><wbr><span class="parameters">(int&nbsp;id,
  <a href="Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria">Order.State</a>&nbsp;state)</span></div>
-<div class="block">Используется при десериализации незавершённых заказов.</div>
+<div class="block">Deserialization constructor — restores a saved order without logging.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>id</code> - saved order id</dd>
+<dd><code>state</code> - saved state</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -180,20 +208,33 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getId()">
 <h3>getId</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getId</span>()</div>
+<div class="block">Returns the unique order identifier.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>order id</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getState()">
 <h3>getState</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria">Order.State</a></span>&nbsp;<span class="element-name">getState</span>()</div>
+<div class="block">Returns the current lifecycle state.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>current state</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setState(ru.nsu.krasnyanskii.pizzeria.Order.State)">
 <h3>setState</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setState</span><wbr><span class="parameters">(<a href="Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria">Order.State</a>&nbsp;state)</span></div>
-<div class="block">Меняет состояние и сразу печатает: [номер заказа] [состояние]
- как требует условие задачи.</div>
+<div class="block">Updates the state and notifies the view if one is present.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>state</code> - new state</dd>
+</dl>
 </section>
 </li>
 </ul>

@@ -31,6 +31,7 @@ loadScripts(document, 'script');</script>
 <div class="top-nav" id="navbar-top">
 <div class="skip-nav"><a href="#skip-navbar-top" title="Skip navigation links">Skip navigation links</a></div>
 <ul id="navbar-top-firstrow" class="nav-list" title="Navigation">
+<li><a href="../../../../index.html">Overview</a></li>
 <li><a href="package-summary.html">Package</a></li>
 <li class="nav-bar-cell1-rev">Class</li>
 <li><a href="package-tree.html">Tree</a></li>
@@ -76,8 +77,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">OrderSerializer</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Сохраняет и загружает незавершённые заказы в простом JSON формате.
- Используется при "полной остановке с сериализацией".</div>
+<div class="block">Saves and loads unfinished orders in a minimal JSON format.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -95,13 +95,14 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Order.html" title="class in ru.nsu.krasnyanskii.pizzeria">Order</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#load(java.lang.String)" class="member-name-link">load</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Загружает заказы из JSON файла (для продолжения на следующий день).</div>
+<div class="block">Loads previously saved orders from a JSON file.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#save(java.util.List,java.lang.String)" class="member-name-link">save</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Order.html" title="class in ru.nsu.krasnyanskii.pizzeria">Order</a>&gt;&nbsp;orders,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#save(java.util.List,java.lang.String,ru.nsu.krasnyanskii.pizzeria.PizzeriaView)" class="member-name-link">save</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Order.html" title="class in ru.nsu.krasnyanskii.pizzeria">Order</a>&gt;&nbsp;orders,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath,
+ <a href="PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a>&nbsp;view)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Сохраняет список заказов в JSON файл.</div>
+<div class="block">Serializes orders to a JSON file.</div>
 </div>
 </div>
 </div>
@@ -121,15 +122,20 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="save(java.util.List,java.lang.String)">
+<section class="detail" id="save(java.util.List,java.lang.String,ru.nsu.krasnyanskii.pizzeria.PizzeriaView)">
 <h3>save</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">save</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Order.html" title="class in ru.nsu.krasnyanskii.pizzeria">Order</a>&gt;&nbsp;orders,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath)</span>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath,
+ <a href="PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a>&nbsp;view)</span>
                  throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
-<div class="block">Сохраняет список заказов в JSON файл.</div>
+<div class="block">Serializes orders to a JSON file.</div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>orders</code> - list of orders to save</dd>
+<dd><code>filePath</code> - destination file path</dd>
+<dd><code>view</code> - view for the confirmation message</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if the file cannot be written</dd>
 </dl>
 </section>
 </li>
@@ -138,10 +144,14 @@ loadScripts(document, 'script');</script>
 <h3>load</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Order.html" title="class in ru.nsu.krasnyanskii.pizzeria">Order</a>&gt;</span>&nbsp;<span class="element-name">load</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath)</span>
                         throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
-<div class="block">Загружает заказы из JSON файла (для продолжения на следующий день).</div>
+<div class="block">Loads previously saved orders from a JSON file.</div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>filePath</code> - source file path</dd>
+<dt>Returns:</dt>
+<dd>list of deserialized orders</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if the file cannot be read</dd>
 </dl>
 </section>
 </li>

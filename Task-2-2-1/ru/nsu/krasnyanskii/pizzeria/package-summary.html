@@ -31,6 +31,7 @@ loadScripts(document, 'script');</script>
 <div class="top-nav" id="navbar-top">
 <div class="skip-nav"><a href="#skip-navbar-top" title="Skip navigation links">Skip navigation links</a></div>
 <ul id="navbar-top-firstrow" class="nav-list" title="Navigation">
+<li><a href="../../../../index.html">Overview</a></li>
 <li class="nav-bar-cell1-rev">Package</li>
 <li>Class</li>
 <li><a href="package-tree.html">Tree</a></li>
@@ -43,7 +44,7 @@ loadScripts(document, 'script');</script>
 <ul class="sub-nav-list">
 <li>Package:&nbsp;</li>
 <li>Description&nbsp;|&nbsp;</li>
-<li>Related Packages&nbsp;|&nbsp;</li>
+<li><a href="#related-package-summary">Related Packages</a>&nbsp;|&nbsp;</li>
 <li><a href="#class-summary">Classes and Interfaces</a></li>
 </ul>
 </div>
@@ -65,63 +66,70 @@ loadScripts(document, 'script');</script>
 <section class="summary">
 <ul class="summary-list">
 <li>
+<div id="related-package-summary">
+<div class="caption"><span>Related Packages</span></div>
+<div class="summary-table two-column-summary">
+<div class="table-header col-first">Package</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><a href="workers/package-summary.html">ru.nsu.krasnyanskii.pizzeria.workers</a></div>
+<div class="col-last even-row-color">&nbsp;</div>
+</div>
+</div>
+</li>
+<li>
 <div id="class-summary">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="class-summary-tab0" role="tab" aria-selected="true" aria-controls="class-summary.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary', 2)" class="active-table-tab">All Classes and Interfaces</button><button id="class-summary-tab2" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab2', 2)" class="table-tab">Classes</button><button id="class-summary-tab3" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab3', 2)" class="table-tab">Enum Classes</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="class-summary-tab0" role="tab" aria-selected="true" aria-controls="class-summary.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary', 2)" class="active-table-tab">All Classes and Interfaces</button><button id="class-summary-tab1" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab1', 2)" class="table-tab">Interfaces</button><button id="class-summary-tab2" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab2', 2)" class="table-tab">Classes</button><button id="class-summary-tab3" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab3', 2)" class="table-tab">Enum Classes</button></div>
 <div id="class-summary.tabpanel" role="tabpanel" aria-labelledby="class-summary-tab0">
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Class</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Baker.html" title="class in ru.nsu.krasnyanskii.pizzeria">Baker</a></div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="BlockingOrderQueue.html" title="class in ru.nsu.krasnyanskii.pizzeria">BlockingOrderQueue</a>&lt;T&gt;</div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Пекарь — берёт заказы из очереди, "готовит" (спит cookingTimeMs),
- затем кладёт на склад.</div>
+<div class="block">Bounded blocking queue backed by intrinsic locks (<code>wait</code>/<code>notifyAll</code>).</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="BlockingOrderQueue.html" title="class in ru.nsu.krasnyanskii.pizzeria">BlockingOrderQueue</a>&lt;T&gt;</div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="ConfigLoader.html" title="class in ru.nsu.krasnyanskii.pizzeria">ConfigLoader</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Custom bounded blocking queue using intrinsic locks (wait / notifyAll).</div>
-</div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="ConfigLoader.html" title="class in ru.nsu.krasnyanskii.pizzeria">ConfigLoader</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Читает JSON конфиг без сторонних библиотек (только стандартная Java).</div>
-</div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Courier.html" title="class in ru.nsu.krasnyanskii.pizzeria">Courier</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Курьер — забирает партию пицц со склада (до trunkCapacity штук)
- и "доставляет" (спит deliveryTimeMs).</div>
+<div class="block">Loads <a href="PizzeriaConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria"><code>PizzeriaConfig</code></a> from a JSON file using Jackson.</div>
 </div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="Order.html" title="class in ru.nsu.krasnyanskii.pizzeria">Order</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Represents a single pizza order moving through the pipeline.</div>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab3"><a href="Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria">Order.State</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab3">&nbsp;</div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="OrderGenerator.html" title="class in ru.nsu.krasnyanskii.pizzeria">OrderGenerator</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Генерирует заказы с фиксированным интервалом пока не будет остановлен.</div>
+<div class="col-last odd-row-color class-summary class-summary-tab3">
+<div class="block">Lifecycle states of an order.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="OrderSerializer.html" title="class in ru.nsu.krasnyanskii.pizzeria">OrderSerializer</a></div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="OrderSerializer.html" title="class in ru.nsu.krasnyanskii.pizzeria">OrderSerializer</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="block">Saves and loads unfinished orders in a minimal JSON format.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="PizzaStorage.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzaStorage</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Сохраняет и загружает незавершённые заказы в простом JSON формате.</div>
+<div class="block">Thread-safe bounded storage for cooked pizzas.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="PizzaStorage.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzaStorage</a></div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Pizzeria.html" title="class in ru.nsu.krasnyanskii.pizzeria">Pizzeria</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Thread-safe bounded storage for finished pizzas.</div>
+<div class="block">Entry point and lifecycle manager for the pizzeria simulation.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Pizzeria.html" title="class in ru.nsu.krasnyanskii.pizzeria">Pizzeria</a></div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="PizzeriaConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Точка входа и менеджер жизненного цикла пиццерии.</div>
-</div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="PizzeriaConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Pizzeria configuration loaded from a JSON file.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="PizzeriaConfig.BakerConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.BakerConfig</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="PizzeriaConfig.BakerConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.BakerConfig</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Configuration for a single baker.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="PizzeriaConfig.CourierConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.CourierConfig</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="PizzeriaConfig.CourierConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.CourierConfig</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Configuration for a single courier.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="block">View layer for the pizzeria simulation.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="Stoppable.html" title="interface in ru.nsu.krasnyanskii.pizzeria">Stoppable</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab1">
+<div class="block">Abstraction for softly stoppable workers.</div>
 </div>
 </div>
 </div>

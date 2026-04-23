@@ -27,6 +27,7 @@ loadScripts(document, 'script');</script>
 <div class="top-nav" id="navbar-top">
 <div class="skip-nav"><a href="#skip-navbar-top" title="Skip navigation links">Skip navigation links</a></div>
 <ul id="navbar-top-firstrow" class="nav-list" title="Navigation">
+<li><a href="../../../../index.html">Overview</a></li>
 <li><a href="package-summary.html">Package</a></li>
 <li class="nav-bar-cell1-rev">Class</li>
 <li><a href="package-tree.html">Tree</a></li>
@@ -39,13 +40,13 @@ loadScripts(document, 'script');</script>
 <ul class="sub-nav-list">
 <li>Summary:&nbsp;</li>
 <li><a href="#nested-class-summary">Nested</a>&nbsp;|&nbsp;</li>
-<li><a href="#field-summary">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor-summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-summary">Method</a></li>
 </ul>
 <ul class="sub-nav-list">
 <li>Detail:&nbsp;</li>
-<li><a href="#field-detail">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor-detail">Constr</a>&nbsp;|&nbsp;</li>
 <li>Method</li>
 </ul>
@@ -72,7 +73,11 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">PizzeriaConfig</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Pizzeria configuration loaded from a JSON file.</div>
+<div class="block">Pizzeria configuration loaded from a JSON file.
+
+ <p>Lombok <code>@Data</code> generates getters, setters, <code>equals</code>, <code>hashCode</code>,
+ and <code>toString</code>. <code>@NoArgsConstructor</code> adds the no-arg constructor required
+ by Jackson for deserialization.</p></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -94,43 +99,6 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color"><code><a href="PizzeriaConfig.CourierConfig.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.CourierConfig</a></code></div>
 <div class="col-last odd-row-color">
 <div class="block">Configuration for a single courier.</div>
-</div>
-</div>
-</section>
-</li>
-<!-- =========== FIELD SUMMARY =========== -->
-<li>
-<section class="field-summary" id="field-summary">
-<h2>Field Summary</h2>
-<div class="caption"><span>Fields</span></div>
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">Modifier and Type</div>
-<div class="table-header col-second">Field</div>
-<div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="PizzeriaConfig.BakerConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.BakerConfig</a>&gt;</code></div>
-<div class="col-second even-row-color"><code><a href="#bakers" class="member-name-link">bakers</a></code></div>
-<div class="col-last even-row-color">
-<div class="block">List of baker configurations.</div>
-</div>
-<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="PizzeriaConfig.CourierConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.CourierConfig</a>&gt;</code></div>
-<div class="col-second odd-row-color"><code><a href="#couriers" class="member-name-link">couriers</a></code></div>
-<div class="col-last odd-row-color">
-<div class="block">List of courier configurations.</div>
-</div>
-<div class="col-first even-row-color"><code>int</code></div>
-<div class="col-second even-row-color"><code><a href="#orderIntervalMs" class="member-name-link">orderIntervalMs</a></code></div>
-<div class="col-last even-row-color">
-<div class="block">Interval between new orders (ms).</div>
-</div>
-<div class="col-first odd-row-color"><code>int</code></div>
-<div class="col-second odd-row-color"><code><a href="#storageCapacity" class="member-name-link">storageCapacity</a></code></div>
-<div class="col-last odd-row-color">
-<div class="block">Storage capacity in pizzas.</div>
-</div>
-<div class="col-first even-row-color"><code>long</code></div>
-<div class="col-second even-row-color"><code><a href="#workDurationMs" class="member-name-link">workDurationMs</a></code></div>
-<div class="col-last even-row-color">
-<div class="block">Total working time of the pizzeria (ms).</div>
 </div>
 </div>
 </section>
@@ -161,49 +129,6 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="details">
 <ul class="details-list">
-<!-- ============ FIELD DETAIL =========== -->
-<li>
-<section class="field-details" id="field-detail">
-<h2>Field Details</h2>
-<ul class="member-list">
-<li>
-<section class="detail" id="storageCapacity">
-<h3>storageCapacity</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">storageCapacity</span></div>
-<div class="block">Storage capacity in pizzas.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="orderIntervalMs">
-<h3>orderIntervalMs</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">orderIntervalMs</span></div>
-<div class="block">Interval between new orders (ms).</div>
-</section>
-</li>
-<li>
-<section class="detail" id="workDurationMs">
-<h3>workDurationMs</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">workDurationMs</span></div>
-<div class="block">Total working time of the pizzeria (ms).</div>
-</section>
-</li>
-<li>
-<section class="detail" id="bakers">
-<h3>bakers</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="PizzeriaConfig.BakerConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.BakerConfig</a>&gt;</span>&nbsp;<span class="element-name">bakers</span></div>
-<div class="block">List of baker configurations.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="couriers">
-<h3>couriers</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="PizzeriaConfig.CourierConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.CourierConfig</a>&gt;</span>&nbsp;<span class="element-name">couriers</span></div>
-<div class="block">List of courier configurations.</div>
-</section>
-</li>
-</ul>
-</section>
-</li>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <li>
 <section class="constructor-details" id="constructor-detail">

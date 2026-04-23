@@ -31,6 +31,7 @@ loadScripts(document, 'script');</script>
 <div class="top-nav" id="navbar-top">
 <div class="skip-nav"><a href="#skip-navbar-top" title="Skip navigation links">Skip navigation links</a></div>
 <ul id="navbar-top-firstrow" class="nav-list" title="Navigation">
+<li><a href="../../../../index.html">Overview</a></li>
 <li><a href="package-summary.html">Package</a></li>
 <li class="nav-bar-cell1-rev">Class</li>
 <li><a href="package-tree.html">Tree</a></li>
@@ -76,8 +77,11 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ConfigLoader</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Читает JSON конфиг без сторонних библиотек (только стандартная Java).
- Использует регулярные выражения для парсинга.</div>
+<div class="block">Loads <a href="PizzeriaConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria"><code>PizzeriaConfig</code></a> from a JSON file using Jackson.
+
+ <p>Jackson maps JSON field names to class fields automatically.
+ Lombok <code>@Data</code> provides the setters Jackson needs; <code>@NoArgsConstructor</code>
+ provides the no-arg constructor required for deserialization.</p></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -95,7 +99,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="PizzeriaConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#load(java.lang.String)" class="member-name-link">load</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Loads pizzeria configuration from a JSON file.</div>
+<div class="block">Loads and validates pizzeria configuration.</div>
 </div>
 </div>
 </div>
@@ -119,15 +123,15 @@ loadScripts(document, 'script');</script>
 <h3>load</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="PizzeriaConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig</a></span>&nbsp;<span class="element-name">load</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath)</span>
                            throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
-<div class="block">Loads pizzeria configuration from a JSON file.</div>
+<div class="block">Loads and validates pizzeria configuration.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>filePath</code> - path to the JSON configuration file</dd>
 <dt>Returns:</dt>
 <dd>parsed <a href="PizzeriaConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria"><code>PizzeriaConfig</code></a></dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if the file cannot be read</dd>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if a required key is missing</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if the file cannot be read or JSON is malformed</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if a required numeric field is missing or zero</dd>
 </dl>
 </section>
 </li>

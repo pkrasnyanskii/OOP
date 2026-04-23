@@ -27,7 +27,8 @@ loadScripts(document, 'script');</script>
 <div class="top-nav" id="navbar-top">
 <div class="skip-nav"><a href="#skip-navbar-top" title="Skip navigation links">Skip navigation links</a></div>
 <ul id="navbar-top-firstrow" class="nav-list" title="Navigation">
-<li><a href="ru/nsu/krasnyanskii/pizzeria/package-summary.html">Package</a></li>
+<li><a href="index.html">Overview</a></li>
+<li>Package</li>
 <li>Class</li>
 <li><a href="overview-tree.html">Tree</a></li>
 <li class="nav-bar-cell1-rev">Index</li>
@@ -48,138 +49,205 @@ loadScripts(document, 'script');</script>
 <div class="header">
 <h1>Index</h1>
 </div>
-<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:Q">Q</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:V">V</a>&nbsp;<a href="#I:W">W</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a>
+<a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:Q">Q</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:V">V</a>&nbsp;<a href="#I:W">W</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a>
+<h2 class="title" id="I:A">A</h2>
+<dl class="index">
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html#allOrdersDone()" class="member-name-link">allOrdersDone()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></dt>
+<dd>
+<div class="block">Prints a confirmation that all orders were completed.</div>
+</dd>
+</dl>
 <h2 class="title" id="I:B">B</h2>
 <dl class="index">
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/Baker.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.pizzeria">Baker</a> - Class in <a href="ru/nsu/krasnyanskii/pizzeria/package-summary.html">ru.nsu.krasnyanskii.pizzeria</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Baker.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Baker</a> - Class in <a href="ru/nsu/krasnyanskii/pizzeria/workers/package-summary.html">ru.nsu.krasnyanskii.pizzeria.workers</a></dt>
 <dd>
-<div class="block">Пекарь — берёт заказы из очереди, "готовит" (спит cookingTimeMs),
- затем кладёт на склад.</div>
+<div class="block">Worker that takes orders from the queue, simulates cooking, and puts pizzas to storage.</div>
 </dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/Baker.html#%3Cinit%3E(int,int,ru.nsu.krasnyanskii.pizzeria.BlockingOrderQueue,ru.nsu.krasnyanskii.pizzeria.PizzaStorage)" class="member-name-link">Baker(int, int, BlockingOrderQueue&lt;Order&gt;, PizzaStorage)</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Baker.html" title="class in ru.nsu.krasnyanskii.pizzeria">Baker</a></dt>
-<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Baker.html#%3Cinit%3E(int,int,ru.nsu.krasnyanskii.pizzeria.BlockingOrderQueue,ru.nsu.krasnyanskii.pizzeria.PizzaStorage,ru.nsu.krasnyanskii.pizzeria.PizzeriaView)" class="member-name-link">Baker(int, int, BlockingOrderQueue&lt;Order&gt;, PizzaStorage, PizzeriaView)</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/Baker.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Baker</a></dt>
+<dd>
+<div class="block">Creates a Baker.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.BakerConfig.html#%3Cinit%3E()" class="member-name-link">BakerConfig()</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.BakerConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.BakerConfig</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.html#bakers" class="member-name-link">bakers</a> - Variable in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html#bakerCooked(int,int)" class="member-name-link">bakerCooked(int, int)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></dt>
 <dd>
-<div class="block">List of baker configurations.</div>
+<div class="block">Prints a baker-cooked message.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html#bakerCooking(int,int)" class="member-name-link">bakerCooking(int, int)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></dt>
+<dd>
+<div class="block">Prints a baker-cooking message.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html#bakerFinished(int)" class="member-name-link">bakerFinished(int)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></dt>
+<dd>
+<div class="block">Prints a baker-finished message.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html#bakerStarted(int,int)" class="member-name-link">bakerStarted(int, int)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></dt>
+<dd>
+<div class="block">Prints a baker-started message.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.pizzeria">BlockingOrderQueue</a>&lt;<a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html" title="type parameter in BlockingOrderQueue">T</a>&gt; - Class in <a href="ru/nsu/krasnyanskii/pizzeria/package-summary.html">ru.nsu.krasnyanskii.pizzeria</a></dt>
 <dd>
-<div class="block">Custom bounded blocking queue using intrinsic locks (wait / notifyAll).</div>
+<div class="block">Bounded blocking queue backed by intrinsic locks (<code>wait</code>/<code>notifyAll</code>).</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html#%3Cinit%3E(int)" class="member-name-link">BlockingOrderQueue(int)</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html" title="class in ru.nsu.krasnyanskii.pizzeria">BlockingOrderQueue</a></dt>
 <dd>
-<div class="block">Creates a new bounded blocking queue.</div>
+<div class="block">Creates a bounded blocking queue.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:C">C</h2>
 <dl class="index">
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/Order.State.html#CANCELLED" class="member-name-link">CANCELLED</a> - Enum constant in enum class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria">Order.State</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Order cancelled and serialized on shutdown.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html#close()" class="member-name-link">close()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html" title="class in ru.nsu.krasnyanskii.pizzeria">BlockingOrderQueue</a></dt>
 <dd>
-<div class="block">Закрывает очередь — все ждущие потоки получат null из take().</div>
+<div class="block">Closes the queue; threads blocked in <code>take()</code> will receive <code>null</code>.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html#closeAccepting()" class="member-name-link">closeAccepting()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzaStorage</a></dt>
 <dd>
-<div class="block">Останавливает приём новых пицц.</div>
+<div class="block">Signals that no more pizzas will be added; couriers will drain and exit.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/ConfigLoader.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.pizzeria">ConfigLoader</a> - Class in <a href="ru/nsu/krasnyanskii/pizzeria/package-summary.html">ru.nsu.krasnyanskii.pizzeria</a></dt>
 <dd>
-<div class="block">Читает JSON конфиг без сторонних библиотек (только стандартная Java).</div>
+<div class="block">Loads <a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria"><code>PizzeriaConfig</code></a> from a JSON file using Jackson.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/Order.State.html#COOKED" class="member-name-link">COOKED</a> - Enum constant in enum class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria">Order.State</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Order cooked, waiting for storage space.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/Order.State.html#COOKING" class="member-name-link">COOKING</a> - Enum constant in enum class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria">Order.State</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.BakerConfig.html#cookingTimeMs" class="member-name-link">cookingTimeMs</a> - Variable in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.BakerConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.BakerConfig</a></dt>
 <dd>
-<div class="block">Cooking time in ms per pizza.</div>
+<div class="block">Order is being cooked.</div>
 </dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/Courier.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.pizzeria">Courier</a> - Class in <a href="ru/nsu/krasnyanskii/pizzeria/package-summary.html">ru.nsu.krasnyanskii.pizzeria</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Courier</a> - Class in <a href="ru/nsu/krasnyanskii/pizzeria/workers/package-summary.html">ru.nsu.krasnyanskii.pizzeria.workers</a></dt>
 <dd>
-<div class="block">Курьер — забирает партию пицц со склада (до trunkCapacity штук)
- и "доставляет" (спит deliveryTimeMs).</div>
+<div class="block">Worker that picks up batches of pizzas from storage and delivers them.</div>
 </dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/Courier.html#%3Cinit%3E(int,int,int,ru.nsu.krasnyanskii.pizzeria.PizzaStorage)" class="member-name-link">Courier(int, int, int, PizzaStorage)</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Courier.html" title="class in ru.nsu.krasnyanskii.pizzeria">Courier</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html#%3Cinit%3E(int,int,int,ru.nsu.krasnyanskii.pizzeria.PizzaStorage,ru.nsu.krasnyanskii.pizzeria.PizzeriaView)" class="member-name-link">Courier(int, int, int, PizzaStorage, PizzeriaView)</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Courier</a></dt>
 <dd>
-<div class="block">Creates a courier.</div>
+<div class="block">Creates a Courier.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.CourierConfig.html#%3Cinit%3E()" class="member-name-link">CourierConfig()</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.CourierConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.CourierConfig</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.html#couriers" class="member-name-link">couriers</a> - Variable in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html#courierDelivered(int,java.lang.String)" class="member-name-link">courierDelivered(int, String)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></dt>
 <dd>
-<div class="block">List of courier configurations.</div>
+<div class="block">Prints a courier-delivered message.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html#courierDelivering(int,int,java.lang.String)" class="member-name-link">courierDelivering(int, int, String)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></dt>
+<dd>
+<div class="block">Prints a courier-delivering message.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html#courierFinished(int)" class="member-name-link">courierFinished(int)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></dt>
+<dd>
+<div class="block">Prints a courier-finished message.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html#courierStarted(int,int)" class="member-name-link">courierStarted(int, int)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></dt>
+<dd>
+<div class="block">Prints a courier-started message.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:D">D</h2>
 <dl class="index">
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/Order.State.html#DELIVERED" class="member-name-link">DELIVERED</a> - Enum constant in enum class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria">Order.State</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/Order.State.html#DELIVERING" class="member-name-link">DELIVERING</a> - Enum constant in enum class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria">Order.State</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.CourierConfig.html#deliveryTimeMs" class="member-name-link">deliveryTimeMs</a> - Variable in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.CourierConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.CourierConfig</a></dt>
 <dd>
-<div class="block">Delivery duration in ms.</div>
+<div class="block">Order successfully delivered.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/Order.State.html#DELIVERING" class="member-name-link">DELIVERING</a> - Enum constant in enum class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria">Order.State</a></dt>
+<dd>
+<div class="block">Order picked up and on the way.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html#drainAll()" class="member-name-link">drainAll()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html" title="class in ru.nsu.krasnyanskii.pizzeria">BlockingOrderQueue</a></dt>
 <dd>
-<div class="block">Забирает все оставшиеся элементы (для сериализации при остановке).</div>
+<div class="block">Drains all remaining elements (used for serialization on shutdown).</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html#drainAll()" class="member-name-link">drainAll()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzaStorage</a></dt>
 <dd>
-<div class="block">Забирает все пиццы (для сериализации).</div>
+<div class="block">Drains all remaining pizzas (used during shutdown serialization).</div>
 </dd>
 </dl>
 <h2 class="title" id="I:G">G</h2>
 <dl class="index">
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/Baker.html#getCookingTimeMs()" class="member-name-link">getCookingTimeMs()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Baker.html" title="class in ru.nsu.krasnyanskii.pizzeria">Baker</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/Courier.html#getDeliveryTimeMs()" class="member-name-link">getDeliveryTimeMs()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Courier.html" title="class in ru.nsu.krasnyanskii.pizzeria">Courier</a></dt>
-<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html#generatorStarted()" class="member-name-link">generatorStarted()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></dt>
+<dd>
+<div class="block">Prints a generator-started message.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html#generatorStopped()" class="member-name-link">generatorStopped()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></dt>
+<dd>
+<div class="block">Prints a generator-stopped message.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Baker.html#getCookingTimeMs()" class="member-name-link">getCookingTimeMs()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/Baker.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Baker</a></dt>
+<dd>
+<div class="block">Returns the cooking duration per pizza in milliseconds.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html#getDeliveryTimeMs()" class="member-name-link">getDeliveryTimeMs()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Courier</a></dt>
+<dd>
+<div class="block">Returns the delivery duration in milliseconds.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/Order.State.html#getDescription()" class="member-name-link">getDescription()</a> - Method in enum class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria">Order.State</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/Baker.html#getId()" class="member-name-link">getId()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Baker.html" title="class in ru.nsu.krasnyanskii.pizzeria">Baker</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/Courier.html#getId()" class="member-name-link">getId()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Courier.html" title="class in ru.nsu.krasnyanskii.pizzeria">Courier</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the human-readable description of this state.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/Order.html#getId()" class="member-name-link">getId()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Order.html" title="class in ru.nsu.krasnyanskii.pizzeria">Order</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the unique order identifier.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Baker.html#getId()" class="member-name-link">getId()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/Baker.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Baker</a></dt>
+<dd>
+<div class="block">Returns the baker identifier.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html#getId()" class="member-name-link">getId()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Courier</a></dt>
+<dd>
+<div class="block">Returns the courier identifier.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/Order.html#getState()" class="member-name-link">getState()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Order.html" title="class in ru.nsu.krasnyanskii.pizzeria">Order</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/Courier.html#getTrunkCapacity()" class="member-name-link">getTrunkCapacity()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Courier.html" title="class in ru.nsu.krasnyanskii.pizzeria">Courier</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the current lifecycle state.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html#getTrunkCapacity()" class="member-name-link">getTrunkCapacity()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Courier</a></dt>
+<dd>
+<div class="block">Returns the maximum number of pizzas this courier can carry per trip.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:I">I</h2>
 <dl class="index">
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/Order.State.html#IN_STORAGE" class="member-name-link">IN_STORAGE</a> - Enum constant in enum class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria">Order.State</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Order sitting in storage, awaiting courier.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html#isAccepting()" class="member-name-link">isAccepting()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzaStorage</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns <code>true</code> if the storage is still accepting new pizzas.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html#isClosed()" class="member-name-link">isClosed()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html" title="class in ru.nsu.krasnyanskii.pizzeria">BlockingOrderQueue</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns <code>true</code> if the queue has been closed.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html#isEmpty()" class="member-name-link">isEmpty()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html" title="class in ru.nsu.krasnyanskii.pizzeria">BlockingOrderQueue</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns <code>true</code> if the queue contains no elements.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html#isEmpty()" class="member-name-link">isEmpty()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzaStorage</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns <code>true</code> if no pizzas are in storage.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:L">L</h2>
 <dl class="index">
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/ConfigLoader.html#load(java.lang.String)" class="member-name-link">load(String)</a> - Static method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/ConfigLoader.html" title="class in ru.nsu.krasnyanskii.pizzeria">ConfigLoader</a></dt>
 <dd>
-<div class="block">Loads pizzeria configuration from a JSON file.</div>
+<div class="block">Loads and validates pizzeria configuration.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/OrderSerializer.html#load(java.lang.String)" class="member-name-link">load(String)</a> - Static method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/OrderSerializer.html" title="class in ru.nsu.krasnyanskii.pizzeria">OrderSerializer</a></dt>
 <dd>
-<div class="block">Загружает заказы из JSON файла (для продолжения на следующий день).</div>
+<div class="block">Loads previously saved orders from a JSON file.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:M">M</h2>
 <dl class="index">
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/Pizzeria.html#main(java.lang.String%5B%5D)" class="member-name-link">main(String[])</a> - Static method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Pizzeria.html" title="class in ru.nsu.krasnyanskii.pizzeria">Pizzeria</a></dt>
 <dd>
-<div class="block">Entry point.</div>
+<div class="block">Starts the pizzeria.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:O">O</h2>
@@ -189,44 +257,60 @@ loadScripts(document, 'script');</script>
 <div class="block">Represents a single pizza order moving through the pipeline.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/Order.html#%3Cinit%3E()" class="member-name-link">Order()</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Order.html" title="class in ru.nsu.krasnyanskii.pizzeria">Order</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a new order without view; no logging (used in tests).</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/Order.html#%3Cinit%3E(int,ru.nsu.krasnyanskii.pizzeria.Order.State)" class="member-name-link">Order(int, Order.State)</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Order.html" title="class in ru.nsu.krasnyanskii.pizzeria">Order</a></dt>
 <dd>
-<div class="block">Используется при десериализации незавершённых заказов.</div>
+<div class="block">Deserialization constructor — restores a saved order without logging.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/Order.html#%3Cinit%3E(ru.nsu.krasnyanskii.pizzeria.PizzeriaView)" class="member-name-link">Order(PizzeriaView)</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Order.html" title="class in ru.nsu.krasnyanskii.pizzeria">Order</a></dt>
+<dd>
+<div class="block">Creates a new order and logs the QUEUED state via view.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/Order.State.html" class="type-name-link" title="enum class in ru.nsu.krasnyanskii.pizzeria">Order.State</a> - Enum Class in <a href="ru/nsu/krasnyanskii/pizzeria/package-summary.html">ru.nsu.krasnyanskii.pizzeria</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/OrderGenerator.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.pizzeria">OrderGenerator</a> - Class in <a href="ru/nsu/krasnyanskii/pizzeria/package-summary.html">ru.nsu.krasnyanskii.pizzeria</a></dt>
 <dd>
-<div class="block">Генерирует заказы с фиксированным интервалом пока не будет остановлен.</div>
+<div class="block">Lifecycle states of an order.</div>
 </dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/OrderGenerator.html#%3Cinit%3E(ru.nsu.krasnyanskii.pizzeria.BlockingOrderQueue,int)" class="member-name-link">OrderGenerator(BlockingOrderQueue&lt;Order&gt;, int)</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/OrderGenerator.html" title="class in ru.nsu.krasnyanskii.pizzeria">OrderGenerator</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html#orderGenerated(int)" class="member-name-link">orderGenerated(int)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></dt>
 <dd>
-<div class="block">Creates an order generator.</div>
+<div class="block">Prints a new-order message.</div>
 </dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.html#orderIntervalMs" class="member-name-link">orderIntervalMs</a> - Variable in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/OrderGenerator.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.pizzeria.workers">OrderGenerator</a> - Class in <a href="ru/nsu/krasnyanskii/pizzeria/workers/package-summary.html">ru.nsu.krasnyanskii.pizzeria.workers</a></dt>
 <dd>
-<div class="block">Interval between new orders (ms).</div>
+<div class="block">Produces new orders at a fixed interval until stopped.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/OrderGenerator.html#%3Cinit%3E(ru.nsu.krasnyanskii.pizzeria.BlockingOrderQueue,int,ru.nsu.krasnyanskii.pizzeria.PizzeriaView)" class="member-name-link">OrderGenerator(BlockingOrderQueue&lt;Order&gt;, int, PizzeriaView)</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/OrderGenerator.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">OrderGenerator</a></dt>
+<dd>
+<div class="block">Creates an OrderGenerator.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/OrderSerializer.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.pizzeria">OrderSerializer</a> - Class in <a href="ru/nsu/krasnyanskii/pizzeria/package-summary.html">ru.nsu.krasnyanskii.pizzeria</a></dt>
 <dd>
-<div class="block">Сохраняет и загружает незавершённые заказы в простом JSON формате.</div>
+<div class="block">Saves and loads unfinished orders in a minimal JSON format.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html#orderStateChanged(int,java.lang.String)" class="member-name-link">orderStateChanged(int, String)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></dt>
+<dd>
+<div class="block">Prints an order state-change message.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:P">P</h2>
 <dl class="index">
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.pizzeria">PizzaStorage</a> - Class in <a href="ru/nsu/krasnyanskii/pizzeria/package-summary.html">ru.nsu.krasnyanskii.pizzeria</a></dt>
 <dd>
-<div class="block">Thread-safe bounded storage for finished pizzas.</div>
+<div class="block">Thread-safe bounded storage for cooked pizzas.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html#%3Cinit%3E(int)" class="member-name-link">PizzaStorage(int)</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzaStorage</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a PizzaStorage.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/Pizzeria.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.pizzeria">Pizzeria</a> - Class in <a href="ru/nsu/krasnyanskii/pizzeria/package-summary.html">ru.nsu.krasnyanskii.pizzeria</a></dt>
 <dd>
-<div class="block">Точка входа и менеджер жизненного цикла пиццерии.</div>
+<div class="block">Entry point and lifecycle manager for the pizzeria simulation.</div>
 </dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/Pizzeria.html#%3Cinit%3E()" class="member-name-link">Pizzeria()</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Pizzeria.html" title="class in ru.nsu.krasnyanskii.pizzeria">Pizzeria</a></dt>
-<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html#pizzeriaClosed()" class="member-name-link">pizzeriaClosed()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></dt>
+<dd>
+<div class="block">Prints the pizzeria-closed banner.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig</a> - Class in <a href="ru/nsu/krasnyanskii/pizzeria/package-summary.html">ru.nsu.krasnyanskii.pizzeria</a></dt>
 <dd>
 <div class="block">Pizzeria configuration loaded from a JSON file.</div>
@@ -241,72 +325,97 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Configuration for a single courier.</div>
 </dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html#pizzeriaOpened()" class="member-name-link">pizzeriaOpened()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></dt>
+<dd>
+<div class="block">Prints the pizzeria-opened banner.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a> - Class in <a href="ru/nsu/krasnyanskii/pizzeria/package-summary.html">ru.nsu.krasnyanskii.pizzeria</a></dt>
+<dd>
+<div class="block">View layer for the pizzeria simulation.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html#%3Cinit%3E()" class="member-name-link">PizzeriaView()</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></dt>
+<dd>
+<div class="block">Creates a PizzeriaView.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html#put(ru.nsu.krasnyanskii.pizzeria.Order)" class="member-name-link">put(Order)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzaStorage</a></dt>
 <dd>
-<div class="block">Пекарь кладёт пиццу на склад.</div>
+<div class="block">Puts a pizza into storage, blocking if full.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html#put(T)" class="member-name-link">put(T)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html" title="class in ru.nsu.krasnyanskii.pizzeria">BlockingOrderQueue</a></dt>
 <dd>
-<div class="block">Добавляет элемент.</div>
+<div class="block">Inserts an element, blocking until space is available.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:Q">Q</h2>
 <dl class="index">
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/Order.State.html#QUEUED" class="member-name-link">QUEUED</a> - Enum constant in enum class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria">Order.State</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Order placed and waiting in queue.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:R">R</h2>
 <dl class="index">
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/package-summary.html">ru.nsu.krasnyanskii.pizzeria</a> - package ru.nsu.krasnyanskii.pizzeria</dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/Baker.html#run()" class="member-name-link">run()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Baker.html" title="class in ru.nsu.krasnyanskii.pizzeria">Baker</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/package-summary.html">ru.nsu.krasnyanskii.pizzeria.workers</a> - package ru.nsu.krasnyanskii.pizzeria.workers</dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/Courier.html#run()" class="member-name-link">run()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Courier.html" title="class in ru.nsu.krasnyanskii.pizzeria">Courier</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Baker.html#run()" class="member-name-link">run()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/Baker.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Baker</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/OrderGenerator.html#run()" class="member-name-link">run()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/OrderGenerator.html" title="class in ru.nsu.krasnyanskii.pizzeria">OrderGenerator</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html#run()" class="member-name-link">run()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Courier</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/OrderGenerator.html#run()" class="member-name-link">run()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/OrderGenerator.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">OrderGenerator</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:S">S</h2>
 <dl class="index">
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/OrderSerializer.html#save(java.util.List,java.lang.String)" class="member-name-link">save(List&lt;Order&gt;, String)</a> - Static method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/OrderSerializer.html" title="class in ru.nsu.krasnyanskii.pizzeria">OrderSerializer</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/OrderSerializer.html#save(java.util.List,java.lang.String,ru.nsu.krasnyanskii.pizzeria.PizzeriaView)" class="member-name-link">save(List&lt;Order&gt;, String, PizzeriaView)</a> - Static method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/OrderSerializer.html" title="class in ru.nsu.krasnyanskii.pizzeria">OrderSerializer</a></dt>
 <dd>
-<div class="block">Сохраняет список заказов в JSON файл.</div>
+<div class="block">Serializes orders to a JSON file.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html#serializerSaved(int,java.lang.String)" class="member-name-link">serializerSaved(int, String)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></dt>
+<dd>
+<div class="block">Prints a serializer-saved confirmation.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/Order.html#setState(ru.nsu.krasnyanskii.pizzeria.Order.State)" class="member-name-link">setState(Order.State)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Order.html" title="class in ru.nsu.krasnyanskii.pizzeria">Order</a></dt>
 <dd>
-<div class="block">Меняет состояние и сразу печатает: [номер заказа] [состояние]
- как требует условие задачи.</div>
+<div class="block">Updates the state and notifies the view if one is present.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html#shutdownStarted()" class="member-name-link">shutdownStarted()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></dt>
+<dd>
+<div class="block">Prints the shutdown-started banner.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html#size()" class="member-name-link">size()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html" title="class in ru.nsu.krasnyanskii.pizzeria">BlockingOrderQueue</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html#size()" class="member-name-link">size()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzaStorage</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/Baker.html#stop()" class="member-name-link">stop()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Baker.html" title="class in ru.nsu.krasnyanskii.pizzeria">Baker</a></dt>
 <dd>
-<div class="block">Мягкая остановка — пекарь завершит текущий заказ.</div>
+<div class="block">Returns the number of elements currently in the queue.</div>
 </dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/Courier.html#stop()" class="member-name-link">stop()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Courier.html" title="class in ru.nsu.krasnyanskii.pizzeria">Courier</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/OrderGenerator.html#stop()" class="member-name-link">stop()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/OrderGenerator.html" title="class in ru.nsu.krasnyanskii.pizzeria">OrderGenerator</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.html#storageCapacity" class="member-name-link">storageCapacity</a> - Variable in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html#size()" class="member-name-link">size()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzaStorage</a></dt>
 <dd>
-<div class="block">Storage capacity in pizzas.</div>
+<div class="block">Returns the number of pizzas currently in storage.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/Stoppable.html#stop()" class="member-name-link">stop()</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/Stoppable.html" title="interface in ru.nsu.krasnyanskii.pizzeria">Stoppable</a></dt>
+<dd>
+<div class="block">Requests the worker to finish after completing its current task.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Baker.html#stop()" class="member-name-link">stop()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/Baker.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Baker</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html#stop()" class="member-name-link">stop()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Courier</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/OrderGenerator.html#stop()" class="member-name-link">stop()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/OrderGenerator.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">OrderGenerator</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/Stoppable.html" class="type-name-link" title="interface in ru.nsu.krasnyanskii.pizzeria">Stoppable</a> - Interface in <a href="ru/nsu/krasnyanskii/pizzeria/package-summary.html">ru.nsu.krasnyanskii.pizzeria</a></dt>
+<dd>
+<div class="block">Abstraction for softly stoppable workers.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:T">T</h2>
 <dl class="index">
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html#take()" class="member-name-link">take()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html" title="class in ru.nsu.krasnyanskii.pizzeria">BlockingOrderQueue</a></dt>
 <dd>
-<div class="block">Забирает элемент.</div>
+<div class="block">Retrieves and removes the head element, blocking until one is available.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html#take(int)" class="member-name-link">take(int)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzaStorage</a></dt>
 <dd>
-<div class="block">Курьер забирает до maxCount пицц.</div>
-</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.CourierConfig.html#trunkCapacity" class="member-name-link">trunkCapacity</a> - Variable in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.CourierConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig.CourierConfig</a></dt>
-<dd>
-<div class="block">Max number of pizzas per delivery.</div>
+<div class="block">Takes up to <code>maxCount</code> pizzas, blocking while storage is empty and open.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:V">V</h2>
@@ -323,12 +432,12 @@ the order they are declared.</div>
 </dl>
 <h2 class="title" id="I:W">W</h2>
 <dl class="index">
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.html#workDurationMs" class="member-name-link">workDurationMs</a> - Variable in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaConfig</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html#workingFor(long)" class="member-name-link">workingFor(long)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.<a href="ru/nsu/krasnyanskii/pizzeria/PizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzeriaView</a></dt>
 <dd>
-<div class="block">Total working time of the pizzeria (ms).</div>
+<div class="block">Prints how long the pizzeria will run.</div>
 </dd>
 </dl>
-<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:Q">Q</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:V">V</a>&nbsp;<a href="#I:W">W</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a></main>
+<a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:Q">Q</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:V">V</a>&nbsp;<a href="#I:W">W</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a></main>
 </div>
 </div>
 </body>

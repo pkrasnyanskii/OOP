@@ -31,6 +31,7 @@ loadScripts(document, 'script');</script>
 <div class="top-nav" id="navbar-top">
 <div class="skip-nav"><a href="#skip-navbar-top" title="Skip navigation links">Skip navigation links</a></div>
 <ul id="navbar-top-firstrow" class="nav-list" title="Navigation">
+<li><a href="../../../../index.html">Overview</a></li>
 <li><a href="package-summary.html">Package</a></li>
 <li class="nav-bar-cell1-rev">Class</li>
 <li><a href="package-tree.html">Tree</a></li>
@@ -76,11 +77,10 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">PizzaStorage</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Thread-safe bounded storage for finished pizzas.
+<div class="block">Thread-safe bounded storage for cooked pizzas.
 
- <p>Пекари кладут пиццы, курьеры забирают партиями.
- Реализация через intrinsic lock (synchronized + wait/notifyAll),
- без java.util.concurrent коллекций.</p></div>
+ <p>Uses intrinsic lock (<code>synchronized</code> + <code>wait</code>/<code>notifyAll</code>)
+ without <code>java.util.concurrent</code> collections.</p></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -93,7 +93,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int)" class="member-name-link">PizzaStorage</a><wbr>(int&nbsp;capacity)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a PizzaStorage.</div>
+</div>
 </div>
 </section>
 </li>
@@ -111,31 +113,37 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#closeAccepting()" class="member-name-link">closeAccepting</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Останавливает приём новых пицц.</div>
+<div class="block">Signals that no more pizzas will be added; couriers will drain and exit.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Order.html" title="class in ru.nsu.krasnyanskii.pizzeria">Order</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#drainAll()" class="member-name-link">drainAll</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Забирает все пиццы (для сериализации).</div>
+<div class="block">Drains all remaining pizzas (used during shutdown serialization).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isAccepting()" class="member-name-link">isAccepting</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if the storage is still accepting new pizzas.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isEmpty()" class="member-name-link">isEmpty</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if no pizzas are in storage.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#put(ru.nsu.krasnyanskii.pizzeria.Order)" class="member-name-link">put</a><wbr>(<a href="Order.html" title="class in ru.nsu.krasnyanskii.pizzeria">Order</a>&nbsp;order)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Пекарь кладёт пиццу на склад.</div>
+<div class="block">Puts a pizza into storage, blocking if full.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#size()" class="member-name-link">size</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the number of pizzas currently in storage.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Order.html" title="class in ru.nsu.krasnyanskii.pizzeria">Order</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#take(int)" class="member-name-link">take</a><wbr>(int&nbsp;maxCount)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Курьер забирает до maxCount пицц.</div>
+<div class="block">Takes up to <code>maxCount</code> pizzas, blocking while storage is empty and open.</div>
 </div>
 </div>
 </div>
@@ -158,6 +166,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(int)">
 <h3>PizzaStorage</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">PizzaStorage</span><wbr><span class="parameters">(int&nbsp;capacity)</span></div>
+<div class="block">Creates a PizzaStorage.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>capacity</code> - max number of pizzas; must be positive</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if capacity is not positive</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -173,11 +188,12 @@ loadScripts(document, 'script');</script>
 <h3>put</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">put</span><wbr><span class="parameters">(<a href="Order.html" title="class in ru.nsu.krasnyanskii.pizzeria">Order</a>&nbsp;order)</span>
          throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
-<div class="block">Пекарь кладёт пиццу на склад.
- Блокирует если склад полон — ждёт пока курьер не заберёт партию.</div>
+<div class="block">Puts a pizza into storage, blocking if full.</div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>order</code> - cooked order to store</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code> - if the thread is interrupted while waiting</dd>
 </dl>
 </section>
 </li>
@@ -186,13 +202,14 @@ loadScripts(document, 'script');</script>
 <h3>take</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Order.html" title="class in ru.nsu.krasnyanskii.pizzeria">Order</a>&gt;</span>&nbsp;<span class="element-name">take</span><wbr><span class="parameters">(int&nbsp;maxCount)</span>
                  throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
-<div class="block">Курьер забирает до maxCount пицц.
- Блокирует если склад пуст и ещё принимает новые заказы.</div>
+<div class="block">Takes up to <code>maxCount</code> pizzas, blocking while storage is empty and open.</div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>maxCount</code> - max pizzas to take</dd>
 <dt>Returns:</dt>
-<dd>список пицц или пустой список если склад закрыт и пуст</dd>
+<dd>list of taken pizzas; empty if storage is closed and empty</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code> - if the thread is interrupted while waiting</dd>
 </dl>
 </section>
 </li>
@@ -200,33 +217,51 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="closeAccepting()">
 <h3>closeAccepting</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">closeAccepting</span>()</div>
-<div class="block">Останавливает приём новых пицц.
- Курьеры заберут оставшееся и завершат работу.</div>
+<div class="block">Signals that no more pizzas will be added; couriers will drain and exit.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="drainAll()">
 <h3>drainAll</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Order.html" title="class in ru.nsu.krasnyanskii.pizzeria">Order</a>&gt;</span>&nbsp;<span class="element-name">drainAll</span>()</div>
-<div class="block">Забирает все пиццы (для сериализации).</div>
+<div class="block">Drains all remaining pizzas (used during shutdown serialization).</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>snapshot of remaining orders</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isEmpty()">
 <h3>isEmpty</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isEmpty</span>()</div>
+<div class="block">Returns <code>true</code> if no pizzas are in storage.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if empty</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="size()">
 <h3>size</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">size</span>()</div>
+<div class="block">Returns the number of pizzas currently in storage.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>current size</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isAccepting()">
 <h3>isAccepting</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isAccepting</span>()</div>
+<div class="block">Returns <code>true</code> if the storage is still accepting new pizzas.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if accepting</dd>
+</dl>
 </section>
 </li>
 </ul>

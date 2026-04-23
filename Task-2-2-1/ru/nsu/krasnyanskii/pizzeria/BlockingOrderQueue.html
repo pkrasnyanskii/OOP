@@ -31,6 +31,7 @@ loadScripts(document, 'script');</script>
 <div class="top-nav" id="navbar-top">
 <div class="skip-nav"><a href="#skip-navbar-top" title="Skip navigation links">Skip navigation links</a></div>
 <ul id="navbar-top-firstrow" class="nav-list" title="Navigation">
+<li><a href="../../../../index.html">Overview</a></li>
 <li><a href="package-summary.html">Package</a></li>
 <li class="nav-bar-cell1-rev">Class</li>
 <li><a href="package-tree.html">Tree</a></li>
@@ -73,19 +74,24 @@ loadScripts(document, 'script');</script>
 <div class="inheritance">ru.nsu.krasnyanskii.pizzeria.BlockingOrderQueue&lt;T&gt;</div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>T</code> - element type</dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">BlockingOrderQueue&lt;T&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Custom bounded blocking queue using intrinsic locks (wait / notifyAll).
+<div class="block">Bounded blocking queue backed by intrinsic locks (<code>wait</code>/<code>notifyAll</code>).
 
- <p>Запрещено использовать java.util.concurrent.BlockingQueue — поэтому
- реализуем блокировку вручную через synchronized + wait/notifyAll.</p>
+ <p>Uses manual synchronization because <code>java.util.concurrent.BlockingQueue</code>
+ is prohibited by the assignment.</p>
 
- <p>Принцип работы:
-   put() — если очередь полна, поток ждёт (wait) пока не освободится место
-   take() — если очередь пуста, поток ждёт (wait) пока не появится элемент
-   close() — сигнализирует всем ждущим потокам что очередь закрыта
- </p></div>
+ <p><b>synchronized variants:</b>
+ (1) <code>synchronized</code> method — lock on the instance (<code>this</code>);
+ (2) <code>synchronized</code> block — lock on an explicit object, narrows the critical
+ section or allows separate locks for independent data;
+ (3) <code>static synchronized</code> method — lock on the <code>Class</code> object, one lock
+ per class across the entire JVM regardless of instance count.</p></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -99,7 +105,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int)" class="member-name-link">BlockingOrderQueue</a><wbr>(int&nbsp;capacity)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Creates a new bounded blocking queue.</div>
+<div class="block">Creates a bounded blocking queue.</div>
 </div>
 </div>
 </section>
@@ -118,31 +124,37 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#close()" class="member-name-link">close</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Закрывает очередь — все ждущие потоки получат null из take().</div>
+<div class="block">Closes the queue; threads blocked in <code>take()</code> will receive <code>null</code>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="BlockingOrderQueue.html" title="type parameter in BlockingOrderQueue">T</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#drainAll()" class="member-name-link">drainAll</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Забирает все оставшиеся элементы (для сериализации при остановке).</div>
+<div class="block">Drains all remaining elements (used for serialization on shutdown).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isClosed()" class="member-name-link">isClosed</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if the queue has been closed.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isEmpty()" class="member-name-link">isEmpty</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if the queue contains no elements.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#put(T)" class="member-name-link">put</a><wbr>(<a href="BlockingOrderQueue.html" title="type parameter in BlockingOrderQueue">T</a>&nbsp;item)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Добавляет элемент.</div>
+<div class="block">Inserts an element, blocking until space is available.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#size()" class="member-name-link">size</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the number of elements currently in the queue.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="BlockingOrderQueue.html" title="type parameter in BlockingOrderQueue">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#take()" class="member-name-link">take</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Забирает элемент.</div>
+<div class="block">Retrieves and removes the head element, blocking until one is available.</div>
 </div>
 </div>
 </div>
@@ -165,10 +177,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(int)">
 <h3>BlockingOrderQueue</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">BlockingOrderQueue</span><wbr><span class="parameters">(int&nbsp;capacity)</span></div>
-<div class="block">Creates a new bounded blocking queue.</div>
+<div class="block">Creates a bounded blocking queue.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>capacity</code> - maximum number of elements; must be positive</dd>
+<dd><code>capacity</code> - max elements; must be positive</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if capacity is not positive</dd>
 </dl>
@@ -187,10 +199,18 @@ loadScripts(document, 'script');</script>
 <h3 id="put(java.lang.Object)">put</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">put</span><wbr><span class="parameters">(<a href="BlockingOrderQueue.html" title="type parameter in BlockingOrderQueue">T</a>&nbsp;item)</span>
          throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
-<div class="block">Добавляет элемент. Блокирует если очередь полна.</div>
+<div class="block">Inserts an element, blocking until space is available.
+
+ <p><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link"><code>InterruptedException</code></a> is thrown when a thread blocked in
+ <code>wait</code>/<code>sleep</code>/<code>join</code> receives <code>thread.interrupt()</code>.
+ This is Java's cooperative cancellation mechanism — the thread must either
+ re-throw the exception or restore the interrupted flag via
+ <code>Thread.currentThread().interrupt()</code>.</p></div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>item</code> - element to insert</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code> - if the thread is interrupted while waiting</dd>
 </dl>
 </section>
 </li>
@@ -199,12 +219,14 @@ loadScripts(document, 'script');</script>
 <h3>take</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="BlockingOrderQueue.html" title="type parameter in BlockingOrderQueue">T</a></span>&nbsp;<span class="element-name">take</span>()
        throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
-<div class="block">Забирает элемент. Блокирует если очередь пуста и не закрыта.</div>
+<div class="block">Retrieves and removes the head element, blocking until one is available.
+
+ <p>For <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link"><code>InterruptedException</code></a> semantics see <a href="#put(T)"><code>put(Object)</code></a>.</p></div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>элемент или null если очередь закрыта и пуста</dd>
+<dd>the head element, or <code>null</code> if the queue is closed and empty</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code> - if the thread is interrupted while waiting</dd>
 </dl>
 </section>
 </li>
@@ -212,32 +234,51 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="close()">
 <h3>close</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">close</span>()</div>
-<div class="block">Закрывает очередь — все ждущие потоки получат null из take().</div>
+<div class="block">Closes the queue; threads blocked in <code>take()</code> will receive <code>null</code>.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="drainAll()">
 <h3>drainAll</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="BlockingOrderQueue.html" title="type parameter in BlockingOrderQueue">T</a>&gt;</span>&nbsp;<span class="element-name">drainAll</span>()</div>
-<div class="block">Забирает все оставшиеся элементы (для сериализации при остановке).</div>
+<div class="block">Drains all remaining elements (used for serialization on shutdown).</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>snapshot of remaining elements</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isEmpty()">
 <h3>isEmpty</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isEmpty</span>()</div>
+<div class="block">Returns <code>true</code> if the queue contains no elements.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if empty</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="size()">
 <h3>size</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">size</span>()</div>
+<div class="block">Returns the number of elements currently in the queue.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>current size</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isClosed()">
 <h3>isClosed</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isClosed</span>()</div>
+<div class="block">Returns <code>true</code> if the queue has been closed.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if closed</dd>
+</dl>
 </section>
 </li>
 </ul>

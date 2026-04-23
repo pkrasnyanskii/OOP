@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.krasnyanskii.pizzeria"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.krasnyanskii.pizzeria"},{"l":"ru.nsu.krasnyanskii.pizzeria.workers"}];updateSearchResults();
