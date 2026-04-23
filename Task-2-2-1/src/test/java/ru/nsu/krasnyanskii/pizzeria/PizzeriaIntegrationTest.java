@@ -6,12 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.nsu.krasnyanskii.pizzeria.workers.Baker;
+import ru.nsu.krasnyanskii.pizzeria.workers.Courier;
 
-/**
- * Интеграционный тест: проверяет что заказы проходят весь путь
- * от очереди до доставки.
- */
+/** Integration test: verifies orders travel the full pipeline from queue to delivery. */
 class PizzeriaIntegrationTest {
+
+    private final PizzeriaView view = new PizzeriaView();
 
     @BeforeEach
     void resetCounter() {
@@ -23,7 +24,6 @@ class PizzeriaIntegrationTest {
         BlockingOrderQueue<Order> queue = new BlockingOrderQueue<>(10);
         PizzaStorage storage = new PizzaStorage(5);
 
-        // Добавляем 3 заказа
         Order o1 = new Order();
         Order o2 = new Order();
         Order o3 = new Order();
@@ -32,9 +32,8 @@ class PizzeriaIntegrationTest {
         queue.put(o3);
         queue.close();
 
-        // Запускаем 2 пекарей
-        Baker b1 = new Baker(1, 50, queue, storage);
-        Baker b2 = new Baker(2, 80, queue, storage);
+        Baker b1 = new Baker(1, 50, queue, storage, view);
+        Baker b2 = new Baker(2, 80, queue, storage, view);
         Thread bt1 = new Thread(b1);
         Thread bt2 = new Thread(b2);
         bt1.start();
@@ -42,11 +41,10 @@ class PizzeriaIntegrationTest {
         bt1.join(3000);
         bt2.join(3000);
 
-        assertEquals(3, storage.size(), "Все 3 пиццы должны быть на складе");
+        assertEquals(3, storage.size(), "All 3 pizzas should be in storage");
 
-        // Закрываем склад и запускаем курьера
         storage.closeAccepting();
-        Courier courier = new Courier(1, 5, 50, storage);
+        Courier courier = new Courier(1, 5, 50, storage, view);
         Thread ct = new Thread(courier);
         ct.start();
         ct.join(3000);
@@ -60,7 +58,6 @@ class PizzeriaIntegrationTest {
 
     @Test
     void storageCapacityLimitBlocksBakers() throws InterruptedException {
-        // Склад на 1 пиццу, 2 заказа — второй пекарь должен подождать курьера
         BlockingOrderQueue<Order> queue = new BlockingOrderQueue<>(10);
         PizzaStorage storage = new PizzaStorage(1);
 
@@ -70,23 +67,20 @@ class PizzeriaIntegrationTest {
         queue.put(o2);
         queue.close();
 
-        Baker baker = new Baker(1, 30, queue, storage);
+        Baker baker = new Baker(1, 30, queue, storage, view);
         Thread bt = new Thread(baker);
         bt.start();
 
-        // Даём время испечь первую и заблокироваться на второй
         Thread.sleep(300);
         assertEquals(1, storage.size());
 
-        // Курьер освобождает место
         storage.closeAccepting();
-        Courier courier = new Courier(1, 5, 10, storage);
+        Courier courier = new Courier(1, 5, 10, storage, view);
         Thread ct = new Thread(courier);
         ct.start();
 
         bt.join(2000);
         ct.join(2000);
-
         assertFalse(bt.isAlive());
     }
 }

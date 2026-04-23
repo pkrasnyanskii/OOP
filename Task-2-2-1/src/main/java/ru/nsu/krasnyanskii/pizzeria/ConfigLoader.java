@@ -1,111 +1,48 @@
 package ru.nsu.krasnyanskii.pizzeria;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Читает JSON конфиг без сторонних библиотек (только стандартная Java).
- * Использует регулярные выражения для парсинга.
+ * Loads {@link PizzeriaConfig} from a JSON file using Jackson.
+ *
+ * <p>Jackson maps JSON field names to class fields automatically.
+ * Lombok {@code @Data} provides the setters Jackson needs; {@code @NoArgsConstructor}
+ * provides the no-arg constructor required for deserialization.</p>
  */
 public class ConfigLoader {
+
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     private ConfigLoader() {
         // utility class
     }
 
     /**
-     * Loads pizzeria configuration from a JSON file.
+     * Loads and validates pizzeria configuration.
      *
      * @param filePath path to the JSON configuration file
      * @return parsed {@link PizzeriaConfig}
-     * @throws IOException              if the file cannot be read
-     * @throws IllegalArgumentException if a required key is missing
+     * @throws IOException              if the file cannot be read or JSON is malformed
+     * @throws IllegalArgumentException if a required numeric field is missing or zero
      */
     public static PizzeriaConfig load(String filePath) throws IOException {
-        String json = new String(Files.readAllBytes(Paths.get(filePath)));
-        PizzeriaConfig config = new PizzeriaConfig();
-
-        config.storageCapacity = parseInt(json, "storageCapacity");
-        config.orderIntervalMs = parseInt(json, "orderIntervalMs");
-        config.workDurationMs  = parseLong(json, "workDurationMs");
-        config.bakers          = parseBakers(json);
-        config.couriers        = parseCouriers(json);
-
+        PizzeriaConfig config = MAPPER.readValue(new File(filePath), PizzeriaConfig.class);
+        validate(config);
         return config;
     }
 
-    private static int parseInt(String json, String key) {
-        Pattern p = Pattern.compile("\"" + key + "\"\\s*:\\s*(-?\\d+)");
-        Matcher m = p.matcher(json);
-        if (m.find()) {
-            return Integer.parseInt(m.group(1));
+    private static void validate(PizzeriaConfig config) {
+        if (config.getStorageCapacity() <= 0) {
+            throw new IllegalArgumentException("Missing key in config: storageCapacity");
         }
-        throw new IllegalArgumentException("Missing key in config: " + key);
-    }
-
-    private static long parseLong(String json, String key) {
-        Pattern p = Pattern.compile("\"" + key + "\"\\s*:\\s*(-?\\d+)");
-        Matcher m = p.matcher(json);
-        if (m.find()) {
-            return Long.parseLong(m.group(1));
+        if (config.getOrderIntervalMs() <= 0) {
+            throw new IllegalArgumentException("Missing key in config: orderIntervalMs");
         }
-        throw new IllegalArgumentException("Missing key in config: " + key);
-    }
-
-    private static List<PizzeriaConfig.BakerConfig> parseBakers(String json) {
-        List<PizzeriaConfig.BakerConfig> list = new ArrayList<>();
-        String section = extractArray(json, "bakers");
-        Pattern p = Pattern.compile("\\{[^}]+\\}");
-        Matcher m = p.matcher(section);
-        while (m.find()) {
-            PizzeriaConfig.BakerConfig bc = new PizzeriaConfig.BakerConfig();
-            bc.cookingTimeMs = parseInt(m.group(), "cookingTimeMs");
-            list.add(bc);
+        if (config.getWorkDurationMs() <= 0) {
+            throw new IllegalArgumentException("Missing key in config: workDurationMs");
         }
-        return list;
-    }
-
-    private static List<PizzeriaConfig.CourierConfig> parseCouriers(String json) {
-        List<PizzeriaConfig.CourierConfig> list = new ArrayList<>();
-        String section = extractArray(json, "couriers");
-        Pattern p = Pattern.compile("\\{[^}]+\\}");
-        Matcher m = p.matcher(section);
-        while (m.find()) {
-            PizzeriaConfig.CourierConfig cc = new PizzeriaConfig.CourierConfig();
-            cc.trunkCapacity  = parseInt(m.group(), "trunkCapacity");
-            cc.deliveryTimeMs = parseInt(m.group(), "deliveryTimeMs");
-            list.add(cc);
-        }
-        return list;
-    }
-
-    /** Вырезает содержимое массива [...] по ключу из JSON строки. */
-    private static String extractArray(String json, String key) {
-        int start = json.indexOf("\"" + key + "\"");
-        if (start == -1) {
-            return "[]";
-        }
-        int bracketOpen = json.indexOf('[', start);
-        if (bracketOpen == -1) {
-            return "[]";
-        }
-        int depth = 0;
-        for (int i = bracketOpen; i < json.length(); i++) {
-            char c = json.charAt(i);
-            if (c == '[') {
-                depth++;
-            } else if (c == ']') {
-                depth--;
-                if (depth == 0) {
-                    return json.substring(bracketOpen, i + 1);
-                }
-            }
-        }
-        return "[]";
     }
 }
