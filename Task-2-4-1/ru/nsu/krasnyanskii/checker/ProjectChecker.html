@@ -78,7 +78,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ProjectChecker</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">Orchestrates the check pipeline for all students and tasks.
- Pipeline per task: (1) compile → (2) javadoc + checkstyle → (3) tests.
+ Pipeline per task: (1) compile, (2) javadoc + checkstyle, (3) tests.
  Each step is skipped if the previous step failed.</div>
 </section>
 <section class="summary">
@@ -93,7 +93,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.krasnyanskii.model.OopCheckerConfig,java.nio.file.Path)" class="member-name-link">ProjectChecker</a><wbr>(<a href="../model/OopCheckerConfig.html" title="class in ru.nsu.krasnyanskii.model">OopCheckerConfig</a>&nbsp;config,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;reposDir)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a ProjectChecker with the given config and local repos directory.</div>
+</div>
 </div>
 </section>
 </li>
@@ -135,6 +137,12 @@ loadScripts(document, 'script');</script>
 <h3>ProjectChecker</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ProjectChecker</span><wbr><span class="parameters">(<a href="../model/OopCheckerConfig.html" title="class in ru.nsu.krasnyanskii.model">OopCheckerConfig</a>&nbsp;config,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;reposDir)</span></div>
+<div class="block">Creates a ProjectChecker with the given config and local repos directory.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>config</code> - parsed OOP checker configuration</dd>
+<dd><code>reposDir</code> - directory where student repos will be cloned</dd>
+</dl>
 </section>
 </li>
 </ul>
