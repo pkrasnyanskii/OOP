@@ -1,0 +1,14 @@
+{
+  "storageCapacity": 10,
+  "orderIntervalMs": 200,
+  "workDurationMs": 3000,
+  "bakers": [
+    { "cookingTimeMs": 300 },
+    { "cookingTimeMs": 500 },
+    { "cookingTimeMs": 700 }
+  ],
+  "couriers": [
+    { "trunkCapacity": 3, "deliveryTimeMs": 400 },
+    { "trunkCapacity": 2, "deliveryTimeMs": 600 }
+  ]
+}
