@@ -1,0 +1,73 @@
+name: Build & Test
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'Task-2-4-1/**'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'Task-2-4-1/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: Task-2-4-1
+
+    steps:
+      # 1. Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. JDK 21
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: gradle
+
+      # 3. Gradle wrapper permission (Linux)
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      # 4. Build (без тестов — чтобы убедиться что компилируется)
+      - name: Build
+        run: ./gradlew assemble
+
+      # 5. Тесты + JaCoCo XML
+      - name: Run tests with coverage
+        run: ./gradlew test jacocoTestReport
+
+      # 6. Публикация результатов тестов
+      - name: Publish test results
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: JUnit Tests
+          path: Task-2-4-1/build/test-results/test/*.xml
+          reporter: java-junit
+
+      # 7. JaCoCo coverage report (PR comment)
+      - name: JaCoCo Coverage Report
+        uses: madrapps/jacoco-report@v1.2
+        if: github.event_name == 'pull_request'
+        with:
+          paths: ${{ github.workspace }}/Task-2-4-1/build/reports/jacoco/test/jacocoTestReport.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-coverage-overall: 40
+          min-coverage-changed-files: 60
+          title: 'Code Coverage'
+
+      # 8. Сохраняем HTML-отчёт JaCoCo как артефакт
+      - name: Upload coverage report artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: jacoco-report
+          path: Task-2-4-1/build/reports/jacoco/test/html/
+          retention-days: 7

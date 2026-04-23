@@ -1,17 +1,14 @@
 package org.example.model;
 
+import lombok.Value;
+
+/**
+ * Запись о дополнительных баллах для конкретного студента за конкретную задачу.
+ * @Value делает класс иммутабельным: все поля final, только геттеры, нет сеттеров.
+ */
+@Value
 public class BonusEntry {
-    private final String studentGithub;
-    private final String taskId;
-    private final double points;
-
-    public BonusEntry(String studentGithub, String taskId, double points) {
-        this.studentGithub = studentGithub;
-        this.taskId = taskId;
-        this.points = points;
-    }
-
-    public String getStudentGithub() { return studentGithub; }
-    public String getTaskId() { return taskId; }
-    public double getPoints() { return points; }
+    String studentGithub;
+    String taskId;
+    double points;
 }
