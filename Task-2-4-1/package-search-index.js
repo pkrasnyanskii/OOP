@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.krasnyanskii"},{"l":"ru.nsu.krasnyanskii.checker"},{"l":"ru.nsu.krasnyanskii.config"},{"l":"ru.nsu.krasnyanskii.dsl"},{"l":"ru.nsu.krasnyanskii.model"},{"l":"ru.nsu.krasnyanskii.model.results"},{"l":"ru.nsu.krasnyanskii.report"}];updateSearchResults();
