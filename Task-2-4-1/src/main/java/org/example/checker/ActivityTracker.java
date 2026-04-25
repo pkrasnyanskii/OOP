@@ -36,3 +36,4 @@ public class ActivityTracker {
         return Math.floor(fraction * config.getBonusPoints());
     }
 }
+
