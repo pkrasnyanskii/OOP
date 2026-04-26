@@ -1,6 +1,7 @@
 plugins {
     id("java")
     id("groovy")
+    id("jacoco")
     application
 }
 
@@ -34,4 +35,10 @@ tasks.jar {
     }
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.required.set(true)
+    }
 }
