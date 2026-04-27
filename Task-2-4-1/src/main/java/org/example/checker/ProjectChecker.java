@@ -12,30 +12,41 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+/**
+ * Главный оркестратор проверки.
+ *
+ * Для каждого студента из CheckInstruction:
+ *   1. Клонирует / обновляет репозиторий через GitManager
+ *   2. Для каждой задачи запускает пайплайн (строго по ТЗ):
+ *      Шаг 1: компиляция
+ *      Шаг 2: если Шаг 1 OK → javadoc + checkstyle
+ *      Шаг 3: если Шаг 2 OK → тесты
+ *   3. Вычисляет баллы через ScoreCalculator
+ *   4. Считает активность (доп. задание)
+ */
 public class ProjectChecker {
     private static final Logger log = Logger.getLogger(ProjectChecker.class.getName());
 
     private final OopCheckerConfig config;
-    private final GitManager gitManager;
-    private final ScoreCalculator scoreCalc;
-    private final ActivityTracker activityTracker;
-    private final ProcessRunner processRunner;
-    private final Path reposDir;
+    private final GitManager       gitManager;
+    private final ScoreCalculator  scoreCalc;
+    private final ActivityTracker  activityTracker;
+    private final ProcessRunner    processRunner;
 
     public ProjectChecker(OopCheckerConfig config, Path reposDir) {
-        this.config = config;
-        this.reposDir = reposDir;
-        int timeout = config.getScoringConfig().getTestTimeoutSeconds();
-        this.gitManager = new GitManager(reposDir, timeout);
-        this.scoreCalc = new ScoreCalculator(config);
+        this.config    = config;
+        int timeout    = config.getScoringConfig().getTestTimeoutSeconds();
+        this.gitManager      = new GitManager(reposDir, timeout);
+        this.scoreCalc       = new ScoreCalculator(config);
         this.activityTracker = new ActivityTracker(gitManager);
-        this.processRunner = new ProcessRunner(timeout);
+        this.processRunner   = new ProcessRunner(timeout);
     }
 
     public List<StudentCheckResult> runChecks() {
@@ -45,20 +56,21 @@ public class ProjectChecker {
         for (String github : instruction.getStudentGithubs()) {
             Optional<Student> studentOpt = config.findStudentByGithub(github);
             if (studentOpt.isEmpty()) {
-                log.warning("Student not found in config: " + github);
+                log.warning("Студент не найден в конфиге: " + github);
                 continue;
             }
-            Student student = studentOpt.get();
+            Student student  = studentOpt.get();
             String groupName = config.findGroupByStudentGithub(github)
                     .map(Group::getName).orElse("Unknown");
 
-            StudentCheckResult studentResult = new StudentCheckResult(github, student.getFullName(), groupName);
+            StudentCheckResult studentResult =
+                    new StudentCheckResult(github, student.getFullName(), groupName);
 
             Path repoPath;
             try {
                 repoPath = gitManager.cloneOrUpdate(github, student.getRepoUrl());
             } catch (Exception e) {
-                log.severe("Failed to clone repo for " + github + ": " + e.getMessage());
+                log.severe("Не удалось клонировать репо " + github + ": " + e.getMessage());
                 results.add(studentResult);
                 continue;
             }
@@ -69,11 +81,11 @@ public class ProjectChecker {
                 studentResult.addTaskResult(taskResult);
             }
 
-            // Activity tracking (bonus task)
+            // ── Доп. задание: еженедельная активность ───────────────────
             ActivityConfig activityConfig = config.getActivityConfig();
             if (activityConfig != null) {
-                int activeWeeks = activityTracker.countActiveWeeks(repoPath, activityConfig);
-                double activityBonus = activityTracker.calculateActivityBonus(activeWeeks, activityConfig);
+                int    activeWeeks    = activityTracker.countActiveWeeks(repoPath, activityConfig);
+                double activityBonus  = activityTracker.calculateActivityBonus(activeWeeks, activityConfig);
                 studentResult.setActiveWeeks(activeWeeks);
                 studentResult.setActivityBonus(activityBonus);
             }
@@ -84,67 +96,79 @@ public class ProjectChecker {
         return results;
     }
 
+    // ─────────────────────────────────────────────────────────────────────
+    // Пайплайн проверки одной задачи (строго по ТЗ §2)
+    // ─────────────────────────────────────────────────────────────────────
+
     private TaskCheckResult checkTask(Path repoPath, String github, String taskId) {
         TaskCheckResult result = new TaskCheckResult(taskId);
+        result.setLastCommitDate(gitManager.getLastCommitDate(repoPath, taskId));
 
-        // Last commit date for this task directory
-        LocalDate lastCommit = gitManager.getLastCommitDate(repoPath, taskId);
-        result.setLastCommitDate(lastCommit);
-
-        // Step 1: Compile
-        log.info("[" + github + "/" + taskId + "] Compiling...");
+        // ── Шаг 1: Компиляция ────────────────────────────────────────────
+        log.info("[" + github + "/" + taskId + "] Шаг 1: компиляция...");
         ProcessResult compile = runGradle(repoPath, ":" + taskId + ":compileJava");
         result.setCompileOutput(compile.getOutput());
+
         if (compile.isTimedOut()) {
             result.setCompileStatus(BuildStatus.TIMEOUT);
-            return result;
+            return result;   // дальше не идём
         }
         if (!compile.isSuccess()) {
             result.setCompileStatus(BuildStatus.FAILED);
-            return result;
+            return result;   // дальше не идём
         }
         result.setCompileStatus(BuildStatus.SUCCESS);
 
-        // Step 2: Javadoc
-        log.info("[" + github + "/" + taskId + "] Generating javadoc...");
+        // ── Шаг 2: Javadoc + Checkstyle (только если компиляция OK) ─────
+        log.info("[" + github + "/" + taskId + "] Шаг 2: javadoc...");
         ProcessResult docs = runGradle(repoPath, ":" + taskId + ":javadoc");
         result.setDocsOutput(docs.getOutput());
-        if (docs.isTimedOut()) {
-            result.setDocsStatus(BuildStatus.TIMEOUT);
-        } else if (isTaskNotFound(docs.getOutput())) {
-            result.setDocsStatus(BuildStatus.NOT_AVAILABLE);
-        } else {
-            result.setDocsStatus(docs.isSuccess() ? BuildStatus.SUCCESS : BuildStatus.FAILED);
-        }
+        result.setDocsStatus(resolveStatus(docs));
 
-        // Step 2: Checkstyle (Google Java Style)
-        log.info("[" + github + "/" + taskId + "] Checking style...");
+        log.info("[" + github + "/" + taskId + "] Шаг 2: checkstyle (Google Java Style)...");
         ProcessResult style = runGradle(repoPath, ":" + taskId + ":checkstyleMain");
         result.setStyleOutput(style.getOutput());
-        if (style.isTimedOut()) {
-            result.setStyleStatus(BuildStatus.TIMEOUT);
-        } else if (isTaskNotFound(style.getOutput())) {
-            result.setStyleStatus(BuildStatus.NOT_AVAILABLE);
-        } else {
-            result.setStyleStatus(style.isSuccess() ? BuildStatus.SUCCESS : BuildStatus.FAILED);
+        result.setStyleStatus(resolveStatus(style));
+
+        // ── Шаг 3: Тесты (только если Шаг 2 прошёл успешно) ────────────
+        // NOT_AVAILABLE = задача не настроена в студенческом проекте → не блокирует
+        boolean step2Passed = isPassedOrNA(result.getDocsStatus())
+                           && isPassedOrNA(result.getStyleStatus());
+
+        if (!step2Passed) {
+            log.info("[" + github + "/" + taskId + "] Шаг 3 пропущен: docs/style не прошли.");
+            return result;
         }
 
-        // Step 3: Tests
-        log.info("[" + github + "/" + taskId + "] Running tests...");
+        log.info("[" + github + "/" + taskId + "] Шаг 3: тесты...");
         ProcessResult tests = runGradle(repoPath, ":" + taskId + ":test", "--continue");
         result.setTestOutput(tests.getOutput());
+
         if (tests.isTimedOut()) {
             result.setTestStatus(BuildStatus.TIMEOUT);
         } else {
-            result.setTestStatus(BuildStatus.SUCCESS); // parse XML for actual counts
             TestCounts counts = parseTestResults(repoPath, taskId);
             result.setTestCounts(counts);
-            if (counts.getFailed() > 0 || counts.getSkipped() > 0) {
-                result.setTestStatus(BuildStatus.FAILED);
-            }
+            result.setTestStatus(counts.getFailed() > 0 ? BuildStatus.FAILED : BuildStatus.SUCCESS);
         }
 
         return result;
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    // Вспомогательные методы
+    // ─────────────────────────────────────────────────────────────────────
+
+    /** Определяет BuildStatus по результату выполнения gradle-таска. */
+    private BuildStatus resolveStatus(ProcessResult pr) {
+        if (pr.isTimedOut())            return BuildStatus.TIMEOUT;
+        if (isTaskNotFound(pr.getOutput())) return BuildStatus.NOT_AVAILABLE;
+        return pr.isSuccess() ? BuildStatus.SUCCESS : BuildStatus.FAILED;
+    }
+
+    /** Статус «прошёл» = SUCCESS или NOT_AVAILABLE (задача не настроена — это не ошибка). */
+    private boolean isPassedOrNA(BuildStatus status) {
+        return status == BuildStatus.SUCCESS || status == BuildStatus.NOT_AVAILABLE;
     }
 
     private ProcessResult runGradle(Path repoPath, String... tasks) {
@@ -159,66 +183,57 @@ public class ProjectChecker {
     }
 
     private boolean isTaskNotFound(String output) {
-        return output.contains("Task '" ) && output.contains("' not found")
-                || output.contains("Could not find") && output.contains("task");
+        return (output.contains("Task '") && output.contains("' not found"))
+            || (output.contains("Could not find") && output.contains("task"));
     }
 
     /**
-     * Parse JUnit XML test result files from build/test-results/.
+     * Парсит JUnit XML-файлы результатов из build/test-results/test/*.xml
+     * и агрегирует количество passed/failed/skipped.
      */
     private TestCounts parseTestResults(Path repoPath, String taskId) {
         TestCounts total = new TestCounts();
-        Path testResultsDir = repoPath.resolve(taskId).resolve("build").resolve("test-results");
+        Path dir = repoPath.resolve(taskId).resolve("build").resolve("test-results");
 
-        if (!Files.exists(testResultsDir)) {
-            return total;
-        }
+        if (!Files.exists(dir)) return total;
 
-        try (Stream<Path> stream = Files.walk(testResultsDir)) {
+        try (Stream<Path> stream = Files.walk(dir)) {
             stream.filter(p -> p.toString().endsWith(".xml"))
                   .forEach(xml -> {
-                      try {
-                          TestCounts counts = parseXmlResults(xml.toFile());
-                          total.add(counts);
-                      } catch (Exception e) {
-                          log.warning("Failed to parse test XML " + xml + ": " + e.getMessage());
+                      try { total.add(parseXmlFile(xml.toFile())); }
+                      catch (Exception e) {
+                          log.warning("Не удалось прочитать " + xml + ": " + e.getMessage());
                       }
                   });
         } catch (IOException e) {
-            log.warning("Failed to walk test results dir: " + e.getMessage());
+            log.warning("Ошибка обхода " + dir + ": " + e.getMessage());
         }
-
         return total;
     }
 
-    private TestCounts parseXmlResults(File xmlFile) throws Exception {
+    private TestCounts parseXmlFile(File xmlFile) throws Exception {
         Document doc = DocumentBuilderFactory.newInstance()
-                .newDocumentBuilder()
-                .parse(xmlFile);
+                .newDocumentBuilder().parse(xmlFile);
 
-        NodeList suites = doc.getElementsByTagName("testsuite");
+        NodeList suites   = doc.getElementsByTagName("testsuite");
         int passed = 0, failed = 0, skipped = 0;
 
         for (int i = 0; i < suites.getLength(); i++) {
-            Element suite = (Element) suites.item(i);
-            int tests = intAttr(suite, "tests");
-            int failures = intAttr(suite, "failures");
-            int errors = intAttr(suite, "errors");
-            int skip = intAttr(suite, "skipped");
-            failed += failures + errors;
+            Element suite  = (Element) suites.item(i);
+            int tests      = intAttr(suite, "tests");
+            int failures   = intAttr(suite, "failures");
+            int errors     = intAttr(suite, "errors");
+            int skip       = intAttr(suite, "skipped");
+            failed  += failures + errors;
             skipped += skip;
-            passed += tests - failures - errors - skip;
+            passed  += tests - failures - errors - skip;
         }
-
         return new TestCounts(Math.max(0, passed), failed, skipped);
     }
 
     private int intAttr(Element el, String attr) {
-        String val = el.getAttribute(attr);
-        if (val == null || val.isEmpty()) return 0;
-        try { return Integer.parseInt(val); } catch (NumberFormatException e) { return 0; }
+        String v = el.getAttribute(attr);
+        try { return v != null && !v.isEmpty() ? Integer.parseInt(v) : 0; }
+        catch (NumberFormatException e) { return 0; }
     }
-
-    // Expose for use in Main
-    public Path getReposDir() { return reposDir; }
 }

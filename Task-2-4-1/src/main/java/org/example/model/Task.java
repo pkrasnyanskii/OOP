@@ -1,41 +1,27 @@
 package org.example.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 
+/**
+ * Описание учебной задачи (лабораторной работы).
+ *
+ * id          — уникальный идентификатор, совпадает с названием поддиректории в репо студента
+ * name        — человекочитаемое название
+ * maxScore    — максимальный балл за задачу
+ * softDeadline — мягкий дедлайн: после него начисляется штраф за каждый день опоздания
+ * hardDeadline — жёсткий дедлайн: после него балл = 0
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Task {
     private String id;
     private String name;
     private double maxScore;
     private LocalDate softDeadline;
     private LocalDate hardDeadline;
-
-    public Task() {}
-
-    public Task(String id, String name, double maxScore, LocalDate softDeadline, LocalDate hardDeadline) {
-        this.id = id;
-        this.name = name;
-        this.maxScore = maxScore;
-        this.softDeadline = softDeadline;
-        this.hardDeadline = hardDeadline;
-    }
-
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
-
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-
-    public double getMaxScore() { return maxScore; }
-    public void setMaxScore(double maxScore) { this.maxScore = maxScore; }
-
-    public LocalDate getSoftDeadline() { return softDeadline; }
-    public void setSoftDeadline(LocalDate softDeadline) { this.softDeadline = softDeadline; }
-
-    public LocalDate getHardDeadline() { return hardDeadline; }
-    public void setHardDeadline(LocalDate hardDeadline) { this.hardDeadline = hardDeadline; }
-
-    @Override
-    public String toString() {
-        return "Task{id='" + id + "', name='" + name + "', maxScore=" + maxScore + "}";
-    }
 }

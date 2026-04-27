@@ -1,29 +1,21 @@
 package org.example.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * Студент курса.
+ *
+ * github  — ник на GitHub (используется как ключ везде в системе)
+ * fullName — ФИО для отображения в отчёте
+ * repoUrl — ссылка на репозиторий (https или ssh)
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student {
     private String github;
     private String fullName;
     private String repoUrl;
-
-    public Student() {}
-
-    public Student(String github, String fullName, String repoUrl) {
-        this.github = github;
-        this.fullName = fullName;
-        this.repoUrl = repoUrl;
-    }
-
-    public String getGithub() { return github; }
-    public void setGithub(String github) { this.github = github; }
-
-    public String getFullName() { return fullName; }
-    public void setFullName(String fullName) { this.fullName = fullName; }
-
-    public String getRepoUrl() { return repoUrl; }
-    public void setRepoUrl(String repoUrl) { this.repoUrl = repoUrl; }
-
-    @Override
-    public String toString() {
-        return "Student{github='" + github + "', fullName='" + fullName + "'}";
-    }
 }

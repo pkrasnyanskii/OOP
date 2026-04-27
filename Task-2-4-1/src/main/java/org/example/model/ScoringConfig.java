@@ -1,26 +1,21 @@
 package org.example.model;
 
+import lombok.Data;
+
+/**
+ * Параметры системы выставления баллов.
+ *
+ * testTimeoutSeconds        — максимальное время выполнения тестов (секунды)
+ * styleDeductionPercent     — штраф за нарушение стиля (% от maxScore задачи)
+ * docsDeductionPercent      — штраф за проблемы с документацией (% от maxScore)
+ * softDeadlinePenaltyPerDay — штраф в баллах за каждый день после softDeadline
+ * gradeScale                — шкала оценок
+ */
+@Data
 public class ScoringConfig {
-    private int testTimeoutSeconds = 300;
-    private double styleDeductionPercent = 10.0;
-    private double docsDeductionPercent = 10.0;
-    private double softDeadlinePenaltyPerDay = 1.0;
-    private GradeScale gradeScale = new GradeScale();
-
-    public int getTestTimeoutSeconds() { return testTimeoutSeconds; }
-    public void setTestTimeoutSeconds(int testTimeoutSeconds) { this.testTimeoutSeconds = testTimeoutSeconds; }
-
-    public double getStyleDeductionPercent() { return styleDeductionPercent; }
-    public void setStyleDeductionPercent(double styleDeductionPercent) { this.styleDeductionPercent = styleDeductionPercent; }
-
-    public double getDocsDeductionPercent() { return docsDeductionPercent; }
-    public void setDocsDeductionPercent(double docsDeductionPercent) { this.docsDeductionPercent = docsDeductionPercent; }
-
-    public double getSoftDeadlinePenaltyPerDay() { return softDeadlinePenaltyPerDay; }
-    public void setSoftDeadlinePenaltyPerDay(double softDeadlinePenaltyPerDay) {
-        this.softDeadlinePenaltyPerDay = softDeadlinePenaltyPerDay;
-    }
-
-    public GradeScale getGradeScale() { return gradeScale; }
-    public void setGradeScale(GradeScale gradeScale) { this.gradeScale = gradeScale; }
+    private int        testTimeoutSeconds        = 300;
+    private double     styleDeductionPercent     = 10.0;
+    private double     docsDeductionPercent      = 10.0;
+    private double     softDeadlinePenaltyPerDay = 1.0;
+    private GradeScale gradeScale                = new GradeScale();
 }
