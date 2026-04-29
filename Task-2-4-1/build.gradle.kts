@@ -20,7 +20,7 @@ repositories {
 }
 
 application {
-    mainClass.set("org.example.Main")
+    mainClass.set("ru.nsu.krasnyanskii.Main")
     // Дефолтные аргументы для ./gradlew run — указываем папку с примером конфига.
     // Для запуска с другим конфигом: ./gradlew run --args="/path/to/config"
     applicationDefaultJvmArgs = listOf(
@@ -70,6 +70,10 @@ tasks.test {
     )
 }
 
+tasks.javadoc {
+    (options as StandardJavadocDocletOptions).addStringOption("Xdoclint:none", "-quiet")
+}
+
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
     reports {
@@ -80,7 +84,7 @@ tasks.jacocoTestReport {
 
 tasks.jar {
     manifest {
-        attributes["Main-Class"] = "org.example.Main"
+        attributes["Main-Class"] = "ru.nsu.krasnyanskii.Main"
     }
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
