@@ -1,5 +1,11 @@
 package ru.nsu.krasnyanskii.checker;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDate;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import ru.nsu.krasnyanskii.model.BonusEntry;
 import ru.nsu.krasnyanskii.model.Group;
 import ru.nsu.krasnyanskii.model.OopCheckerConfig;
@@ -8,20 +14,12 @@ import ru.nsu.krasnyanskii.model.Task;
 import ru.nsu.krasnyanskii.model.results.BuildStatus;
 import ru.nsu.krasnyanskii.model.results.TaskCheckResult;
 import ru.nsu.krasnyanskii.model.results.TestCounts;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("ScoreCalculator — scoring logic")
 class ScoreCalculatorTest {
 
     private OopCheckerConfig config;
     private ScoreCalculator  calculator;
-    private Task             task;
 
     private static final String GITHUB  = "test-student";
     private static final String TASK_ID = "Task-1-1";
@@ -32,7 +30,7 @@ class ScoreCalculatorTest {
 
         LocalDate soft = LocalDate.of(2024, 3, 1);
         LocalDate hard = LocalDate.of(2024, 3, 15);
-        task = new Task(TASK_ID, "Test Task", 100.0, soft, hard);
+        Task task = new Task(TASK_ID, "Test Task", 100.0, soft, hard);
         config.addTask(task);
 
         Student student = new Student(GITHUB, "Test Student", "https://github.com/test/OOP");

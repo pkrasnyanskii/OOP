@@ -16,9 +16,15 @@ public class GradeScale {
      * @return grade from 2 (fail) to 5 (excellent)
      */
     public int toGrade(double scorePercent) {
-        if (scorePercent >= excellent)    return 5;
-        if (scorePercent >= good)         return 4;
-        if (scorePercent >= satisfactory) return 3;
+        if (scorePercent >= excellent) {
+            return 5;
+        }
+        if (scorePercent >= good) {
+            return 4;
+        }
+        if (scorePercent >= satisfactory) {
+            return 3;
+        }
         return 2;
     }
 }

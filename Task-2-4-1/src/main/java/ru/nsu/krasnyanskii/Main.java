@@ -1,5 +1,11 @@
 package ru.nsu.krasnyanskii;
 
+import java.io.File;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.logging.Logger;
 import ru.nsu.krasnyanskii.checker.ProcessResult;
 import ru.nsu.krasnyanskii.checker.ProcessRunner;
 import ru.nsu.krasnyanskii.checker.ProjectChecker;
@@ -8,23 +14,22 @@ import ru.nsu.krasnyanskii.model.OopCheckerConfig;
 import ru.nsu.krasnyanskii.model.results.StudentCheckResult;
 import ru.nsu.krasnyanskii.report.HtmlReporter;
 
-import java.io.File;
-import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
-import java.util.List;
-import java.util.logging.Logger;
-
 /**
  * Entry point. Reads oop_checker.groovy from the working directory,
  * runs checks for each student, and writes an HTML report to stdout.
  *
- * Usage:
- *   java -jar oop-checker.jar [config-dir] [--output report.html] [--skip-auth-check]
+ * <p>Usage: {@code java -jar oop-checker.jar [config-dir] [--output report.html]
+ * [--skip-auth-check]}
  */
 public class Main {
     private static final Logger log = Logger.getLogger(Main.class.getName());
 
+    /**
+     * Application entry point.
+     *
+     * @param args command-line arguments
+     * @throws Exception on any unrecoverable error
+     */
     public static void main(String[] args) throws Exception {
         File    workDir       = new File(System.getProperty("user.dir"));
         String  outputFile    = null;
@@ -64,7 +69,7 @@ public class Main {
                 cause = cause.getCause();
             }
             System.err.println();
-            System.err.println("Hint: pass the directory containing oop_checker.groovy as an argument");
+            System.err.println("Hint: pass the directory containing oop_checker.groovy");
             System.err.println("  ./gradlew run --args=\"example_configs\"");
             System.err.println("  java -jar oop-checker.jar /path/to/configs");
             System.exit(1);
@@ -117,8 +122,7 @@ public class Main {
             if (r.isSuccess() && !r.getOutput().trim().isEmpty()) {
                 System.err.println("Git user: " + r.getOutput().trim());
             } else {
-                System.err.println("WARNING: git config --global user.name is not set. "
-                        + "Run: git config --global user.name \"Your Name\"");
+                System.err.println("WARNING: git config --global user.name is not set.");
             }
         } catch (Exception e) {
             System.err.println("WARNING: could not read git user.name: " + e.getMessage());
@@ -136,10 +140,7 @@ public class Main {
                 System.err.println();
                 System.err.println("WARNING: git credential.helper is not configured.");
                 System.err.println("  Cloning private repos may hang waiting for a password.");
-                System.err.println("  Options:");
-                System.err.println("    Use SSH keys with ssh:// URLs");
-                System.err.println("    git config --global credential.helper store");
-                System.err.println("    Run with --skip-auth-check to suppress this warning");
+                System.err.println("  Use SSH keys, set credential.helper, or --skip-auth-check");
                 System.err.println();
             } else {
                 System.err.println("Git credential.helper: " + r.getOutput().trim() + " (OK)");

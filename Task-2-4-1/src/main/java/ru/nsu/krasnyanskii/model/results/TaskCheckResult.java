@@ -1,9 +1,8 @@
 package ru.nsu.krasnyanskii.model.results;
 
+import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDate;
 
 /**
  * Check result for a single task of a single student.

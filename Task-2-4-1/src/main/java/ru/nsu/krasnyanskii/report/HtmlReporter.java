@@ -1,5 +1,9 @@
 package ru.nsu.krasnyanskii.report;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Optional;
 import ru.nsu.krasnyanskii.model.ActivityConfig;
 import ru.nsu.krasnyanskii.model.CheckPoint;
 import ru.nsu.krasnyanskii.model.GradeScale;
@@ -8,11 +12,6 @@ import ru.nsu.krasnyanskii.model.Task;
 import ru.nsu.krasnyanskii.model.results.BuildStatus;
 import ru.nsu.krasnyanskii.model.results.StudentCheckResult;
 import ru.nsu.krasnyanskii.model.results.TaskCheckResult;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Optional;
 
 /** Generates a self-contained HTML report from check results. */
 public class HtmlReporter {
@@ -29,38 +28,62 @@ public class HtmlReporter {
      * @return full HTML document as a string
      */
     public String generate(List<StudentCheckResult> results) {
-        List<String> checkedTaskIds = config.getCheckInstruction().getTaskIds();
+        final List<String> checkedTaskIds = config.getCheckInstruction().getTaskIds();
         StringBuilder sb = new StringBuilder();
 
-        sb.append("<!DOCTYPE html>\n<html lang=\"ru\">\n<head>\n")
-          .append("<meta charset=\"UTF-8\">\n")
-          .append("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n")
-          .append("<title>OOP Check Report</title>\n")
-          .append(CSS)
-          .append("</head>\n<body>\n");
+        sb.append("<!DOCTYPE html>\n<html lang=\"ru\">\n<head>\n");
+        sb.append("<meta charset=\"UTF-8\">\n");
+        sb.append("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n");
+        sb.append("<title>OOP Check Report</title>\n");
+        sb.append(CSS);
+        sb.append("</head>\n<body>\n");
 
         sb.append("<h1>Отчёт автоматической проверки задач по ООП</h1>\n");
-        sb.append("<p class=\"meta\">Сгенерировано: ")
-          .append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")))
-          .append("</p>\n");
+        sb.append("<p class=\"meta\">Сгенерировано: ");
+        sb.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")));
+        sb.append("</p>\n");
 
-        // Task results table
+        appendTaskTable(sb, results, checkedTaskIds);
+
+        if (!config.getCheckPoints().isEmpty()) {
+            appendCheckpointTable(sb, results);
+        }
+
+        if (config.getActivityConfig() != null) {
+            appendActivityTable(sb, results);
+        }
+
+        appendFinalGrades(sb, results, checkedTaskIds);
+        appendLegend(sb);
+
+        sb.append("</body>\n</html>\n");
+        return sb.toString();
+    }
+
+    private void appendTaskTable(
+            StringBuilder sb,
+            List<StudentCheckResult> results,
+            List<String> checkedTaskIds) {
         sb.append("<h2>Результаты проверки задач</h2>\n");
         sb.append("<div class=\"scroll\">\n<table>\n<thead>\n<tr>\n");
         sb.append("<th>Студент</th><th>Группа</th>");
         for (String tid : checkedTaskIds) {
             Task t = config.findTaskById(tid).orElse(null);
-            String label = t != null
-                    ? tid + "<br><small>" + t.getName() + "</small><br><small>(" + (int) t.getMaxScore() + " б)</small>"
-                    : tid;
+            String label;
+            if (t != null) {
+                label = tid + "<br><small>" + t.getName()
+                        + "</small><br><small>(" + (int) t.getMaxScore() + " б)</small>";
+            } else {
+                label = tid;
+            }
             sb.append("<th>").append(label).append("</th>");
         }
         sb.append("<th>Сумма</th></tr>\n</thead>\n<tbody>\n");
 
         for (StudentCheckResult sr : results) {
             sb.append("<tr>\n");
-            sb.append("<td><b>").append(esc(sr.getStudentName())).append("</b><br>")
-              .append("<small>@").append(esc(sr.getStudentGithub())).append("</small></td>\n");
+            sb.append("<td><b>").append(esc(sr.getStudentName())).append("</b><br>");
+            sb.append("<small>@").append(esc(sr.getStudentGithub())).append("</small></td>\n");
             sb.append("<td>").append(esc(sr.getGroupName())).append("</td>\n");
 
             double totalScore = 0;
@@ -78,69 +101,75 @@ public class HtmlReporter {
             totalScore += sr.getActivityBonus();
             sb.append("<td class=\"total\"><b>").append(fmt(totalScore)).append("</b>");
             if (sr.getActivityBonus() > 0) {
-                sb.append("<br><small>+").append(fmt(sr.getActivityBonus())).append(" (активность)</small>");
+                sb.append("<br><small>+").append(fmt(sr.getActivityBonus()));
+                sb.append(" (активность)</small>");
             }
             sb.append("</td>\n</tr>\n");
         }
         sb.append("</tbody>\n</table>\n</div>\n");
+    }
 
-        // Checkpoint scores
-        if (!config.getCheckPoints().isEmpty()) {
-            sb.append("<h2>Контрольные точки</h2>\n");
-            sb.append("<div class=\"scroll\">\n<table>\n<thead>\n<tr>\n");
-            sb.append("<th>Студент</th><th>Группа</th>");
+    private void appendCheckpointTable(StringBuilder sb, List<StudentCheckResult> results) {
+        sb.append("<h2>Контрольные точки</h2>\n");
+        sb.append("<div class=\"scroll\">\n<table>\n<thead>\n<tr>\n");
+        sb.append("<th>Студент</th><th>Группа</th>");
+        for (CheckPoint cp : config.getCheckPoints()) {
+            sb.append("<th>").append(esc(cp.getName())).append("<br><small>");
+            sb.append(cp.getDate()).append("</small></th>");
+        }
+        sb.append("</tr>\n</thead>\n<tbody>\n");
+
+        for (StudentCheckResult sr : results) {
+            sb.append("<tr>\n");
+            sb.append("<td><b>").append(esc(sr.getStudentName())).append("</b></td>\n");
+            sb.append("<td>").append(esc(sr.getGroupName())).append("</td>\n");
             for (CheckPoint cp : config.getCheckPoints()) {
-                sb.append("<th>").append(esc(cp.getName())).append("<br><small>")
-                  .append(cp.getDate()).append("</small></th>");
+                double cpScore = cp.getTaskIds().stream()
+                        .mapToDouble(tid -> sr.getTaskResult(tid)
+                                .map(TaskCheckResult::getScore).orElse(0.0))
+                        .sum();
+                double cpMax = cp.getTaskIds().stream()
+                        .mapToDouble(tid -> config.findTaskById(tid)
+                                .map(Task::getMaxScore).orElse(0.0))
+                        .sum();
+                int grade = gradeForScore(cpScore, cpMax > 0 ? cpMax : 100);
+                String cls = gradeClass(grade);
+                sb.append("<td class=\"").append(cls).append("\">");
+                sb.append(fmt(cpScore)).append(" / ").append(fmt(cpMax));
+                sb.append("<br><b>Оценка: ").append(grade).append("</b></td>\n");
             }
-            sb.append("</tr>\n</thead>\n<tbody>\n");
-
-            for (StudentCheckResult sr : results) {
-                sb.append("<tr>\n");
-                sb.append("<td><b>").append(esc(sr.getStudentName())).append("</b></td>\n");
-                sb.append("<td>").append(esc(sr.getGroupName())).append("</td>\n");
-                for (CheckPoint cp : config.getCheckPoints()) {
-                    double cpScore = cp.getTaskIds().stream()
-                            .mapToDouble(tid -> sr.getTaskResult(tid)
-                                    .map(TaskCheckResult::getScore).orElse(0.0))
-                            .sum();
-                    double cpMax = cp.getTaskIds().stream()
-                            .mapToDouble(tid -> config.findTaskById(tid)
-                                    .map(Task::getMaxScore).orElse(0.0))
-                            .sum();
-                    int grade = gradeForScore(cpScore, cpMax > 0 ? cpMax : 100);
-                    String cls = gradeClass(grade);
-                    sb.append("<td class=\"").append(cls).append("\">")
-                      .append(fmt(cpScore)).append(" / ").append(fmt(cpMax))
-                      .append("<br><b>Оценка: ").append(grade).append("</b></td>\n");
-                }
-                sb.append("</tr>\n");
-            }
-            sb.append("</tbody>\n</table>\n</div>\n");
+            sb.append("</tr>\n");
         }
+        sb.append("</tbody>\n</table>\n</div>\n");
+    }
 
-        // Activity bonus table
-        if (config.getActivityConfig() != null) {
-            ActivityConfig ac = config.getActivityConfig();
-            sb.append("<h2>Активность студентов</h2>\n");
-            sb.append("<p>Период: ").append(ac.getCourseStart()).append(" — ").append(ac.getCourseEnd())
-              .append(". Порог активных недель: <b>").append(ac.getMinActiveWeeks())
-              .append("</b>. Бонус: <b>").append(fmt(ac.getBonusPoints())).append(" б.</b></p>\n");
-            sb.append("<div class=\"scroll\">\n<table>\n<thead>\n<tr>")
-              .append("<th>Студент</th><th>Группа</th><th>Активных недель</th><th>Бонус</th></tr>\n</thead>\n<tbody>\n");
-            for (StudentCheckResult sr : results) {
-                String cls = sr.getActiveWeeks() >= ac.getMinActiveWeeks() ? "pass" : "warn";
-                sb.append("<tr>")
-                  .append("<td><b>").append(esc(sr.getStudentName())).append("</b></td>")
-                  .append("<td>").append(esc(sr.getGroupName())).append("</td>")
-                  .append("<td class=\"").append(cls).append("\">").append(sr.getActiveWeeks()).append("</td>")
-                  .append("<td>").append(fmt(sr.getActivityBonus())).append(" б.</td>")
-                  .append("</tr>\n");
-            }
-            sb.append("</tbody>\n</table>\n</div>\n");
+    private void appendActivityTable(StringBuilder sb, List<StudentCheckResult> results) {
+        ActivityConfig ac = config.getActivityConfig();
+        sb.append("<h2>Активность студентов</h2>\n");
+        sb.append("<p>Период: ").append(ac.getCourseStart());
+        sb.append(" — ").append(ac.getCourseEnd());
+        sb.append(". Порог активных недель: <b>").append(ac.getMinActiveWeeks());
+        sb.append("</b>. Бонус: <b>").append(fmt(ac.getBonusPoints())).append(" б.</b></p>\n");
+        sb.append("<div class=\"scroll\">\n<table>\n<thead>\n<tr>");
+        sb.append("<th>Студент</th><th>Группа</th>");
+        sb.append("<th>Активных недель</th><th>Бонус</th></tr>\n</thead>\n<tbody>\n");
+        for (StudentCheckResult sr : results) {
+            String cls = sr.getActiveWeeks() >= ac.getMinActiveWeeks() ? "pass" : "warn";
+            sb.append("<tr>");
+            sb.append("<td><b>").append(esc(sr.getStudentName())).append("</b></td>");
+            sb.append("<td>").append(esc(sr.getGroupName())).append("</td>");
+            sb.append("<td class=\"").append(cls).append("\">");
+            sb.append(sr.getActiveWeeks()).append("</td>");
+            sb.append("<td>").append(fmt(sr.getActivityBonus())).append(" б.</td>");
+            sb.append("</tr>\n");
         }
+        sb.append("</tbody>\n</table>\n</div>\n");
+    }
 
-        // Final grades
+    private void appendFinalGrades(
+            StringBuilder sb,
+            List<StudentCheckResult> results,
+            List<String> checkedTaskIds) {
         sb.append("<h2>Итоговые оценки</h2>\n");
         double totalMaxScore = checkedTaskIds.stream()
                 .mapToDouble(tid -> config.findTaskById(tid).map(Task::getMaxScore).orElse(0.0))
@@ -148,39 +177,40 @@ public class HtmlReporter {
         if (config.getActivityConfig() != null) {
             totalMaxScore += config.getActivityConfig().getBonusPoints();
         }
-        sb.append("<div class=\"scroll\">\n<table>\n<thead>\n<tr>")
-          .append("<th>Студент</th><th>Группа</th>")
-          .append("<th>Сумма баллов</th><th>% от макс.</th><th>Оценка</th></tr>\n</thead>\n<tbody>\n");
+        sb.append("<div class=\"scroll\">\n<table>\n<thead>\n<tr>");
+        sb.append("<th>Студент</th><th>Группа</th>");
+        sb.append("<th>Сумма баллов</th><th>% от макс.</th><th>Оценка</th>");
+        sb.append("</tr>\n</thead>\n<tbody>\n");
         for (StudentCheckResult sr : results) {
             double score = sr.getTotalScore();
             double pct   = totalMaxScore > 0 ? score / totalMaxScore * 100 : 0;
             int grade    = gradeForScore(score, totalMaxScore > 0 ? totalMaxScore : 100);
             String cls   = gradeClass(grade);
-            sb.append("<tr>")
-              .append("<td><b>").append(esc(sr.getStudentName())).append("</b></td>")
-              .append("<td>").append(esc(sr.getGroupName())).append("</td>")
-              .append("<td>").append(fmt(score)).append(" / ").append(fmt(totalMaxScore)).append("</td>")
-              .append("<td>").append(String.format("%.1f%%", pct)).append("</td>")
-              .append("<td class=\"grade ").append(cls).append("\"><b>").append(grade).append("</b></td>")
-              .append("</tr>\n");
+            sb.append("<tr>");
+            sb.append("<td><b>").append(esc(sr.getStudentName())).append("</b></td>");
+            sb.append("<td>").append(esc(sr.getGroupName())).append("</td>");
+            sb.append("<td>").append(fmt(score)).append(" / ").append(fmt(totalMaxScore));
+            sb.append("</td>");
+            sb.append("<td>").append(String.format("%.1f%%", pct)).append("</td>");
+            sb.append("<td class=\"grade ").append(cls).append("\"><b>");
+            sb.append(grade).append("</b></td>");
+            sb.append("</tr>\n");
         }
         sb.append("</tbody>\n</table>\n</div>\n");
+    }
 
-        // Legend
+    private void appendLegend(StringBuilder sb) {
         sb.append("<h2>Легенда</h2>\n");
         GradeScale gs = config.getScoringConfig().getGradeScale();
-        sb.append("<p>Оценки: ")
-          .append("5 ≥ ").append(fmt(gs.getExcellent())).append("%, ")
-          .append("4 ≥ ").append(fmt(gs.getGood())).append("%, ")
-          .append("3 ≥ ").append(fmt(gs.getSatisfactory())).append("%, ")
-          .append("иначе 2</p>\n");
-        sb.append("<p><span class=\"pass\">■</span> OK &nbsp; ")
-          .append("<span class=\"fail\">■</span> Ошибка &nbsp; ")
-          .append("<span class=\"warn\">■</span> Частично &nbsp; ")
-          .append("<span class=\"na\">■</span> Н/Д</p>\n");
-
-        sb.append("</body>\n</html>\n");
-        return sb.toString();
+        sb.append("<p>Оценки: ");
+        sb.append("5 ≥ ").append(fmt(gs.getExcellent())).append("%, ");
+        sb.append("4 ≥ ").append(fmt(gs.getGood())).append("%, ");
+        sb.append("3 ≥ ").append(fmt(gs.getSatisfactory())).append("%, ");
+        sb.append("иначе 2</p>\n");
+        sb.append("<p><span class=\"pass\">■</span> OK &nbsp; ");
+        sb.append("<span class=\"fail\">■</span> Ошибка &nbsp; ");
+        sb.append("<span class=\"warn\">■</span> Частично &nbsp; ");
+        sb.append("<span class=\"na\">■</span> Н/Д</p>\n");
     }
 
     private String renderTaskCell(TaskCheckResult tr) {
@@ -236,12 +266,16 @@ public class HtmlReporter {
     }
 
     private String fmt(double v) {
-        if (v == Math.floor(v)) return String.valueOf((int) v);
+        if (v == Math.floor(v)) {
+            return String.valueOf((int) v);
+        }
         return String.format("%.1f", v);
     }
 
     private String esc(String s) {
-        if (s == null) return "";
+        if (s == null) {
+            return "";
+        }
         return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
     }
 
@@ -254,8 +288,8 @@ public class HtmlReporter {
               .scroll { overflow-x: auto; }
               table { border-collapse: collapse; min-width: 600px; background: #fff;
                       box-shadow: 0 1px 4px rgba(0,0,0,.1); }
-              th { background: #2c3e50; color: #fff; padding: 10px 14px; text-align: left; font-size: 0.85em; }
-              td { padding: 8px 14px; border-bottom: 1px solid #e0e0e0; font-size: 0.85em; vertical-align: top; }
+              th { background: #2c3e50; color: #fff; padding: 10px 14px; font-size: 0.85em; }
+              td { padding: 8px 14px; border-bottom: 1px solid #e0e0e0; font-size: 0.85em; }
               tr:hover td { background: #f0f7ff; }
               .pass { background-color: #d4edda; color: #155724; }
               .fail { background-color: #f8d7da; color: #721c24; }

@@ -1,11 +1,10 @@
 package ru.nsu.krasnyanskii.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Root configuration object populated from DSL files.
@@ -24,13 +23,24 @@ public class OopCheckerConfig {
     private ActivityConfig   activityConfig;
 
     /** Appends a task definition. */
-    public void addTask(Task task)           { tasks.add(task); }
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+
     /** Appends a student group. */
-    public void addGroup(Group group)        { groups.add(group); }
+    public void addGroup(Group group) {
+        groups.add(group);
+    }
+
     /** Appends a grading checkpoint. */
-    public void addCheckPoint(CheckPoint cp) { checkPoints.add(cp); }
+    public void addCheckPoint(CheckPoint cp) {
+        checkPoints.add(cp);
+    }
+
     /** Appends a bonus entry. */
-    public void addBonusEntry(BonusEntry e)  { bonusEntries.add(e); }
+    public void addBonusEntry(BonusEntry e) {
+        bonusEntries.add(e);
+    }
 
     /**
      * Finds a task by its id.
@@ -66,7 +76,7 @@ public class OopCheckerConfig {
     public Optional<Group> findGroupByStudentGithub(String github) {
         return groups.stream()
                 .filter(g -> g.getStudents().stream()
-                              .anyMatch(s -> s.getGithub().equals(github)))
+                        .anyMatch(s -> s.getGithub().equals(github)))
                 .findFirst();
     }
 
@@ -80,7 +90,7 @@ public class OopCheckerConfig {
     public double getBonusFor(String github, String taskId) {
         return bonusEntries.stream()
                 .filter(e -> e.getStudentGithub().equals(github)
-                          && e.getTaskId().equals(taskId))
+                        && e.getTaskId().equals(taskId))
                 .mapToDouble(BonusEntry::getPoints)
                 .sum();
     }

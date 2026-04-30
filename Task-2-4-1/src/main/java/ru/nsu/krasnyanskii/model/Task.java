@@ -1,10 +1,9 @@
 package ru.nsu.krasnyanskii.model;
 
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
 
 /**
  * A course task (lab assignment).
