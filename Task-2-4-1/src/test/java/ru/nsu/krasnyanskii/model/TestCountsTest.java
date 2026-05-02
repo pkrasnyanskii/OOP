@@ -1,10 +1,11 @@
 package ru.nsu.krasnyanskii.model;
 
-import ru.nsu.krasnyanskii.model.results.TestCounts;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import ru.nsu.krasnyanskii.model.results.TestCounts;
 
 @DisplayName("TestCounts — test result aggregation")
 class TestCountsTest {
