@@ -7,8 +7,9 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -26,28 +27,34 @@ import ru.nsu.krasnyanskii.model.results.TestCounts;
 
 /**
  * Orchestrates the check pipeline for all students and tasks.
- * Pipeline per task: (1) compile, (2) javadoc + checkstyle, (3) tests.
- * Each step is skipped if the previous step failed.
+ *
+ * <p>Pipeline per task:
+ * (1) compile &rarr; (2) javadoc + checkstyle &rarr; (3) tests.
+ * Each step is skipped when the previous step failed.</p>
+ *
+ * <p>Students are checked in parallel via {@code parallelStream()}.</p>
  */
 public class ProjectChecker {
-    private static final Logger log = Logger.getLogger(ProjectChecker.class.getName());
 
     private final OopCheckerConfig config;
     private final GitManager       gitManager;
     private final ScoreCalculator  scoreCalc;
     private final ActivityTracker  activityTracker;
     private final ProcessRunner    processRunner;
+    private final CheckerView      view;
 
     /**
-     * Creates a ProjectChecker with the given config and local repos directory.
+     * Creates a ProjectChecker.
      *
      * @param config   parsed OOP checker configuration
      * @param reposDir directory where student repos will be cloned
+     * @param view     view for all console output
      */
-    public ProjectChecker(OopCheckerConfig config, Path reposDir) {
-        this.config    = config;
-        int timeout    = config.getScoringConfig().getTestTimeoutSeconds();
-        this.gitManager      = new GitManager(reposDir, timeout);
+    public ProjectChecker(OopCheckerConfig config, Path reposDir, CheckerView view) {
+        this.config          = config;
+        this.view            = view;
+        int timeout          = config.getScoringConfig().getTestTimeoutSeconds();
+        this.gitManager      = new GitManager(reposDir, timeout, view);
         this.scoreCalc       = new ScoreCalculator(config);
         this.activityTracker = new ActivityTracker(gitManager);
         this.processRunner   = new ProcessRunner(timeout);
@@ -55,99 +62,132 @@ public class ProjectChecker {
 
     /**
      * Runs checks for all students listed in the config's check instruction.
+     * Students are processed in parallel.
      *
      * @return list of per-student check results
      */
     public List<StudentCheckResult> runChecks() {
-        List<StudentCheckResult> results = new ArrayList<>();
         CheckInstruction instruction = config.getCheckInstruction();
-
-        for (String github : instruction.getStudentGithubs()) {
-            Optional<Student> studentOpt = config.findStudentByGithub(github);
-            if (studentOpt.isEmpty()) {
-                log.warning("Student not found in config: " + github);
-                continue;
-            }
-            Student student  = studentOpt.get();
-            String groupName = config.findGroupByStudentGithub(github)
-                    .map(Group::getName).orElse("Unknown");
-
-            StudentCheckResult studentResult =
-                    new StudentCheckResult(github, student.getFullName(), groupName);
-
-            Path repoPath;
-            try {
-                repoPath = gitManager.cloneOrUpdate(github, student.getRepoUrl());
-            } catch (Exception e) {
-                log.severe("Failed to clone repo for " + github + ": " + e.getMessage());
-                results.add(studentResult);
-                continue;
-            }
-
-            for (String taskId : instruction.getTaskIds()) {
-                TaskCheckResult taskResult = checkTask(repoPath, github, taskId);
-                taskResult.setScore(scoreCalc.calculate(github, taskResult));
-                studentResult.addTaskResult(taskResult);
-            }
-
-            // Bonus task: weekly activity
-            ActivityConfig activityConfig = config.getActivityConfig();
-            if (activityConfig != null) {
-                int    activeWeeks   = activityTracker.countActiveWeeks(repoPath, activityConfig);
-                double activityBonus = activityTracker.calculateActivityBonus(
-                        activeWeeks, activityConfig);
-                studentResult.setActiveWeeks(activeWeeks);
-                studentResult.setActivityBonus(activityBonus);
-            }
-
-            results.add(studentResult);
-        }
-
-        return results;
+        return instruction.getStudentGithubs().parallelStream()
+                .map(this::checkStudent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
-    // ── Pipeline steps ────────────────────────────────────────────────────────
+    // ── Per-student orchestration ─────────────────────────────────────────────
+
+    private StudentCheckResult checkStudent(String github) {
+        Optional<Student> studentOpt = config.findStudentByGithub(github);
+        if (studentOpt.isEmpty()) {
+            view.warnStudentNotFound(github);
+            return null;
+        }
+
+        Student student   = studentOpt.get();
+        String  groupName = config.findGroupByStudentGithub(github)
+                .map(Group::getName).orElse("Unknown");
+
+        StudentCheckResult studentResult =
+                new StudentCheckResult(github, student.getFullName(), groupName);
+
+        Path repoPath;
+        try {
+            repoPath = gitManager.cloneOrUpdate(github, student.getRepoUrl());
+        } catch (Exception e) {
+            view.errorCloneFailed(github, e.getMessage());
+            return studentResult;
+        }
+
+        CheckInstruction instruction = config.getCheckInstruction();
+        for (String taskId : instruction.getTaskIds()) {
+            TaskCheckResult taskResult = checkTask(repoPath, github, taskId);
+            taskResult.setScore(scoreCalc.calculate(github, taskResult));
+            studentResult.addTaskResult(taskResult);
+        }
+
+        addActivityBonus(repoPath, studentResult);
+        return studentResult;
+    }
+
+    private void addActivityBonus(Path repoPath, StudentCheckResult studentResult) {
+        ActivityConfig activityConfig = config.getActivityConfig();
+        if (activityConfig != null) {
+            int    activeWeeks   = activityTracker.countActiveWeeks(repoPath, activityConfig);
+            double activityBonus = activityTracker.calculateActivityBonus(
+                    activeWeeks, activityConfig);
+            studentResult.setActiveWeeks(activeWeeks);
+            studentResult.setActivityBonus(activityBonus);
+        }
+    }
+
+    // ── Pipeline orchestration ────────────────────────────────────────────────
 
     private TaskCheckResult checkTask(Path repoPath, String github, String taskId) {
         TaskCheckResult result = new TaskCheckResult(taskId);
         result.setLastCommitDate(gitManager.getLastCommitDate(repoPath, taskId));
 
-        // Step 1: compile
-        log.info("[" + github + "/" + taskId + "] Step 1: compile");
+        if (!runCompileStep(repoPath, github, taskId, result)) {
+            return result;
+        }
+        if (!runDocsAndStyleStep(repoPath, github, taskId, result)) {
+            return result;
+        }
+        runTestStep(repoPath, github, taskId, result);
+        return result;
+    }
+
+    /**
+     * Runs the compile step.
+     *
+     * @return true if compilation succeeded; false otherwise (caller must stop pipeline)
+     */
+    private boolean runCompileStep(Path repoPath, String github,
+                                   String taskId, TaskCheckResult result) {
+        view.infoStep(github, taskId, "Step 1: compile");
         ProcessResult compile = runGradle(repoPath, ":" + taskId + ":compileJava");
         result.setCompileOutput(compile.getOutput());
 
         if (compile.isTimedOut()) {
             result.setCompileStatus(BuildStatus.TIMEOUT);
-            return result;
+            return false;
         }
         if (!compile.isSuccess()) {
             result.setCompileStatus(BuildStatus.FAILED);
-            return result;
+            return false;
         }
         result.setCompileStatus(BuildStatus.SUCCESS);
+        return true;
+    }
 
-        // Step 2: javadoc + checkstyle (only if compile passed)
-        log.info("[" + github + "/" + taskId + "] Step 2: javadoc");
+    /**
+     * Runs the javadoc and checkstyle steps.
+     *
+     * @return true if both docs and style passed (or were unavailable); false otherwise
+     */
+    private boolean runDocsAndStyleStep(Path repoPath, String github,
+                                        String taskId, TaskCheckResult result) {
+        view.infoStep(github, taskId, "Step 2: javadoc");
         ProcessResult docs = runGradle(repoPath, ":" + taskId + ":javadoc");
         result.setDocsOutput(docs.getOutput());
         result.setDocsStatus(resolveStatus(docs));
 
-        log.info("[" + github + "/" + taskId + "] Step 2: checkstyle");
+        view.infoStep(github, taskId, "Step 2: checkstyle");
         ProcessResult style = runGradle(repoPath, ":" + taskId + ":checkstyleMain");
         result.setStyleOutput(style.getOutput());
         result.setStyleStatus(resolveStatus(style));
 
-        // Step 3: tests (only if step 2 passed; NOT_AVAILABLE is not a failure)
-        boolean step2Passed = isPassedOrNa(result.getDocsStatus())
+        boolean passed = isPassedOrNa(result.getDocsStatus())
                 && isPassedOrNa(result.getStyleStatus());
-
-        if (!step2Passed) {
-            log.info("[" + github + "/" + taskId + "] Step 3 skipped: docs/style failed");
-            return result;
+        if (!passed) {
+            view.infoStep(github, taskId, "Step 3 skipped: docs/style failed");
         }
+        return passed;
+    }
 
-        log.info("[" + github + "/" + taskId + "] Step 3: tests");
+    /** Runs the tests step and records counts or timeout status. */
+    private void runTestStep(Path repoPath, String github,
+                             String taskId, TaskCheckResult result) {
+        view.infoStep(github, taskId, "Step 3: tests");
         ProcessResult tests = runGradle(repoPath, ":" + taskId + ":test", "--continue");
         result.setTestOutput(tests.getOutput());
 
@@ -156,10 +196,9 @@ public class ProjectChecker {
         } else {
             TestCounts counts = parseTestResults(repoPath, taskId);
             result.setTestCounts(counts);
-            result.setTestStatus(counts.getFailed() > 0 ? BuildStatus.FAILED : BuildStatus.SUCCESS);
+            result.setTestStatus(
+                    counts.getFailed() > 0 ? BuildStatus.FAILED : BuildStatus.SUCCESS);
         }
-
-        return result;
     }
 
     // ── Helpers ───────────────────────────────────────────────────────────────
@@ -209,11 +248,11 @@ public class ProjectChecker {
                         try {
                             total.add(parseXmlFile(xml.toFile()));
                         } catch (Exception e) {
-                            log.warning("Could not parse " + xml + ": " + e.getMessage());
+                            view.warnXmlParseFailed(xml.toString(), e.getMessage());
                         }
                     });
         } catch (IOException e) {
-            log.warning("Could not walk " + dir + ": " + e.getMessage());
+            view.warnWalkFailed(dir.toString(), e.getMessage());
         }
         return total;
     }
@@ -223,8 +262,8 @@ public class ProjectChecker {
                 .newDocumentBuilder().parse(xmlFile);
 
         NodeList suites = doc.getElementsByTagName("testsuite");
-        int passed = 0;
-        int failed = 0;
+        int passed  = 0;
+        int failed  = 0;
         int skipped = 0;
 
         for (int i = 0; i < suites.getLength(); i++) {

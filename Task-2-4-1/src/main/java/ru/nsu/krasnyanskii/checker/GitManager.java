@@ -7,19 +7,27 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Logger;
 
 /** Performs git operations (clone, update, log queries) via the console git client. */
 public class GitManager {
-    private static final Logger log = Logger.getLogger(GitManager.class.getName());
+
     private static final DateTimeFormatter ISO_DATE = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     private final ProcessRunner runner;
-    private final Path reposDir;
+    private final Path          reposDir;
+    private final CheckerView   view;
 
-    public GitManager(Path reposDir, int timeoutSeconds) {
+    /**
+     * Creates a GitManager.
+     *
+     * @param reposDir       directory where student repos are stored
+     * @param timeoutSeconds timeout per git command in seconds
+     * @param view           view for all console output
+     */
+    public GitManager(Path reposDir, int timeoutSeconds, CheckerView view) {
         this.reposDir = reposDir;
-        this.runner = new ProcessRunner(timeoutSeconds);
+        this.runner   = new ProcessRunner(timeoutSeconds);
+        this.view     = view;
     }
 
     /**
@@ -47,18 +55,19 @@ public class GitManager {
      * @throws IOException          on clone failure
      * @throws InterruptedException if interrupted while waiting for git
      */
-    public Path cloneOrUpdate(String github, String repoUrl) throws IOException, InterruptedException {
+    public Path cloneOrUpdate(String github, String repoUrl)
+            throws IOException, InterruptedException {
         Path repoPath = reposDir.resolve(github);
 
         if (Files.exists(repoPath.resolve(".git"))) {
-            log.info("Updating repo for " + github);
+            view.infoUpdating(github);
             ProcessResult fetch = runner.run(repoPath, "git", "fetch", "--all", "--prune");
-            log.fine(fetch.getOutput());
+            view.debugFetchOutput(fetch.getOutput());
             String branch = detectMainBranch(repoPath);
             runner.run(repoPath, "git", "checkout", branch);
             runner.run(repoPath, "git", "reset", "--hard", "origin/" + branch);
         } else {
-            log.info("Cloning repo for " + github + " from " + repoUrl);
+            view.infoCloning(github, repoUrl);
             Files.createDirectories(reposDir);
             ProcessResult clone = runner.run(reposDir, "git", "clone", repoUrl, github);
             if (!clone.isSuccess()) {
@@ -79,7 +88,8 @@ public class GitManager {
     public LocalDate getLastCommitDate(Path repoPath, String taskSubDir) {
         try {
             ProcessResult result = runner.run(repoPath,
-                    "git", "log", "-1", "--format=%ad", "--date=format:%Y-%m-%d", "--", taskSubDir);
+                    "git", "log", "-1", "--format=%ad",
+                    "--date=format:%Y-%m-%d", "--", taskSubDir);
             String out = result.getOutput().trim();
             if (out.isEmpty()) {
                 return null;
@@ -91,7 +101,8 @@ public class GitManager {
     }
 
     /**
-     * Returns the set of ISO year-week strings (e.g. "2024-08") for weeks with at least one commit.
+     * Returns the set of ISO year-week strings (e.g. "2024-08")
+     * for weeks with at least one commit.
      *
      * @param repoPath local repository path
      * @param from     course start date (inclusive)
@@ -114,7 +125,7 @@ public class GitManager {
                 }
             }
         } catch (Exception e) {
-            log.warning("Failed to get active weeks: " + e.getMessage());
+            view.warnActiveWeeksFailed(e.getMessage());
         }
         return weeks;
     }
@@ -131,7 +142,7 @@ public class GitManager {
                 return "master";
             }
         } catch (Exception e) {
-            log.fine("Could not read symbolic-ref: " + e.getMessage());
+            view.debug("Could not read symbolic-ref: " + e.getMessage());
         }
         try {
             ProcessResult r = runner.run(
@@ -140,7 +151,7 @@ public class GitManager {
                 return "main";
             }
         } catch (Exception e) {
-            log.fine("Could not verify origin/main: " + e.getMessage());
+            view.debug("Could not verify origin/main: " + e.getMessage());
         }
         return "master";
     }

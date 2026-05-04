@@ -59,15 +59,30 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
+val jvmOpenArgs = listOf(
+    "--add-opens=java.base/java.lang=ALL-UNNAMED",
+    "--add-opens=java.base/java.lang.reflect=ALL-UNNAMED",
+    "--add-opens=java.base/java.util=ALL-UNNAMED",
+    "--add-opens=java.base/java.io=ALL-UNNAMED"
+)
+
 tasks.test {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        excludeTags("integration")
+    }
     finalizedBy(tasks.jacocoTestReport)
-    jvmArgs(
-        "--add-opens=java.base/java.lang=ALL-UNNAMED",
-        "--add-opens=java.base/java.lang.reflect=ALL-UNNAMED",
-        "--add-opens=java.base/java.util=ALL-UNNAMED",
-        "--add-opens=java.base/java.io=ALL-UNNAMED"
-    )
+    jvmArgs(jvmOpenArgs)
+}
+
+tasks.register<Test>("integrationTest") {
+    description = "Runs integration tests that require network access."
+    group = "verification"
+    useJUnitPlatform {
+        includeTags("integration")
+    }
+    jvmArgs(jvmOpenArgs)
+    // Integration tests may take longer — use a generous timeout
+    systemProperty("junit.jupiter.execution.timeout.default", "5m")
 }
 
 tasks.javadoc {
