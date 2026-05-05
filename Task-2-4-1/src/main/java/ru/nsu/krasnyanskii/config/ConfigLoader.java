@@ -45,7 +45,6 @@ public class ConfigLoader {
     public static OopCheckerConfig loadFromFile(File scriptFile) throws IOException {
         try {
             CompilerConfiguration cc = new CompilerConfiguration();
-            // Reference the Groovy class by name to avoid a Java to Groovy compile-time dependency
             cc.setScriptBaseClass("ru.nsu.krasnyanskii.dsl.OopCheckerScript");
 
             groovy.lang.GroovyShell shell = new groovy.lang.GroovyShell(
@@ -56,7 +55,6 @@ public class ConfigLoader {
 
             Script script = shell.parse(scriptFile);
 
-            // Access via Java interface to avoid a compile-time dependency on the Groovy class
             OopCheckerScriptInterface dslScript = (OopCheckerScriptInterface) script;
             dslScript.setScriptDir(scriptFile.getParentFile());
 

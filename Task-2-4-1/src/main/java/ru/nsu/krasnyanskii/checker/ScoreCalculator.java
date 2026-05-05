@@ -48,7 +48,6 @@ public class ScoreCalculator {
             return 0.0;
         }
 
-        // Compile is the gate; no compile = 0
         if (result.getCompileStatus() != BuildStatus.SUCCESS) {
             return 0.0;
         }
@@ -73,7 +72,7 @@ public class ScoreCalculator {
      */
     private double baseScore(TestCounts tests, Task task) {
         if (tests.getTotal() == 0) {
-            return task.getMaxScore(); // compiled but no tests: full score
+            return task.getMaxScore();
         }
         return ((double) tests.getPassed() / tests.getTotal()) * task.getMaxScore();
     }

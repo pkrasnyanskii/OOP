@@ -3,6 +3,7 @@ package ru.nsu.krasnyanskii.checker;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.PrintStream;
 import java.nio.file.Files;
@@ -24,24 +25,28 @@ import ru.nsu.krasnyanskii.model.results.TaskCheckResult;
 /**
  * Integration tests: clones a real public repository and runs the full check pipeline.
  *
- * <p>These tests require network access and a working git installation.
- * They are excluded from the regular {@code test} task and can be run separately:</p>
+ * <p>Requires network access and a working git installation.
+ * Excluded from the regular {@code test} task; run separately:</p>
  * <pre>./gradlew integrationTest</pre>
  */
 @Tag("integration")
-@DisplayName("ProjectChecker — integration against real repository")
+@DisplayName("ProjectChecker — full pipeline against a real repository")
 class ProjectCheckerIntegrationTest {
 
     private static final String GITHUB   = "pkrasnyanskii";
     private static final String REPO_URL = "https://github.com/pkrasnyanskii/OOP";
-    private static final String TASK_ID  = "Task-1-1";
+
+    private static final String TASK_1_1   = "Task-1-1";
+    private static final String TASK_1_2   = "Task-1-2";
+    private static final String TASK_1_3   = "Task-1-3";
+    private static final String TASK_1_5_1 = "Task-1-5-1";
 
     @Test
-    @DisplayName("Task-1-1 (HeapSort) compiles and tests pass in pkrasnyanskii/OOP")
-    void task11CompilesAndTestsPass(@TempDir Path tempDir) throws Exception {
-        OopCheckerConfig config = buildConfig();
+    @DisplayName("Semester-1 tasks compile, tests pass, grade >= 3")
+    void semester1Tasks(@TempDir Path tempDir) throws Exception {
+        List<String> tasks = List.of(TASK_1_1, TASK_1_2, TASK_1_3, TASK_1_5_1);
+        OopCheckerConfig config = buildConfig(tasks);
 
-        // Use a silent view so integration test output is clean
         CheckerView view = new CheckerView(
                 new PrintStream(Files.newOutputStream(tempDir.resolve("checker.log"))),
                 new PrintStream(Files.newOutputStream(tempDir.resolve("report.html"))),
@@ -57,34 +62,49 @@ class ProjectCheckerIntegrationTest {
         StudentCheckResult sr = results.get(0);
         assertEquals(GITHUB, sr.getStudentGithub());
 
-        TaskCheckResult taskResult = sr.getTaskResult(TASK_ID)
-                .orElseThrow(() -> new AssertionError("No result for " + TASK_ID));
-
-        assertEquals(BuildStatus.SUCCESS, taskResult.getCompileStatus(),
-                "Task-1-1 should compile successfully");
-        assertNotNull(taskResult.getTestCounts(),
-                "Test counts should be populated");
-        assertEquals(0, taskResult.getTestCounts().getFailed(),
-                "Task-1-1 should have no failing tests");
+        for (String taskId : tasks) {
+            assertTaskPasses(sr, taskId, config);
+        }
     }
 
-    private OopCheckerConfig buildConfig() {
+    /**
+     * Asserts that a task compiled successfully, all tests pass,
+     * and the score is at least 10% of max (satisfactory threshold).
+     */
+    private void assertTaskPasses(StudentCheckResult sr, String taskId, OopCheckerConfig config) {
+        TaskCheckResult taskResult = sr.getTaskResult(taskId)
+                .orElseThrow(() -> new AssertionError("No result for " + taskId));
+
+        assertEquals(BuildStatus.SUCCESS, taskResult.getCompileStatus(),
+                taskId + " should compile successfully");
+        assertNotNull(taskResult.getTestCounts(), taskId + ": test counts should be populated");
+        assertEquals(0, taskResult.getTestCounts().getFailed(),
+                taskId + ": no failing tests expected");
+
+        double score    = taskResult.getScore();
+        double maxScore = config.findTaskById(taskId).map(Task::getMaxScore).orElse(100.0);
+        double pct      = maxScore > 0 ? score / maxScore * 100 : 0;
+        assertTrue(pct >= 10.0,
+                taskId + ": score " + score + " / " + maxScore + " = " + pct + "% — expected >= 10%");
+    }
+
+    private OopCheckerConfig buildConfig(List<String> taskIds) {
         OopCheckerConfig config = new OopCheckerConfig();
 
-        // Task under test
-        Task task = new Task(TASK_ID, "Сортировка кучей", 100.0, null, null);
-        config.addTask(task);
+        for (String id : taskIds) {
+            config.addTask(new Task(id, id, 100.0, null, null));
+        }
 
-        // Student: real GitHub account
-        Student student = new Student(GITHUB, "Красняnskий Пётр", REPO_URL);
-        Group group = new Group("TEST");
+        config.getScoringConfig().getGradeScale().setSatisfactory(10.0);
+
+        Student student = new Student(GITHUB, "Krasnyansky Pyotr", REPO_URL);
+        Group group = new Group("24214");
         group.addStudent(student);
         config.addGroup(group);
 
-        // Check instruction
         CheckInstruction instruction = new CheckInstruction();
         instruction.getStudentGithubs().add(GITHUB);
-        instruction.getTaskIds().add(TASK_ID);
+        instruction.getTaskIds().addAll(taskIds);
         config.setCheckInstruction(instruction);
 
         return config;

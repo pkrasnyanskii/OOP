@@ -68,14 +68,4 @@ public class ProcessRunner {
         return new ProcessResult(process.exitValue(), output.toString(), false);
     }
 
-    /**
-     * Returns the platform-specific Gradle wrapper command name.
-     *
-     * @return "gradlew.bat" on Windows, "./gradlew" elsewhere
-     */
-    public static String gradlewCommand() {
-        return System.getProperty("os.name", "").toLowerCase().contains("win")
-                ? "gradlew.bat"
-                : "./gradlew";
-    }
 }
