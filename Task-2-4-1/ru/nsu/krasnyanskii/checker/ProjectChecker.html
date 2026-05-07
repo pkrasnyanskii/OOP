@@ -78,8 +78,12 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ProjectChecker</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">Orchestrates the check pipeline for all students and tasks.
- Pipeline per task: (1) compile, (2) javadoc + checkstyle, (3) tests.
- Each step is skipped if the previous step failed.</div>
+
+ <p>Pipeline per task:
+ (1) compile &rarr; (2) javadoc + checkstyle &rarr; (3) tests.
+ Each step is skipped when the previous step failed.</p>
+
+ <p>Students are checked in parallel via <code>parallelStream()</code>.</p></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -91,10 +95,11 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.krasnyanskii.model.OopCheckerConfig,java.nio.file.Path)" class="member-name-link">ProjectChecker</a><wbr>(<a href="../model/OopCheckerConfig.html" title="class in ru.nsu.krasnyanskii.model">OopCheckerConfig</a>&nbsp;config,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;reposDir)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.krasnyanskii.model.OopCheckerConfig,java.nio.file.Path,ru.nsu.krasnyanskii.checker.CheckerView)" class="member-name-link">ProjectChecker</a><wbr>(<a href="../model/OopCheckerConfig.html" title="class in ru.nsu.krasnyanskii.model">OopCheckerConfig</a>&nbsp;config,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;reposDir,
+ <a href="CheckerView.html" title="class in ru.nsu.krasnyanskii.checker">CheckerView</a>&nbsp;view)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Creates a ProjectChecker with the given config and local repos directory.</div>
+<div class="block">Creates a ProjectChecker.</div>
 </div>
 </div>
 </section>
@@ -133,15 +138,17 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(ru.nsu.krasnyanskii.model.OopCheckerConfig,java.nio.file.Path)">
+<section class="detail" id="&lt;init&gt;(ru.nsu.krasnyanskii.model.OopCheckerConfig,java.nio.file.Path,ru.nsu.krasnyanskii.checker.CheckerView)">
 <h3>ProjectChecker</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ProjectChecker</span><wbr><span class="parameters">(<a href="../model/OopCheckerConfig.html" title="class in ru.nsu.krasnyanskii.model">OopCheckerConfig</a>&nbsp;config,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;reposDir)</span></div>
-<div class="block">Creates a ProjectChecker with the given config and local repos directory.</div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;reposDir,
+ <a href="CheckerView.html" title="class in ru.nsu.krasnyanskii.checker">CheckerView</a>&nbsp;view)</span></div>
+<div class="block">Creates a ProjectChecker.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>config</code> - parsed OOP checker configuration</dd>
 <dd><code>reposDir</code> - directory where student repos will be cloned</dd>
+<dd><code>view</code> - view for all console output</dd>
 </dl>
 </section>
 </li>
@@ -157,7 +164,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="runChecks()">
 <h3>runChecks</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/results/StudentCheckResult.html" title="class in ru.nsu.krasnyanskii.model.results">StudentCheckResult</a>&gt;</span>&nbsp;<span class="element-name">runChecks</span>()</div>
-<div class="block">Runs checks for all students listed in the config's check instruction.</div>
+<div class="block">Runs checks for all students listed in the config's check instruction.
+ Students are processed in parallel.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>list of per-student check results</dd>
