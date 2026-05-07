@@ -4,10 +4,8 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
 /**
- * View layer for the OOP Checker application.
- *
- * <p><b>SRP</b>: single class responsible for all console output.
- * No other class calls {@code System.err} or {@code System.out} directly.</p>
+ * Single point of all console output for the application (SRP).
+ * No other class writes to {@code System.out} / {@code System.err} directly.
  */
 public class CheckerView {
 
@@ -15,17 +13,15 @@ public class CheckerView {
     private final PrintStream out;
     private final boolean verbose;
 
-    /** Creates a CheckerView writing to standard streams (non-verbose). */
+    /** Uses the standard streams, verbose mode off. */
     public CheckerView() {
         this(System.err, new PrintStream(System.out, true, StandardCharsets.UTF_8), false);
     }
 
     /**
-     * Creates a CheckerView with custom streams and verbosity flag.
-     *
-     * @param err     stream for diagnostics / warnings
+     * @param err     stream for diagnostics and warnings
      * @param out     stream for the HTML report
-     * @param verbose if true, debug-level messages are printed
+     * @param verbose whether to print debug messages
      */
     public CheckerView(PrintStream err, PrintStream out, boolean verbose) {
         this.err     = err;
@@ -33,37 +29,31 @@ public class CheckerView {
         this.verbose = verbose;
     }
 
-    // ── Startup ──────────────────────────────────────────────────────────────
-
-    /** Prints the application banner. */
+    /** Prints the startup banner. */
     public void printBanner() {
         err.println("=== OOP Checker ===");
     }
 
     /**
-     * Prints the resolved working directory.
-     *
-     * @param path absolute path of the working directory
+     * @param path working directory
      */
     public void printWorkDir(String path) {
         err.println("Working dir: " + path);
     }
 
     /**
-     * Prints how many students and tasks were loaded from the config.
-     *
-     * @param students number of students
-     * @param tasks    number of tasks
+     * @param students number of students in the config
+     * @param tasks    number of tasks in the config
      */
     public void printConfigLoaded(int students, int tasks) {
         err.println("Config loaded: " + students + " student(s), " + tasks + " task(s).");
     }
 
     /**
-     * Prints a config load error with hint lines.
+     * Prints a config load error with the full cause chain and a usage hint.
      *
      * @param msg   top-level error message
-     * @param cause root cause (may be null)
+     * @param cause cause chain (may be null)
      */
     public void printConfigError(String msg, Throwable cause) {
         err.println();
@@ -81,16 +71,14 @@ public class CheckerView {
     }
 
     /**
-     * Prints the path where the HTML report was saved.
-     *
-     * @param path output file path
+     * @param path path to the saved report file
      */
     public void printReportSaved(String path) {
         err.println("Report saved: " + path);
     }
 
     /**
-     * Prints the HTML report to stdout.
+     * Writes the HTML report to the output stream.
      *
      * @param html full HTML document
      */
@@ -98,56 +86,52 @@ public class CheckerView {
         out.print(html);
     }
 
-    // ── Environment checks ────────────────────────────────────────────────────
-
     /**
-     * Prints the detected git version string.
-     *
-     * @param version version output from {@code git --version}
+     * @param version output of {@code git --version}
      */
     public void printGitVersion(String version) {
         err.println("Git: " + version);
     }
 
-    /** Warns that git was not found on PATH. */
+    /** Warns that git is not available on PATH. */
     public void warnGitNotFound() {
         err.println("WARNING: git not found on PATH. Install git and retry.");
     }
 
-    /** Warns that the git check itself failed. */
+    /**
+     * @param msg reason the git check failed
+     */
     public void warnGitCheckFailed(String msg) {
         err.println("WARNING: could not check git: " + msg);
     }
 
     /**
-     * Prints the configured git user name.
-     *
      * @param user value of {@code git config --global user.name}
      */
     public void printGitUser(String user) {
         err.println("Git user: " + user);
     }
 
-    /** Warns that {@code git config --global user.name} is not set. */
+    /** Warns that {@code user.name} is not set in the global git config. */
     public void warnGitUserNotSet() {
         err.println("WARNING: git config --global user.name is not set.");
     }
 
-    /** Warns that reading the git user name failed. */
+    /**
+     * @param msg reason the user.name check failed
+     */
     public void warnGitUserCheckFailed(String msg) {
         err.println("WARNING: could not read git user.name: " + msg);
     }
 
     /**
-     * Prints the configured git credential helper.
-     *
-     * @param helper value of {@code git config --global credential.helper}
+     * @param helper value of {@code credential.helper}
      */
     public void printCredentialHelper(String helper) {
         err.println("Git credential.helper: " + helper + " (OK)");
     }
 
-    /** Warns that no credential helper is configured, which may cause password prompts. */
+    /** Warns that no credential helper is configured — cloning private repos may stall. */
     public void warnCredentialHelperNotSet() {
         err.println();
         err.println("WARNING: git credential.helper is not configured.");
@@ -156,37 +140,31 @@ public class CheckerView {
         err.println();
     }
 
-    /** Warns that the credential helper check itself failed. */
+    /**
+     * @param msg reason the credential helper check failed
+     */
     public void warnCredentialHelperCheckFailed(String msg) {
         err.println("WARNING: could not check credential.helper: " + msg);
     }
 
-    // ── ProjectChecker progress ───────────────────────────────────────────────
-
     /**
-     * Prints a pipeline step progress message.
-     *
-     * @param github student GitHub login
+     * @param github student's GitHub login
      * @param taskId task identifier
-     * @param step   description of the current step
+     * @param step   description of the current pipeline step
      */
     public void infoStep(String github, String taskId, String step) {
         err.println("[" + github + "/" + taskId + "] " + step);
     }
 
     /**
-     * Warns that a student GitHub login was not found in the config.
-     *
-     * @param github student GitHub login
+     * @param github student not found in the config
      */
     public void warnStudentNotFound(String github) {
         err.println("WARNING: Student not found in config: " + github);
     }
 
     /**
-     * Prints an error when cloning a student repository failed.
-     *
-     * @param github student GitHub login
+     * @param github student whose repo could not be cloned
      * @param msg    error message
      */
     public void errorCloneFailed(String github, String msg) {
@@ -194,60 +172,47 @@ public class CheckerView {
     }
 
     /**
-     * Warns that a JUnit XML result file could not be parsed.
-     *
-     * @param path path of the XML file
-     * @param msg  error message
+     * @param path path to the XML test-results file
+     * @param msg  parse error message
      */
     public void warnXmlParseFailed(String path, String msg) {
         err.println("WARNING: Could not parse " + path + ": " + msg);
     }
 
     /**
-     * Warns that the test-results directory could not be traversed.
-     *
-     * @param dir path of the directory
+     * @param dir test-results directory
      * @param msg error message
      */
     public void warnWalkFailed(String dir, String msg) {
         err.println("WARNING: Could not walk " + dir + ": " + msg);
     }
 
-    // ── GitManager progress ───────────────────────────────────────────────────
-
     /**
-     * Prints a message when a student repository is being cloned for the first time.
-     *
-     * @param github student GitHub login
-     * @param url    repository URL
+     * @param github student whose repo is being cloned
+     * @param url    remote repository URL
      */
     public void infoCloning(String github, String url) {
         err.println("Cloning repo for " + github + " from " + url);
     }
 
     /**
-     * Prints a message when a student repository is being updated via fetch.
-     *
-     * @param github student GitHub login
+     * @param github student whose repo is being updated
      */
     public void infoUpdating(String github) {
         err.println("Updating repo for " + github);
     }
 
     /**
-     * Warns that the active-weeks git query failed.
-     *
-     * @param msg error message
+     * @param msg error message from the active-weeks calculation
      */
     public void warnActiveWeeksFailed(String msg) {
         err.println("WARNING: Failed to get active weeks: " + msg);
     }
 
     /**
-     * Prints raw fetch output at debug level.
-     * Only printed when this view was created with {@code verbose = true}.
+     * Prints git fetch output; no-op unless verbose mode is on.
      *
-     * @param fetchOutput output from {@code git fetch}
+     * @param fetchOutput raw output from {@code git fetch}
      */
     public void debugFetchOutput(String fetchOutput) {
         if (verbose) {
@@ -256,10 +221,9 @@ public class CheckerView {
     }
 
     /**
-     * Prints a debug-level message.
-     * Only printed when this view was created with {@code verbose = true}.
+     * Prints a debug message; no-op unless verbose mode is on.
      *
-     * @param msg debug message
+     * @param msg message to print
      */
     public void debug(String msg) {
         if (verbose) {

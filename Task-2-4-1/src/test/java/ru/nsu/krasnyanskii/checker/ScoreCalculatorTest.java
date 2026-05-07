@@ -134,7 +134,7 @@ class ScoreCalculatorTest {
     @DisplayName("After soft deadline → 1 point penalty per day")
     void afterSoftDeadline_penaltyPerDay() {
         TaskCheckResult r = successResult(10, 0, 0);
-        r.setLastCommitDate(LocalDate.of(2024, 3, 6)); // 5 days after soft deadline
+        r.setLastCommitDate(LocalDate.of(2024, 3, 6));
         assertEquals(95.0, calculator.calculate(GITHUB, r), 0.001);
     }
 
@@ -151,7 +151,6 @@ class ScoreCalculatorTest {
     void bonusAdded() {
         config.addBonusEntry(new BonusEntry(GITHUB, TASK_ID, 5.0));
         TaskCheckResult r = successResult(10, 0, 0);
-        // 100 + 5, but capped at maxScore=100
         assertEquals(100.0, calculator.calculate(GITHUB, r), 0.001);
     }
 
@@ -159,8 +158,7 @@ class ScoreCalculatorTest {
     @DisplayName("Bonus cannot exceed maxScore")
     void bonusCappedAtMaxScore() {
         config.addBonusEntry(new BonusEntry(GITHUB, TASK_ID, 50.0));
-        TaskCheckResult r = successResult(5, 5, 0); // base = 50
-        // 50 + 50 = 100, not 105
+        TaskCheckResult r = successResult(5, 5, 0);
         assertEquals(100.0, calculator.calculate(GITHUB, r), 0.001);
     }
 }

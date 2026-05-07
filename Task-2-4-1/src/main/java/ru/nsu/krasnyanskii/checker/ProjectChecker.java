@@ -74,8 +74,6 @@ public class ProjectChecker {
                 .collect(Collectors.toList());
     }
 
-    // ── Per-student orchestration ─────────────────────────────────────────────
-
     private StudentCheckResult checkStudent(String github) {
         Optional<Student> studentOpt = config.findStudentByGithub(github);
         if (studentOpt.isEmpty()) {
@@ -119,8 +117,6 @@ public class ProjectChecker {
             studentResult.setActivityBonus(activityBonus);
         }
     }
-
-    // ── Pipeline orchestration ────────────────────────────────────────────────
 
     private TaskCheckResult checkTask(Path repoPath, String github, String taskId) {
         TaskCheckResult result = new TaskCheckResult(taskId);
@@ -184,7 +180,9 @@ public class ProjectChecker {
         return passed;
     }
 
-    /** Runs the tests step and records counts or timeout status. */
+    /**
+     * Runs the test step and records counts or timeout status.
+     */
     private void runTestStep(Path repoPath, String github,
                              String taskId, TaskCheckResult result) {
         view.infoStep(github, taskId, "Step 3: tests");
@@ -201,8 +199,6 @@ public class ProjectChecker {
         }
     }
 
-    // ── Helpers ───────────────────────────────────────────────────────────────
-
     private BuildStatus resolveStatus(ProcessResult pr) {
         if (pr.isTimedOut()) {
             return BuildStatus.TIMEOUT;
@@ -217,10 +213,8 @@ public class ProjectChecker {
         return status == BuildStatus.SUCCESS || status == BuildStatus.NOT_AVAILABLE;
     }
 
-    private ProcessResult runGradle(Path repoPath, String... tasks) {
-        List<String> cmd = new ArrayList<>();
-        cmd.add(ProcessRunner.gradlewCommand());
-        cmd.addAll(Arrays.asList(tasks));
+    private ProcessResult runGradle(Path repoPath, String... args) {
+        List<String> cmd = buildGradleCommand(repoPath, args);
         try {
             return processRunner.run(repoPath, cmd);
         } catch (IOException | InterruptedException e) {
@@ -228,12 +222,33 @@ public class ProjectChecker {
         }
     }
 
+    /**
+     * Builds the command list for invoking gradlew.
+     * On Windows, batch files (.bat) cannot be started directly via ProcessBuilder —
+     * they need to go through cmd.exe.
+     */
+    private List<String> buildGradleCommand(Path repoPath, String[] args) {
+        List<String> cmd = new ArrayList<>();
+        boolean isWin = System.getProperty("os.name", "").toLowerCase().contains("win");
+        if (isWin) {
+            cmd.add("cmd");
+            cmd.add("/c");
+            cmd.add(repoPath.resolve("gradlew.bat").toAbsolutePath().toString());
+        } else {
+            cmd.add(repoPath.resolve("gradlew").toAbsolutePath().toString());
+        }
+        cmd.addAll(Arrays.asList(args));
+        return cmd;
+    }
+
     private boolean isTaskNotFound(String output) {
         return (output.contains("Task '") && output.contains("' not found"))
                 || (output.contains("Could not find") && output.contains("task"));
     }
 
-    /** Parses JUnit XML files from build/test-results and aggregates counts. */
+    /**
+     * Parses JUnit XML files from {@code build/test-results} and aggregates counts.
+     */
     private TestCounts parseTestResults(Path repoPath, String taskId) {
         TestCounts total = new TestCounts();
         Path dir = repoPath.resolve(taskId).resolve("build").resolve("test-results");

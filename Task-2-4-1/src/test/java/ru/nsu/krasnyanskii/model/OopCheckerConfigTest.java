@@ -25,7 +25,7 @@ class OopCheckerConfigTest {
         config.addGroup(group);
 
         config.addBonusEntry(new BonusEntry("ivanov", "Task-1-1", 5.0));
-        config.addBonusEntry(new BonusEntry("ivanov", "Task-1-1", 3.0)); // second bonus sums
+        config.addBonusEntry(new BonusEntry("ivanov", "Task-1-1", 3.0));
     }
 
     @Test

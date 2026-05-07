@@ -31,22 +31,6 @@ public class GitManager {
     }
 
     /**
-     * Verifies that the repository URL is reachable without auth prompts.
-     *
-     * @param repoUrl repository URL to probe
-     * @return true if git ls-remote succeeds
-     */
-    public boolean verifyGitAuth(String repoUrl) {
-        try {
-            ProcessResult result = runner.run(reposDir,
-                    "git", "ls-remote", "--exit-code", "--heads", repoUrl);
-            return result.isSuccess();
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    /**
      * Clones the repository if it does not exist locally, or fetches and resets to origin HEAD.
      *
      * @param github  GitHub username (used as the local directory name)

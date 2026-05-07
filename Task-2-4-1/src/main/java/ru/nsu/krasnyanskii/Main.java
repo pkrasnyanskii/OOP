@@ -48,12 +48,10 @@ public class Main {
         view.printBanner();
         view.printWorkDir(workDir.getAbsolutePath());
 
-        // Step 0: environment checks
         ProcessRunner    envRunner = new ProcessRunner(10);
         EnvironmentChecker envCheck = new EnvironmentChecker(envRunner, view);
         envCheck.check(skipAuthCheck);
 
-        // Step 1: load DSL config
         OopCheckerConfig config;
         try {
             config = ConfigLoader.loadFromDirectory(workDir);
@@ -67,12 +65,10 @@ public class Main {
                 config.getCheckInstruction().getStudentGithubs().size(),
                 config.getCheckInstruction().getTaskIds().size());
 
-        // Step 2: run checks
         Path reposDir = workDir.toPath().resolve("repos");
         ProjectChecker checker = new ProjectChecker(config, reposDir, view);
         List<StudentCheckResult> results = checker.runChecks();
 
-        // Step 3: generate HTML report
         HtmlReporter reporter = new HtmlReporter(config);
         String html = reporter.generate(results);
 

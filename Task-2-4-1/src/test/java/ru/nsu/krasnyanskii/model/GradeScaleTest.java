@@ -13,7 +13,7 @@ class GradeScaleTest {
 
     @BeforeEach
     void setUp() {
-        scale = new GradeScale(); // defaults: excellent=90, good=75, satisfactory=60
+        scale = new GradeScale();
     }
 
     @Test

@@ -3,13 +3,8 @@ package ru.nsu.krasnyanskii.checker;
 import java.io.File;
 
 /**
- * Verifies that the runtime environment is properly configured for git operations.
- *
- * <p><b>SRP</b>: responsible solely for environment pre-flight checks.
- * All output is delegated to {@link CheckerView}.</p>
- *
- * <p><b>DIP</b>: depends on {@link ProcessRunner} and {@link CheckerView} abstractions,
- * not on concrete I/O or process-management implementations.</p>
+ * Runs pre-flight environment checks before the main pipeline starts:
+ * git availability, global user config, and credential helper setup.
  */
 public class EnvironmentChecker {
 
@@ -17,9 +12,7 @@ public class EnvironmentChecker {
     private final CheckerView   view;
 
     /**
-     * Creates an EnvironmentChecker.
-     *
-     * @param runner process runner used for git commands
+     * @param runner process runner used to invoke git commands
      * @param view   view for all console output
      */
     public EnvironmentChecker(ProcessRunner runner, CheckerView view) {
@@ -28,9 +21,9 @@ public class EnvironmentChecker {
     }
 
     /**
-     * Runs all pre-flight environment checks.
+     * Runs all pre-flight checks.
      *
-     * @param skipAuthCheck if true, the credential-helper check is skipped
+     * @param skipAuthCheck when true, the credential.helper check is skipped
      */
     public void check(boolean skipAuthCheck) {
         checkGitAvailable();
@@ -40,7 +33,6 @@ public class EnvironmentChecker {
         }
     }
 
-    /** Checks that git is available on PATH. */
     private void checkGitAvailable() {
         try {
             ProcessResult r = runner.run(new File(".").toPath(), "git", "--version");
@@ -54,7 +46,6 @@ public class EnvironmentChecker {
         }
     }
 
-    /** Checks that {@code git config --global user.name} is set. */
     private void checkGitUserConfigured() {
         try {
             ProcessResult r = runner.run(
@@ -69,7 +60,6 @@ public class EnvironmentChecker {
         }
     }
 
-    /** Warns if git may prompt for credentials (no credential helper configured). */
     private void warnIfAuthMayPrompt() {
         try {
             ProcessResult r = runner.run(

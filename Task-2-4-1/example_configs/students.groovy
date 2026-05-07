@@ -36,11 +36,10 @@ groups {
         }
     }
 
-    // Реальный репозиторий — используется для интеграционных тестов
-    group("TEST") {
+    group("24214") {
         student {
             github = "pkrasnyanskii"
-            name   = "Красняnskий Пётр"
+            name   = "Краснянский Пётр"
             repo   = "https://github.com/pkrasnyanskii/OOP"
         }
     }
