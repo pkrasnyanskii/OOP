@@ -154,10 +154,10 @@ public class HtmlReporter {
         sb.append("<th>Студент</th><th>Группа</th>");
         sb.append("<th>Активных недель</th><th>Бонус</th></tr>\n</thead>\n<tbody>\n");
         for (StudentCheckResult sr : results) {
-            String cls = sr.getActiveWeeks() >= ac.getMinActiveWeeks() ? "pass" : "warn";
             sb.append("<tr>");
             sb.append("<td><b>").append(esc(sr.getStudentName())).append("</b></td>");
             sb.append("<td>").append(esc(sr.getGroupName())).append("</td>");
+            String cls = sr.getActiveWeeks() >= ac.getMinActiveWeeks() ? "pass" : "warn";
             sb.append("<td class=\"").append(cls).append("\">");
             sb.append(sr.getActiveWeeks()).append("</td>");
             sb.append("<td>").append(fmt(sr.getActivityBonus())).append(" б.</td>");
@@ -183,15 +183,15 @@ public class HtmlReporter {
         sb.append("</tr>\n</thead>\n<tbody>\n");
         for (StudentCheckResult sr : results) {
             double score = sr.getTotalScore();
-            double pct   = totalMaxScore > 0 ? score / totalMaxScore * 100 : 0;
             int grade    = gradeForScore(score, totalMaxScore > 0 ? totalMaxScore : 100);
-            String cls   = gradeClass(grade);
             sb.append("<tr>");
             sb.append("<td><b>").append(esc(sr.getStudentName())).append("</b></td>");
             sb.append("<td>").append(esc(sr.getGroupName())).append("</td>");
             sb.append("<td>").append(fmt(score)).append(" / ").append(fmt(totalMaxScore));
             sb.append("</td>");
+            double pct = totalMaxScore > 0 ? score / totalMaxScore * 100 : 0;
             sb.append("<td>").append(String.format("%.1f%%", pct)).append("</td>");
+            String cls = gradeClass(grade);
             sb.append("<td class=\"grade ").append(cls).append("\"><b>");
             sb.append(grade).append("</b></td>");
             sb.append("</tr>\n");
@@ -226,12 +226,14 @@ public class HtmlReporter {
 
         StringBuilder cell = new StringBuilder();
         double score = tr.getScore();
-        String scoreClass = score > 0 ? (tr.getTestCounts().getFailed() > 0 ? "warn" : "pass") : "fail";
+        boolean hasFailed = tr.getTestCounts().getFailed() > 0;
+        String scoreClass = score > 0 ? (hasFailed ? "warn" : "pass") : "fail";
 
         cell.append("<td class=\"").append(scoreClass).append("\">");
         cell.append("<b>").append(fmt(score)).append(" б.</b><br>");
         cell.append("<small>").append(tr.getTestCounts()).append("</small><br>");
-        cell.append("<small>Style: ").append(statusBadge(tr.getStyleStatus())).append("</small><br>");
+        cell.append("<small>Style: ")
+                .append(statusBadge(tr.getStyleStatus())).append("</small><br>");
         cell.append("<small>Docs: ").append(statusBadge(tr.getDocsStatus())).append("</small>");
 
         if (tr.getLastCommitDate() != null) {
@@ -281,7 +283,8 @@ public class HtmlReporter {
 
     private static final String CSS = """
             <style>
-              body { font-family: Arial, sans-serif; margin: 24px; background: #f5f5f5; color: #222; }
+              body { font-family: Arial, sans-serif; margin: 24px;
+                     background: #f5f5f5; color: #222; }
               h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 8px; }
               h2 { color: #34495e; margin-top: 32px; }
               .meta { color: #7f8c8d; font-size: 0.9em; }

@@ -164,10 +164,12 @@ class ProjectCheckerTest {
         initGitRepo(repoDir);
         createFakeGradlew(repoDir, 0);
 
-        Path xmlDir = repoDir.resolve(TASK_ID).resolve("build").resolve("test-results").resolve("test");
+        Path xmlDir = repoDir.resolve(TASK_ID)
+                .resolve("build").resolve("test-results").resolve("test");
         Files.createDirectories(xmlDir);
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                + "<testsuite name=\"MyTest\" tests=\"3\" failures=\"1\" errors=\"0\" skipped=\"0\">"
+                + "<testsuite name=\"MyTest\" tests=\"3\" failures=\"1\""
+                + " errors=\"0\" skipped=\"0\">"
                 + "<testcase name=\"test1\"/>"
                 + "<testcase name=\"test2\"><failure message=\"fail\"/></testcase>"
                 + "<testcase name=\"test3\"/>"

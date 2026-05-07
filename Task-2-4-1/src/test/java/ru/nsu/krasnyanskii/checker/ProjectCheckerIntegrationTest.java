@@ -84,8 +84,8 @@ class ProjectCheckerIntegrationTest {
         double score    = taskResult.getScore();
         double maxScore = config.findTaskById(taskId).map(Task::getMaxScore).orElse(100.0);
         double pct      = maxScore > 0 ? score / maxScore * 100 : 0;
-        assertTrue(pct >= 10.0,
-                taskId + ": score " + score + " / " + maxScore + " = " + pct + "% — expected >= 10%");
+        String msg = taskId + ": score " + score + "/" + maxScore + " = " + pct + "% < 10%";
+        assertTrue(pct >= 10.0, msg);
     }
 
     private OopCheckerConfig buildConfig(List<String> taskIds) {
