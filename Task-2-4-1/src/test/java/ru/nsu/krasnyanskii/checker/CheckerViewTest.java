@@ -25,8 +25,13 @@ class CheckerViewTest {
         verbose = new CheckerView(new PrintStream(errBuf), new PrintStream(outBuf), true);
     }
 
-    private String err() { return errBuf.toString(); }
-    private String out() { return outBuf.toString(); }
+    private String err() {
+        return errBuf.toString();
+    }
+
+    private String out() {
+        return outBuf.toString();
+    }
 
     @Test
     @DisplayName("printBanner outputs application title")

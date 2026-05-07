@@ -13,12 +13,14 @@ public class CheckerView {
     private final PrintStream out;
     private final boolean verbose;
 
-    /** Uses the standard streams, verbose mode off. */
+    /** Uses the standard streams with verbose mode off. */
     public CheckerView() {
         this(System.err, new PrintStream(System.out, true, StandardCharsets.UTF_8), false);
     }
 
     /**
+     * Creates a view with the given streams and verbosity setting.
+     *
      * @param err     stream for diagnostics and warnings
      * @param out     stream for the HTML report
      * @param verbose whether to print debug messages
@@ -35,6 +37,8 @@ public class CheckerView {
     }
 
     /**
+     * Prints the working directory path.
+     *
      * @param path working directory
      */
     public void printWorkDir(String path) {
@@ -42,6 +46,8 @@ public class CheckerView {
     }
 
     /**
+     * Prints the number of students and tasks loaded from config.
+     *
      * @param students number of students in the config
      * @param tasks    number of tasks in the config
      */
@@ -71,6 +77,8 @@ public class CheckerView {
     }
 
     /**
+     * Prints the path of the saved report file.
+     *
      * @param path path to the saved report file
      */
     public void printReportSaved(String path) {
@@ -87,6 +95,8 @@ public class CheckerView {
     }
 
     /**
+     * Prints the git version string returned by {@code git --version}.
+     *
      * @param version output of {@code git --version}
      */
     public void printGitVersion(String version) {
@@ -99,6 +109,8 @@ public class CheckerView {
     }
 
     /**
+     * Warns that the git availability check failed.
+     *
      * @param msg reason the git check failed
      */
     public void warnGitCheckFailed(String msg) {
@@ -106,6 +118,8 @@ public class CheckerView {
     }
 
     /**
+     * Prints the global git user name.
+     *
      * @param user value of {@code git config --global user.name}
      */
     public void printGitUser(String user) {
@@ -118,6 +132,8 @@ public class CheckerView {
     }
 
     /**
+     * Warns that reading {@code user.name} from the git config failed.
+     *
      * @param msg reason the user.name check failed
      */
     public void warnGitUserCheckFailed(String msg) {
@@ -125,6 +141,8 @@ public class CheckerView {
     }
 
     /**
+     * Prints the configured git credential helper.
+     *
      * @param helper value of {@code credential.helper}
      */
     public void printCredentialHelper(String helper) {
@@ -141,6 +159,8 @@ public class CheckerView {
     }
 
     /**
+     * Warns that the credential helper check failed.
+     *
      * @param msg reason the credential helper check failed
      */
     public void warnCredentialHelperCheckFailed(String msg) {
@@ -148,6 +168,8 @@ public class CheckerView {
     }
 
     /**
+     * Logs a pipeline step for a student's task.
+     *
      * @param github student's GitHub login
      * @param taskId task identifier
      * @param step   description of the current pipeline step
@@ -157,6 +179,8 @@ public class CheckerView {
     }
 
     /**
+     * Warns that a requested student was not found in the config.
+     *
      * @param github student not found in the config
      */
     public void warnStudentNotFound(String github) {
@@ -164,6 +188,8 @@ public class CheckerView {
     }
 
     /**
+     * Reports a fatal clone failure for a student's repository.
+     *
      * @param github student whose repo could not be cloned
      * @param msg    error message
      */
@@ -172,6 +198,8 @@ public class CheckerView {
     }
 
     /**
+     * Warns that a JUnit XML result file could not be parsed.
+     *
      * @param path path to the XML test-results file
      * @param msg  parse error message
      */
@@ -180,6 +208,8 @@ public class CheckerView {
     }
 
     /**
+     * Warns that walking a test-results directory failed.
+     *
      * @param dir test-results directory
      * @param msg error message
      */
@@ -188,6 +218,8 @@ public class CheckerView {
     }
 
     /**
+     * Logs that a repository is being cloned.
+     *
      * @param github student whose repo is being cloned
      * @param url    remote repository URL
      */
@@ -196,6 +228,8 @@ public class CheckerView {
     }
 
     /**
+     * Logs that a repository is being updated via fetch/pull.
+     *
      * @param github student whose repo is being updated
      */
     public void infoUpdating(String github) {
@@ -203,6 +237,8 @@ public class CheckerView {
     }
 
     /**
+     * Warns that the active-weeks calculation failed.
+     *
      * @param msg error message from the active-weeks calculation
      */
     public void warnActiveWeeksFailed(String msg) {

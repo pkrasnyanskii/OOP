@@ -19,7 +19,8 @@ class EnvironmentCheckerTest {
     @BeforeEach
     void setUp() {
         errBuf  = new ByteArrayOutputStream();
-        view    = new CheckerView(new PrintStream(errBuf), new PrintStream(new ByteArrayOutputStream()), false);
+        PrintStream devNull = new PrintStream(new ByteArrayOutputStream());
+        view    = new CheckerView(new PrintStream(errBuf), devNull, false);
         checker = new EnvironmentChecker(new ProcessRunner(15), view);
     }
 
@@ -42,7 +43,9 @@ class EnvironmentCheckerTest {
     void checkOutputContainsGitInfo() {
         checker.check(true);
         String output = errBuf.toString();
-        boolean hasGitInfo = output.contains("git") || output.contains("Git") || output.contains("WARNING");
+        boolean hasGitInfo = output.contains("git")
+                || output.contains("Git")
+                || output.contains("WARNING");
         assertTrue(hasGitInfo);
     }
 }
