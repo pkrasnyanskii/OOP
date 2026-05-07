@@ -77,13 +77,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">EnvironmentChecker</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Verifies that the runtime environment is properly configured for git operations.
-
- <p><b>SRP</b>: responsible solely for environment pre-flight checks.
- All output is delegated to <a href="CheckerView.html" title="class in ru.nsu.krasnyanskii.checker"><code>CheckerView</code></a>.</p>
-
- <p><b>DIP</b>: depends on <a href="ProcessRunner.html" title="class in ru.nsu.krasnyanskii.checker"><code>ProcessRunner</code></a> and <a href="CheckerView.html" title="class in ru.nsu.krasnyanskii.checker"><code>CheckerView</code></a> abstractions,
- not on concrete I/O or process-management implementations.</p></div>
+<div class="block">Runs pre-flight environment checks before the main pipeline starts:
+ git availability, global user config, and credential helper setup.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -97,9 +92,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.krasnyanskii.checker.ProcessRunner,ru.nsu.krasnyanskii.checker.CheckerView)" class="member-name-link">EnvironmentChecker</a><wbr>(<a href="ProcessRunner.html" title="class in ru.nsu.krasnyanskii.checker">ProcessRunner</a>&nbsp;runner,
  <a href="CheckerView.html" title="class in ru.nsu.krasnyanskii.checker">CheckerView</a>&nbsp;view)</code></div>
-<div class="col-last even-row-color">
-<div class="block">Creates an EnvironmentChecker.</div>
-</div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -117,7 +110,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#check(boolean)" class="member-name-link">check</a><wbr>(boolean&nbsp;skipAuthCheck)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Runs all pre-flight environment checks.</div>
+<div class="block">Runs all pre-flight checks.</div>
 </div>
 </div>
 </div>
@@ -141,10 +134,9 @@ loadScripts(document, 'script');</script>
 <h3>EnvironmentChecker</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">EnvironmentChecker</span><wbr><span class="parameters">(<a href="ProcessRunner.html" title="class in ru.nsu.krasnyanskii.checker">ProcessRunner</a>&nbsp;runner,
  <a href="CheckerView.html" title="class in ru.nsu.krasnyanskii.checker">CheckerView</a>&nbsp;view)</span></div>
-<div class="block">Creates an EnvironmentChecker.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>runner</code> - process runner used for git commands</dd>
+<dd><code>runner</code> - process runner used to invoke git commands</dd>
 <dd><code>view</code> - view for all console output</dd>
 </dl>
 </section>
@@ -161,10 +153,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="check(boolean)">
 <h3>check</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">check</span><wbr><span class="parameters">(boolean&nbsp;skipAuthCheck)</span></div>
-<div class="block">Runs all pre-flight environment checks.</div>
+<div class="block">Runs all pre-flight checks.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>skipAuthCheck</code> - if true, the credential-helper check is skipped</dd>
+<dd><code>skipAuthCheck</code> - when true, the credential.helper check is skipped</dd>
 </dl>
 </section>
 </li>

@@ -77,10 +77,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">CheckerView</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">View layer for the OOP Checker application.
-
- <p><b>SRP</b>: single class responsible for all console output.
- No other class calls <code>System.err</code> or <code>System.out</code> directly.</p></div>
+<div class="block">Single point of all console output for the application (SRP).
+ No other class writes to <code>System.out</code> / <code>System.err</code> directly.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -94,14 +92,12 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">CheckerView</a>()</code></div>
 <div class="col-last even-row-color">
-<div class="block">Creates a CheckerView writing to standard streams (non-verbose).</div>
+<div class="block">Uses the standard streams, verbose mode off.</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.io.PrintStream,java.io.PrintStream,boolean)" class="member-name-link">CheckerView</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;err,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;out,
  boolean&nbsp;verbose)</code></div>
-<div class="col-last odd-row-color">
-<div class="block">Creates a CheckerView with custom streams and verbosity flag.</div>
-</div>
+<div class="col-last odd-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -119,136 +115,102 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#debug(java.lang.String)" class="member-name-link">debug</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Prints a debug-level message.</div>
+<div class="block">Prints a debug message; no-op unless verbose mode is on.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#debugFetchOutput(java.lang.String)" class="member-name-link">debugFetchOutput</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fetchOutput)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Prints raw fetch output at debug level.</div>
+<div class="block">Prints git fetch output; no-op unless verbose mode is on.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#errorCloneFailed(java.lang.String,java.lang.String)" class="member-name-link">errorCloneFailed</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;github,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Prints an error when cloning a student repository failed.</div>
-</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#infoCloning(java.lang.String,java.lang.String)" class="member-name-link">infoCloning</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;github,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;url)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Prints a message when a student repository is being cloned for the first time.</div>
-</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#infoStep(java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">infoStep</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;github,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;taskId,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;step)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Prints a pipeline step progress message.</div>
-</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#infoUpdating(java.lang.String)" class="member-name-link">infoUpdating</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;github)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Prints a message when a student repository is being updated via fetch.</div>
-</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#printBanner()" class="member-name-link">printBanner</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Prints the application banner.</div>
+<div class="block">Prints the startup banner.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#printConfigError(java.lang.String,java.lang.Throwable)" class="member-name-link">printConfigError</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Throwable.html" title="class or interface in java.lang" class="external-link">Throwable</a>&nbsp;cause)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Prints a config load error with hint lines.</div>
+<div class="block">Prints a config load error with the full cause chain and a usage hint.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#printConfigLoaded(int,int)" class="member-name-link">printConfigLoaded</a><wbr>(int&nbsp;students,
  int&nbsp;tasks)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Prints how many students and tasks were loaded from the config.</div>
-</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#printCredentialHelper(java.lang.String)" class="member-name-link">printCredentialHelper</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;helper)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Prints the configured git credential helper.</div>
-</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#printGitUser(java.lang.String)" class="member-name-link">printGitUser</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;user)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Prints the configured git user name.</div>
-</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#printGitVersion(java.lang.String)" class="member-name-link">printGitVersion</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;version)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Prints the detected git version string.</div>
-</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#printHtml(java.lang.String)" class="member-name-link">printHtml</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;html)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Prints the HTML report to stdout.</div>
+<div class="block">Writes the HTML report to the output stream.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#printReportSaved(java.lang.String)" class="member-name-link">printReportSaved</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Prints the path where the HTML report was saved.</div>
-</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#printWorkDir(java.lang.String)" class="member-name-link">printWorkDir</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Prints the resolved working directory.</div>
-</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#warnActiveWeeksFailed(java.lang.String)" class="member-name-link">warnActiveWeeksFailed</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Warns that the active-weeks git query failed.</div>
-</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#warnCredentialHelperCheckFailed(java.lang.String)" class="member-name-link">warnCredentialHelperCheckFailed</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Warns that the credential helper check itself failed.</div>
-</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#warnCredentialHelperNotSet()" class="member-name-link">warnCredentialHelperNotSet</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Warns that no credential helper is configured, which may cause password prompts.</div>
+<div class="block">Warns that no credential helper is configured — cloning private repos may stall.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#warnGitCheckFailed(java.lang.String)" class="member-name-link">warnGitCheckFailed</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Warns that the git check itself failed.</div>
-</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#warnGitNotFound()" class="member-name-link">warnGitNotFound</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Warns that git was not found on PATH.</div>
+<div class="block">Warns that git is not available on PATH.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#warnGitUserCheckFailed(java.lang.String)" class="member-name-link">warnGitUserCheckFailed</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Warns that reading the git user name failed.</div>
-</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#warnGitUserNotSet()" class="member-name-link">warnGitUserNotSet</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Warns that <code>git config --global user.name</code> is not set.</div>
+<div class="block">Warns that <code>user.name</code> is not set in the global git config.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#warnStudentNotFound(java.lang.String)" class="member-name-link">warnStudentNotFound</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;github)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Warns that a student GitHub login was not found in the config.</div>
-</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#warnWalkFailed(java.lang.String,java.lang.String)" class="member-name-link">warnWalkFailed</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;dir,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Warns that the test-results directory could not be traversed.</div>
-</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#warnXmlParseFailed(java.lang.String,java.lang.String)" class="member-name-link">warnXmlParseFailed</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Warns that a JUnit XML result file could not be parsed.</div>
-</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -270,7 +232,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>CheckerView</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CheckerView</span>()</div>
-<div class="block">Creates a CheckerView writing to standard streams (non-verbose).</div>
+<div class="block">Uses the standard streams, verbose mode off.</div>
 </section>
 </li>
 <li>
@@ -279,12 +241,11 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CheckerView</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;err,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;out,
  boolean&nbsp;verbose)</span></div>
-<div class="block">Creates a CheckerView with custom streams and verbosity flag.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>err</code> - stream for diagnostics / warnings</dd>
+<dd><code>err</code> - stream for diagnostics and warnings</dd>
 <dd><code>out</code> - stream for the HTML report</dd>
-<dd><code>verbose</code> - if true, debug-level messages are printed</dd>
+<dd><code>verbose</code> - whether to print debug messages</dd>
 </dl>
 </section>
 </li>
@@ -300,17 +261,16 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="printBanner()">
 <h3>printBanner</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printBanner</span>()</div>
-<div class="block">Prints the application banner.</div>
+<div class="block">Prints the startup banner.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="printWorkDir(java.lang.String)">
 <h3>printWorkDir</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printWorkDir</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</span></div>
-<div class="block">Prints the resolved working directory.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>path</code> - absolute path of the working directory</dd>
+<dd><code>path</code> - working directory</dd>
 </dl>
 </section>
 </li>
@@ -319,11 +279,10 @@ loadScripts(document, 'script');</script>
 <h3>printConfigLoaded</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printConfigLoaded</span><wbr><span class="parameters">(int&nbsp;students,
  int&nbsp;tasks)</span></div>
-<div class="block">Prints how many students and tasks were loaded from the config.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>students</code> - number of students</dd>
-<dd><code>tasks</code> - number of tasks</dd>
+<dd><code>students</code> - number of students in the config</dd>
+<dd><code>tasks</code> - number of tasks in the config</dd>
 </dl>
 </section>
 </li>
@@ -332,11 +291,11 @@ loadScripts(document, 'script');</script>
 <h3>printConfigError</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printConfigError</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Throwable.html" title="class or interface in java.lang" class="external-link">Throwable</a>&nbsp;cause)</span></div>
-<div class="block">Prints a config load error with hint lines.</div>
+<div class="block">Prints a config load error with the full cause chain and a usage hint.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>msg</code> - top-level error message</dd>
-<dd><code>cause</code> - root cause (may be null)</dd>
+<dd><code>cause</code> - cause chain (may be null)</dd>
 </dl>
 </section>
 </li>
@@ -344,10 +303,9 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="printReportSaved(java.lang.String)">
 <h3>printReportSaved</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printReportSaved</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</span></div>
-<div class="block">Prints the path where the HTML report was saved.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>path</code> - output file path</dd>
+<dd><code>path</code> - path to the saved report file</dd>
 </dl>
 </section>
 </li>
@@ -355,7 +313,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="printHtml(java.lang.String)">
 <h3>printHtml</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printHtml</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;html)</span></div>
-<div class="block">Prints the HTML report to stdout.</div>
+<div class="block">Writes the HTML report to the output stream.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>html</code> - full HTML document</dd>
@@ -366,10 +324,9 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="printGitVersion(java.lang.String)">
 <h3>printGitVersion</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printGitVersion</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;version)</span></div>
-<div class="block">Prints the detected git version string.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>version</code> - version output from <code>git --version</code></dd>
+<dd><code>version</code> - output of <code>git --version</code></dd>
 </dl>
 </section>
 </li>
@@ -377,21 +334,23 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="warnGitNotFound()">
 <h3>warnGitNotFound</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">warnGitNotFound</span>()</div>
-<div class="block">Warns that git was not found on PATH.</div>
+<div class="block">Warns that git is not available on PATH.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="warnGitCheckFailed(java.lang.String)">
 <h3>warnGitCheckFailed</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">warnGitCheckFailed</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</span></div>
-<div class="block">Warns that the git check itself failed.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>msg</code> - reason the git check failed</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="printGitUser(java.lang.String)">
 <h3>printGitUser</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printGitUser</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;user)</span></div>
-<div class="block">Prints the configured git user name.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>user</code> - value of <code>git config --global user.name</code></dd>
@@ -402,24 +361,26 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="warnGitUserNotSet()">
 <h3>warnGitUserNotSet</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">warnGitUserNotSet</span>()</div>
-<div class="block">Warns that <code>git config --global user.name</code> is not set.</div>
+<div class="block">Warns that <code>user.name</code> is not set in the global git config.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="warnGitUserCheckFailed(java.lang.String)">
 <h3>warnGitUserCheckFailed</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">warnGitUserCheckFailed</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</span></div>
-<div class="block">Warns that reading the git user name failed.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>msg</code> - reason the user.name check failed</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="printCredentialHelper(java.lang.String)">
 <h3>printCredentialHelper</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printCredentialHelper</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;helper)</span></div>
-<div class="block">Prints the configured git credential helper.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>helper</code> - value of <code>git config --global credential.helper</code></dd>
+<dd><code>helper</code> - value of <code>credential.helper</code></dd>
 </dl>
 </section>
 </li>
@@ -427,14 +388,17 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="warnCredentialHelperNotSet()">
 <h3>warnCredentialHelperNotSet</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">warnCredentialHelperNotSet</span>()</div>
-<div class="block">Warns that no credential helper is configured, which may cause password prompts.</div>
+<div class="block">Warns that no credential helper is configured — cloning private repos may stall.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="warnCredentialHelperCheckFailed(java.lang.String)">
 <h3>warnCredentialHelperCheckFailed</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">warnCredentialHelperCheckFailed</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</span></div>
-<div class="block">Warns that the credential helper check itself failed.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>msg</code> - reason the credential helper check failed</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -443,12 +407,11 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">infoStep</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;github,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;taskId,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;step)</span></div>
-<div class="block">Prints a pipeline step progress message.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>github</code> - student GitHub login</dd>
+<dd><code>github</code> - student's GitHub login</dd>
 <dd><code>taskId</code> - task identifier</dd>
-<dd><code>step</code> - description of the current step</dd>
+<dd><code>step</code> - description of the current pipeline step</dd>
 </dl>
 </section>
 </li>
@@ -456,10 +419,9 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="warnStudentNotFound(java.lang.String)">
 <h3>warnStudentNotFound</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">warnStudentNotFound</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;github)</span></div>
-<div class="block">Warns that a student GitHub login was not found in the config.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>github</code> - student GitHub login</dd>
+<dd><code>github</code> - student not found in the config</dd>
 </dl>
 </section>
 </li>
@@ -468,10 +430,9 @@ loadScripts(document, 'script');</script>
 <h3>errorCloneFailed</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">errorCloneFailed</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;github,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</span></div>
-<div class="block">Prints an error when cloning a student repository failed.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>github</code> - student GitHub login</dd>
+<dd><code>github</code> - student whose repo could not be cloned</dd>
 <dd><code>msg</code> - error message</dd>
 </dl>
 </section>
@@ -481,11 +442,10 @@ loadScripts(document, 'script');</script>
 <h3>warnXmlParseFailed</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">warnXmlParseFailed</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</span></div>
-<div class="block">Warns that a JUnit XML result file could not be parsed.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>path</code> - path of the XML file</dd>
-<dd><code>msg</code> - error message</dd>
+<dd><code>path</code> - path to the XML test-results file</dd>
+<dd><code>msg</code> - parse error message</dd>
 </dl>
 </section>
 </li>
@@ -494,10 +454,9 @@ loadScripts(document, 'script');</script>
 <h3>warnWalkFailed</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">warnWalkFailed</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;dir,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</span></div>
-<div class="block">Warns that the test-results directory could not be traversed.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>dir</code> - path of the directory</dd>
+<dd><code>dir</code> - test-results directory</dd>
 <dd><code>msg</code> - error message</dd>
 </dl>
 </section>
@@ -507,11 +466,10 @@ loadScripts(document, 'script');</script>
 <h3>infoCloning</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">infoCloning</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;github,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;url)</span></div>
-<div class="block">Prints a message when a student repository is being cloned for the first time.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>github</code> - student GitHub login</dd>
-<dd><code>url</code> - repository URL</dd>
+<dd><code>github</code> - student whose repo is being cloned</dd>
+<dd><code>url</code> - remote repository URL</dd>
 </dl>
 </section>
 </li>
@@ -519,10 +477,9 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="infoUpdating(java.lang.String)">
 <h3>infoUpdating</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">infoUpdating</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;github)</span></div>
-<div class="block">Prints a message when a student repository is being updated via fetch.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>github</code> - student GitHub login</dd>
+<dd><code>github</code> - student whose repo is being updated</dd>
 </dl>
 </section>
 </li>
@@ -530,10 +487,9 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="warnActiveWeeksFailed(java.lang.String)">
 <h3>warnActiveWeeksFailed</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">warnActiveWeeksFailed</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</span></div>
-<div class="block">Warns that the active-weeks git query failed.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>msg</code> - error message</dd>
+<dd><code>msg</code> - error message from the active-weeks calculation</dd>
 </dl>
 </section>
 </li>
@@ -541,11 +497,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="debugFetchOutput(java.lang.String)">
 <h3>debugFetchOutput</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">debugFetchOutput</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fetchOutput)</span></div>
-<div class="block">Prints raw fetch output at debug level.
- Only printed when this view was created with <code>verbose = true</code>.</div>
+<div class="block">Prints git fetch output; no-op unless verbose mode is on.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>fetchOutput</code> - output from <code>git fetch</code></dd>
+<dd><code>fetchOutput</code> - raw output from <code>git fetch</code></dd>
 </dl>
 </section>
 </li>
@@ -553,11 +508,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="debug(java.lang.String)">
 <h3>debug</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">debug</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</span></div>
-<div class="block">Prints a debug-level message.
- Only printed when this view was created with <code>verbose = true</code>.</div>
+<div class="block">Prints a debug message; no-op unless verbose mode is on.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>msg</code> - debug message</dd>
+<dd><code>msg</code> - message to print</dd>
 </dl>
 </section>
 </li>
