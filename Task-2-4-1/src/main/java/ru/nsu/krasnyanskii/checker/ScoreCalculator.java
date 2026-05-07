@@ -11,13 +11,26 @@ import ru.nsu.krasnyanskii.model.results.TestCounts;
 
 /**
  * Calculates the score for a student's task result.
- * Formula: test-pass ratio * maxScore, minus style/docs deductions,
- * minus soft-deadline penalty per day, capped to 0 after hard deadline,
- * then bonus added (capped at maxScore).
+ *
+ * <p>Formula (applied in order):
+ * <ol>
+ *   <li>Compile failure &rarr; 0</li>
+ *   <li>Base score from test-pass ratio &times; maxScore</li>
+ *   <li>Style / docs deductions (configurable percentage)</li>
+ *   <li>Soft-deadline penalty per day late; hard-deadline &rarr; 0</li>
+ *   <li>Bonus added, capped at maxScore</li>
+ * </ol>
+ * Final score is rounded to one decimal place.
  */
 public class ScoreCalculator {
+
     private final OopCheckerConfig config;
 
+    /**
+     * Creates a ScoreCalculator.
+     *
+     * @param config parsed OOP checker configuration
+     */
     public ScoreCalculator(OopCheckerConfig config) {
         this.config = config;
     }
@@ -35,48 +48,93 @@ public class ScoreCalculator {
             return 0.0;
         }
 
-        ScoringConfig sc = config.getScoringConfig();
-
         // Compile is the gate; no compile = 0
         if (result.getCompileStatus() != BuildStatus.SUCCESS) {
             return 0.0;
         }
 
-        // Base score from tests
-        TestCounts tests = result.getTestCounts();
-        double baseScore;
-        if (tests.getTotal() == 0) {
-            baseScore = task.getMaxScore(); // compiled but no tests: full score
-        } else {
-            baseScore = ((double) tests.getPassed() / tests.getTotal()) * task.getMaxScore();
-        }
+        ScoringConfig sc = config.getScoringConfig();
 
-        // Style and docs deductions
+        double score = baseScore(result.getTestCounts(), task);
+        score = applyDeductions(score, result, task, sc);
+        score = applyDeadlinePenalty(score, result.getLastCommitDate(), task, sc);
+        score = applyBonus(score, studentGithub, task);
+
+        return Math.round(score * 10.0) / 10.0;
+    }
+
+    /**
+     * Calculates the base score from the test-pass ratio.
+     * If there are no tests, the full score is awarded (compiled = done).
+     *
+     * @param tests test counts from the task run
+     * @param task  task configuration with maxScore
+     * @return base score before any deductions
+     */
+    private double baseScore(TestCounts tests, Task task) {
+        if (tests.getTotal() == 0) {
+            return task.getMaxScore(); // compiled but no tests: full score
+        }
+        return ((double) tests.getPassed() / tests.getTotal()) * task.getMaxScore();
+    }
+
+    /**
+     * Applies style and docs deductions, flooring the result at zero.
+     *
+     * @param score  score before deductions
+     * @param result task check result with style/docs statuses
+     * @param task   task configuration with maxScore
+     * @param sc     scoring configuration with deduction percentages
+     * @return score after deductions, at least 0
+     */
+    private double applyDeductions(double score, TaskCheckResult result,
+                                   Task task, ScoringConfig sc) {
+        double adjusted = score;
         if (result.getStyleStatus() == BuildStatus.FAILED) {
-            baseScore -= task.getMaxScore() * sc.getStyleDeductionPercent() / 100.0;
+            adjusted -= task.getMaxScore() * sc.getStyleDeductionPercent() / 100.0;
         }
         if (result.getDocsStatus() == BuildStatus.FAILED) {
-            baseScore -= task.getMaxScore() * sc.getDocsDeductionPercent() / 100.0;
+            adjusted -= task.getMaxScore() * sc.getDocsDeductionPercent() / 100.0;
         }
-        baseScore = Math.max(0, baseScore);
+        return Math.max(0, adjusted);
+    }
 
-        // Deadline penalties
-        LocalDate lastCommit = result.getLastCommitDate();
-        if (lastCommit != null) {
-            if (task.getHardDeadline() != null && lastCommit.isAfter(task.getHardDeadline())) {
-                return 0.0;
-            }
-            if (task.getSoftDeadline() != null && lastCommit.isAfter(task.getSoftDeadline())) {
-                long daysLate = ChronoUnit.DAYS.between(task.getSoftDeadline(), lastCommit);
-                baseScore -= daysLate * sc.getSoftDeadlinePenaltyPerDay();
-                baseScore = Math.max(0, baseScore);
-            }
+    /**
+     * Applies deadline penalties.
+     * Hard deadline exceeded &rarr; returns 0.
+     * Soft deadline exceeded &rarr; subtracts {@code penaltyPerDay * daysLate}.
+     *
+     * @param score      score before penalties
+     * @param lastCommit date of the student's last relevant commit
+     * @param task       task configuration with deadlines
+     * @param sc         scoring configuration with penalty rate
+     * @return score after deadline penalties, at least 0
+     */
+    private double applyDeadlinePenalty(double score, LocalDate lastCommit,
+                                        Task task, ScoringConfig sc) {
+        if (lastCommit == null) {
+            return score;
         }
+        if (task.getHardDeadline() != null && lastCommit.isAfter(task.getHardDeadline())) {
+            return 0.0;
+        }
+        if (task.getSoftDeadline() != null && lastCommit.isAfter(task.getSoftDeadline())) {
+            long daysLate = ChronoUnit.DAYS.between(task.getSoftDeadline(), lastCommit);
+            return Math.max(0, score - daysLate * sc.getSoftDeadlinePenaltyPerDay());
+        }
+        return score;
+    }
 
-        // Bonus (capped at maxScore)
+    /**
+     * Adds the configured bonus and caps the result at {@code task.getMaxScore()}.
+     *
+     * @param score         score before bonus
+     * @param studentGithub student GitHub login
+     * @param task          task configuration with maxScore
+     * @return score after bonus, capped at maxScore
+     */
+    private double applyBonus(double score, String studentGithub, Task task) {
         double bonus = config.getBonusFor(studentGithub, task.getId());
-        baseScore = Math.min(task.getMaxScore(), baseScore + bonus);
-
-        return Math.round(baseScore * 10.0) / 10.0;
+        return Math.min(task.getMaxScore(), score + bonus);
     }
 }

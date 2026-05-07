@@ -35,4 +35,13 @@ groups {
             repo   = "https://github.com/novikova-elena/OOP"
         }
     }
+
+    // Реальный репозиторий — используется для интеграционных тестов
+    group("TEST") {
+        student {
+            github = "pkrasnyanskii"
+            name   = "Красняnskий Пётр"
+            repo   = "https://github.com/pkrasnyanskii/OOP"
+        }
+    }
 }
