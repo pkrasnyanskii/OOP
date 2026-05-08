@@ -141,33 +141,6 @@ public class CheckerView {
     }
 
     /**
-     * Prints the configured git credential helper.
-     *
-     * @param helper value of {@code credential.helper}
-     */
-    public void printCredentialHelper(String helper) {
-        err.println("Git credential.helper: " + helper + " (OK)");
-    }
-
-    /** Warns that no credential helper is configured — cloning private repos may stall. */
-    public void warnCredentialHelperNotSet() {
-        err.println();
-        err.println("WARNING: git credential.helper is not configured.");
-        err.println("  Cloning private repos may hang waiting for a password.");
-        err.println("  Use SSH keys, set credential.helper, or --skip-auth-check");
-        err.println();
-    }
-
-    /**
-     * Warns that the credential helper check failed.
-     *
-     * @param msg reason the credential helper check failed
-     */
-    public void warnCredentialHelperCheckFailed(String msg) {
-        err.println("WARNING: could not check credential.helper: " + msg);
-    }
-
-    /**
      * Logs a pipeline step for a student's task.
      *
      * @param github student's GitHub login

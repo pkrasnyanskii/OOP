@@ -18,8 +18,7 @@ import ru.nsu.krasnyanskii.report.HtmlReporter;
  * Entry point. Reads oop_checker.groovy from the working directory,
  * runs checks for each student, and writes an HTML report to stdout.
  *
- * <p>Usage: {@code java -jar oop-checker.jar [config-dir] [--output report.html]
- * [--skip-auth-check]}
+ * <p>Usage: {@code java -jar oop-checker.jar [config-dir] [--output report.html]}
  */
 public class Main {
 
@@ -30,15 +29,12 @@ public class Main {
      * @throws Exception on any unrecoverable error
      */
     public static void main(String[] args) throws Exception {
-        File    workDir       = new File(System.getProperty("user.dir"));
-        String  outputFile    = null;
-        boolean skipAuthCheck = false;
+        File   workDir    = new File(System.getProperty("user.dir"));
+        String outputFile = null;
 
         for (int i = 0; i < args.length; i++) {
             if ("--output".equals(args[i]) && i + 1 < args.length) {
                 outputFile = args[++i];
-            } else if ("--skip-auth-check".equals(args[i])) {
-                skipAuthCheck = true;
             } else if (!args[i].startsWith("--")) {
                 workDir = new File(args[i]);
             }
@@ -50,7 +46,7 @@ public class Main {
 
         ProcessRunner    envRunner = new ProcessRunner(10);
         EnvironmentChecker envCheck = new EnvironmentChecker(envRunner, view);
-        envCheck.check(skipAuthCheck);
+        envCheck.check();
 
         OopCheckerConfig config;
         try {

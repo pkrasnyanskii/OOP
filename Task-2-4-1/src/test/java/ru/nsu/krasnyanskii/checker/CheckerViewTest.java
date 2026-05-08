@@ -130,27 +130,6 @@ class CheckerViewTest {
     }
 
     @Test
-    @DisplayName("printCredentialHelper outputs the helper value")
-    void printCredentialHelper() {
-        view.printCredentialHelper("manager");
-        assertTrue(err().contains("manager"));
-    }
-
-    @Test
-    @DisplayName("warnCredentialHelperNotSet outputs a WARNING")
-    void warnCredentialHelperNotSet() {
-        view.warnCredentialHelperNotSet();
-        assertTrue(err().contains("WARNING"));
-    }
-
-    @Test
-    @DisplayName("warnCredentialHelperCheckFailed outputs the error message")
-    void warnCredentialHelperCheckFailed() {
-        view.warnCredentialHelperCheckFailed("check failed");
-        assertTrue(err().contains("check failed"));
-    }
-
-    @Test
     @DisplayName("infoStep outputs github, taskId and step description")
     void infoStep() {
         view.infoStep("student1", "Task-1-1", "Step 1: compile");
