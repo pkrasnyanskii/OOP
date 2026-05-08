@@ -140,19 +140,10 @@ public class ProjectChecker {
     private boolean runCompileStep(Path repoPath, String github,
                                    String taskId, TaskCheckResult result) {
         view.infoStep(github, taskId, "Step 1: compile");
-        ProcessResult compile = runGradle(repoPath, ":" + taskId + ":compileJava");
+        ProcessResult compile = runTaskGradle(repoPath, taskId, "compileJava");
         result.setCompileOutput(compile.getOutput());
-
-        if (compile.isTimedOut()) {
-            result.setCompileStatus(BuildStatus.TIMEOUT);
-            return false;
-        }
-        if (!compile.isSuccess()) {
-            result.setCompileStatus(BuildStatus.FAILED);
-            return false;
-        }
-        result.setCompileStatus(BuildStatus.SUCCESS);
-        return true;
+        result.setCompileStatus(resolveStatus(compile));
+        return result.getCompileStatus() == BuildStatus.SUCCESS;
     }
 
     /**
@@ -163,12 +154,12 @@ public class ProjectChecker {
     private boolean runDocsAndStyleStep(Path repoPath, String github,
                                         String taskId, TaskCheckResult result) {
         view.infoStep(github, taskId, "Step 2: javadoc");
-        ProcessResult docs = runGradle(repoPath, ":" + taskId + ":javadoc");
+        ProcessResult docs = runTaskGradle(repoPath, taskId, "javadoc");
         result.setDocsOutput(docs.getOutput());
         result.setDocsStatus(resolveStatus(docs));
 
         view.infoStep(github, taskId, "Step 2: checkstyle");
-        ProcessResult style = runGradle(repoPath, ":" + taskId + ":checkstyleMain");
+        ProcessResult style = runTaskGradle(repoPath, taskId, "checkstyleMain");
         result.setStyleOutput(style.getOutput());
         result.setStyleStatus(resolveStatus(style));
 
@@ -186,7 +177,7 @@ public class ProjectChecker {
     private void runTestStep(Path repoPath, String github,
                              String taskId, TaskCheckResult result) {
         view.infoStep(github, taskId, "Step 3: tests");
-        ProcessResult tests = runGradle(repoPath, ":" + taskId + ":test", "--continue");
+        ProcessResult tests = runTaskGradle(repoPath, taskId, "test", "--continue");
         result.setTestOutput(tests.getOutput());
 
         if (tests.isTimedOut()) {
@@ -197,6 +188,33 @@ public class ProjectChecker {
             result.setTestStatus(
                     counts.getFailed() > 0 ? BuildStatus.FAILED : BuildStatus.SUCCESS);
         }
+    }
+
+    /**
+     * Runs a Gradle task for a specific task subdirectory.
+     *
+     * <p>If the subdirectory contains its own {@code gradlew} wrapper (standalone project),
+     * the wrapper is invoked directly from inside that directory.
+     * Otherwise the root wrapper is used with the multi-project notation
+     * {@code :taskId:gradleTask}.</p>
+     */
+    private ProcessResult runTaskGradle(Path repoPath, String taskId,
+                                        String gradleTask, String... extra) {
+        Path taskDir = repoPath.resolve(taskId);
+        boolean standalone = Files.exists(taskDir.resolve("gradlew"))
+                || Files.exists(taskDir.resolve("gradlew.bat"));
+
+        if (standalone) {
+            String[] args = new String[1 + extra.length];
+            args[0] = gradleTask;
+            System.arraycopy(extra, 0, args, 1, extra.length);
+            return runGradle(taskDir, args);
+        }
+
+        String[] args = new String[1 + extra.length];
+        args[0] = ":" + taskId + ":" + gradleTask;
+        System.arraycopy(extra, 0, args, 1, extra.length);
+        return runGradle(repoPath, args);
     }
 
     private BuildStatus resolveStatus(ProcessResult pr) {

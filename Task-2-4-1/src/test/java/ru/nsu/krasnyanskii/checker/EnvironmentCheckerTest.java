@@ -25,23 +25,16 @@ class EnvironmentCheckerTest {
     }
 
     @Test
-    @DisplayName("check(skipAuthCheck=true) does not throw and produces output")
-    void checkSkipAuth() {
-        assertDoesNotThrow(() -> checker.check(true));
-        assertTrue(errBuf.size() > 0);
-    }
-
-    @Test
-    @DisplayName("check(skipAuthCheck=false) does not throw and includes credential.helper check")
-    void checkWithAuth() {
-        assertDoesNotThrow(() -> checker.check(false));
+    @DisplayName("check() does not throw and produces output")
+    void checkDoesNotThrow() {
+        assertDoesNotThrow(() -> checker.check());
         assertTrue(errBuf.size() > 0);
     }
 
     @Test
     @DisplayName("check() output contains git info or a WARNING")
     void checkOutputContainsGitInfo() {
-        checker.check(true);
+        checker.check();
         String output = errBuf.toString();
         boolean hasGitInfo = output.contains("git")
                 || output.contains("Git")

@@ -4,7 +4,7 @@ import java.io.File;
 
 /**
  * Runs pre-flight environment checks before the main pipeline starts:
- * git availability, global user config, and credential helper setup.
+ * git availability and global user config.
  */
 public class EnvironmentChecker {
 
@@ -20,17 +20,10 @@ public class EnvironmentChecker {
         this.view   = view;
     }
 
-    /**
-     * Runs all pre-flight checks.
-     *
-     * @param skipAuthCheck when true, the credential.helper check is skipped
-     */
-    public void check(boolean skipAuthCheck) {
+    /** Runs all pre-flight checks. */
+    public void check() {
         checkGitAvailable();
         checkGitUserConfigured();
-        if (!skipAuthCheck) {
-            warnIfAuthMayPrompt();
-        }
     }
 
     private void checkGitAvailable() {
@@ -57,22 +50,6 @@ public class EnvironmentChecker {
             }
         } catch (Exception e) {
             view.warnGitUserCheckFailed(e.getMessage());
-        }
-    }
-
-    private void warnIfAuthMayPrompt() {
-        try {
-            ProcessResult r = runner.run(
-                    new File(".").toPath(),
-                    "git", "config", "--global", "credential.helper");
-            boolean hasHelper = r.isSuccess() && !r.getOutput().trim().isEmpty();
-            if (!hasHelper) {
-                view.warnCredentialHelperNotSet();
-            } else {
-                view.printCredentialHelper(r.getOutput().trim());
-            }
-        } catch (Exception e) {
-            view.warnCredentialHelperCheckFailed(e.getMessage());
         }
     }
 }

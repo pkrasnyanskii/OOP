@@ -70,6 +70,10 @@ tasks.register<Test>("integrationTest") {
     }
     jvmArgs(jvmOpenArgs)
     systemProperty("junit.jupiter.execution.timeout.default", "5m")
+    testLogging {
+        showStandardStreams = true
+        events("passed", "failed", "skipped")
+    }
 }
 
 tasks.javadoc {
