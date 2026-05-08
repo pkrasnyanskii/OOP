@@ -97,11 +97,14 @@ public class ProjectChecker {
         }
 
         CheckInstruction instruction = config.getCheckInstruction();
-        for (String taskId : instruction.getTaskIds()) {
-            TaskCheckResult taskResult = checkTask(repoPath, github, taskId);
-            taskResult.setScore(scoreCalc.calculate(github, taskResult));
-            studentResult.addTaskResult(taskResult);
-        }
+        List<TaskCheckResult> taskResults = instruction.getTaskIds().parallelStream()
+                .map(taskId -> {
+                    TaskCheckResult tr = checkTask(repoPath, github, taskId);
+                    tr.setScore(scoreCalc.calculate(github, tr));
+                    return tr;
+                })
+                .collect(Collectors.toList());
+        taskResults.forEach(studentResult::addTaskResult);
 
         addActivityBonus(repoPath, studentResult);
         return studentResult;

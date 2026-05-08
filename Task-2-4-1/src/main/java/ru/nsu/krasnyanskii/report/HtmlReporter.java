@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+import ru.nsu.krasnyanskii.checker.GradeCalculator;
 import ru.nsu.krasnyanskii.model.ActivityConfig;
 import ru.nsu.krasnyanskii.model.CheckPoint;
 import ru.nsu.krasnyanskii.model.GradeScale;
@@ -15,10 +16,18 @@ import ru.nsu.krasnyanskii.model.results.TaskCheckResult;
 
 /** Generates a self-contained HTML report from check results. */
 public class HtmlReporter {
-    private final OopCheckerConfig config;
 
+    private final OopCheckerConfig config;
+    private final GradeCalculator  gradeCalc;
+
+    /**
+     * Creates an HtmlReporter.
+     *
+     * @param config parsed OOP checker configuration
+     */
     public HtmlReporter(OopCheckerConfig config) {
-        this.config = config;
+        this.config    = config;
+        this.gradeCalc = new GradeCalculator(config);
     }
 
     /**
@@ -124,16 +133,10 @@ public class HtmlReporter {
             sb.append("<td><b>").append(esc(sr.getStudentName())).append("</b></td>\n");
             sb.append("<td>").append(esc(sr.getGroupName())).append("</td>\n");
             for (CheckPoint cp : config.getCheckPoints()) {
-                double cpScore = cp.getTaskIds().stream()
-                        .mapToDouble(tid -> sr.getTaskResult(tid)
-                                .map(TaskCheckResult::getScore).orElse(0.0))
-                        .sum();
-                double cpMax = cp.getTaskIds().stream()
-                        .mapToDouble(tid -> config.findTaskById(tid)
-                                .map(Task::getMaxScore).orElse(0.0))
-                        .sum();
-                int grade = gradeForScore(cpScore, cpMax > 0 ? cpMax : 100);
-                String cls = gradeClass(grade);
+                double cpScore = gradeCalc.checkpointScore(sr, cp);
+                double cpMax   = gradeCalc.checkpointMax(cp);
+                int grade      = gradeCalc.grade(cpScore, cpMax);
+                String cls     = gradeCalc.gradeClass(grade);
                 sb.append("<td class=\"").append(cls).append("\">");
                 sb.append(fmt(cpScore)).append(" / ").append(fmt(cpMax));
                 sb.append("<br><b>Оценка: ").append(grade).append("</b></td>\n");
@@ -171,27 +174,22 @@ public class HtmlReporter {
             List<StudentCheckResult> results,
             List<String> checkedTaskIds) {
         sb.append("<h2>Итоговые оценки</h2>\n");
-        double totalMaxScore = checkedTaskIds.stream()
-                .mapToDouble(tid -> config.findTaskById(tid).map(Task::getMaxScore).orElse(0.0))
-                .sum();
-        if (config.getActivityConfig() != null) {
-            totalMaxScore += config.getActivityConfig().getBonusPoints();
-        }
+        double totalMaxScore = gradeCalc.totalMaxScore(checkedTaskIds);
         sb.append("<div class=\"scroll\">\n<table>\n<thead>\n<tr>");
         sb.append("<th>Студент</th><th>Группа</th>");
         sb.append("<th>Сумма баллов</th><th>% от макс.</th><th>Оценка</th>");
         sb.append("</tr>\n</thead>\n<tbody>\n");
         for (StudentCheckResult sr : results) {
             double score = sr.getTotalScore();
-            int grade    = gradeForScore(score, totalMaxScore > 0 ? totalMaxScore : 100);
+            int grade    = gradeCalc.grade(score, totalMaxScore);
+            String cls   = gradeCalc.gradeClass(grade);
             sb.append("<tr>");
             sb.append("<td><b>").append(esc(sr.getStudentName())).append("</b></td>");
             sb.append("<td>").append(esc(sr.getGroupName())).append("</td>");
             sb.append("<td>").append(fmt(score)).append(" / ").append(fmt(totalMaxScore));
             sb.append("</td>");
-            double pct = totalMaxScore > 0 ? score / totalMaxScore * 100 : 0;
+            double pct = gradeCalc.scorePercent(score, totalMaxScore);
             sb.append("<td>").append(String.format("%.1f%%", pct)).append("</td>");
-            String cls = gradeClass(grade);
             sb.append("<td class=\"grade ").append(cls).append("\"><b>");
             sb.append(grade).append("</b></td>");
             sb.append("</tr>\n");
@@ -251,19 +249,6 @@ public class HtmlReporter {
             case TIMEOUT       -> "<span class=\"fail\">⏱</span>";
             case NOT_AVAILABLE -> "<span class=\"pass\">✓</span>";
             case NOT_CHECKED   -> "<span class=\"na\">?</span>";
-        };
-    }
-
-    private int gradeForScore(double score, double maxScore) {
-        double pct = maxScore > 0 ? score / maxScore * 100 : 0;
-        return config.getScoringConfig().getGradeScale().toGrade(pct);
-    }
-
-    private String gradeClass(int grade) {
-        return switch (grade) {
-            case 5, 4 -> "pass";
-            case 3    -> "warn";
-            default   -> "fail";
         };
     }
 
