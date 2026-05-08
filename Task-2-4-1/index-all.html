@@ -148,6 +148,14 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/model/CheckPoint.html#%3Cinit%3E(java.lang.String,java.time.LocalDate)" class="member-name-link">CheckPoint(String, LocalDate)</a> - Constructor for class ru.nsu.krasnyanskii.model.<a href="ru/nsu/krasnyanskii/model/CheckPoint.html" title="class in ru.nsu.krasnyanskii.model">CheckPoint</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/krasnyanskii/checker/GradeCalculator.html#checkpointMax(ru.nsu.krasnyanskii.model.CheckPoint)" class="member-name-link">checkpointMax(CheckPoint)</a> - Method in class ru.nsu.krasnyanskii.checker.<a href="ru/nsu/krasnyanskii/checker/GradeCalculator.html" title="class in ru.nsu.krasnyanskii.checker">GradeCalculator</a></dt>
+<dd>
+<div class="block">Sums the maximum scores for all tasks in a checkpoint.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/checker/GradeCalculator.html#checkpointScore(ru.nsu.krasnyanskii.model.results.StudentCheckResult,ru.nsu.krasnyanskii.model.CheckPoint)" class="member-name-link">checkpointScore(StudentCheckResult, CheckPoint)</a> - Method in class ru.nsu.krasnyanskii.checker.<a href="ru/nsu/krasnyanskii/checker/GradeCalculator.html" title="class in ru.nsu.krasnyanskii.checker">GradeCalculator</a></dt>
+<dd>
+<div class="block">Sums the earned scores for all tasks in a checkpoint.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/checker/GitManager.html#cloneOrUpdate(java.lang.String,java.lang.String)" class="member-name-link">cloneOrUpdate(String, String)</a> - Method in class ru.nsu.krasnyanskii.checker.<a href="ru/nsu/krasnyanskii/checker/GitManager.html" title="class in ru.nsu.krasnyanskii.checker">GitManager</a></dt>
 <dd>
 <div class="block">Clones the repository if it does not exist locally, or fetches and resets to origin HEAD.</div>
@@ -234,6 +242,22 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates a GitManager.</div>
 </dd>
+<dt><a href="ru/nsu/krasnyanskii/checker/GradeCalculator.html#grade(double,double)" class="member-name-link">grade(double, double)</a> - Method in class ru.nsu.krasnyanskii.checker.<a href="ru/nsu/krasnyanskii/checker/GradeCalculator.html" title="class in ru.nsu.krasnyanskii.checker">GradeCalculator</a></dt>
+<dd>
+<div class="block">Converts a raw score to an academic grade (2–5).</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/checker/GradeCalculator.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.checker">GradeCalculator</a> - Class in <a href="ru/nsu/krasnyanskii/checker/package-summary.html">ru.nsu.krasnyanskii.checker</a></dt>
+<dd>
+<div class="block">Computes grades, percentages, and aggregated scores for the HTML report.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/checker/GradeCalculator.html#%3Cinit%3E(ru.nsu.krasnyanskii.model.OopCheckerConfig)" class="member-name-link">GradeCalculator(OopCheckerConfig)</a> - Constructor for class ru.nsu.krasnyanskii.checker.<a href="ru/nsu/krasnyanskii/checker/GradeCalculator.html" title="class in ru.nsu.krasnyanskii.checker">GradeCalculator</a></dt>
+<dd>
+<div class="block">Creates a GradeCalculator.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/checker/GradeCalculator.html#gradeClass(int)" class="member-name-link">gradeClass(int)</a> - Method in class ru.nsu.krasnyanskii.checker.<a href="ru/nsu/krasnyanskii/checker/GradeCalculator.html" title="class in ru.nsu.krasnyanskii.checker">GradeCalculator</a></dt>
+<dd>
+<div class="block">Maps a numeric grade to a CSS class name.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/model/GradeScale.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.model">GradeScale</a> - Class in <a href="ru/nsu/krasnyanskii/model/package-summary.html">ru.nsu.krasnyanskii.model</a></dt>
 <dd>
 <div class="block">Maps a score percentage to a 2–5 academic grade.</div>
@@ -256,7 +280,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Generates a self-contained HTML report from check results.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/report/HtmlReporter.html#%3Cinit%3E(ru.nsu.krasnyanskii.model.OopCheckerConfig)" class="member-name-link">HtmlReporter(OopCheckerConfig)</a> - Constructor for class ru.nsu.krasnyanskii.report.<a href="ru/nsu/krasnyanskii/report/HtmlReporter.html" title="class in ru.nsu.krasnyanskii.report">HtmlReporter</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates an HtmlReporter.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:I">I</h2>
 <dl class="index">
@@ -415,6 +441,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates a ScoreCalculator.</div>
 </dd>
+<dt><a href="ru/nsu/krasnyanskii/checker/GradeCalculator.html#scorePercent(double,double)" class="member-name-link">scorePercent(double, double)</a> - Method in class ru.nsu.krasnyanskii.checker.<a href="ru/nsu/krasnyanskii/checker/GradeCalculator.html" title="class in ru.nsu.krasnyanskii.checker">GradeCalculator</a></dt>
+<dd>
+<div class="block">Converts a raw score to a percentage of the maximum.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/model/ScoringConfig.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.model">ScoringConfig</a> - Class in <a href="ru/nsu/krasnyanskii/model/package-summary.html">ru.nsu.krasnyanskii.model</a></dt>
 <dd>
 <div class="block">Parameters controlling how scores are calculated.</div>
@@ -470,6 +500,11 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/model/results/TestCounts.html#toString()" class="member-name-link">toString()</a> - Method in class ru.nsu.krasnyanskii.model.results.<a href="ru/nsu/krasnyanskii/model/results/TestCounts.html" title="class in ru.nsu.krasnyanskii.model.results">TestCounts</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/krasnyanskii/checker/GradeCalculator.html#totalMaxScore(java.util.List)" class="member-name-link">totalMaxScore(List&lt;String&gt;)</a> - Method in class ru.nsu.krasnyanskii.checker.<a href="ru/nsu/krasnyanskii/checker/GradeCalculator.html" title="class in ru.nsu.krasnyanskii.checker">GradeCalculator</a></dt>
+<dd>
+<div class="block">Sums the maximum scores for the given task IDs,
+ including the activity bonus if configured.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:V">V</h2>
 <dl class="index">
