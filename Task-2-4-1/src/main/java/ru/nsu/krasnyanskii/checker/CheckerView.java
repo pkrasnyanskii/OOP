@@ -11,24 +11,21 @@ public class CheckerView {
 
     private final PrintStream err;
     private final PrintStream out;
-    private final boolean verbose;
 
-    /** Uses the standard streams with verbose mode off. */
+    /** Uses the standard streams. */
     public CheckerView() {
-        this(System.err, new PrintStream(System.out, true, StandardCharsets.UTF_8), false);
+        this(System.err, new PrintStream(System.out, true, StandardCharsets.UTF_8));
     }
 
     /**
-     * Creates a view with the given streams and verbosity setting.
+     * Creates a view with the given streams.
      *
-     * @param err     stream for diagnostics and warnings
-     * @param out     stream for the HTML report
-     * @param verbose whether to print debug messages
+     * @param err stream for diagnostics and warnings
+     * @param out stream for the HTML report
      */
-    public CheckerView(PrintStream err, PrintStream out, boolean verbose) {
-        this.err     = err;
-        this.out     = out;
-        this.verbose = verbose;
+    public CheckerView(PrintStream err, PrintStream out) {
+        this.err = err;
+        this.out = out;
     }
 
     /** Prints the startup banner. */
@@ -216,27 +213,5 @@ public class CheckerView {
      */
     public void warnActiveWeeksFailed(String msg) {
         err.println("WARNING: Failed to get active weeks: " + msg);
-    }
-
-    /**
-     * Prints git fetch output; no-op unless verbose mode is on.
-     *
-     * @param fetchOutput raw output from {@code git fetch}
-     */
-    public void debugFetchOutput(String fetchOutput) {
-        if (verbose) {
-            err.println("[DEBUG] fetch: " + fetchOutput);
-        }
-    }
-
-    /**
-     * Prints a debug message; no-op unless verbose mode is on.
-     *
-     * @param msg message to print
-     */
-    public void debug(String msg) {
-        if (verbose) {
-            err.println("[DEBUG] " + msg);
-        }
     }
 }

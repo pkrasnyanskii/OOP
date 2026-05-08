@@ -15,14 +15,12 @@ class CheckerViewTest {
     private ByteArrayOutputStream errBuf;
     private ByteArrayOutputStream outBuf;
     private CheckerView view;
-    private CheckerView verbose;
 
     @BeforeEach
     void setUp() {
-        errBuf  = new ByteArrayOutputStream();
-        outBuf  = new ByteArrayOutputStream();
-        view    = new CheckerView(new PrintStream(errBuf), new PrintStream(outBuf), false);
-        verbose = new CheckerView(new PrintStream(errBuf), new PrintStream(outBuf), true);
+        errBuf = new ByteArrayOutputStream();
+        outBuf = new ByteArrayOutputStream();
+        view   = new CheckerView(new PrintStream(errBuf), new PrintStream(outBuf));
     }
 
     private String err() {
@@ -191,35 +189,4 @@ class CheckerViewTest {
         assertTrue(err().contains("git failed"));
     }
 
-    @Test
-    @DisplayName("debugFetchOutput is silent in non-verbose mode")
-    void debugFetchOutput_notVerbose() {
-        errBuf.reset();
-        view.debugFetchOutput("fetch output");
-        assertFalse(err().contains("fetch output"));
-    }
-
-    @Test
-    @DisplayName("debugFetchOutput prints in verbose mode")
-    void debugFetchOutput_verbose() {
-        errBuf.reset();
-        verbose.debugFetchOutput("fetch output here");
-        assertTrue(err().contains("fetch output here"));
-    }
-
-    @Test
-    @DisplayName("debug is silent in non-verbose mode")
-    void debug_notVerbose() {
-        errBuf.reset();
-        view.debug("debug message");
-        assertFalse(err().contains("debug message"));
-    }
-
-    @Test
-    @DisplayName("debug prints in verbose mode")
-    void debug_verbose() {
-        errBuf.reset();
-        verbose.debug("debug message here");
-        assertTrue(err().contains("debug message here"));
-    }
 }
