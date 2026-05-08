@@ -92,13 +92,12 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">CheckerView</a>()</code></div>
 <div class="col-last even-row-color">
-<div class="block">Uses the standard streams with verbose mode off.</div>
+<div class="block">Uses the standard streams.</div>
 </div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.io.PrintStream,java.io.PrintStream,boolean)" class="member-name-link">CheckerView</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;err,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;out,
- boolean&nbsp;verbose)</code></div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.io.PrintStream,java.io.PrintStream)" class="member-name-link">CheckerView</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;err,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;out)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Creates a view with the given streams and verbosity setting.</div>
+<div class="block">Creates a view with the given streams.</div>
 </div>
 </div>
 </section>
@@ -114,16 +113,6 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#debug(java.lang.String)" class="member-name-link">debug</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Prints a debug message; no-op unless verbose mode is on.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#debugFetchOutput(java.lang.String)" class="member-name-link">debugFetchOutput</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fetchOutput)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Prints git fetch output; no-op unless verbose mode is on.</div>
-</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#errorCloneFailed(java.lang.String,java.lang.String)" class="member-name-link">errorCloneFailed</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;github,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</code></div>
@@ -253,21 +242,19 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>CheckerView</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CheckerView</span>()</div>
-<div class="block">Uses the standard streams with verbose mode off.</div>
+<div class="block">Uses the standard streams.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="&lt;init&gt;(java.io.PrintStream,java.io.PrintStream,boolean)">
+<section class="detail" id="&lt;init&gt;(java.io.PrintStream,java.io.PrintStream)">
 <h3>CheckerView</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CheckerView</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;err,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;out,
- boolean&nbsp;verbose)</span></div>
-<div class="block">Creates a view with the given streams and verbosity setting.</div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;out)</span></div>
+<div class="block">Creates a view with the given streams.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>err</code> - stream for diagnostics and warnings</dd>
 <dd><code>out</code> - stream for the HTML report</dd>
-<dd><code>verbose</code> - whether to print debug messages</dd>
 </dl>
 </section>
 </li>
@@ -500,28 +487,6 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>msg</code> - error message from the active-weeks calculation</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="debugFetchOutput(java.lang.String)">
-<h3>debugFetchOutput</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">debugFetchOutput</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fetchOutput)</span></div>
-<div class="block">Prints git fetch output; no-op unless verbose mode is on.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>fetchOutput</code> - raw output from <code>git fetch</code></dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="debug(java.lang.String)">
-<h3>debug</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">debug</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</span></div>
-<div class="block">Prints a debug message; no-op unless verbose mode is on.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>msg</code> - message to print</dd>
 </dl>
 </section>
 </li>
