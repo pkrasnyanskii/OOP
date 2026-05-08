@@ -120,7 +120,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Calculates the activity bonus.</div>
 </dd>
-<dt><a href="ru/nsu/krasnyanskii/checker/EnvironmentChecker.html#check(boolean)" class="member-name-link">check(boolean)</a> - Method in class ru.nsu.krasnyanskii.checker.<a href="ru/nsu/krasnyanskii/checker/EnvironmentChecker.html" title="class in ru.nsu.krasnyanskii.checker">EnvironmentChecker</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/checker/EnvironmentChecker.html#check()" class="member-name-link">check()</a> - Method in class ru.nsu.krasnyanskii.checker.<a href="ru/nsu/krasnyanskii/checker/EnvironmentChecker.html" title="class in ru.nsu.krasnyanskii.checker">EnvironmentChecker</a></dt>
 <dd>
 <div class="block">Runs all pre-flight checks.</div>
 </dd>
@@ -179,7 +179,7 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/krasnyanskii/checker/EnvironmentChecker.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.checker">EnvironmentChecker</a> - Class in <a href="ru/nsu/krasnyanskii/checker/package-summary.html">ru.nsu.krasnyanskii.checker</a></dt>
 <dd>
 <div class="block">Runs pre-flight environment checks before the main pipeline starts:
- git availability, global user config, and credential helper setup.</div>
+ git availability and global user config.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/checker/EnvironmentChecker.html#%3Cinit%3E(ru.nsu.krasnyanskii.checker.ProcessRunner,ru.nsu.krasnyanskii.checker.CheckerView)" class="member-name-link">EnvironmentChecker(ProcessRunner, CheckerView)</a> - Constructor for class ru.nsu.krasnyanskii.checker.<a href="ru/nsu/krasnyanskii/checker/EnvironmentChecker.html" title="class in ru.nsu.krasnyanskii.checker">EnvironmentChecker</a></dt>
 <dd>&nbsp;</dd>
@@ -346,10 +346,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Prints the number of students and tasks loaded from config.</div>
 </dd>
-<dt><a href="ru/nsu/krasnyanskii/checker/CheckerView.html#printCredentialHelper(java.lang.String)" class="member-name-link">printCredentialHelper(String)</a> - Method in class ru.nsu.krasnyanskii.checker.<a href="ru/nsu/krasnyanskii/checker/CheckerView.html" title="class in ru.nsu.krasnyanskii.checker">CheckerView</a></dt>
-<dd>
-<div class="block">Prints the configured git credential helper.</div>
-</dd>
 <dt><a href="ru/nsu/krasnyanskii/checker/CheckerView.html#printGitUser(java.lang.String)" class="member-name-link">printGitUser(String)</a> - Method in class ru.nsu.krasnyanskii.checker.<a href="ru/nsu/krasnyanskii/checker/CheckerView.html" title="class in ru.nsu.krasnyanskii.checker">CheckerView</a></dt>
 <dd>
 <div class="block">Prints the global git user name.</div>
@@ -503,14 +499,6 @@ the order they are declared.</div>
 <dt><a href="ru/nsu/krasnyanskii/checker/CheckerView.html#warnActiveWeeksFailed(java.lang.String)" class="member-name-link">warnActiveWeeksFailed(String)</a> - Method in class ru.nsu.krasnyanskii.checker.<a href="ru/nsu/krasnyanskii/checker/CheckerView.html" title="class in ru.nsu.krasnyanskii.checker">CheckerView</a></dt>
 <dd>
 <div class="block">Warns that the active-weeks calculation failed.</div>
-</dd>
-<dt><a href="ru/nsu/krasnyanskii/checker/CheckerView.html#warnCredentialHelperCheckFailed(java.lang.String)" class="member-name-link">warnCredentialHelperCheckFailed(String)</a> - Method in class ru.nsu.krasnyanskii.checker.<a href="ru/nsu/krasnyanskii/checker/CheckerView.html" title="class in ru.nsu.krasnyanskii.checker">CheckerView</a></dt>
-<dd>
-<div class="block">Warns that the credential helper check failed.</div>
-</dd>
-<dt><a href="ru/nsu/krasnyanskii/checker/CheckerView.html#warnCredentialHelperNotSet()" class="member-name-link">warnCredentialHelperNotSet()</a> - Method in class ru.nsu.krasnyanskii.checker.<a href="ru/nsu/krasnyanskii/checker/CheckerView.html" title="class in ru.nsu.krasnyanskii.checker">CheckerView</a></dt>
-<dd>
-<div class="block">Warns that no credential helper is configured — cloning private repos may stall.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/checker/CheckerView.html#warnGitCheckFailed(java.lang.String)" class="member-name-link">warnGitCheckFailed(String)</a> - Method in class ru.nsu.krasnyanskii.checker.<a href="ru/nsu/krasnyanskii/checker/CheckerView.html" title="class in ru.nsu.krasnyanskii.checker">CheckerView</a></dt>
 <dd>

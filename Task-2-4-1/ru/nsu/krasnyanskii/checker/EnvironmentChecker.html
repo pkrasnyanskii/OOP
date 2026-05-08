@@ -78,7 +78,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">EnvironmentChecker</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">Runs pre-flight environment checks before the main pipeline starts:
- git availability, global user config, and credential helper setup.</div>
+ git availability and global user config.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -108,7 +108,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#check(boolean)" class="member-name-link">check</a><wbr>(boolean&nbsp;skipAuthCheck)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#check()" class="member-name-link">check</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Runs all pre-flight checks.</div>
 </div>
@@ -150,14 +150,10 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="check(boolean)">
+<section class="detail" id="check()">
 <h3>check</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">check</span><wbr><span class="parameters">(boolean&nbsp;skipAuthCheck)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">check</span>()</div>
 <div class="block">Runs all pre-flight checks.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>skipAuthCheck</code> - when true, the credential.helper check is skipped</dd>
-</dl>
 </section>
 </li>
 </ul>
