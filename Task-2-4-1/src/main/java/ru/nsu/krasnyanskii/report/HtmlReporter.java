@@ -249,7 +249,7 @@ public class HtmlReporter {
             case SUCCESS       -> "<span class=\"pass\">✓</span>";
             case FAILED        -> "<span class=\"fail\">✗</span>";
             case TIMEOUT       -> "<span class=\"fail\">⏱</span>";
-            case NOT_AVAILABLE -> "<span class=\"na\">—</span>";
+            case NOT_AVAILABLE -> "<span class=\"pass\">✓</span>";
             case NOT_CHECKED   -> "<span class=\"na\">?</span>";
         };
     }

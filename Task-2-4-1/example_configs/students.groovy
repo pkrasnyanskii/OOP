@@ -39,7 +39,7 @@ groups {
     group("24214") {
         student {
             github = "pkrasnyanskii"
-            name   = "Краснянский Пётр"
+            name   = "Краснянский Пётр Михвйлович"
             repo   = "https://github.com/pkrasnyanskii/OOP"
         }
     }
