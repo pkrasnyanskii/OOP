@@ -20,7 +20,7 @@ class EnvironmentCheckerTest {
     void setUp() {
         errBuf  = new ByteArrayOutputStream();
         PrintStream devNull = new PrintStream(new ByteArrayOutputStream());
-        view    = new CheckerView(new PrintStream(errBuf), devNull, false);
+        view    = new CheckerView(new PrintStream(errBuf), devNull);
         checker = new EnvironmentChecker(new ProcessRunner(15), view);
     }
 

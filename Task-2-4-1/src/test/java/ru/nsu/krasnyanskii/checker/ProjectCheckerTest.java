@@ -36,7 +36,7 @@ class ProjectCheckerTest {
     @BeforeEach
     void setUp() {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        view = new CheckerView(new PrintStream(buf), new PrintStream(buf), false);
+        view = new CheckerView(new PrintStream(buf), new PrintStream(buf));
     }
 
     private OopCheckerConfig buildConfig(String github, String repoUrl, String taskId) {

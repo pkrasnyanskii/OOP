@@ -24,7 +24,7 @@ class GitManagerTest {
     @BeforeEach
     void setUp(@TempDir Path reposDir) {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        view       = new CheckerView(new PrintStream(buf), new PrintStream(buf), true);
+        view       = new CheckerView(new PrintStream(buf), new PrintStream(buf));
         gitManager = new GitManager(reposDir, 15, view);
     }
 

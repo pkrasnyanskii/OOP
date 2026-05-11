@@ -61,8 +61,7 @@ class ProjectCheckerIntegrationTest {
 
         CheckerView view = new CheckerView(
                 new PrintStream(Files.newOutputStream(logFile)),
-                System.out,
-                false);
+                System.out);
 
         Path reposDir = REPORT_DIR.resolve("repos");
         ProjectChecker checker = new ProjectChecker(config, reposDir, view);

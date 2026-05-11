@@ -45,8 +45,7 @@ public class GitManager {
 
         if (Files.exists(repoPath.resolve(".git"))) {
             view.infoUpdating(github);
-            ProcessResult fetch = runner.run(repoPath, "git", "fetch", "--all", "--prune");
-            view.debugFetchOutput(fetch.getOutput());
+            runner.run(repoPath, "git", "fetch", "--all", "--prune");
             String branch = detectMainBranch(repoPath);
             runner.run(repoPath, "git", "checkout", branch);
             runner.run(repoPath, "git", "reset", "--hard", "origin/" + branch);
@@ -125,8 +124,8 @@ public class GitManager {
             if (ref.endsWith("/master")) {
                 return "master";
             }
-        } catch (Exception e) {
-            view.debug("Could not read symbolic-ref: " + e.getMessage());
+        } catch (Exception ignored) {
+            // fall through to show-ref check
         }
         try {
             ProcessResult r = runner.run(
@@ -134,8 +133,8 @@ public class GitManager {
             if (r.isSuccess()) {
                 return "main";
             }
-        } catch (Exception e) {
-            view.debug("Could not verify origin/main: " + e.getMessage());
+        } catch (Exception ignored) {
+            // fall through to default branch
         }
         return "master";
     }
