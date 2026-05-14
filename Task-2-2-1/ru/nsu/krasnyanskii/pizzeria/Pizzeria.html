@@ -77,13 +77,9 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Pizzeria</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Entry point and lifecycle manager for the pizzeria simulation.
+<div class="block">Application entry point.
 
- <p><b>DIP</b>: <code>stopAll</code> and <code>interruptAndJoin</code> work with
- <a href="Stoppable.html" title="interface in ru.nsu.krasnyanskii.pizzeria"><code>Stoppable</code></a>/<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Thread.html" title="class or interface in java.lang" class="external-link"><code>Thread</code></a> abstractions — no coupling to concrete worker types.</p>
-
- <p>Shutdown strategy: stop generator → drain queue → wait for bakers →
- close storage → wait for couriers → serialize unfinished orders.</p></div>
+ <p>All orchestration is delegated to <a href="controller/PizzeriaController.html" title="class in ru.nsu.krasnyanskii.pizzeria.controller"><code>PizzeriaController</code></a>.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">

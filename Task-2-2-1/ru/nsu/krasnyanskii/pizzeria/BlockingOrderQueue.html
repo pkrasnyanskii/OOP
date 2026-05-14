@@ -84,14 +84,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Bounded blocking queue backed by intrinsic locks (<code>wait</code>/<code>notifyAll</code>).
 
  <p>Uses manual synchronization because <code>java.util.concurrent.BlockingQueue</code>
- is prohibited by the assignment.</p>
-
- <p><b>synchronized variants:</b>
- (1) <code>synchronized</code> method — lock on the instance (<code>this</code>);
- (2) <code>synchronized</code> block — lock on an explicit object, narrows the critical
- section or allows separate locks for independent data;
- (3) <code>static synchronized</code> method — lock on the <code>Class</code> object, one lock
- per class across the entire JVM regardless of instance count.</p></div>
+ is prohibited by the assignment.</p></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -199,13 +192,7 @@ loadScripts(document, 'script');</script>
 <h3 id="put(java.lang.Object)">put</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">put</span><wbr><span class="parameters">(<a href="BlockingOrderQueue.html" title="type parameter in BlockingOrderQueue">T</a>&nbsp;item)</span>
          throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
-<div class="block">Inserts an element, blocking until space is available.
-
- <p><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link"><code>InterruptedException</code></a> is thrown when a thread blocked in
- <code>wait</code>/<code>sleep</code>/<code>join</code> receives <code>thread.interrupt()</code>.
- This is Java's cooperative cancellation mechanism — the thread must either
- re-throw the exception or restore the interrupted flag via
- <code>Thread.currentThread().interrupt()</code>.</p></div>
+<div class="block">Inserts an element, blocking until space is available.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>item</code> - element to insert</dd>
@@ -219,9 +206,7 @@ loadScripts(document, 'script');</script>
 <h3>take</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="BlockingOrderQueue.html" title="type parameter in BlockingOrderQueue">T</a></span>&nbsp;<span class="element-name">take</span>()
        throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
-<div class="block">Retrieves and removes the head element, blocking until one is available.
-
- <p>For <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link"><code>InterruptedException</code></a> semantics see <a href="#put(T)"><code>put(Object)</code></a>.</p></div>
+<div class="block">Retrieves and removes the head element, blocking until one is available.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the head element, or <code>null</code> if the queue is closed and empty</dd>
