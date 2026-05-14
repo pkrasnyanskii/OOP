@@ -1,17 +1,12 @@
 package ru.nsu.krasnyanskii.pizzeria.workers;
 
 import ru.nsu.krasnyanskii.pizzeria.BlockingOrderQueue;
-import ru.nsu.krasnyanskii.pizzeria.Order;
 import ru.nsu.krasnyanskii.pizzeria.PizzaStorage;
-import ru.nsu.krasnyanskii.pizzeria.PizzeriaView;
 import ru.nsu.krasnyanskii.pizzeria.Stoppable;
+import ru.nsu.krasnyanskii.pizzeria.model.Order;
+import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
 
-/**
- * Worker that takes orders from the queue, simulates cooking, and puts pizzas to storage.
- *
- * <p>Implements {@link Stoppable} (ISP): the interface exposes only {@code stop()},
- * letting {@code Pizzeria} manage all workers through a single abstraction (DIP).</p>
- */
+/** Worker that takes orders from the queue, simulates cooking, and puts pizzas to storage. */
 public class Baker implements Runnable, Stoppable {
 
     private final int id;
@@ -19,12 +14,6 @@ public class Baker implements Runnable, Stoppable {
     private final BlockingOrderQueue<Order> orderQueue;
     private final PizzaStorage storage;
     private final PizzeriaView view;
-
-    /**
-     * {@code volatile} ensures that a write in one thread is immediately visible to all
-     * other threads without CPU-register caching. Without it, the baker thread might
-     * never observe the {@code false} written by {@code stop()}.
-     */
     private volatile boolean running = true;
 
     /**
@@ -57,7 +46,7 @@ public class Baker implements Runnable, Stoppable {
             while (running) {
                 Order order = orderQueue.take();
                 if (order == null) {
-                    break; // queue closed and empty
+                    break;
                 }
                 order.setState(Order.State.COOKING);
                 view.bakerCooking(id, order.getId());

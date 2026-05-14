@@ -3,6 +3,7 @@ package ru.nsu.krasnyanskii.pizzeria;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import ru.nsu.krasnyanskii.pizzeria.model.Order;
 
 /**
  * Thread-safe bounded storage for cooked pizzas.

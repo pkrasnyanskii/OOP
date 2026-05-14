@@ -3,17 +3,12 @@ package ru.nsu.krasnyanskii.pizzeria.workers;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ru.nsu.krasnyanskii.pizzeria.Order;
 import ru.nsu.krasnyanskii.pizzeria.PizzaStorage;
-import ru.nsu.krasnyanskii.pizzeria.PizzeriaView;
 import ru.nsu.krasnyanskii.pizzeria.Stoppable;
+import ru.nsu.krasnyanskii.pizzeria.model.Order;
+import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
 
-/**
- * Worker that picks up batches of pizzas from storage and delivers them.
- *
- * <p>Implements {@link Stoppable} (ISP): single-method interface lets {@code Pizzeria}
- * control all workers via one abstraction (DIP).</p>
- */
+/** Worker that picks up batches of pizzas from storage and delivers them. */
 public class Courier implements Runnable, Stoppable {
 
     private final int id;
@@ -21,11 +16,6 @@ public class Courier implements Runnable, Stoppable {
     private final PizzaStorage storage;
     private final int deliveryTimeMs;
     private final PizzeriaView view;
-
-    /**
-     * {@code volatile} makes the write from {@code stop()} immediately visible
-     * to the courier thread without explicit synchronization.
-     */
     private volatile boolean running = true;
 
     /**
@@ -59,7 +49,7 @@ public class Courier implements Runnable, Stoppable {
             while (running) {
                 List<Order> batch = storage.take(trunkCapacity);
                 if (batch.isEmpty()) {
-                    break; // storage closed and empty
+                    break;
                 }
                 batch.forEach(order -> order.setState(Order.State.DELIVERING));
                 String ids = formatIds(batch);

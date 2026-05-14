@@ -1,18 +1,13 @@
-package ru.nsu.krasnyanskii.pizzeria;
+package ru.nsu.krasnyanskii.pizzeria.view;
 
-/**
- * View layer for the pizzeria simulation.
- *
- * <p><b>SRP</b>: this class is the single place responsible for all console output.
- * No other class calls {@code System.out} directly.</p>
- */
+import ru.nsu.krasnyanskii.pizzeria.model.Order;
+
+/** View layer for the pizzeria simulation — single place for all console output. */
 public class PizzeriaView {
 
     /** Creates a PizzeriaView. */
     public PizzeriaView() {
     }
-
-    // --- Pizzeria lifecycle ---
 
     /** Prints the pizzeria-opened banner. */
     public void pizzeriaOpened() {
@@ -42,8 +37,6 @@ public class PizzeriaView {
     public void shutdownStarted() {
         System.out.println("\n=== Time is up! Starting shutdown... ===");
     }
-
-    // --- Baker ---
 
     /**
      * Prints a baker-started message.
@@ -83,8 +76,6 @@ public class PizzeriaView {
     public void bakerFinished(int id) {
         System.out.printf("[Baker-%d] finished%n", id);
     }
-
-    // --- Courier ---
 
     /**
      * Prints a courier-started message.
@@ -126,8 +117,6 @@ public class PizzeriaView {
         System.out.printf("[Courier-%d] finished%n", id);
     }
 
-    // --- OrderGenerator ---
-
     /** Prints a generator-started message. */
     public void generatorStarted() {
         System.out.println("[OrderGenerator] started accepting orders");
@@ -147,8 +136,6 @@ public class PizzeriaView {
         System.out.printf("[OrderGenerator] new order #%d%n", orderId);
     }
 
-    // --- Order state ---
-
     /**
      * Prints an order state-change message.
      *
@@ -158,8 +145,6 @@ public class PizzeriaView {
     public void orderStateChanged(int orderId, String state) {
         System.out.printf("[#%d] %s%n", orderId, state);
     }
-
-    // --- Serializer ---
 
     /**
      * Prints a serializer-saved confirmation.

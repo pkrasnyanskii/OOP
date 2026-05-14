@@ -1,4 +1,4 @@
-package ru.nsu.krasnyanskii.pizzeria;
+package ru.nsu.krasnyanskii.pizzeria.config;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,12 +8,13 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import ru.nsu.krasnyanskii.pizzeria.model.Order;
+import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
 
 /** Saves and loads unfinished orders in a minimal JSON format. */
 public class OrderSerializer {
 
     private OrderSerializer() {
-        // utility class
     }
 
     /**

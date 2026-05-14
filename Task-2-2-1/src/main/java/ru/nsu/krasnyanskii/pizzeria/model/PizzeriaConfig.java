@@ -1,17 +1,10 @@
-package ru.nsu.krasnyanskii.pizzeria;
+package ru.nsu.krasnyanskii.pizzeria.model;
 
 import java.util.List;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * Pizzeria configuration loaded from a JSON file.
- *
- * <p>Lombok {@code @Data} generates getters, setters, {@code equals}, {@code hashCode},
- * and {@code toString}. {@code @NoArgsConstructor} adds the no-arg constructor required
- * by Jackson for deserialization.</p>
- */
+/** Pizzeria configuration loaded from a JSON file. */
 @Data
 @NoArgsConstructor
 public class PizzeriaConfig {

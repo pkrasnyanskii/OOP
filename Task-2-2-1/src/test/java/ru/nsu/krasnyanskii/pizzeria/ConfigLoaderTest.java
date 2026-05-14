@@ -9,6 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import ru.nsu.krasnyanskii.pizzeria.config.ConfigLoader;
+import ru.nsu.krasnyanskii.pizzeria.model.PizzeriaConfig;
 
 class ConfigLoaderTest {
 
