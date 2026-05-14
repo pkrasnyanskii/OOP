@@ -318,11 +318,11 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="ru/nsu/krasnyanskii/Main.html#main(java.lang.String%5B%5D)" class="member-name-link">main(String[])</a> - Static method in class ru.nsu.krasnyanskii.<a href="ru/nsu/krasnyanskii/Main.html" title="class in ru.nsu.krasnyanskii">Main</a></dt>
 <dd>
-<div class="block">Application entry point.</div>
+<div class="block">Starts the OOP checker.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/Main.html" class="type-name-link" title="class in ru.nsu.krasnyanskii">Main</a> - Class in <a href="ru/nsu/krasnyanskii/package-summary.html">ru.nsu.krasnyanskii</a></dt>
 <dd>
-<div class="block">Entry point.</div>
+<div class="block">Application entry point.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/Main.html#%3Cinit%3E()" class="member-name-link">Main()</a> - Constructor for class ru.nsu.krasnyanskii.<a href="ru/nsu/krasnyanskii/Main.html" title="class in ru.nsu.krasnyanskii">Main</a></dt>
 <dd>&nbsp;</dd>
@@ -342,6 +342,14 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/model/OopCheckerConfig.html#%3Cinit%3E()" class="member-name-link">OopCheckerConfig()</a> - Constructor for class ru.nsu.krasnyanskii.model.<a href="ru/nsu/krasnyanskii/model/OopCheckerConfig.html" title="class in ru.nsu.krasnyanskii.model">OopCheckerConfig</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/krasnyanskii/controller/OopCheckerController.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.controller">OopCheckerController</a> - Class in <a href="ru/nsu/krasnyanskii/controller/package-summary.html">ru.nsu.krasnyanskii.controller</a></dt>
+<dd>
+<div class="block">Orchestrates the full OOP checker pipeline.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/controller/OopCheckerController.html#%3Cinit%3E(java.lang.String%5B%5D)" class="member-name-link">OopCheckerController(String[])</a> - Constructor for class ru.nsu.krasnyanskii.controller.<a href="ru/nsu/krasnyanskii/controller/OopCheckerController.html" title="class in ru.nsu.krasnyanskii.controller">OopCheckerController</a></dt>
+<dd>
+<div class="block">Creates a controller and parses the given command-line arguments.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/dsl/OopCheckerScriptInterface.html" class="type-name-link" title="interface in ru.nsu.krasnyanskii.dsl">OopCheckerScriptInterface</a> - Interface in <a href="ru/nsu/krasnyanskii/dsl/package-summary.html">ru.nsu.krasnyanskii.dsl</a></dt>
 <dd>
 <div class="block">Java interface implemented by OopCheckerScript.groovy.</div>
@@ -410,6 +418,8 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/krasnyanskii/config/package-summary.html">ru.nsu.krasnyanskii.config</a> - package ru.nsu.krasnyanskii.config</dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/krasnyanskii/controller/package-summary.html">ru.nsu.krasnyanskii.controller</a> - package ru.nsu.krasnyanskii.controller</dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/krasnyanskii/dsl/package-summary.html">ru.nsu.krasnyanskii.dsl</a> - package ru.nsu.krasnyanskii.dsl</dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/krasnyanskii/model/package-summary.html">ru.nsu.krasnyanskii.model</a> - package ru.nsu.krasnyanskii.model</dt>
@@ -418,6 +428,10 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/krasnyanskii/report/package-summary.html">ru.nsu.krasnyanskii.report</a> - package ru.nsu.krasnyanskii.report</dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/krasnyanskii/controller/OopCheckerController.html#run()" class="member-name-link">run()</a> - Method in class ru.nsu.krasnyanskii.controller.<a href="ru/nsu/krasnyanskii/controller/OopCheckerController.html" title="class in ru.nsu.krasnyanskii.controller">OopCheckerController</a></dt>
+<dd>
+<div class="block">Runs the full checker pipeline and outputs the HTML report.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/checker/ProcessRunner.html#run(java.nio.file.Path,java.lang.String...)" class="member-name-link">run(Path, String...)</a> - Method in class ru.nsu.krasnyanskii.checker.<a href="ru/nsu/krasnyanskii/checker/ProcessRunner.html" title="class in ru.nsu.krasnyanskii.checker">ProcessRunner</a></dt>
 <dd>
 <div class="block">Runs a command in the given directory.</div>
