@@ -47,28 +47,44 @@ public class ScoreCalculator {
         if (task == null) {
             return 0.0;
         }
-
         if (result.getCompileStatus() != BuildStatus.SUCCESS) {
+            return 0.0;
+        }
+        if (isAfterHardDeadline(result.getLastCommitDate(), task)) {
             return 0.0;
         }
 
         ScoringConfig sc = config.getScoringConfig();
 
-        double score = baseScore(result.getTestCounts(), task);
-        score = applyDeductions(score, result, task, sc);
-        score = applyDeadlinePenalty(score, result.getLastCommitDate(), task, sc);
-        score = applyBonus(score, studentGithub, task);
+        double base      = baseScore(result.getTestCounts(), task);
+        double deduction = deductionAmount(result, task, sc);
+        double penalty   = softDeadlinePenalty(result.getLastCommitDate(), task, sc);
+        double bonus     = bonusAmount(studentGithub, task);
 
+        double score = Math.min(task.getMaxScore(), Math.max(0, base + deduction + penalty) + bonus);
         return Math.round(score * 10.0) / 10.0;
     }
 
     /**
-     * Calculates the base score from the test-pass ratio.
+     * Returns {@code true} if the commit is past the hard deadline.
+     *
+     * @param lastCommit date of the student's last relevant commit
+     * @param task       task configuration with hard deadline
+     * @return {@code true} if hard deadline exceeded
+     */
+    private boolean isAfterHardDeadline(LocalDate lastCommit, Task task) {
+        return lastCommit != null
+                && task.getHardDeadline() != null
+                && lastCommit.isAfter(task.getHardDeadline());
+    }
+
+    /**
+     * Returns the base score from the test-pass ratio.
      * If there are no tests, the full score is awarded (compiled = done).
      *
      * @param tests test counts from the task run
      * @param task  task configuration with maxScore
-     * @return base score before any deductions
+     * @return base score, always &ge; 0
      */
     private double baseScore(TestCounts tests, Task task) {
         if (tests.getTotal() == 0) {
@@ -78,62 +94,52 @@ public class ScoreCalculator {
     }
 
     /**
-     * Applies style and docs deductions, flooring the result at zero.
+     * Returns the total style and docs deduction as a non-positive number.
      *
-     * @param score  score before deductions
      * @param result task check result with style/docs statuses
      * @param task   task configuration with maxScore
      * @param sc     scoring configuration with deduction percentages
-     * @return score after deductions, at least 0
+     * @return deduction amount (&le; 0)
      */
-    private double applyDeductions(double score, TaskCheckResult result,
-                                   Task task, ScoringConfig sc) {
-        double adjusted = score;
+    private double deductionAmount(TaskCheckResult result, Task task, ScoringConfig sc) {
+        double deduction = 0;
         if (result.getStyleStatus() == BuildStatus.FAILED) {
-            adjusted -= task.getMaxScore() * sc.getStyleDeductionPercent() / 100.0;
+            deduction -= task.getMaxScore() * sc.getStyleDeductionPercent() / 100.0;
         }
         if (result.getDocsStatus() == BuildStatus.FAILED) {
-            adjusted -= task.getMaxScore() * sc.getDocsDeductionPercent() / 100.0;
+            deduction -= task.getMaxScore() * sc.getDocsDeductionPercent() / 100.0;
         }
-        return Math.max(0, adjusted);
+        return deduction;
     }
 
     /**
-     * Applies deadline penalties.
-     * Hard deadline exceeded &rarr; returns 0.
-     * Soft deadline exceeded &rarr; subtracts {@code penaltyPerDay * daysLate}.
+     * Returns the soft-deadline penalty as a non-positive number.
+     * Returns 0 if no soft deadline is configured or not exceeded.
      *
-     * @param score      score before penalties
      * @param lastCommit date of the student's last relevant commit
-     * @param task       task configuration with deadlines
-     * @param sc         scoring configuration with penalty rate
-     * @return score after deadline penalties, at least 0
+     * @param task       task configuration with soft deadline
+     * @param sc         scoring configuration with penalty rate per day
+     * @return penalty amount (&le; 0)
      */
-    private double applyDeadlinePenalty(double score, LocalDate lastCommit,
-                                        Task task, ScoringConfig sc) {
-        if (lastCommit == null) {
-            return score;
+    private double softDeadlinePenalty(LocalDate lastCommit, Task task, ScoringConfig sc) {
+        if (lastCommit == null || task.getSoftDeadline() == null) {
+            return 0;
         }
-        if (task.getHardDeadline() != null && lastCommit.isAfter(task.getHardDeadline())) {
-            return 0.0;
+        if (!lastCommit.isAfter(task.getSoftDeadline())) {
+            return 0;
         }
-        if (task.getSoftDeadline() != null && lastCommit.isAfter(task.getSoftDeadline())) {
-            long daysLate = ChronoUnit.DAYS.between(task.getSoftDeadline(), lastCommit);
-            return Math.max(0, score - daysLate * sc.getSoftDeadlinePenaltyPerDay());
-        }
-        return score;
+        long daysLate = ChronoUnit.DAYS.between(task.getSoftDeadline(), lastCommit);
+        return -(daysLate * sc.getSoftDeadlinePenaltyPerDay());
     }
 
     /**
-     * Adds the configured bonus and caps the result at {@code task.getMaxScore()}.
+     * Returns the bonus points for this student and task.
      *
-     * @param score         score before bonus
      * @param studentGithub student GitHub login
-     * @param task          task configuration with maxScore
-     * @return score after bonus, capped at maxScore
+     * @param task          task configuration
+     * @return bonus amount (&ge; 0)
      */
-    private double applyBonus(double score, String studentGithub, Task task) {
-        double bonus = config.getBonusFor(studentGithub, task.getId());
-        return Math.min(task.getMaxScore(), score + bonus);
+    private double bonusAmount(String studentGithub, Task task) {
+        return config.getBonusFor(studentGithub, task.getId());
     }
 }
