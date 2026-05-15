@@ -11,6 +11,7 @@ import ru.nsu.krasnyanskii.pizzeria.config.ConfigLoader;
 import ru.nsu.krasnyanskii.pizzeria.config.OrderSerializer;
 import ru.nsu.krasnyanskii.pizzeria.model.Order;
 import ru.nsu.krasnyanskii.pizzeria.model.PizzeriaConfig;
+import ru.nsu.krasnyanskii.pizzeria.view.ConsolePizzeriaView;
 import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
 import ru.nsu.krasnyanskii.pizzeria.workers.Baker;
 import ru.nsu.krasnyanskii.pizzeria.workers.Courier;
@@ -43,7 +44,7 @@ public class PizzeriaController {
      * @throws Exception if config cannot be loaded or threads are interrupted
      */
     public void run() throws Exception {
-        PizzeriaView view = new PizzeriaView();
+        PizzeriaView view = new ConsolePizzeriaView();
         view.pizzeriaOpened();
         PizzeriaConfig config = ConfigLoader.load(configPath);
 

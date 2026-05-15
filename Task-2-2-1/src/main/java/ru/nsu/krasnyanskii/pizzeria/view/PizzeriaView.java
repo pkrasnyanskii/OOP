@@ -1,42 +1,26 @@
 package ru.nsu.krasnyanskii.pizzeria.view;
 
-import ru.nsu.krasnyanskii.pizzeria.model.Order;
-
-/** View layer for the pizzeria simulation — single place for all console output. */
-public class PizzeriaView {
-
-    /** Creates a PizzeriaView. */
-    public PizzeriaView() {
-    }
+/** Output contract for the pizzeria simulation. */
+public interface PizzeriaView {
 
     /** Prints the pizzeria-opened banner. */
-    public void pizzeriaOpened() {
-        System.out.println("=== Pizzeria is opening! ===");
-    }
+    void pizzeriaOpened();
 
     /** Prints the pizzeria-closed banner. */
-    public void pizzeriaClosed() {
-        System.out.println("=== Pizzeria is closed. Goodbye! ===");
-    }
+    void pizzeriaClosed();
 
     /** Prints a confirmation that all orders were completed. */
-    public void allOrdersDone() {
-        System.out.println("[Pizzeria] All orders completed!");
-    }
+    void allOrdersDone();
 
     /**
      * Prints how long the pizzeria will run.
      *
      * @param ms working duration in milliseconds
      */
-    public void workingFor(long ms) {
-        System.out.printf("[Pizzeria] Working for %d ms...%n", ms);
-    }
+    void workingFor(long ms);
 
     /** Prints the shutdown-started banner. */
-    public void shutdownStarted() {
-        System.out.println("\n=== Time is up! Starting shutdown... ===");
-    }
+    void shutdownStarted();
 
     /**
      * Prints a baker-started message.
@@ -44,9 +28,7 @@ public class PizzeriaView {
      * @param id            baker identifier
      * @param cookingTimeMs cooking time per pizza in ms
      */
-    public void bakerStarted(int id, int cookingTimeMs) {
-        System.out.printf("[Baker-%d] started (cooking time: %d ms)%n", id, cookingTimeMs);
-    }
+    void bakerStarted(int id, int cookingTimeMs);
 
     /**
      * Prints a baker-cooking message.
@@ -54,9 +36,7 @@ public class PizzeriaView {
      * @param bakerId baker identifier
      * @param orderId order being cooked
      */
-    public void bakerCooking(int bakerId, int orderId) {
-        System.out.printf("[Baker-%d] cooking order #%d%n", bakerId, orderId);
-    }
+    void bakerCooking(int bakerId, int orderId);
 
     /**
      * Prints a baker-cooked message.
@@ -64,18 +44,14 @@ public class PizzeriaView {
      * @param bakerId baker identifier
      * @param orderId order that finished cooking
      */
-    public void bakerCooked(int bakerId, int orderId) {
-        System.out.printf("[Baker-%d] order #%d ready, putting to storage%n", bakerId, orderId);
-    }
+    void bakerCooked(int bakerId, int orderId);
 
     /**
      * Prints a baker-finished message.
      *
      * @param id baker identifier
      */
-    public void bakerFinished(int id) {
-        System.out.printf("[Baker-%d] finished%n", id);
-    }
+    void bakerFinished(int id);
 
     /**
      * Prints a courier-started message.
@@ -83,9 +59,7 @@ public class PizzeriaView {
      * @param id            courier identifier
      * @param trunkCapacity max pizzas per trip
      */
-    public void courierStarted(int id, int trunkCapacity) {
-        System.out.printf("[Courier-%d] started (trunk: %d pizzas)%n", id, trunkCapacity);
-    }
+    void courierStarted(int id, int trunkCapacity);
 
     /**
      * Prints a courier-delivering message.
@@ -94,9 +68,7 @@ public class PizzeriaView {
      * @param count     number of pizzas in this trip
      * @param ids       formatted order id list
      */
-    public void courierDelivering(int courierId, int count, String ids) {
-        System.out.printf("[Courier-%d] delivering %d pizzas: %s%n", courierId, count, ids);
-    }
+    void courierDelivering(int courierId, int count, String ids);
 
     /**
      * Prints a courier-delivered message.
@@ -104,37 +76,27 @@ public class PizzeriaView {
      * @param courierId courier identifier
      * @param ids       formatted order id list
      */
-    public void courierDelivered(int courierId, String ids) {
-        System.out.printf("[Courier-%d] delivered: %s%n", courierId, ids);
-    }
+    void courierDelivered(int courierId, String ids);
 
     /**
      * Prints a courier-finished message.
      *
      * @param id courier identifier
      */
-    public void courierFinished(int id) {
-        System.out.printf("[Courier-%d] finished%n", id);
-    }
+    void courierFinished(int id);
 
     /** Prints a generator-started message. */
-    public void generatorStarted() {
-        System.out.println("[OrderGenerator] started accepting orders");
-    }
+    void generatorStarted();
 
     /** Prints a generator-stopped message. */
-    public void generatorStopped() {
-        System.out.println("[OrderGenerator] stopped");
-    }
+    void generatorStopped();
 
     /**
      * Prints a new-order message.
      *
      * @param orderId generated order identifier
      */
-    public void orderGenerated(int orderId) {
-        System.out.printf("[OrderGenerator] new order #%d%n", orderId);
-    }
+    void orderGenerated(int orderId);
 
     /**
      * Prints an order state-change message.
@@ -142,9 +104,7 @@ public class PizzeriaView {
      * @param orderId order identifier
      * @param state   human-readable state description
      */
-    public void orderStateChanged(int orderId, String state) {
-        System.out.printf("[#%d] %s%n", orderId, state);
-    }
+    void orderStateChanged(int orderId, String state);
 
     /**
      * Prints a serializer-saved confirmation.
@@ -152,7 +112,5 @@ public class PizzeriaView {
      * @param count    number of saved orders
      * @param filePath destination file path
      */
-    public void serializerSaved(int count, String filePath) {
-        System.out.printf("[Serializer] Saved %d unfinished orders to %s%n", count, filePath);
-    }
+    void serializerSaved(int count, String filePath);
 }

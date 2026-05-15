@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import ru.nsu.krasnyanskii.pizzeria.config.OrderSerializer;
 import ru.nsu.krasnyanskii.pizzeria.model.Order;
+import ru.nsu.krasnyanskii.pizzeria.view.ConsolePizzeriaView;
 import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
 
 class OrderSerializerTest {
@@ -18,7 +19,7 @@ class OrderSerializerTest {
     @TempDir
     Path tempDir;
 
-    private final PizzeriaView view = new PizzeriaView();
+    private final PizzeriaView view = new ConsolePizzeriaView();
 
     @BeforeEach
     void resetCounter() {
