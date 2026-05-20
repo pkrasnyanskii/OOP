@@ -1,7 +1,8 @@
 package ru.nsu.krasnyanskii.pizzeria;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Deque;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public class BlockingOrderQueue<T> {
 
-    private final LinkedList<T> queue = new LinkedList<>();
+    private final Deque<T> queue = new ArrayDeque<>();
     private final int capacity;
     private volatile boolean closed = false;
 

@@ -1,7 +1,8 @@
 package ru.nsu.krasnyanskii.pizzeria;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Deque;
 import java.util.List;
 import ru.nsu.krasnyanskii.pizzeria.model.Order;
 
@@ -14,7 +15,7 @@ import ru.nsu.krasnyanskii.pizzeria.model.Order;
 public class PizzaStorage {
 
     private final int capacity;
-    private final LinkedList<Order> orders = new LinkedList<>();
+    private final Deque<Order> orders = new ArrayDeque<>();
     private volatile boolean accepting = true;
 
     /**
