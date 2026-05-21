@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.krasnyanskii.pizzeria.model.Order;
+import ru.nsu.krasnyanskii.pizzeria.storage.BoundedPizzaStorage;
+import ru.nsu.krasnyanskii.pizzeria.storage.PizzaStorage;
 import ru.nsu.krasnyanskii.pizzeria.view.ConsolePizzeriaView;
 import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
 import ru.nsu.krasnyanskii.pizzeria.workers.Courier;
@@ -23,7 +25,7 @@ class CourierTest {
 
     @Test
     void courierDeliversPizzas() throws InterruptedException {
-        PizzaStorage storage = new PizzaStorage(10);
+        PizzaStorage storage = new BoundedPizzaStorage(10);
 
         Order o1 = new Order();
         Order o2 = new Order();
@@ -43,7 +45,7 @@ class CourierTest {
 
     @Test
     void courierRespectsCapacity() throws InterruptedException {
-        PizzaStorage storage = new PizzaStorage(10);
+        PizzaStorage storage = new BoundedPizzaStorage(10);
         for (int i = 0; i < 5; i++) {
             storage.put(new Order());
         }
@@ -60,7 +62,7 @@ class CourierTest {
 
     @Test
     void courierThrowsOnInvalidCapacity() {
-        PizzaStorage storage = new PizzaStorage(10);
+        PizzaStorage storage = new BoundedPizzaStorage(10);
         assertThrows(IllegalArgumentException.class,
                 () -> new Courier(1, 0, 100, storage, view));
     }

@@ -9,6 +9,8 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.krasnyanskii.pizzeria.model.Order;
+import ru.nsu.krasnyanskii.pizzeria.storage.BoundedPizzaStorage;
+import ru.nsu.krasnyanskii.pizzeria.storage.PizzaStorage;
 
 class PizzaStorageTest {
 
@@ -19,7 +21,7 @@ class PizzaStorageTest {
 
     @Test
     void putAndTake() throws InterruptedException {
-        PizzaStorage storage = new PizzaStorage(5);
+        PizzaStorage storage = new BoundedPizzaStorage(5);
         Order order = new Order();
         storage.put(order);
         assertEquals(1, storage.size());
@@ -32,7 +34,7 @@ class PizzaStorageTest {
 
     @Test
     void takeLimitedByTrunkCapacity() throws InterruptedException {
-        PizzaStorage storage = new PizzaStorage(10);
+        PizzaStorage storage = new BoundedPizzaStorage(10);
         for (int i = 0; i < 5; i++) {
             storage.put(new Order());
         }
@@ -43,7 +45,7 @@ class PizzaStorageTest {
 
     @Test
     void takeReturnsEmptyWhenClosedAndEmpty() throws InterruptedException {
-        PizzaStorage storage = new PizzaStorage(5);
+        PizzaStorage storage = new BoundedPizzaStorage(5);
         storage.closeAccepting();
         List<Order> taken = storage.take(5);
         assertTrue(taken.isEmpty());
@@ -51,7 +53,7 @@ class PizzaStorageTest {
 
     @Test
     void putBlocksWhenFull() throws InterruptedException {
-        PizzaStorage storage = new PizzaStorage(1);
+        PizzaStorage storage = new BoundedPizzaStorage(1);
         storage.put(new Order());
 
         Thread putter = new Thread(() -> {
@@ -72,7 +74,7 @@ class PizzaStorageTest {
 
     @Test
     void drainAll() throws InterruptedException {
-        PizzaStorage storage = new PizzaStorage(10);
+        PizzaStorage storage = new BoundedPizzaStorage(10);
         storage.put(new Order());
         storage.put(new Order());
         List<Order> drained = storage.drainAll();
@@ -82,6 +84,6 @@ class PizzaStorageTest {
 
     @Test
     void constructorThrowsOnInvalidCapacity() {
-        assertThrows(IllegalArgumentException.class, () -> new PizzaStorage(0));
+        assertThrows(IllegalArgumentException.class, () -> new BoundedPizzaStorage(0));
     }
 }

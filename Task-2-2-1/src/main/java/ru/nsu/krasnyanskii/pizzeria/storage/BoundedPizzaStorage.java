@@ -1,4 +1,4 @@
-package ru.nsu.krasnyanskii.pizzeria;
+package ru.nsu.krasnyanskii.pizzeria.storage;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -12,31 +12,26 @@ import ru.nsu.krasnyanskii.pizzeria.model.Order;
  * <p>Uses intrinsic lock ({@code synchronized} + {@code wait}/{@code notifyAll})
  * without {@code java.util.concurrent} collections.</p>
  */
-public class PizzaStorage {
+public class BoundedPizzaStorage implements PizzaStorage {
 
     private final int capacity;
     private final Deque<Order> orders = new ArrayDeque<>();
     private volatile boolean accepting = true;
 
     /**
-     * Creates a PizzaStorage.
+     * Creates a BoundedPizzaStorage.
      *
      * @param capacity max number of pizzas; must be positive
      * @throws IllegalArgumentException if capacity is not positive
      */
-    public PizzaStorage(int capacity) {
+    public BoundedPizzaStorage(int capacity) {
         if (capacity <= 0) {
             throw new IllegalArgumentException("Storage capacity must be positive");
         }
         this.capacity = capacity;
     }
 
-    /**
-     * Puts a pizza into storage, blocking if full.
-     *
-     * @param order cooked order to store
-     * @throws InterruptedException if the thread is interrupted while waiting
-     */
+    @Override
     public synchronized void put(Order order) throws InterruptedException {
         while (orders.size() >= capacity) {
             wait();
@@ -46,13 +41,7 @@ public class PizzaStorage {
         notifyAll();
     }
 
-    /**
-     * Takes up to {@code maxCount} pizzas, blocking while storage is empty and open.
-     *
-     * @param maxCount max pizzas to take
-     * @return list of taken pizzas; empty if storage is closed and empty
-     * @throws InterruptedException if the thread is interrupted while waiting
-     */
+    @Override
     public synchronized List<Order> take(int maxCount) throws InterruptedException {
         while (orders.isEmpty() && accepting) {
             wait();
@@ -66,17 +55,13 @@ public class PizzaStorage {
         return taken;
     }
 
-    /** Signals that no more pizzas will be added; couriers will drain and exit. */
+    @Override
     public synchronized void closeAccepting() {
         accepting = false;
         notifyAll();
     }
 
-    /**
-     * Drains all remaining pizzas (used during shutdown serialization).
-     *
-     * @return snapshot of remaining orders
-     */
+    @Override
     public synchronized List<Order> drainAll() {
         List<Order> result = new ArrayList<>(orders);
         orders.clear();
@@ -84,29 +69,17 @@ public class PizzaStorage {
         return result;
     }
 
-    /**
-     * Returns {@code true} if no pizzas are in storage.
-     *
-     * @return {@code true} if empty
-     */
+    @Override
     public synchronized boolean isEmpty() {
         return orders.isEmpty();
     }
 
-    /**
-     * Returns the number of pizzas currently in storage.
-     *
-     * @return current size
-     */
+    @Override
     public synchronized int size() {
         return orders.size();
     }
 
-    /**
-     * Returns {@code true} if the storage is still accepting new pizzas.
-     *
-     * @return {@code true} if accepting
-     */
+    @Override
     public boolean isAccepting() {
         return accepting;
     }
