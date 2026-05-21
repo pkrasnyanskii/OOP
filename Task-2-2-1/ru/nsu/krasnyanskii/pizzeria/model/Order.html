@@ -108,16 +108,12 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">Order</a>()</code></div>
 <div class="col-last even-row-color">
-<div class="block">Creates a new order without view; no logging (used in tests).</div>
+<div class="block">Creates a new order in the QUEUED state.</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(int,ru.nsu.krasnyanskii.pizzeria.model.Order.State)" class="member-name-link">Order</a><wbr>(int&nbsp;id,
  <a href="Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria.model">Order.State</a>&nbsp;state)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Deserialization constructor — restores a saved order without logging.</div>
-</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView)" class="member-name-link">Order</a><wbr>(<a href="../view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a>&nbsp;view)</code></div>
-<div class="col-last even-row-color">
-<div class="block">Creates a new order and logs the QUEUED state via view.</div>
+<div class="block">Deserialization constructor — restores a saved order without auto-incrementing the counter.</div>
 </div>
 </div>
 </section>
@@ -127,7 +123,7 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
@@ -137,11 +133,6 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#resetCounter()" class="member-name-link">resetCounter</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Resets the id counter; for tests only.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setState(ru.nsu.krasnyanskii.pizzeria.model.Order.State)" class="member-name-link">setState</a><wbr>(<a href="Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria.model">Order.State</a>&nbsp;state)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Updates the state and notifies the view if one is present.</div>
 </div>
 </div>
 </div>
@@ -161,21 +152,10 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView)">
-<h3>Order</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Order</span><wbr><span class="parameters">(<a href="../view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a>&nbsp;view)</span></div>
-<div class="block">Creates a new order and logs the QUEUED state via view.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>view</code> - view for state-change output</dd>
-</dl>
-</section>
-</li>
-<li>
 <section class="detail" id="&lt;init&gt;()">
 <h3>Order</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Order</span>()</div>
-<div class="block">Creates a new order without view; no logging (used in tests).</div>
+<div class="block">Creates a new order in the QUEUED state.</div>
 </section>
 </li>
 <li>
@@ -183,7 +163,7 @@ loadScripts(document, 'script');</script>
 <h3>Order</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Order</span><wbr><span class="parameters">(int&nbsp;id,
  <a href="Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria.model">Order.State</a>&nbsp;state)</span></div>
-<div class="block">Deserialization constructor — restores a saved order without logging.</div>
+<div class="block">Deserialization constructor — restores a saved order without auto-incrementing the counter.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>id</code> - saved order id</dd>
@@ -199,17 +179,6 @@ loadScripts(document, 'script');</script>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
-<li>
-<section class="detail" id="setState(ru.nsu.krasnyanskii.pizzeria.model.Order.State)">
-<h3>setState</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setState</span><wbr><span class="parameters">(<a href="Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria.model">Order.State</a>&nbsp;state)</span></div>
-<div class="block">Updates the state and notifies the view if one is present.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>state</code> - new state</dd>
-</dl>
-</section>
-</li>
 <li>
 <section class="detail" id="resetCounter()">
 <h3>resetCounter</h3>

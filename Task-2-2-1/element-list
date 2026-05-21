@@ -2,5 +2,7 @@ ru.nsu.krasnyanskii.pizzeria
 ru.nsu.krasnyanskii.pizzeria.config
 ru.nsu.krasnyanskii.pizzeria.controller
 ru.nsu.krasnyanskii.pizzeria.model
+ru.nsu.krasnyanskii.pizzeria.queue
+ru.nsu.krasnyanskii.pizzeria.storage
 ru.nsu.krasnyanskii.pizzeria.view
 ru.nsu.krasnyanskii.pizzeria.workers

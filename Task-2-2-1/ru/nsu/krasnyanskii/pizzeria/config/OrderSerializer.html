@@ -98,9 +98,8 @@ loadScripts(document, 'script');</script>
 <div class="block">Loads previously saved orders from a JSON file.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#save(java.util.List,java.lang.String,ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView)" class="member-name-link">save</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/Order.html" title="class in ru.nsu.krasnyanskii.pizzeria.model">Order</a>&gt;&nbsp;orders,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath,
- <a href="../view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a>&nbsp;view)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#save(java.util.List,java.lang.String)" class="member-name-link">save</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/Order.html" title="class in ru.nsu.krasnyanskii.pizzeria.model">Order</a>&gt;&nbsp;orders,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Serializes orders to a JSON file.</div>
 </div>
@@ -122,18 +121,16 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="save(java.util.List,java.lang.String,ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView)">
+<section class="detail" id="save(java.util.List,java.lang.String)">
 <h3>save</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">save</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/Order.html" title="class in ru.nsu.krasnyanskii.pizzeria.model">Order</a>&gt;&nbsp;orders,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath,
- <a href="../view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a>&nbsp;view)</span>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath)</span>
                  throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
 <div class="block">Serializes orders to a JSON file.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>orders</code> - list of orders to save</dd>
 <dd><code>filePath</code> - destination file path</dd>
-<dd><code>view</code> - view for the confirmation message</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if the file cannot be written</dd>
 </dl>

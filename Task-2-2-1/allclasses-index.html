@@ -63,41 +63,49 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Worker that takes orders from the queue, simulates cooking, and puts pizzas to storage.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html" title="class in ru.nsu.krasnyanskii.pizzeria">BlockingOrderQueue</a>&lt;<a href="ru/nsu/krasnyanskii/pizzeria/BlockingOrderQueue.html" title="type parameter in BlockingOrderQueue">T</a>&gt;</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/krasnyanskii/pizzeria/queue/BlockingOrderQueue.html" title="class in ru.nsu.krasnyanskii.pizzeria.queue">BlockingOrderQueue</a>&lt;<a href="ru/nsu/krasnyanskii/pizzeria/queue/BlockingOrderQueue.html" title="type parameter in BlockingOrderQueue">T</a>&gt;</div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Bounded blocking queue backed by intrinsic locks (<code>wait</code>/<code>notifyAll</code>).</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/krasnyanskii/pizzeria/config/ConfigLoader.html" title="class in ru.nsu.krasnyanskii.pizzeria.config">ConfigLoader</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/krasnyanskii/pizzeria/storage/BoundedPizzaStorage.html" title="class in ru.nsu.krasnyanskii.pizzeria.storage">BoundedPizzaStorage</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Thread-safe bounded storage for cooked pizzas.</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/krasnyanskii/pizzeria/config/ConfigLoader.html" title="class in ru.nsu.krasnyanskii.pizzeria.config">ConfigLoader</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Loads <a href="ru/nsu/krasnyanskii/pizzeria/model/PizzeriaConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria.model"><code>PizzeriaConfig</code></a> from a JSON file using Jackson.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Console implementation of <a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view"><code>PizzeriaView</code></a> — prints all output to stdout.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Courier</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Courier</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Worker that picks up batches of pizzas from storage and delivers them.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/krasnyanskii/pizzeria/model/Order.html" title="class in ru.nsu.krasnyanskii.pizzeria.model">Order</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/krasnyanskii/pizzeria/model/Order.html" title="class in ru.nsu.krasnyanskii.pizzeria.model">Order</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Represents a single pizza order moving through the pipeline.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab3"><a href="ru/nsu/krasnyanskii/pizzeria/model/Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria.model">Order.State</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab3">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab3"><a href="ru/nsu/krasnyanskii/pizzeria/model/Order.State.html" title="enum class in ru.nsu.krasnyanskii.pizzeria.model">Order.State</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab3">
 <div class="block">Lifecycle states of an order.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/krasnyanskii/pizzeria/workers/OrderGenerator.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">OrderGenerator</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/krasnyanskii/pizzeria/workers/OrderGenerator.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">OrderGenerator</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Produces new orders at a fixed interval until stopped.</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="ru/nsu/krasnyanskii/pizzeria/queue/OrderQueue.html" title="interface in ru.nsu.krasnyanskii.pizzeria.queue">OrderQueue</a>&lt;<a href="ru/nsu/krasnyanskii/pizzeria/queue/OrderQueue.html" title="type parameter in OrderQueue">T</a>&gt;</div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
+<div class="block">Contract for a bounded blocking queue of orders.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/krasnyanskii/pizzeria/config/OrderSerializer.html" title="class in ru.nsu.krasnyanskii.pizzeria.config">OrderSerializer</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Saves and loads unfinished orders in a minimal JSON format.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/krasnyanskii/pizzeria/PizzaStorage.html" title="class in ru.nsu.krasnyanskii.pizzeria">PizzaStorage</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Thread-safe bounded storage for cooked pizzas.</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="ru/nsu/krasnyanskii/pizzeria/storage/PizzaStorage.html" title="interface in ru.nsu.krasnyanskii.pizzeria.storage">PizzaStorage</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
+<div class="block">Contract for thread-safe bounded pizza storage.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/krasnyanskii/pizzeria/Pizzeria.html" title="class in ru.nsu.krasnyanskii.pizzeria">Pizzeria</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
@@ -123,9 +131,13 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
 <div class="block">Output contract for the pizzeria simulation.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="ru/nsu/krasnyanskii/pizzeria/Stoppable.html" title="interface in ru.nsu.krasnyanskii.pizzeria">Stoppable</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="ru/nsu/krasnyanskii/pizzeria/workers/Stoppable.html" title="interface in ru.nsu.krasnyanskii.pizzeria.workers">Stoppable</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab1">
-<div class="block">Abstraction for softly stoppable workers.</div>
+<div class="block">Contract for softly stoppable workers.</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="ru/nsu/krasnyanskii/pizzeria/workers/Worker.html" title="interface in ru.nsu.krasnyanskii.pizzeria.workers">Worker</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
+<div class="block">Contract for a pizzeria worker: can be run in a thread and stopped gracefully.</div>
 </div>
 </div>
 </div>
