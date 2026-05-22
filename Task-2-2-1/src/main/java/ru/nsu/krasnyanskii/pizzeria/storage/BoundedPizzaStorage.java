@@ -37,7 +37,6 @@ public class BoundedPizzaStorage implements PizzaStorage {
             wait();
         }
         orders.addLast(order);
-        order.setState(Order.State.IN_STORAGE);
         notifyAll();
     }
 

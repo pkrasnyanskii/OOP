@@ -4,7 +4,7 @@ import lombok.Getter;
 import ru.nsu.krasnyanskii.pizzeria.model.Order;
 import ru.nsu.krasnyanskii.pizzeria.queue.OrderQueue;
 import ru.nsu.krasnyanskii.pizzeria.storage.PizzaStorage;
-import ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView;
+import ru.nsu.krasnyanskii.pizzeria.view.BakerView;
 
 /** Worker that takes orders from the queue, simulates cooking, and puts pizzas to storage. */
 public class Baker implements Worker {
@@ -15,8 +15,7 @@ public class Baker implements Worker {
     private final int cookingTimeMs;
     private final OrderQueue<Order> orderQueue;
     private final PizzaStorage storage;
-    private final PizzeriaView view;
-    private volatile boolean running = true;
+    private final BakerView view;
 
     /**
      * Creates a Baker.
@@ -30,7 +29,7 @@ public class Baker implements Worker {
     public Baker(int id, int cookingTimeMs,
                  OrderQueue<Order> orderQueue,
                  PizzaStorage storage,
-                 PizzeriaView view) {
+                 BakerView view) {
         if (cookingTimeMs <= 0) {
             throw new IllegalArgumentException("cookingTimeMs must be positive");
         }
@@ -45,7 +44,7 @@ public class Baker implements Worker {
     public void run() {
         view.bakerStarted(id, cookingTimeMs);
         try {
-            while (running) {
+            while (!Thread.currentThread().isInterrupted()) {
                 Order order = orderQueue.take();
                 if (order == null) {
                     break;
@@ -56,16 +55,12 @@ public class Baker implements Worker {
                 order.setState(Order.State.COOKED);
                 view.bakerCooked(id, order.getId());
                 storage.put(order);
+                order.setState(Order.State.IN_STORAGE);
                 view.orderStateChanged(order.getId(), Order.State.IN_STORAGE.getDescription());
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
         view.bakerFinished(id);
-    }
-
-    @Override
-    public void stop() {
-        running = false;
     }
 }
