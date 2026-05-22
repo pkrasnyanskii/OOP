@@ -15,11 +15,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.min.js"></script>
 </head>
 <body class="class-declaration-page">
-<script type="text/javascript">var evenRowColor = "even-row-color";
-var oddRowColor = "odd-row-color";
-var tableTab = "table-tab";
-var activeTableTab = "active-table-tab";
-var pathtoroot = "../../../../../";
+<script type="text/javascript">var pathtoroot = "../../../../../";
 loadScripts(document, 'script');</script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -52,7 +48,7 @@ loadScripts(document, 'script');</script>
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li><a href="#method-detail">Method</a></li>
+<li>Method</li>
 </ul>
 </div>
 <div class="nav-list-search"><label for="search-input">SEARCH:</label>
@@ -72,12 +68,22 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
+<dt>All Superinterfaces:</dt>
+<dd><code><a href="BakerView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">BakerView</a></code>, <code><a href="CourierView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">CourierView</a></code>, <code><a href="GeneratorView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">GeneratorView</a></code>, <code><a href="LifecycleView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">LifecycleView</a></code></dd>
+</dl>
+<dl class="notes">
 <dt>All Known Implementing Classes:</dt>
 <dd><code><a href="ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">PizzeriaView</span></div>
-<div class="block">Output contract for the pizzeria simulation.</div>
+<div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">PizzeriaView</span><span class="extends-implements">
+extends <a href="BakerView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">BakerView</a>, <a href="CourierView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">CourierView</a>, <a href="GeneratorView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">GeneratorView</a>, <a href="LifecycleView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">LifecycleView</a></span></div>
+<div class="block">Composite view that aggregates all role-specific view interfaces.
+
+ <p>Implementations of this interface satisfy every output channel of the pizzeria.
+ Clients should depend on the narrowest role interface they need
+ (<a href="BakerView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view"><code>BakerView</code></a>, <a href="CourierView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view"><code>CourierView</code></a>, <a href="GeneratorView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view"><code>GeneratorView</code></a>, <a href="LifecycleView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view"><code>LifecycleView</code></a>)
+ rather than on this composite.</p></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -85,319 +91,18 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
-<div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab3" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab3', 3)" class="table-tab">Abstract Methods</button></div>
-<div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">Modifier and Type</div>
-<div class="table-header col-second">Method</div>
-<div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#allOrdersDone()" class="member-name-link">allOrdersDone</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Prints a confirmation that all orders were completed.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#bakerCooked(int,int)" class="member-name-link">bakerCooked</a><wbr>(int&nbsp;bakerId,
- int&nbsp;orderId)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Prints a baker-cooked message.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#bakerCooking(int,int)" class="member-name-link">bakerCooking</a><wbr>(int&nbsp;bakerId,
- int&nbsp;orderId)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Prints a baker-cooking message.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#bakerFinished(int)" class="member-name-link">bakerFinished</a><wbr>(int&nbsp;id)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Prints a baker-finished message.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#bakerStarted(int,int)" class="member-name-link">bakerStarted</a><wbr>(int&nbsp;id,
- int&nbsp;cookingTimeMs)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Prints a baker-started message.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#courierDelivered(int,java.lang.String)" class="member-name-link">courierDelivered</a><wbr>(int&nbsp;courierId,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;ids)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Prints a courier-delivered message.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#courierDelivering(int,int,java.lang.String)" class="member-name-link">courierDelivering</a><wbr>(int&nbsp;courierId,
- int&nbsp;count,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;ids)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Prints a courier-delivering message.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#courierFinished(int)" class="member-name-link">courierFinished</a><wbr>(int&nbsp;id)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Prints a courier-finished message.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#courierStarted(int,int)" class="member-name-link">courierStarted</a><wbr>(int&nbsp;id,
- int&nbsp;trunkCapacity)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Prints a courier-started message.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#generatorStarted()" class="member-name-link">generatorStarted</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Prints a generator-started message.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#generatorStopped()" class="member-name-link">generatorStopped</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Prints a generator-stopped message.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#orderGenerated(int)" class="member-name-link">orderGenerated</a><wbr>(int&nbsp;orderId)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Prints a new-order message.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#orderStateChanged(int,java.lang.String)" class="member-name-link">orderStateChanged</a><wbr>(int&nbsp;orderId,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;state)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Prints an order state-change message.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#pizzeriaClosed()" class="member-name-link">pizzeriaClosed</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Prints the pizzeria-closed banner.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#pizzeriaOpened()" class="member-name-link">pizzeriaOpened</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Prints the pizzeria-opened banner.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#serializerSaved(int,java.lang.String)" class="member-name-link">serializerSaved</a><wbr>(int&nbsp;count,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Prints a serializer-saved confirmation.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#shutdownStarted()" class="member-name-link">shutdownStarted</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Prints the shutdown-started banner.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#workingFor(long)" class="member-name-link">workingFor</a><wbr>(long&nbsp;ms)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Prints how long the pizzeria will run.</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-</li>
-</ul>
-</section>
-<section class="details">
-<ul class="details-list">
-<!-- ============ METHOD DETAIL ========== -->
-<li>
-<section class="method-details" id="method-detail">
-<h2>Method Details</h2>
-<ul class="member-list">
-<li>
-<section class="detail" id="pizzeriaOpened()">
-<h3>pizzeriaOpened</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">pizzeriaOpened</span>()</div>
-<div class="block">Prints the pizzeria-opened banner.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="pizzeriaClosed()">
-<h3>pizzeriaClosed</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">pizzeriaClosed</span>()</div>
-<div class="block">Prints the pizzeria-closed banner.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="allOrdersDone()">
-<h3>allOrdersDone</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">allOrdersDone</span>()</div>
-<div class="block">Prints a confirmation that all orders were completed.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="workingFor(long)">
-<h3>workingFor</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">workingFor</span><wbr><span class="parameters">(long&nbsp;ms)</span></div>
-<div class="block">Prints how long the pizzeria will run.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>ms</code> - working duration in milliseconds</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="shutdownStarted()">
-<h3>shutdownStarted</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">shutdownStarted</span>()</div>
-<div class="block">Prints the shutdown-started banner.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="bakerStarted(int,int)">
-<h3>bakerStarted</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">bakerStarted</span><wbr><span class="parameters">(int&nbsp;id,
- int&nbsp;cookingTimeMs)</span></div>
-<div class="block">Prints a baker-started message.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>id</code> - baker identifier</dd>
-<dd><code>cookingTimeMs</code> - cooking time per pizza in ms</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="bakerCooking(int,int)">
-<h3>bakerCooking</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">bakerCooking</span><wbr><span class="parameters">(int&nbsp;bakerId,
- int&nbsp;orderId)</span></div>
-<div class="block">Prints a baker-cooking message.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>bakerId</code> - baker identifier</dd>
-<dd><code>orderId</code> - order being cooked</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="bakerCooked(int,int)">
-<h3>bakerCooked</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">bakerCooked</span><wbr><span class="parameters">(int&nbsp;bakerId,
- int&nbsp;orderId)</span></div>
-<div class="block">Prints a baker-cooked message.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>bakerId</code> - baker identifier</dd>
-<dd><code>orderId</code> - order that finished cooking</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="bakerFinished(int)">
-<h3>bakerFinished</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">bakerFinished</span><wbr><span class="parameters">(int&nbsp;id)</span></div>
-<div class="block">Prints a baker-finished message.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>id</code> - baker identifier</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="courierStarted(int,int)">
-<h3>courierStarted</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">courierStarted</span><wbr><span class="parameters">(int&nbsp;id,
- int&nbsp;trunkCapacity)</span></div>
-<div class="block">Prints a courier-started message.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>id</code> - courier identifier</dd>
-<dd><code>trunkCapacity</code> - max pizzas per trip</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="courierDelivering(int,int,java.lang.String)">
-<h3>courierDelivering</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">courierDelivering</span><wbr><span class="parameters">(int&nbsp;courierId,
- int&nbsp;count,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;ids)</span></div>
-<div class="block">Prints a courier-delivering message.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>courierId</code> - courier identifier</dd>
-<dd><code>count</code> - number of pizzas in this trip</dd>
-<dd><code>ids</code> - formatted order id list</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="courierDelivered(int,java.lang.String)">
-<h3>courierDelivered</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">courierDelivered</span><wbr><span class="parameters">(int&nbsp;courierId,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;ids)</span></div>
-<div class="block">Prints a courier-delivered message.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>courierId</code> - courier identifier</dd>
-<dd><code>ids</code> - formatted order id list</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="courierFinished(int)">
-<h3>courierFinished</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">courierFinished</span><wbr><span class="parameters">(int&nbsp;id)</span></div>
-<div class="block">Prints a courier-finished message.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>id</code> - courier identifier</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="generatorStarted()">
-<h3>generatorStarted</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">generatorStarted</span>()</div>
-<div class="block">Prints a generator-started message.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="generatorStopped()">
-<h3>generatorStopped</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">generatorStopped</span>()</div>
-<div class="block">Prints a generator-stopped message.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="orderGenerated(int)">
-<h3>orderGenerated</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">orderGenerated</span><wbr><span class="parameters">(int&nbsp;orderId)</span></div>
-<div class="block">Prints a new-order message.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>orderId</code> - generated order identifier</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="orderStateChanged(int,java.lang.String)">
-<h3>orderStateChanged</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">orderStateChanged</span><wbr><span class="parameters">(int&nbsp;orderId,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;state)</span></div>
-<div class="block">Prints an order state-change message.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>orderId</code> - order identifier</dd>
-<dd><code>state</code> - human-readable state description</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="serializerSaved(int,java.lang.String)">
-<h3>serializerSaved</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">serializerSaved</span><wbr><span class="parameters">(int&nbsp;count,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath)</span></div>
-<div class="block">Prints a serializer-saved confirmation.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>count</code> - number of saved orders</dd>
-<dd><code>filePath</code> - destination file path</dd>
-</dl>
-</section>
-</li>
-</ul>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-ru.nsu.krasnyanskii.pizzeria.view.BakerView">Methods inherited from interface&nbsp;ru.nsu.krasnyanskii.pizzeria.view.<a href="BakerView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">BakerView</a></h3>
+<code><a href="BakerView.html#bakerCooked(int,int)">bakerCooked</a>, <a href="BakerView.html#bakerCooking(int,int)">bakerCooking</a>, <a href="BakerView.html#bakerFinished(int)">bakerFinished</a>, <a href="BakerView.html#bakerStarted(int,int)">bakerStarted</a>, <a href="BakerView.html#orderStateChanged(int,java.lang.String)">orderStateChanged</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-ru.nsu.krasnyanskii.pizzeria.view.CourierView">Methods inherited from interface&nbsp;ru.nsu.krasnyanskii.pizzeria.view.<a href="CourierView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">CourierView</a></h3>
+<code><a href="CourierView.html#courierDelivered(int,java.lang.String)">courierDelivered</a>, <a href="CourierView.html#courierDelivering(int,int,java.lang.String)">courierDelivering</a>, <a href="CourierView.html#courierFinished(int)">courierFinished</a>, <a href="CourierView.html#courierStarted(int,int)">courierStarted</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-ru.nsu.krasnyanskii.pizzeria.view.GeneratorView">Methods inherited from interface&nbsp;ru.nsu.krasnyanskii.pizzeria.view.<a href="GeneratorView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">GeneratorView</a></h3>
+<code><a href="GeneratorView.html#generatorStarted()">generatorStarted</a>, <a href="GeneratorView.html#generatorStopped()">generatorStopped</a>, <a href="GeneratorView.html#orderGenerated(int)">orderGenerated</a>, <a href="GeneratorView.html#orderStateChanged(int,java.lang.String)">orderStateChanged</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-ru.nsu.krasnyanskii.pizzeria.view.LifecycleView">Methods inherited from interface&nbsp;ru.nsu.krasnyanskii.pizzeria.view.<a href="LifecycleView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">LifecycleView</a></h3>
+<code><a href="LifecycleView.html#allOrdersDone()">allOrdersDone</a>, <a href="LifecycleView.html#pizzeriaClosed()">pizzeriaClosed</a>, <a href="LifecycleView.html#pizzeriaOpened()">pizzeriaOpened</a>, <a href="LifecycleView.html#serializerSaved(int,java.lang.String)">serializerSaved</a>, <a href="LifecycleView.html#shutdownStarted()">shutdownStarted</a>, <a href="LifecycleView.html#workingFor(long)">workingFor</a></code></div>
 </section>
 </li>
 </ul>

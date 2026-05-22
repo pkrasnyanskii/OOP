@@ -54,7 +54,7 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#allOrdersDone()" class="member-name-link">allOrdersDone()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html#allOrdersDone()" class="member-name-link">allOrdersDone()</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/LifecycleView.html#allOrdersDone()" class="member-name-link">allOrdersDone()</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/LifecycleView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">LifecycleView</a></dt>
 <dd>
 <div class="block">Prints a confirmation that all orders were completed.</div>
 </dd>
@@ -65,35 +65,39 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Worker that takes orders from the queue, simulates cooking, and puts pizzas to storage.</div>
 </dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Baker.html#%3Cinit%3E(int,int,ru.nsu.krasnyanskii.pizzeria.queue.OrderQueue,ru.nsu.krasnyanskii.pizzeria.storage.PizzaStorage,ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView)" class="member-name-link">Baker(int, int, OrderQueue&lt;Order&gt;, PizzaStorage, PizzeriaView)</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/Baker.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Baker</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Baker.html#%3Cinit%3E(int,int,ru.nsu.krasnyanskii.pizzeria.queue.OrderQueue,ru.nsu.krasnyanskii.pizzeria.storage.PizzaStorage,ru.nsu.krasnyanskii.pizzeria.view.BakerView)" class="member-name-link">Baker(int, int, OrderQueue&lt;Order&gt;, PizzaStorage, BakerView)</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/Baker.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Baker</a></dt>
 <dd>
 <div class="block">Creates a Baker.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/model/PizzeriaConfig.BakerConfig.html#%3Cinit%3E()" class="member-name-link">BakerConfig()</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.model.<a href="ru/nsu/krasnyanskii/pizzeria/model/PizzeriaConfig.BakerConfig.html" title="class in ru.nsu.krasnyanskii.pizzeria.model">PizzeriaConfig.BakerConfig</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#bakerCooked(int,int)" class="member-name-link">bakerCooked(int, int)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html#bakerCooked(int,int)" class="member-name-link">bakerCooked(int, int)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/BakerView.html#bakerCooked(int,int)" class="member-name-link">bakerCooked(int, int)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/BakerView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">BakerView</a></dt>
 <dd>
 <div class="block">Prints a baker-cooked message.</div>
 </dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#bakerCooking(int,int)" class="member-name-link">bakerCooking(int, int)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#bakerCooked(int,int)" class="member-name-link">bakerCooked(int, int)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html#bakerCooking(int,int)" class="member-name-link">bakerCooking(int, int)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/BakerView.html#bakerCooking(int,int)" class="member-name-link">bakerCooking(int, int)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/BakerView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">BakerView</a></dt>
 <dd>
 <div class="block">Prints a baker-cooking message.</div>
 </dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#bakerFinished(int)" class="member-name-link">bakerFinished(int)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#bakerCooking(int,int)" class="member-name-link">bakerCooking(int, int)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html#bakerFinished(int)" class="member-name-link">bakerFinished(int)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/BakerView.html#bakerFinished(int)" class="member-name-link">bakerFinished(int)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/BakerView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">BakerView</a></dt>
 <dd>
 <div class="block">Prints a baker-finished message.</div>
 </dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#bakerStarted(int,int)" class="member-name-link">bakerStarted(int, int)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#bakerFinished(int)" class="member-name-link">bakerFinished(int)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html#bakerStarted(int,int)" class="member-name-link">bakerStarted(int, int)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/BakerView.html#bakerStarted(int,int)" class="member-name-link">bakerStarted(int, int)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/BakerView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">BakerView</a></dt>
 <dd>
 <div class="block">Prints a baker-started message.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#bakerStarted(int,int)" class="member-name-link">bakerStarted(int, int)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/BakerView.html" class="type-name-link" title="interface in ru.nsu.krasnyanskii.pizzeria.view">BakerView</a> - Interface in <a href="ru/nsu/krasnyanskii/pizzeria/view/package-summary.html">ru.nsu.krasnyanskii.pizzeria.view</a></dt>
+<dd>
+<div class="block">Output contract for events produced by bakers.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/queue/BlockingOrderQueue.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.pizzeria.queue">BlockingOrderQueue</a>&lt;<a href="ru/nsu/krasnyanskii/pizzeria/queue/BlockingOrderQueue.html" title="type parameter in BlockingOrderQueue">T</a>&gt; - Class in <a href="ru/nsu/krasnyanskii/pizzeria/queue/package-summary.html">ru.nsu.krasnyanskii.pizzeria.queue</a></dt>
 <dd>
@@ -154,7 +158,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Worker that picks up batches of pizzas from storage and delivers them.</div>
 </dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html#%3Cinit%3E(int,int,int,ru.nsu.krasnyanskii.pizzeria.storage.PizzaStorage,ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView)" class="member-name-link">Courier(int, int, int, PizzaStorage, PizzeriaView)</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Courier</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html#%3Cinit%3E(int,int,int,ru.nsu.krasnyanskii.pizzeria.storage.PizzaStorage,ru.nsu.krasnyanskii.pizzeria.view.CourierView)" class="member-name-link">Courier(int, int, int, PizzaStorage, CourierView)</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Courier</a></dt>
 <dd>
 <div class="block">Creates a Courier.</div>
 </dd>
@@ -162,27 +166,31 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#courierDelivered(int,java.lang.String)" class="member-name-link">courierDelivered(int, String)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html#courierDelivered(int,java.lang.String)" class="member-name-link">courierDelivered(int, String)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/CourierView.html#courierDelivered(int,java.lang.String)" class="member-name-link">courierDelivered(int, String)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/CourierView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">CourierView</a></dt>
 <dd>
 <div class="block">Prints a courier-delivered message.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#courierDelivering(int,int,java.lang.String)" class="member-name-link">courierDelivering(int, int, String)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html#courierDelivering(int,int,java.lang.String)" class="member-name-link">courierDelivering(int, int, String)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/CourierView.html#courierDelivering(int,int,java.lang.String)" class="member-name-link">courierDelivering(int, int, String)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/CourierView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">CourierView</a></dt>
 <dd>
 <div class="block">Prints a courier-delivering message.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#courierFinished(int)" class="member-name-link">courierFinished(int)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html#courierFinished(int)" class="member-name-link">courierFinished(int)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/CourierView.html#courierFinished(int)" class="member-name-link">courierFinished(int)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/CourierView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">CourierView</a></dt>
 <dd>
 <div class="block">Prints a courier-finished message.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#courierStarted(int,int)" class="member-name-link">courierStarted(int, int)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html#courierStarted(int,int)" class="member-name-link">courierStarted(int, int)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/CourierView.html#courierStarted(int,int)" class="member-name-link">courierStarted(int, int)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/CourierView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">CourierView</a></dt>
 <dd>
 <div class="block">Prints a courier-started message.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/CourierView.html" class="type-name-link" title="interface in ru.nsu.krasnyanskii.pizzeria.view">CourierView</a> - Interface in <a href="ru/nsu/krasnyanskii/pizzeria/view/package-summary.html">ru.nsu.krasnyanskii.pizzeria.view</a></dt>
+<dd>
+<div class="block">Output contract for events produced by couriers.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:D">D</h2>
@@ -212,15 +220,19 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#generatorStarted()" class="member-name-link">generatorStarted()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html#generatorStarted()" class="member-name-link">generatorStarted()</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/GeneratorView.html#generatorStarted()" class="member-name-link">generatorStarted()</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/GeneratorView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">GeneratorView</a></dt>
 <dd>
 <div class="block">Prints a generator-started message.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#generatorStopped()" class="member-name-link">generatorStopped()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html#generatorStopped()" class="member-name-link">generatorStopped()</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/GeneratorView.html#generatorStopped()" class="member-name-link">generatorStopped()</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/GeneratorView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">GeneratorView</a></dt>
 <dd>
 <div class="block">Prints a generator-stopped message.</div>
+</dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/GeneratorView.html" class="type-name-link" title="interface in ru.nsu.krasnyanskii.pizzeria.view">GeneratorView</a> - Interface in <a href="ru/nsu/krasnyanskii/pizzeria/view/package-summary.html">ru.nsu.krasnyanskii.pizzeria.view</a></dt>
+<dd>
+<div class="block">Output contract for events produced by the order generator.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:I">I</h2>
@@ -256,6 +268,10 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:L">L</h2>
 <dl class="index">
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/LifecycleView.html" class="type-name-link" title="interface in ru.nsu.krasnyanskii.pizzeria.view">LifecycleView</a> - Interface in <a href="ru/nsu/krasnyanskii/pizzeria/view/package-summary.html">ru.nsu.krasnyanskii.pizzeria.view</a></dt>
+<dd>
+<div class="block">Output contract for pizzeria lifecycle events handled by the controller.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/config/ConfigLoader.html#load(java.lang.String)" class="member-name-link">load(String)</a> - Static method in class ru.nsu.krasnyanskii.pizzeria.config.<a href="ru/nsu/krasnyanskii/pizzeria/config/ConfigLoader.html" title="class in ru.nsu.krasnyanskii.pizzeria.config">ConfigLoader</a></dt>
 <dd>
 <div class="block">Loads and validates pizzeria configuration.</div>
@@ -292,15 +308,15 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#orderGenerated(int)" class="member-name-link">orderGenerated(int)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html#orderGenerated(int)" class="member-name-link">orderGenerated(int)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/GeneratorView.html#orderGenerated(int)" class="member-name-link">orderGenerated(int)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/GeneratorView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">GeneratorView</a></dt>
 <dd>
 <div class="block">Prints a new-order message.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/OrderGenerator.html" class="type-name-link" title="class in ru.nsu.krasnyanskii.pizzeria.workers">OrderGenerator</a> - Class in <a href="ru/nsu/krasnyanskii/pizzeria/workers/package-summary.html">ru.nsu.krasnyanskii.pizzeria.workers</a></dt>
 <dd>
-<div class="block">Produces new orders at a fixed interval until stopped.</div>
+<div class="block">Produces new orders at a fixed interval until interrupted or the queue is closed.</div>
 </dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/OrderGenerator.html#%3Cinit%3E(ru.nsu.krasnyanskii.pizzeria.queue.OrderQueue,int,ru.nsu.krasnyanskii.pizzeria.view.PizzeriaView)" class="member-name-link">OrderGenerator(OrderQueue&lt;Order&gt;, int, PizzeriaView)</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/OrderGenerator.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">OrderGenerator</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/OrderGenerator.html#%3Cinit%3E(ru.nsu.krasnyanskii.pizzeria.queue.OrderQueue,int,ru.nsu.krasnyanskii.pizzeria.view.GeneratorView)" class="member-name-link">OrderGenerator(OrderQueue&lt;Order&gt;, int, GeneratorView)</a> - Constructor for class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/OrderGenerator.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">OrderGenerator</a></dt>
 <dd>
 <div class="block">Creates an OrderGenerator.</div>
 </dd>
@@ -312,9 +328,13 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Saves and loads unfinished orders in a minimal JSON format.</div>
 </dd>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/BakerView.html#orderStateChanged(int,java.lang.String)" class="member-name-link">orderStateChanged(int, String)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/BakerView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">BakerView</a></dt>
+<dd>
+<div class="block">Prints an order state-change message.</div>
+</dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#orderStateChanged(int,java.lang.String)" class="member-name-link">orderStateChanged(int, String)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html#orderStateChanged(int,java.lang.String)" class="member-name-link">orderStateChanged(int, String)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/GeneratorView.html#orderStateChanged(int,java.lang.String)" class="member-name-link">orderStateChanged(int, String)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/GeneratorView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">GeneratorView</a></dt>
 <dd>
 <div class="block">Prints an order state-change message.</div>
 </dd>
@@ -331,7 +351,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#pizzeriaClosed()" class="member-name-link">pizzeriaClosed()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html#pizzeriaClosed()" class="member-name-link">pizzeriaClosed()</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/LifecycleView.html#pizzeriaClosed()" class="member-name-link">pizzeriaClosed()</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/LifecycleView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">LifecycleView</a></dt>
 <dd>
 <div class="block">Prints the pizzeria-closed banner.</div>
 </dd>
@@ -359,13 +379,13 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#pizzeriaOpened()" class="member-name-link">pizzeriaOpened()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html#pizzeriaOpened()" class="member-name-link">pizzeriaOpened()</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/LifecycleView.html#pizzeriaOpened()" class="member-name-link">pizzeriaOpened()</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/LifecycleView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">LifecycleView</a></dt>
 <dd>
 <div class="block">Prints the pizzeria-opened banner.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" class="type-name-link" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a> - Interface in <a href="ru/nsu/krasnyanskii/pizzeria/view/package-summary.html">ru.nsu.krasnyanskii.pizzeria.view</a></dt>
 <dd>
-<div class="block">Output contract for the pizzeria simulation.</div>
+<div class="block">Composite view that aggregates all role-specific view interfaces.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/storage/BoundedPizzaStorage.html#put(ru.nsu.krasnyanskii.pizzeria.model.Order)" class="member-name-link">put(Order)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.storage.<a href="ru/nsu/krasnyanskii/pizzeria/storage/BoundedPizzaStorage.html" title="class in ru.nsu.krasnyanskii.pizzeria.storage">BoundedPizzaStorage</a></dt>
 <dd>&nbsp;</dd>
@@ -428,13 +448,13 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#serializerSaved(int,java.lang.String)" class="member-name-link">serializerSaved(int, String)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html#serializerSaved(int,java.lang.String)" class="member-name-link">serializerSaved(int, String)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/LifecycleView.html#serializerSaved(int,java.lang.String)" class="member-name-link">serializerSaved(int, String)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/LifecycleView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">LifecycleView</a></dt>
 <dd>
 <div class="block">Prints a serializer-saved confirmation.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#shutdownStarted()" class="member-name-link">shutdownStarted()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html#shutdownStarted()" class="member-name-link">shutdownStarted()</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/LifecycleView.html#shutdownStarted()" class="member-name-link">shutdownStarted()</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/LifecycleView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">LifecycleView</a></dt>
 <dd>
 <div class="block">Prints the shutdown-started banner.</div>
 </dd>
@@ -449,20 +469,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/storage/PizzaStorage.html#size()" class="member-name-link">size()</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.storage.<a href="ru/nsu/krasnyanskii/pizzeria/storage/PizzaStorage.html" title="interface in ru.nsu.krasnyanskii.pizzeria.storage">PizzaStorage</a></dt>
 <dd>
 <div class="block">Returns the number of pizzas currently in storage.</div>
-</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Baker.html#stop()" class="member-name-link">stop()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/Baker.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Baker</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html#stop()" class="member-name-link">stop()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/Courier.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">Courier</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/OrderGenerator.html#stop()" class="member-name-link">stop()</a> - Method in class ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/OrderGenerator.html" title="class in ru.nsu.krasnyanskii.pizzeria.workers">OrderGenerator</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Stoppable.html#stop()" class="member-name-link">stop()</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.workers.<a href="ru/nsu/krasnyanskii/pizzeria/workers/Stoppable.html" title="interface in ru.nsu.krasnyanskii.pizzeria.workers">Stoppable</a></dt>
-<dd>
-<div class="block">Requests the worker to finish after completing its current task.</div>
-</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Stoppable.html" class="type-name-link" title="interface in ru.nsu.krasnyanskii.pizzeria.workers">Stoppable</a> - Interface in <a href="ru/nsu/krasnyanskii/pizzeria/workers/package-summary.html">ru.nsu.krasnyanskii.pizzeria.workers</a></dt>
-<dd>
-<div class="block">Contract for softly stoppable workers.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:T">T</h2>
@@ -496,11 +502,11 @@ the order they are declared.</div>
 <dl class="index">
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/workers/Worker.html" class="type-name-link" title="interface in ru.nsu.krasnyanskii.pizzeria.workers">Worker</a> - Interface in <a href="ru/nsu/krasnyanskii/pizzeria/workers/package-summary.html">ru.nsu.krasnyanskii.pizzeria.workers</a></dt>
 <dd>
-<div class="block">Contract for a pizzeria worker: can be run in a thread and stopped gracefully.</div>
+<div class="block">Marker interface for a pizzeria worker.</div>
 </dd>
 <dt><a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html#workingFor(long)" class="member-name-link">workingFor(long)</a> - Method in class ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/ConsolePizzeriaView.html" title="class in ru.nsu.krasnyanskii.pizzeria.view">ConsolePizzeriaView</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html#workingFor(long)" class="member-name-link">workingFor(long)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/PizzeriaView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">PizzeriaView</a></dt>
+<dt><a href="ru/nsu/krasnyanskii/pizzeria/view/LifecycleView.html#workingFor(long)" class="member-name-link">workingFor(long)</a> - Method in interface ru.nsu.krasnyanskii.pizzeria.view.<a href="ru/nsu/krasnyanskii/pizzeria/view/LifecycleView.html" title="interface in ru.nsu.krasnyanskii.pizzeria.view">LifecycleView</a></dt>
 <dd>
 <div class="block">Prints how long the pizzeria will run.</div>
 </dd>
