@@ -3,10 +3,6 @@ package ru.nsu.krasnyanskii.pizzeria.view;
 /** Console implementation of {@link PizzeriaView} — prints all output to stdout. */
 public class ConsolePizzeriaView implements PizzeriaView {
 
-    /** Creates a ConsolePizzeriaView. */
-    public ConsolePizzeriaView() {
-    }
-
     @Override
     public void pizzeriaOpened() {
         System.out.println("=== Pizzeria is opening! ===");

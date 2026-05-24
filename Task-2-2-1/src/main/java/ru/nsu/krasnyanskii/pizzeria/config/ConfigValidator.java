@@ -1,12 +1,11 @@
 package ru.nsu.krasnyanskii.pizzeria.config;
 
+import lombok.experimental.UtilityClass;
 import ru.nsu.krasnyanskii.pizzeria.model.PizzeriaConfig;
 
 /** Validates that a {@link PizzeriaConfig} contains all required positive numeric fields. */
+@UtilityClass
 class ConfigValidator {
-
-    private ConfigValidator() {
-    }
 
     /**
      * Validates the given configuration.
@@ -14,7 +13,7 @@ class ConfigValidator {
      * @param config configuration to validate
      * @throws IllegalArgumentException if any required field is missing or non-positive
      */
-    static void validate(PizzeriaConfig config) {
+    void validate(PizzeriaConfig config) {
         if (config.getStorageCapacity() <= 0) {
             throw new IllegalArgumentException("Missing key in config: storageCapacity");
         }
