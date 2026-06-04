@@ -1,0 +1,85 @@
+package ru.nsu.krasnyanskii.pizzeria.storage;
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
+import ru.nsu.krasnyanskii.pizzeria.model.Order;
+
+/**
+ * Thread-safe bounded storage for cooked pizzas.
+ *
+ * <p>Uses intrinsic lock ({@code synchronized} + {@code wait}/{@code notifyAll})
+ * without {@code java.util.concurrent} collections.</p>
+ */
+public class BoundedPizzaStorage implements PizzaStorage {
+
+    private final int capacity;
+    private final Deque<Order> orders = new ArrayDeque<>();
+    private volatile boolean accepting = true;
+
+    /**
+     * Creates a BoundedPizzaStorage.
+     *
+     * @param capacity max number of pizzas; must be positive
+     * @throws IllegalArgumentException if capacity is not positive
+     */
+    public BoundedPizzaStorage(int capacity) {
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("Storage capacity must be positive");
+        }
+        this.capacity = capacity;
+    }
+
+    @Override
+    public synchronized void put(Order order) throws InterruptedException {
+        while (orders.size() >= capacity) {
+            wait();
+        }
+        orders.addLast(order);
+        notifyAll();
+    }
+
+    @Override
+    public synchronized List<Order> take(int maxCount) throws InterruptedException {
+        while (orders.isEmpty() && accepting) {
+            wait();
+        }
+        List<Order> taken = new ArrayList<>();
+        int count = Math.min(maxCount, orders.size());
+        for (int i = 0; i < count; i++) {
+            taken.add(orders.removeFirst());
+        }
+        notifyAll();
+        return taken;
+    }
+
+    @Override
+    public synchronized void closeAccepting() {
+        accepting = false;
+        notifyAll();
+    }
+
+    @Override
+    public synchronized List<Order> drainAll() {
+        List<Order> result = new ArrayList<>(orders);
+        orders.clear();
+        notifyAll();
+        return result;
+    }
+
+    @Override
+    public synchronized boolean isEmpty() {
+        return orders.isEmpty();
+    }
+
+    @Override
+    public synchronized int size() {
+        return orders.size();
+    }
+
+    @Override
+    public boolean isAccepting() {
+        return accepting;
+    }
+}
